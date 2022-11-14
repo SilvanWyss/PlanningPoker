@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.datamodelapi;
 
 import ch.nolix.coreapi.containerapi.mainapi.IContainer;
-import ch.nolix.planningpoker.analysis.IEstimationRoundAnalysis;
+import ch.nolix.planningpoker.analysisapi.IEstimationRoundAnalysis;
 
 public interface IEstimationRound {
 	

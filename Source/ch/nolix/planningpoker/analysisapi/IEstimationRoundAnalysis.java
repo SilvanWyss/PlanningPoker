@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.analysis;
+package ch.nolix.planningpoker.analysisapi;
 
 public interface IEstimationRoundAnalysis {
 	
