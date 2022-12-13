@@ -10,7 +10,7 @@ public interface IRoom {
 	
 	IUser getRefParentCreator();
 	
-	IContainer<IRoomVisit> getRefVisits();
+	IContainer<? extends IRoomVisit> getRefVisits();
 	
 	boolean hasSetEstimationsInvisible();
 	
