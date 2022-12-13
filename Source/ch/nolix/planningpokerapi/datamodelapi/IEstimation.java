@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.datamodelapi;
+package ch.nolix.planningpokerapi.datamodelapi;
 
 public interface IEstimation {
 	

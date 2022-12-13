@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.datamodelapi;
+package ch.nolix.planningpokerapi.datamodelapi;
 
 import ch.nolix.coreapi.attributeapi.mutablemandatoryattributeuniversalapi.Namable;
 
