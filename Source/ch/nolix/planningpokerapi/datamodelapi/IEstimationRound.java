@@ -7,5 +7,5 @@ public interface IEstimationRound {
 	
 	IEstimationRoundAnalysis getAnalysis();
 	
-	IContainer<IEstimation> getRefEstimations();
+	IContainer<? extends IEstimation> getRefEstimations();
 }
