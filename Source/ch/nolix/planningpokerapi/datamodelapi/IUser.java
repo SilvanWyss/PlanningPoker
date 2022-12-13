@@ -1,8 +1,6 @@
 package ch.nolix.planningpokerapi.datamodelapi;
 
-import ch.nolix.coreapi.attributeapi.mutablemandatoryattributeuniversalapi.Namable;
-
-public interface IUser extends Namable<IUser> {
+public interface IUser {
 	
 	IRoom createAndEnterNewRoom();
 	
@@ -10,7 +8,11 @@ public interface IUser extends Namable<IUser> {
 	
 	void enterRoomByIdentification(String identification);
 	
+	String getName();
+	
 	IRoomVisit getRefRoomVisit();
 	
 	boolean isInRoom();
+	
+	void setName(String name);
 }
