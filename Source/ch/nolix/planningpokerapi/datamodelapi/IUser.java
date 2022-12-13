@@ -4,7 +4,7 @@ public interface IUser {
 	
 	IRoom createAndEnterNewRoom();
 	
-	void enterRoom(IRoom romm);
+	void enterRoom(IRoom room);
 	
 	void enterRoomByIdentification(String identification);
 	
