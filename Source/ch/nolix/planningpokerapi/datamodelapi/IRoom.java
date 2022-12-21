@@ -6,7 +6,7 @@ public interface IRoom {
 	
 	String getIdentification();
 	
-	IContainer<IEstimationRound> getRefEstimationRounds();
+	IContainer<? extends IEstimationRound> getRefEstimationRounds();
 	
 	IUser getRefParentCreator();
 	
