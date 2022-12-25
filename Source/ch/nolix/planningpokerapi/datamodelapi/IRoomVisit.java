@@ -8,7 +8,7 @@ public interface IRoomVisit {
 	
 	IRoom getRefParentRoom();
 	
-	IUser getRefParentVisitor();
+	IUser getRefVisitor();
 	
 	boolean hasEstimation();
 	

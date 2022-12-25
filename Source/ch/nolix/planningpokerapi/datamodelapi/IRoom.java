@@ -4,6 +4,8 @@ import ch.nolix.coreapi.containerapi.mainapi.IContainer;
 
 public interface IRoom {
 	
+	void addVisitor(IUser visitor);
+	
 	String getIdentification();
 	
 	IContainer<? extends IEstimationRound> getRefEstimationRounds();
