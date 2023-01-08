@@ -2,8 +2,6 @@ package ch.nolix.planningpoker.datamodel;
 
 import ch.nolix.core.errorcontrol.invalidargumentexception.InvalidArgumentException;
 import ch.nolix.coreapi.containerapi.mainapi.IContainer;
-import ch.nolix.planningpoker.analysis.EstimationRoundAnalysis;
-import ch.nolix.planningpokerapi.analysisapi.IEstimationRoundAnalysis;
 import ch.nolix.planningpokerapi.datamodelapi.IEstimation;
 import ch.nolix.planningpokerapi.datamodelapi.IEstimationRound;
 import ch.nolix.system.objectdatabase.database.Entity;
@@ -26,11 +24,6 @@ public final class EstimationRound extends Entity implements IEstimationRound {
 	}
 	
 	@Override
-	public IEstimationRoundAnalysis getAnalysis() {
-		return EstimationRoundAnalysis.forEstimationsInStoryPoints(getEstimationsInStoryPoints());
-	}
-	
-	@Override
 	public IContainer<? extends IEstimation> getRefEstimations() {
 		return estimations.getReferencedEntities();
 	}
@@ -43,10 +36,6 @@ public final class EstimationRound extends Entity implements IEstimationRound {
 	
 	private boolean containsEstimations() {
 		return estimations.containsAny();
-	}
-	
-	private IContainer<Double> getEstimationsInStoryPoints() {
-		return getRefEstimations().to(IEstimation::getStoryPoints);
 	}
 	
 	private void setEstimations(final IContainer<Estimation> estimations) {
