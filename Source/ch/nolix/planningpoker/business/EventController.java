@@ -22,7 +22,7 @@ public final class EventController implements IEventController {
 	}
 	
 	private void registerRoomSubscriber(final RoomSubscriber roomSubscriber) {
-		this.roomSubscribers.addAtEnd(roomSubscriber);
+		roomSubscribers.addAtEnd(roomSubscriber);
 	}
 	
 	private void removeClosedRoomSubscribers() {
