@@ -10,7 +10,7 @@ public interface IRoomVisit {
 	
 	IUser getRefVisitor();
 	
-	boolean hasEstimation();
+	boolean hasEstimationInStorypoints();
 	
 	void setEstimationInStoryPoints(double estimationInStoryPoints);
 }

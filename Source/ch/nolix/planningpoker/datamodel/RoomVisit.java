@@ -47,7 +47,7 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 	}
 	
 	@Override
-	public boolean hasEstimation() {
+	public boolean hasEstimationInStorypoints() {
 		return estimationInStoryPoints.containsAny();
 	}
 	
