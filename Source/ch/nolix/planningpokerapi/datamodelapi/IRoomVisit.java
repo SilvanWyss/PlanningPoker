@@ -12,5 +12,9 @@ public interface IRoomVisit {
 	
 	boolean hasEstimationInStorypoints();
 	
+	boolean hasInfiniteEstimation();
+	
 	void setEstimationInStoryPoints(double estimationInStoryPoints);
+	
+	void setInfiniteEstimation();
 }
