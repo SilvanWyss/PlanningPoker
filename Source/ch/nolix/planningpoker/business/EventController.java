@@ -2,40 +2,43 @@ package ch.nolix.planningpoker.business;
 
 import ch.nolix.core.container.main.LinkedList;
 import ch.nolix.coreapi.containerapi.mainapi.IContainer;
+import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequestableTriggerable;
 import ch.nolix.planningpokerapi.businessapi.IEventController;
-import ch.nolix.planningpokerapi.businessapi.ISubscriber;
 
 public final class EventController implements IEventController {
 	
-	private boolean isUpdatingRoomSubscribers;
+	private boolean isTriggeringRoomSubscribers;
 	
-	private boolean updatingRoomSubscribersIsRequired;
+	private boolean triggeringRoomSubscribersIsRequired;
 	
 	private final LinkedList<RoomSubscriber> roomSubscribers = new LinkedList<>();
 	
 	@Override
 	public void noteRoomChange(final String roomIdentification) {
-		if (!isUpdatingRoomSubscribers()) {
+		if (!isTriggeringRoomSubscribers()) {
 			
-			isUpdatingRoomSubscribers = true;
+			isTriggeringRoomSubscribers = true;
 			
-			updateRoomSubscribers(roomIdentification);
+			triggerRoomSubscribers(roomIdentification);
 			
-			while (updatingRoomSubscribersIsRequired()) {
+			while (triggeringRoomSubscribersIsRequired()) {
 				
-				updatingRoomSubscribersIsRequired = false;
+				triggeringRoomSubscribersIsRequired = false;
 				
-				updateRoomSubscribers(roomIdentification);
+				triggerRoomSubscribers(roomIdentification);
 			}
 			
-			isUpdatingRoomSubscribers = false;
+			isTriggeringRoomSubscribers = false;
 		} else {
-			updatingRoomSubscribersIsRequired = true;
+			triggeringRoomSubscribersIsRequired = true;
 		}
 	}
 
 	@Override
-	public void registerSubscriberForRoomChange(final String roomIdentification, final ISubscriber subscriber) {
+	public void registerSubscriberForRoomChange(
+		final String roomIdentification,
+		final CloseStateRequestableTriggerable subscriber
+	) {
 		registerRoomSubscriber(RoomSubscriber.forRoomAndSubscriber(roomIdentification, subscriber));
 	}
 	
@@ -43,8 +46,8 @@ public final class EventController implements IEventController {
 		return roomSubscribers;
 	}
 	
-	private boolean isUpdatingRoomSubscribers() {
-		return isUpdatingRoomSubscribers;
+	private boolean isTriggeringRoomSubscribers() {
+		return isTriggeringRoomSubscribers;
 	}
 	
 	private void registerRoomSubscriber(final RoomSubscriber roomSubscriber) {
@@ -55,20 +58,20 @@ public final class EventController implements IEventController {
 		roomSubscribers.removeAll(RoomSubscriber::isClosed);
 	}
 	
-	private void updateRoomSubscribers(final String roomIdentification) {
+	private void triggerRoomSubscribers(final String roomIdentification) {
 		removeClosedRoomSubscribers();
 		
-		updateRoomSubscribersOfRoom(roomIdentification);
+		triggerRoomSubscribersOfRoom(roomIdentification);
 	}
 	
-	private boolean updatingRoomSubscribersIsRequired() {
-		return updatingRoomSubscribersIsRequired;
+	private boolean triggeringRoomSubscribersIsRequired() {
+		return triggeringRoomSubscribersIsRequired;
 	}
-
-	private void updateRoomSubscribersOfRoom(final String roomIdentification) {
+	
+	private void triggerRoomSubscribersOfRoom(final String roomIdentification) {
 		for (final var rs : getRefRoomSubscribers()) {
 			if (rs.getRoomIdentification().equals(roomIdentification)) {
-				rs.update();
+				rs.trigger();
 			}
 		}
 	}
