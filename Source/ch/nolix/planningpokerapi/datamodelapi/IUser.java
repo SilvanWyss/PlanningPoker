@@ -1,6 +1,8 @@
 package ch.nolix.planningpokerapi.datamodelapi;
 
-public interface IUser {
+import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.IdentifiedByString;
+
+public interface IUser extends IdentifiedByString {
 	
 	String getName();
 	
