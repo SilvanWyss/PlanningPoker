@@ -1,9 +1,9 @@
-package ch.nolix.planningpoker.business;
+package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.core.container.main.LinkedList;
 import ch.nolix.coreapi.containerapi.mainapi.IContainer;
 import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequestableTriggerable;
-import ch.nolix.planningpokerapi.businessapi.IEventController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IEventController;
 
 public final class EventController implements IEventController {
 	

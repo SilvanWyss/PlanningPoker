@@ -1,9 +1,9 @@
-package ch.nolix.planningpoker.business;
+package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.businessapi.IDataController;
-import ch.nolix.planningpokerapi.businessapi.IEventController;
-import ch.nolix.planningpokerapi.businessapi.IApplicationController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IEventController;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 
 public final class ApplicationController implements IApplicationController {

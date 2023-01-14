@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.businessapi;
+package ch.nolix.planningpokerapi.applicationcontextapi;
 
 public interface IApplicationController {
 	

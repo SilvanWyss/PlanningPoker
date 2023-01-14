@@ -1,9 +1,9 @@
-package ch.nolix.planningpoker.business;
+package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.datamodel.Room;
 import ch.nolix.planningpoker.datamodel.User;
-import ch.nolix.planningpokerapi.businessapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.IUser;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;

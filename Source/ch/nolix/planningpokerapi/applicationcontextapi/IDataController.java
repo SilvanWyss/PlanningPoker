@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.businessapi;
+package ch.nolix.planningpokerapi.applicationcontextapi;
 
 import ch.nolix.coreapi.functionapi.mutationuniversalapi.IChangeSaver;
 import ch.nolix.planningpokerapi.datamodelapi.IRoom;

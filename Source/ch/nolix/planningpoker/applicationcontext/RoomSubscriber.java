@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.business;
+package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequestableTriggerable;
