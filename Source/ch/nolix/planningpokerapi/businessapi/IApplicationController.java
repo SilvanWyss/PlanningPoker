@@ -1,6 +1,6 @@
 package ch.nolix.planningpokerapi.businessapi;
 
-public interface IPlanningPokerController {
+public interface IApplicationController {
 	
 	IDataController getRefDataController();
 	
