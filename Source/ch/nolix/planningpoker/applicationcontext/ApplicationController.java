@@ -16,6 +16,7 @@ public final class ApplicationController implements IApplicationController {
 	}
 	
 	private final IDataController dataController;
+	
 	private final IEventController eventController;
 	
 	private ApplicationController(
