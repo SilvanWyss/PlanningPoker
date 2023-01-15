@@ -9,8 +9,8 @@ import ch.nolix.planningpoker.datamodel.EstimationRound;
 import ch.nolix.planningpoker.datamodel.Room;
 import ch.nolix.planningpoker.datamodel.RoomVisit;
 import ch.nolix.planningpoker.datamodel.User;
-import ch.nolix.system.objectdatabase.database.Schema;
 import ch.nolix.system.objectdatabase.databaseadapter.NodeDatabaseAdapter;
+import ch.nolix.system.objectdatabase.schema.Schema;
 
 public final class DataModelTest {
 	
