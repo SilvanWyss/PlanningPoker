@@ -13,6 +13,9 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 		if (userId == null) {
 			setNext(new CreateUserSession());
 		} else {
+			
+			getRefParentClient().setSessionVariableWithKeyAndValue("userId", userId);
+			
 			//TODO: Create SelectRoomSession.
 		}
 	}
