@@ -24,6 +24,11 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
+	public void close() {
+		databaseAdapter.close();
+	}
+	
+	@Override
 	public IRoom createAndEnterNewRoom(final IUser user) {
 		
 		final var room = Room.fromParentCreator((User)user);
