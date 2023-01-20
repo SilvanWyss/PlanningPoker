@@ -16,6 +16,14 @@ public abstract class PlanningPokerSession extends BackendWebClientSession<IAppl
 		IApplicationController applicationController
 	);
 	
+	protected final String getUserId() {
+		return getRefParentClient().getSessionVariableValueByKey("userId");
+	}
+	
+	protected final boolean hasUserId() {
+		return getRefParentClient().containsSessionVariableWithKey("userId");
+	}
+	
 	@Override
 	protected void initialize() {
 		try (final var applicationController = getRefApplicationContext().createApplicationController()) {
