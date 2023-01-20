@@ -1,5 +1,6 @@
 package ch.nolix.planningpoker.applicationcontext;
 
+import ch.nolix.core.errorcontrol.exception.WrapperException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
@@ -28,6 +29,15 @@ public final class ApplicationController implements IApplicationController {
 		
 		dataController = DataController.withDatabaseAdapter(databaseAdapter);
 		this.eventController = eventController;
+	}
+	
+	@Override
+	public void close() {
+		try {
+			getRefDataController().close();
+		} catch (final Exception exception) {
+			throw WrapperException.forError(exception);
+		}
 	}
 	
 	@Override

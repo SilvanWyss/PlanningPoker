@@ -1,6 +1,6 @@
 package ch.nolix.planningpokerapi.applicationcontextapi;
 
-public interface IApplicationController {
+public interface IApplicationController extends AutoCloseable {
 	
 	IDataController getRefDataController();
 	
