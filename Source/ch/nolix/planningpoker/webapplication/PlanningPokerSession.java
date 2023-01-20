@@ -1,5 +1,6 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.core.errorcontrol.exception.WrapperException;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationController;
 import ch.nolix.system.application.webapplication.BackendWebClientSession;
@@ -11,17 +12,18 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public abstract class PlanningPokerSession extends BackendWebClientSession<IApplicationContext> {
 	
-	@Override
-	protected void initialize() {
-		
-		final var applicationController = getRefApplicationContext().createApplicationController();
-		
-		getRefGUI().pushLayerWithRootControl(createRootControl(applicationController));
-	}
-	
 	protected abstract IControl<?, ?> createMainControl(
 		IApplicationController applicationController
 	);
+	
+	@Override
+	protected void initialize() {
+		try (final var applicationController = getRefApplicationContext().createApplicationController()) {
+			getRefGUI().pushLayerWithRootControl(createRootControl(applicationController));
+		} catch (final Exception exception) {
+			throw WrapperException.forError(exception);
+		}
+	}
 	
 	private IControl<?, ?> createHeaderControl(final IApplicationController applicationController) {
 		
