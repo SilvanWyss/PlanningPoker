@@ -4,10 +4,10 @@ import ch.nolix.core.errorcontrol.exception.WrapperException;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationController;
 import ch.nolix.system.application.webapplication.BackendWebClientSession;
-import ch.nolix.system.webgui.control.Text;
+import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
-import ch.nolix.systemapi.webguiapi.controlapi.TextRole;
+import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public abstract class PlanningPokerSession extends BackendWebClientSession<IApplicationContext> {
@@ -38,8 +38,8 @@ public abstract class PlanningPokerSession extends BackendWebClientSession<IAppl
 		final var headerControl =
 		new HorizontalStack()
 		.addControl(
-			new Text()
-			.setRole(TextRole.TITLE)
+			new Label()
+			.setRole(LabelRole.TITLE)
 			.setText(getApplicationName())
 		);
 		
@@ -67,6 +67,6 @@ public abstract class PlanningPokerSession extends BackendWebClientSession<IAppl
 		
 		final var user = applicationController.getRefDataController().getRefUserById(userId);
 		
-		return new Text().setText("you: " + user.getName());
+		return new Label().setText("you: " + user.getName());
 	}
 }
