@@ -25,6 +25,11 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
+	public boolean containsUserWithId(String id) {
+		return databaseAdapter.getRefTableByEntityType(User.class).getRefEntities().containsAny(u -> u.hasId(id));
+	}
+	
+	@Override
 	public IRoom createAndEnterNewRoom(final IUser user) {
 		
 		final var room = Room.fromParentCreator((User)user);

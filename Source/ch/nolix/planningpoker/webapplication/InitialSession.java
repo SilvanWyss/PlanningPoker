@@ -10,13 +10,22 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 		
 		final var userId = getRefParentClient().getCookieValueByCookieNameOrNull("userId");
 		
-		if (userId == null) {
-			setNext(new CreateUserSession());
+		if (!knowsUserWithId(userId)) {
+			setNext(new CreateUserSession());			
 		} else {
 			
 			getRefParentClient().setSessionVariableWithKeyAndValue("userId", userId);
 			
 			//TODO: Create SelectRoomSession.
 		}
+	}
+	
+	private boolean knowsUserWithId(final String id) {
+		
+		final var applicationController = getRefApplicationContext().createApplicationController();
+		
+		try (final var dataController = applicationController.createDataController()) {
+			return dataController.containsUserWithId(id);
+		} 
 	}
 }

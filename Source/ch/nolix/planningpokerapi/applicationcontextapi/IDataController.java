@@ -6,6 +6,8 @@ import ch.nolix.planningpokerapi.datamodelapi.IUser;
 
 public interface IDataController extends IChangeSaver {
 	
+	boolean containsUserWithId(String id);
+	
 	IRoom createAndEnterNewRoom(IUser user);
 	
 	IUser createUserWithName(String name);
