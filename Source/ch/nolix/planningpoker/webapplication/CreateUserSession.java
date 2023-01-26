@@ -53,7 +53,7 @@ public final class CreateUserSession extends PlanningPokerSession {
 			dataController.saveChanges();
 			getRefParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 		
-			//TODO: Redirect.
+			setNext(new CreateRoomSession());
 		}
 	}
 }
