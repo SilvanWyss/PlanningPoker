@@ -1,6 +1,5 @@
 package ch.nolix.planningpoker.applicationcontext;
 
-import ch.nolix.core.errorcontrol.exception.WrapperException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
@@ -16,7 +15,7 @@ public final class ApplicationController implements IApplicationController {
 		return new ApplicationController(databaseAdapter, eventController);
 	}
 	
-	private final IDataController dataController;
+	private final DatabaseAdapter databaseAdapter;
 	
 	private final IEventController eventController;
 	
@@ -25,24 +24,16 @@ public final class ApplicationController implements IApplicationController {
 		final IEventController eventController
 	) {
 		
+		GlobalValidator.assertThat(databaseAdapter).thatIsNamed(DatabaseAdapter.class).isNotNull();
 		GlobalValidator.assertThat(eventController).thatIsNamed("event controller").isNotNull();
-		
-		dataController = DataController.withDatabaseAdapter(databaseAdapter);
+				
+		this.databaseAdapter = databaseAdapter;
 		this.eventController = eventController;
 	}
 	
 	@Override
-	public void close() {
-		try {
-			getRefDataController().close();
-		} catch (final Exception exception) {
-			throw WrapperException.forError(exception);
-		}
-	}
-	
-	@Override
-	public IDataController getRefDataController() {
-		return dataController;
+	public IDataController createDataController() {
+		return DataController.usingDatabaseAdapter(databaseAdapter);
 	}
 	
 	@Override

@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.control.Textbox;
@@ -16,9 +16,7 @@ public final class CreateUserSession extends PlanningPokerSession {
 	private final Textbox userNameTextbox = new Textbox();
 	
 	@Override
-	protected IControl<?, ?> createMainControl(
-		final IApplicationController applicationController
-	) {
+	protected IControl<?, ?> createMainControl(final IDataController dataController) {
 		return
 		new VerticalStack()
 		.addControl(
@@ -48,12 +46,14 @@ public final class CreateUserSession extends PlanningPokerSession {
 		GlobalValidator.assertThat(userName).thatIsNamed("user name").isNotBlank();
 		
 		final var applicationController = getRefApplicationContext().createApplicationController();
-		final var dataController = applicationController.getRefDataController();
-		final var user = dataController.createUserWithName(userName);
-		dataController.saveChanges();
 		
-		getRefParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
+		try (final var dataController = applicationController.createDataController()) {
+			
+			final var user = dataController.createUserWithName(userName);
+			dataController.saveChanges();
+			getRefParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 		
-		//TODO: Redirect.
+			//TODO: Redirect.
+		}
 	}
 }

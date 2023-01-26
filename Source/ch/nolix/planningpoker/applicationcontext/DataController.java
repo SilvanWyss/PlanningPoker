@@ -1,6 +1,5 @@
 package ch.nolix.planningpoker.applicationcontext;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.datamodel.Room;
 import ch.nolix.planningpoker.datamodel.User;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
@@ -10,17 +9,14 @@ import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 
 public final class DataController implements IDataController {
 	
-	public static DataController withDatabaseAdapter(final DatabaseAdapter databaseAdapter) {
+	public static DataController usingDatabaseAdapter(final DatabaseAdapter databaseAdapter) {
 		return new DataController(databaseAdapter);
 	}
 	
 	private final DatabaseAdapter databaseAdapter;
 	
 	private DataController(final DatabaseAdapter databaseAdapter) {
-		
-		GlobalValidator.assertThat(databaseAdapter).thatIsNamed(DatabaseAdapter.class).isNotNull();
-		
-		this.databaseAdapter = databaseAdapter;
+		this.databaseAdapter = databaseAdapter.getEmptyCopy();
 	}
 	
 	@Override
@@ -33,7 +29,6 @@ public final class DataController implements IDataController {
 		
 		final var room = Room.fromParentCreator((User)user);
 		databaseAdapter.insert(room);
-		
 		room.addVisitor(user);
 		
 		return room;
