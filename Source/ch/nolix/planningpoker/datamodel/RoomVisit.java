@@ -87,20 +87,20 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 		infiniteEstimationFlag.setValue(true);
 	}
 	
-	private void assertVisitorIsNotInRoom(final User visitor) {
-		if (visitor.isInRoom()) {
+	private void assertVisitorIsNotInARoom(final User visitor) {
+		if (visitor.isInARoom()) {
 			throw
 			InvalidArgumentException.forArgumentNameAndArgumentAndErrorPredicate(
 				"visitor",
 				visitor,
-				"is in room"
+				"is in a room"
 			);
 		}
 	}
 	
 	private void setVisitor(final User visitor) {
 		
-		assertVisitorIsNotInRoom(visitor);
+		assertVisitorIsNotInARoom(visitor);
 		
 		this.visitor.setEntity(visitor);
 	}

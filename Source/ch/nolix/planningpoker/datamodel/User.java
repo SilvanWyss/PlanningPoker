@@ -38,7 +38,7 @@ public final class User extends Entity implements IUser {
 	}
 	
 	@Override
-	public boolean isInRoom() {
+	public boolean isInARoom() {
 		return currentRoomVisit.containsAny();
 	}
 	

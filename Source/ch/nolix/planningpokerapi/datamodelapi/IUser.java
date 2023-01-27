@@ -7,5 +7,5 @@ public interface IUser extends IdentifiedByString, Namable {
 	
 	IRoomVisit getRefCurrentRoomVisit();
 	
-	boolean isInRoom();
+	boolean isInARoom();
 }
