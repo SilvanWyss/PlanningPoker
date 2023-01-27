@@ -26,7 +26,7 @@ public final class DataController implements IDataController {
 	
 	@Override
 	public boolean containsUserWithId(String id) {
-		return databaseAdapter.getRefTableByEntityType(User.class).getRefEntities().containsAny(u -> u.hasId(id));
+		return databaseAdapter.getRefTableByEntityType(User.class).containsEntityWithId(id);
 	}
 	
 	@Override
