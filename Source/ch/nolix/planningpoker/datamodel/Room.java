@@ -1,5 +1,6 @@
 package ch.nolix.planningpoker.datamodel;
 
+import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.containerapi.mainapi.IContainer;
 import ch.nolix.planningpokerapi.datamodelapi.IEstimationRound;
 import ch.nolix.planningpokerapi.datamodelapi.IRoom;
@@ -22,8 +23,7 @@ public final class Room extends Entity implements IRoom {
 		return room;
 	}
 	
-	private final Value<String> identification =
-	Value.withInitialValue(RoomGlobalIdentificationGenerator.generateNextIdentification());
+	private final Value<String> identification = new Value<>();
 	
 	private final Reference<User> parentCreator = Reference.forEntity(User.class);
 			
@@ -34,7 +34,10 @@ public final class Room extends Entity implements IRoom {
 	private final MultiReference<EstimationRound> estimationRounds = MultiReference.forEntity(EstimationRound.class);
 	
 	private Room() {
+		
 		initialize();
+		
+		setInsertAction(this::setIdentification);
 	}
 	
 	@Override
@@ -85,6 +88,21 @@ public final class Room extends Entity implements IRoom {
 	@Override
 	public void setEstimationsVisible() {
 		estimationsVisible.setValue(true);
+	}
+	
+	private String createIdentification() {
+		return String.valueOf(getRefParentTable().getEntityCount());
+	}
+	
+	private void setIdentification() {
+		setIdentification(createIdentification());
+	}
+	
+	private void setIdentification(final String identification) {
+		
+		GlobalValidator.assertThat(identification).thatIsNamed("identification").isNotNull();
+		
+		this.identification.setValue(identification);
 	}
 	
 	private void setParentCreator(final User parentCreator) {
