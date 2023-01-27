@@ -49,6 +49,11 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
+	public IRoom getRefRoomById(String id) {
+		return databaseAdapter.getRefTableByEntityType(Room.class).getRefEntityById(id);
+	}
+	
+	@Override
 	public IRoom getRefRoomByIdentification(final String identification) {
 		return
 		databaseAdapter
