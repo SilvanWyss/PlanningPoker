@@ -51,6 +51,7 @@ public final class CreateUserSession extends PlanningPokerSession {
 			
 			final var user = dataController.createUserWithName(userName);
 			dataController.saveChanges();
+			getRefParentClient().setSessionVariableWithKeyAndValue("userId", user.getId());
 			getRefParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 		
 			setNext(new CreateRoomSession());
