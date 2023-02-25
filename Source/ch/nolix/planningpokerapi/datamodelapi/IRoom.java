@@ -1,9 +1,9 @@
 package ch.nolix.planningpokerapi.datamodelapi;
 
-import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.IdentifiedByString;
-import ch.nolix.coreapi.containerapi.mainapi.IContainer;
+import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.Identified;
+import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 
-public interface IRoom extends IdentifiedByString {
+public interface IRoom extends Identified {
 	
 	void addVisitor(IUser visitor);
 	

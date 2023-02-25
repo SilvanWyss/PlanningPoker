@@ -7,7 +7,6 @@ import ch.nolix.planningpoker.datamodel.DataModelCatalogue;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.system.application.main.Application;
 import ch.nolix.system.application.webapplication.BackendWebClient;
-import ch.nolix.system.objectdatabase.database.DataImplementation;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 import ch.nolix.system.objectdatabase.databaseadapter.NodeDatabaseAdapter;
 import ch.nolix.systemapi.objectdatabaseapi.schemaapi.ISchema;
@@ -28,7 +27,7 @@ extends Application<BackendWebClient<IApplicationContext>, IApplicationContext> 
 	}
 	
 	private PlanningPokerApplication(
-		final IElementTakerElementGetter<ISchema<DataImplementation>, DatabaseAdapter> databaseAdapterCreator
+		final IElementTakerElementGetter<ISchema, DatabaseAdapter> databaseAdapterCreator
 	) {
 		super(ApplicationContext.withDatabaseAdapter(databaseAdapterCreator.getOutput(DataModelCatalogue.SCHEMA)));
 	}
@@ -39,7 +38,7 @@ extends Application<BackendWebClient<IApplicationContext>, IApplicationContext> 
 	}
 	
 	@Override
-	protected Class<?> getRefInitialSessionClass() {
+	protected Class<?> getInitialSessionClass() {
 		return InitialSession.class;
 	}
 }

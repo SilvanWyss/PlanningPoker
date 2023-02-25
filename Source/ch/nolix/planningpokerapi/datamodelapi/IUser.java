@@ -1,9 +1,9 @@
 package ch.nolix.planningpokerapi.datamodelapi;
 
-import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.IdentifiedByString;
-import ch.nolix.coreapi.attributeapi.mutablemandatoryattributeuniversalapi.Namable;
+import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.Identified;
+import ch.nolix.coreapi.attributeapi.mutablemandatoryattributeuniversalapi.Nameable;
 
-public interface IUser extends IdentifiedByString, Namable {
+public interface IUser extends Identified, Nameable {
 	
 	IRoomVisit getRefCurrentRoomVisit();
 	

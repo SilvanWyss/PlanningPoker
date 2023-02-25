@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.datamodel;
 
 import ch.nolix.core.errorcontrol.invalidargumentexception.InvalidArgumentException;
-import ch.nolix.coreapi.containerapi.mainapi.IContainer;
+import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.planningpokerapi.datamodelapi.IEstimation;
 import ch.nolix.planningpokerapi.datamodelapi.IEstimationRound;
 import ch.nolix.system.objectdatabase.database.Entity;

@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.analysis;
 import ch.nolix.core.container.immutablelist.ImmutableList;
 import ch.nolix.core.math.main.GlobalCalculator;
 import ch.nolix.core.programatom.function.FunctionCatalogue;
-import ch.nolix.coreapi.containerapi.mainapi.IContainer;
+import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.planningpokerapi.analysisapi.IEstimationRoundAnalysis;
 
 public final class EstimationRoundAnalysis implements IEstimationRoundAnalysis {
@@ -26,28 +26,28 @@ public final class EstimationRoundAnalysis implements IEstimationRoundAnalysis {
 		final var averageEstimationInStoryPoints = getAverageEstimationInStoryPoints();
 		
 		return
-		estimationsInStoryPoints.getAverageByDouble(
+		estimationsInStoryPoints.getAverage(
 			e -> GlobalCalculator.getAbsoluteDifference(averageEstimationInStoryPoints, e)
 		);
 	}
 	
 	@Override
 	public double getAverageEstimationInStoryPoints() {
-		return estimationsInStoryPoints.getAverageByDouble(FunctionCatalogue::getSelf);
+		return estimationsInStoryPoints.getAverage(FunctionCatalogue::getSelf);
 	}
 	
 	@Override
 	public double getMedianEstimationInStoryPoints() {
-		return estimationsInStoryPoints.getMedianByDouble(FunctionCatalogue::getSelf);
+		return estimationsInStoryPoints.getMedian(FunctionCatalogue::getSelf);
 	}
 	
 	@Override
 	public double getMinEstimationInStoryPoints() {
-		return estimationsInStoryPoints.getMinDouble(FunctionCatalogue::getSelf);
+		return estimationsInStoryPoints.getMin(FunctionCatalogue::getSelf);
 	}
 	
 	@Override
 	public double getMaxEstimationInStoryPoints() {
-		return estimationsInStoryPoints.getMaxDouble(FunctionCatalogue::getSelf);
+		return estimationsInStoryPoints.getMax(FunctionCatalogue::getSelf);
 	}
 }
