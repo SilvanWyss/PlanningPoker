@@ -40,10 +40,10 @@ public final class CreateRoomSession extends PlanningPokerSession {
 		try (final var dataController = applicationController.createDataController()) {
 			
 			final var user = dataController.getRefUserById(getUserId());
-			dataController.createAndEnterNewRoom(user);
+			final var room = dataController.createAndEnterNewRoom(user);
 			dataController.saveChanges();
 			
-			//TODO: Redirect to RoomSession.
+			setNext(RoomSession.withRoomId(room.getId()));
 		}
 	}
 	
@@ -59,7 +59,7 @@ public final class CreateRoomSession extends PlanningPokerSession {
 			room.addVisitor(user);
 			dataController.saveChanges();
 			
-			//TODO: Redirect to RoomSession.
+			setNext(RoomSession.withRoomId(room.getId()));
 		}
 	}
 }
