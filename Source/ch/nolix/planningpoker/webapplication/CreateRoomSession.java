@@ -35,7 +35,7 @@ public final class CreateRoomSession extends PlanningPokerSession {
 	
 	private void createAndEnterNewRoom() {
 		
-		final var applicationController = getRefApplicationContext().createApplicationController();
+		final var applicationController = getOriApplicationContext().createApplicationController();
 		
 		try (final var dataController = applicationController.createDataController()) {
 			
@@ -51,7 +51,7 @@ public final class CreateRoomSession extends PlanningPokerSession {
 		
 		final var roomIdentification = roomIdentificationTextbox.getText();
 		
-		final var applicationController = getRefApplicationContext().createApplicationController();
+		final var applicationController = getOriApplicationContext().createApplicationController();
 		try (final var dataController = applicationController.createDataController()) {
 			
 			final var room = dataController.getRefRoomByIdentification(roomIdentification);

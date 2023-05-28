@@ -26,7 +26,7 @@ public final class DataController implements IDataController {
 	
 	@Override
 	public boolean containsUserWithId(String id) {
-		return databaseAdapter.getRefTableByEntityType(User.class).containsEntityWithId(id);
+		return databaseAdapter.getOriTableByEntityType(User.class).containsEntityWithId(id);
 	}
 	
 	@Override
@@ -50,21 +50,21 @@ public final class DataController implements IDataController {
 	
 	@Override
 	public IRoom getRefRoomById(String id) {
-		return databaseAdapter.getRefTableByEntityType(Room.class).getRefEntityById(id);
+		return databaseAdapter.getOriTableByEntityType(Room.class).getOriEntityById(id);
 	}
 	
 	@Override
 	public IRoom getRefRoomByIdentification(final String identification) {
 		return
 		databaseAdapter
-		.getRefTableByEntityType(Room.class)
-		.getRefEntities()
-		.getRefFirst(r -> r.getIdentification().equals(identification));		
+		.getOriTableByEntityType(Room.class)
+		.getOriEntities()
+		.getOriFirst(r -> r.getIdentification().equals(identification));		
 	}
 	
 	@Override
 	public IUser getRefUserById(final String id) {
-		return databaseAdapter.getRefTableByEntityType(User.class).getRefEntityById(id);
+		return databaseAdapter.getOriTableByEntityType(User.class).getOriEntityById(id);
 	}
 	
 	@Override

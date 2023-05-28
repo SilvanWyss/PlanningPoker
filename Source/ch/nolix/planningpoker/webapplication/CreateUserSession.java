@@ -45,14 +45,14 @@ public final class CreateUserSession extends PlanningPokerSession {
 		
 		GlobalValidator.assertThat(userName).thatIsNamed("user name").isNotBlank();
 		
-		final var applicationController = getRefApplicationContext().createApplicationController();
+		final var applicationController = getOriApplicationContext().createApplicationController();
 		
 		try (final var dataController = applicationController.createDataController()) {
 			
 			final var user = dataController.createUserWithName(userName);
 			dataController.saveChanges();
-			getRefParentClient().setSessionVariableWithKeyAndValue("userId", user.getId());
-			getRefParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
+			getOriParentClient().setSessionVariableWithKeyAndValue("userId", user.getId());
+			getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 		
 			setNext(new CreateRoomSession());
 		}

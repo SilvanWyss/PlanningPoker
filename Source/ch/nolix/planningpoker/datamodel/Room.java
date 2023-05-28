@@ -45,14 +45,14 @@ public final class Room extends Entity implements IRoom {
 		
 		final var roomVisit = RoomVisit.forVisitor((User)visitor);
 		
-		getRefParentDatabase().insertEntity(roomVisit);
+		getOriParentDatabase().insertEntity(roomVisit);
 		
 		visits.addEntity(roomVisit);
 	}
 	
 	@Override
 	public String getIdentification() {
-		return identification.getRefValue();
+		return identification.getOriValue();
 	}
 	
 	@Override
@@ -77,7 +77,7 @@ public final class Room extends Entity implements IRoom {
 
 	@Override
 	public boolean hasSetEstimationsVisible() {
-		return estimationsVisible.getRefValue();
+		return estimationsVisible.getOriValue();
 	}
 	
 	@Override
@@ -91,7 +91,7 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	private String createIdentification() {
-		return String.valueOf(getRefParentTable().getEntityCount());
+		return String.valueOf(getOriParentTable().getEntityCount());
 	}
 	
 	private void setIdentification() {

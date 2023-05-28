@@ -34,7 +34,7 @@ public final class Estimation extends Entity implements IEstimation {
 	
 	@Override
 	public double getStoryPoints() {
-		return storyPoints.getRefValue();
+		return storyPoints.getOriValue();
 	}
 	
 	private void assertDoesNotHaveParentUser() {

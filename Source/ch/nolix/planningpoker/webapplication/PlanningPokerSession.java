@@ -14,20 +14,20 @@ public abstract class PlanningPokerSession extends BackendWebClientSession<IAppl
 	protected abstract IControl<?, ?> createMainControl(IDataController dataController);
 	
 	protected final String getUserId() {
-		return getRefParentClient().getSessionVariableValueByKey("userId");
+		return getOriParentClient().getSessionVariableValueByKey("userId");
 	}
 	
 	protected final boolean hasUserId() {
-		return getRefParentClient().containsSessionVariableWithKey("userId");
+		return getOriParentClient().containsSessionVariableWithKey("userId");
 	}
 	
 	@Override
 	protected void initialize() {
 		
-		final var applicationController = getRefApplicationContext().createApplicationController();
+		final var applicationController = getOriApplicationContext().createApplicationController();
 		
 		try (final var dataController = applicationController.createDataController()) {
-			getRefGUI().pushLayerWithRootControl(createRootControl(dataController));
+			getOriGUI().pushLayerWithRootControl(createRootControl(dataController));
 		}
 	}
 	
@@ -41,9 +41,9 @@ public abstract class PlanningPokerSession extends BackendWebClientSession<IAppl
 			.setText(getApplicationName())
 		);
 		
-		if (getRefParentClient().containsSessionVariableWithKey("userId")) {
+		if (getOriParentClient().containsSessionVariableWithKey("userId")) {
 			
-			final var userId = getRefParentClient().getSessionVariableValueByKey("userId");
+			final var userId = getOriParentClient().getSessionVariableValueByKey("userId");
 			
 			headerControl.addControl(createUserControl(userId, dataController));
 		}

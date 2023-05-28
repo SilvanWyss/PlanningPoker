@@ -29,7 +29,7 @@ public final class User extends Entity implements IUser {
 	
 	@Override
 	public String getName() {
-		return name.getRefValue();
+		return name.getOriValue();
 	}
 	
 	@Override

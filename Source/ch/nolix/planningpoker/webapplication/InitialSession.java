@@ -8,13 +8,13 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 	@Override
 	protected void initialize() {
 		
-		final var userId = getRefParentClient().getCookieValueByCookieNameOrNull("userId");
+		final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
 		
 		if (!knowsUserWithId(userId)) {
 			setNext(new CreateUserSession());			
 		} else {
 			
-			getRefParentClient().setSessionVariableWithKeyAndValue("userId", userId);
+			getOriParentClient().setSessionVariableWithKeyAndValue("userId", userId);
 			
 			setNext(new CreateRoomSession());
 		}
@@ -22,7 +22,7 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 	
 	private boolean knowsUserWithId(final String id) {
 		
-		final var applicationController = getRefApplicationContext().createApplicationController();
+		final var applicationController = getOriApplicationContext().createApplicationController();
 		
 		try (final var dataController = applicationController.createDataController()) {
 			return dataController.containsUserWithId(id);
