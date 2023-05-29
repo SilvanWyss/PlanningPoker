@@ -56,17 +56,17 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public IContainer<? extends IEstimationRound> getRefEstimationRounds() {
+	public IContainer<? extends IEstimationRound> getOriEstimationRounds() {
 		return estimationRounds.getReferencedEntities();
 	}
 	
 	@Override
-	public IUser getRefParentCreator() {
+	public IUser getOriParentCreator() {
 		return parentCreator.getReferencedEntity();
 	}
 	
 	@Override
-	public IContainer<? extends IRoomVisit> getRefVisits() {
+	public IContainer<? extends IRoomVisit> getOriVisits() {
 		return visits.getReferencedEntities();
 	}
 	

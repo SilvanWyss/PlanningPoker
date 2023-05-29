@@ -49,12 +49,12 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
-	public IRoom getRefRoomById(String id) {
+	public IRoom getOriRoomById(String id) {
 		return databaseAdapter.getOriTableByEntityType(Room.class).getOriEntityById(id);
 	}
 	
 	@Override
-	public IRoom getRefRoomByIdentification(final String identification) {
+	public IRoom getOriRoomByIdentification(final String identification) {
 		return
 		databaseAdapter
 		.getOriTableByEntityType(Room.class)
@@ -63,7 +63,7 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
-	public IUser getRefUserById(final String id) {
+	public IUser getOriUserById(final String id) {
 		return databaseAdapter.getOriTableByEntityType(User.class).getOriEntityById(id);
 	}
 	

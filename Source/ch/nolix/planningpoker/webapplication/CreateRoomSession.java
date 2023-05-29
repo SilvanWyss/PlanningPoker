@@ -39,7 +39,7 @@ public final class CreateRoomSession extends PlanningPokerSession {
 		
 		try (final var dataController = applicationController.createDataController()) {
 			
-			final var user = dataController.getRefUserById(getUserId());
+			final var user = dataController.getOriUserById(getUserId());
 			final var room = dataController.createAndEnterNewRoom(user);
 			dataController.saveChanges();
 			
@@ -54,8 +54,8 @@ public final class CreateRoomSession extends PlanningPokerSession {
 		final var applicationController = getOriApplicationContext().createApplicationController();
 		try (final var dataController = applicationController.createDataController()) {
 			
-			final var room = dataController.getRefRoomByIdentification(roomIdentification);
-			final var user = dataController.getRefUserById(getUserId());
+			final var room = dataController.getOriRoomByIdentification(roomIdentification);
+			final var user = dataController.getOriUserById(getUserId());
 			room.addVisitor(user);
 			dataController.saveChanges();
 			

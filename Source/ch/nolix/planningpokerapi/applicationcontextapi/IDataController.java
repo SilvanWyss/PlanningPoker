@@ -12,9 +12,9 @@ public interface IDataController extends IChangeSaver {
 	
 	IUser createUserWithName(String name);
 	
-	IRoom getRefRoomById(String id);
+	IRoom getOriRoomById(String id);
 	
-	IRoom getRefRoomByIdentification(String identification);
+	IRoom getOriRoomByIdentification(String identification);
 	
-	IUser getRefUserById(String id);
+	IUser getOriUserById(String id);
 }

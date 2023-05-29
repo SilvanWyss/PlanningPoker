@@ -5,7 +5,7 @@ import ch.nolix.coreapi.attributeapi.mutablemandatoryattributeuniversalapi.Namea
 
 public interface IUser extends Identified, Nameable {
 	
-	IRoomVisit getRefCurrentRoomVisit();
+	IRoomVisit getOriCurrentRoomVisit();
 	
 	boolean isInARoom();
 }

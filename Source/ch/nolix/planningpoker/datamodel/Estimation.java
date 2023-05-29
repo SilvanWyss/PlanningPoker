@@ -28,7 +28,7 @@ public final class Estimation extends Entity implements IEstimation {
 	}
 	
 	@Override
-	public IUser getRefParentUser() {
+	public IUser getOriParentUser() {
 		return parentUser.getReferencedEntity();
 	}
 	

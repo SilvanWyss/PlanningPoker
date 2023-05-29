@@ -37,7 +37,7 @@ public final class ApplicationController implements IApplicationController {
 	}
 	
 	@Override
-	public IEventController getRefEventController() {
+	public IEventController getOriEventController() {
 		return eventController;
 	}
 }

@@ -9,11 +9,11 @@ public interface IRoom extends Identified {
 	
 	String getIdentification();
 	
-	IContainer<? extends IEstimationRound> getRefEstimationRounds();
+	IContainer<? extends IEstimationRound> getOriEstimationRounds();
 	
-	IUser getRefParentCreator();
+	IUser getOriParentCreator();
 	
-	IContainer<? extends IRoomVisit> getRefVisits();
+	IContainer<? extends IRoomVisit> getOriVisits();
 	
 	boolean hasSetEstimationsInvisible();
 	

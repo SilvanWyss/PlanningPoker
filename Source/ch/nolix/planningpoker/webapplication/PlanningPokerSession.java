@@ -62,7 +62,7 @@ public abstract class PlanningPokerSession extends BackendWebClientSession<IAppl
 	
 	private IControl<?, ?> createUserControl(final String userId, final IDataController dataController) {
 		
-		final var user = dataController.getRefUserById(userId);
+		final var user = dataController.getOriUserById(userId);
 		
 		return new Label().setText("you: " + user.getName());
 	}

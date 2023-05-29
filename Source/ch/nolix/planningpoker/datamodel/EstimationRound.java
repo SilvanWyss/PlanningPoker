@@ -24,7 +24,7 @@ public final class EstimationRound extends Entity implements IEstimationRound {
 	}
 	
 	@Override
-	public IContainer<? extends IEstimation> getRefEstimations() {
+	public IContainer<? extends IEstimation> getOriEstimations() {
 		return estimations.getReferencedEntities();
 	}
 	

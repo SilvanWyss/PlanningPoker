@@ -6,9 +6,9 @@ public interface IRoomVisit {
 	
 	double getEstimationInStoryPoints();
 	
-	IRoom getRefParentRoom();
+	IRoom getOriParentRoom();
 	
-	IUser getRefVisitor();
+	IUser getOriVisitor();
 	
 	boolean hasEstimationInStorypoints();
 	

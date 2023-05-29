@@ -28,7 +28,7 @@ public final class RoomSession extends PlanningPokerSession {
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
 		
-		final var room = dataController.getRefRoomById(roomId);
+		final var room = dataController.getOriRoomById(roomId);
 		
 		return
 		new VerticalStack()
@@ -36,7 +36,7 @@ public final class RoomSession extends PlanningPokerSession {
 			new Label()
 			.setText("Room " + room.getIdentification()),
 			new Label()
-			.setText(room.getRefParentCreator().getName() + " is our captain."),
+			.setText(room.getOriParentCreator().getName() + " is our captain."),
 			new HorizontalStack()
 			.addControl(
 				new VerticalStack()
@@ -58,12 +58,12 @@ public final class RoomSession extends PlanningPokerSession {
 		final var roomVisitGridContainer = new GridContainer();
 		
 		var index = 1;
-		for (final var v : room.getRefVisits()) {
+		for (final var v : room.getOriVisits()) {
 			
 			roomVisitGridContainer.insertControlAtRowAndColumn(
 				index,
 				1,
-				new Label().setText(v.getRefVisitor().getName())
+				new Label().setText(v.getOriVisitor().getName())
 			);
 			
 			roomVisitGridContainer.insertControlAtRowAndColumn(

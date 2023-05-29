@@ -42,7 +42,7 @@ public final class EventController implements IEventController {
 		registerRoomSubscriber(RoomSubscriber.forRoomAndSubscriber(roomIdentification, subscriber));
 	}
 	
-	private IContainer<RoomSubscriber> getRefRoomSubscribers() {
+	private IContainer<RoomSubscriber> getOriRoomSubscribers() {
 		return roomSubscribers;
 	}
 	
@@ -69,7 +69,7 @@ public final class EventController implements IEventController {
 	}
 	
 	private void triggerRoomSubscribersOfRoom(final String roomIdentification) {
-		for (final var rs : getRefRoomSubscribers()) {
+		for (final var rs : getOriRoomSubscribers()) {
 			if (rs.getRoomIdentification().equals(roomIdentification)) {
 				rs.trigger();
 			}
