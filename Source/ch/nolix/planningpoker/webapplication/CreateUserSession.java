@@ -1,6 +1,5 @@
 package ch.nolix.planningpoker.webapplication;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.control.Label;
@@ -42,12 +41,7 @@ public final class CreateUserSession extends PlanningPokerSession {
 	}
 	
 	private void createUserAndRedirectWithUserName(final String userName) {
-		
-		GlobalValidator.assertThat(userName).thatIsNamed("user name").isNotBlank();
-		
-		final var applicationController = getOriApplicationContext().createApplicationController();
-		
-		try (final var dataController = applicationController.createDataController()) {
+		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
 			final var user = dataController.createUserWithName(userName);
 			dataController.saveChanges();

@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
-import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 
@@ -24,11 +24,12 @@ public final class ApplicationContext implements IApplicationContext {
 	}
 	
 	@Override
-	public IApplicationController createApplicationController() {
-		return ApplicationController.withDatabaseAdapterAndEventController(createDatabaseAdapter(), eventController);
+	public IDataController createDataController() {
+		return DataController.usingDatabaseAdapter(databaseAdapter.getEmptyCopy());
 	}
 	
-	private DatabaseAdapter createDatabaseAdapter() {
-		return databaseAdapter.getEmptyCopy();
+	@Override
+	public IRoomChangeNotifier getOriEventController() {
+		return eventController;
 	}
 }

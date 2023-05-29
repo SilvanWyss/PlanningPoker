@@ -34,10 +34,7 @@ public final class CreateRoomSession extends PlanningPokerSession {
 	}
 	
 	private void createAndEnterNewRoom() {
-		
-		final var applicationController = getOriApplicationContext().createApplicationController();
-		
-		try (final var dataController = applicationController.createDataController()) {
+		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
 			final var user = dataController.getOriUserById(getUserId());
 			final var room = dataController.createAndEnterNewRoom(user);
@@ -51,8 +48,7 @@ public final class CreateRoomSession extends PlanningPokerSession {
 		
 		final var roomIdentification = roomIdentificationTextbox.getText();
 		
-		final var applicationController = getOriApplicationContext().createApplicationController();
-		try (final var dataController = applicationController.createDataController()) {
+		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
 			final var room = dataController.getOriRoomByIdentification(roomIdentification);
 			final var user = dataController.getOriUserById(getUserId());

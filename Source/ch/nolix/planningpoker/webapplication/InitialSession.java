@@ -11,10 +11,7 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 	}
 	
 	private BackendWebClientSession<IApplicationContext> createNextSession() {
-				
-		final var applicationController = getOriApplicationContext().createApplicationController();
-		
-		try (final var dataController = applicationController.createDataController()) {
+		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
 			final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
 			

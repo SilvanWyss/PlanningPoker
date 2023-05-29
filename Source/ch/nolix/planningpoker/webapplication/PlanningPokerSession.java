@@ -23,10 +23,7 @@ public abstract class PlanningPokerSession extends BackendWebClientSession<IAppl
 	
 	@Override
 	protected void initialize() {
-		
-		final var applicationController = getOriApplicationContext().createApplicationController();
-		
-		try (final var dataController = applicationController.createDataController()) {
+		try (final var dataController = getOriApplicationContext().createDataController()) {
 			getOriGUI().pushLayerWithRootControl(createRootControl(dataController));
 		}
 	}
