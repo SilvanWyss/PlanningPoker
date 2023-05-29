@@ -14,7 +14,7 @@ public abstract class PlanningPokerSession extends BackendWebClientSession<IAppl
 	protected abstract IControl<?, ?> createMainControl(IDataController dataController);
 	
 	protected final String getUserId() {
-		return getOriParentClient().getSessionVariableValueByKey("userId");
+		return getOriParentClient().getCookieValueByCookieNameOrNull("userId");
 	}
 	
 	protected final boolean hasUserId() {

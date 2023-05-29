@@ -7,25 +7,29 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 	
 	@Override
 	protected void initialize() {
-		
-		final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
-		
-		if (!knowsUserWithId(userId)) {
-			setNext(new CreateUserSession());			
-		} else {
-			
-			getOriParentClient().setSessionVariableWithKeyAndValue("userId", userId);
-			
-			setNext(new CreateRoomSession());
-		}
+		setNext(createNextSession());
 	}
 	
-	private boolean knowsUserWithId(final String id) {
-		
+	private BackendWebClientSession<IApplicationContext> createNextSession() {
+				
 		final var applicationController = getOriApplicationContext().createApplicationController();
 		
 		try (final var dataController = applicationController.createDataController()) {
-			return dataController.containsUserWithId(id);
-		} 
+			
+			final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
+			
+			if (dataController.containsUserWithId(userId)) {
+				
+				final var user = dataController.getOriUserById(userId);
+				
+				if (user.isInARoom()) {
+					return RoomSession.withRoomId(user.getOriCurrentRoomVisit().getOriParentRoom().getId());
+				}
+				
+				return new CreateRoomSession();
+			}
+			
+			return new CreateUserSession();
+		}
 	}
 }
