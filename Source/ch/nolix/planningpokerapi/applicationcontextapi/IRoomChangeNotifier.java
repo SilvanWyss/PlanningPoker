@@ -4,7 +4,7 @@ import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequesta
 
 public interface IRoomChangeNotifier {
 	
-	void noteRoomChange(String roomIdentification);
+	void noteRoomChange(String roomId);
 	
-	void registerSubscriberForRoomChange(String roomIdentification, CloseStateRequestableTriggerable subscriber);
+	void registerSubscriberForRoomChange(String roomId, CloseStateRequestableTriggerable subscriber);
 }

@@ -14,18 +14,18 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	private final LinkedList<RoomSubscriber> roomSubscribers = new LinkedList<>();
 	
 	@Override
-	public void noteRoomChange(final String roomIdentification) {
+	public void noteRoomChange(final String roomId) {
 		if (!isTriggeringRoomSubscribers()) {
 			
 			isTriggeringRoomSubscribers = true;
 			
-			triggerRoomSubscribers(roomIdentification);
+			triggerRoomSubscribers(roomId);
 			
 			while (triggeringRoomSubscribersIsRequired()) {
 				
 				triggeringRoomSubscribersIsRequired = false;
 				
-				triggerRoomSubscribers(roomIdentification);
+				triggerRoomSubscribers(roomId);
 			}
 			
 			isTriggeringRoomSubscribers = false;
@@ -36,10 +36,10 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 
 	@Override
 	public void registerSubscriberForRoomChange(
-		final String roomIdentification,
+		final String roomId,
 		final CloseStateRequestableTriggerable subscriber
 	) {
-		registerRoomSubscriber(RoomSubscriber.forRoomAndSubscriber(roomIdentification, subscriber));
+		registerRoomSubscriber(RoomSubscriber.forRoomAndSubscriber(roomId, subscriber));
 	}
 	
 	private IContainer<RoomSubscriber> getOriRoomSubscribers() {
@@ -58,19 +58,19 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 		roomSubscribers.removeAll(RoomSubscriber::isClosed);
 	}
 	
-	private void triggerRoomSubscribers(final String roomIdentification) {
+	private void triggerRoomSubscribers(final String roomId) {
 		removeClosedRoomSubscribers();
 		
-		triggerRoomSubscribersOfRoom(roomIdentification);
+		triggerRoomSubscribersOfRoom(roomId);
 	}
 	
 	private boolean triggeringRoomSubscribersIsRequired() {
 		return triggeringRoomSubscribersIsRequired;
 	}
 	
-	private void triggerRoomSubscribersOfRoom(final String roomIdentification) {
+	private void triggerRoomSubscribersOfRoom(final String roomId) {
 		for (final var rs : getOriRoomSubscribers()) {
-			if (rs.getRoomIdentification().equals(roomIdentification)) {
+			if (rs.getRoomId().equals(roomId)) {
 				rs.trigger();
 			}
 		}

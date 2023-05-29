@@ -12,7 +12,7 @@ public final class RoomSubscriber implements CloseStateRequestableTriggerable {
 		return new RoomSubscriber(roomIdentification, subscriber);
 	}
 	
-	private final String roomIdentification;
+	private final String roomId;
 	
 	private final CloseStateRequestableTriggerable subscriber;
 	
@@ -21,7 +21,7 @@ public final class RoomSubscriber implements CloseStateRequestableTriggerable {
 		GlobalValidator.assertThat(roomIdentification).thatIsNamed("room identification").isNotBlank();
 		GlobalValidator.assertThat(subscriber).thatIsNamed("subscriber").isNotNull();
 		
-		this.roomIdentification = roomIdentification;
+		this.roomId = roomIdentification;
 		this.subscriber = subscriber;
 	}
 	
@@ -30,8 +30,8 @@ public final class RoomSubscriber implements CloseStateRequestableTriggerable {
 		return subscriber.isClosed();
 	}
 	
-	public String getRoomIdentification() {
-		return roomIdentification;
+	public String getRoomId() {
+		return roomId;
 	}
 	
 	@Override
