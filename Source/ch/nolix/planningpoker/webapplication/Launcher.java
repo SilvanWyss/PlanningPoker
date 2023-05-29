@@ -1,11 +1,24 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.core.environment.localcomputer.ShellProvider;
+import ch.nolix.core.programcontrol.sequencer.GlobalSequencer;
 import ch.nolix.system.application.main.Server;
 
-public final class Launcher {
+final class Launcher {
 	
 	public static void main(String[] args) {
-		Server.forDefaultPort().addDefaultApplication(PlanningPokerApplication.withTemporaryNodeDatabase());
+		
+		final var server = Server.forDefaultPort();
+		
+		server.addDefaultApplication(PlanningPokerApplication.withTemporaryNodeDatabase());
+		
+		ShellProvider.startDefaultWebBrowserOpeningLoopBackAddress();
+		
+		GlobalSequencer
+		.waitForSeconds(2)
+		.andThen()
+		.asSoonAsNoMore(server::hasClientConnected)
+		.runInBackground(server::close);
 	}
 	
 	private Launcher() {}
