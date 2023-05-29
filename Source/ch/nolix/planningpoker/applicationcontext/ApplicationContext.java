@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.applicationcontext;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationController;
-import ch.nolix.planningpokerapi.applicationcontextapi.IEventController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 
 public final class ApplicationContext implements IApplicationContext {
@@ -14,7 +14,7 @@ public final class ApplicationContext implements IApplicationContext {
 	
 	private final DatabaseAdapter databaseAdapter;
 	
-	private final IEventController eventController = new EventController();
+	private final IRoomChangeNotifier eventController = new RoomChangeNotifier();
 	
 	private ApplicationContext(final DatabaseAdapter databaseAdapter) {
 		

@@ -2,7 +2,7 @@ package ch.nolix.planningpokerapi.applicationcontextapi;
 
 import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequestableTriggerable;
 
-public interface IEventController {
+public interface IRoomChangeNotifier {
 	
 	void noteRoomChange(String roomIdentification);
 	

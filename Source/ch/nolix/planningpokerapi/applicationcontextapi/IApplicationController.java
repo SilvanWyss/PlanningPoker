@@ -4,5 +4,5 @@ public interface IApplicationController {
 	
 	IDataController createDataController();
 	
-	IEventController getOriEventController();
+	IRoomChangeNotifier getOriEventController();
 }

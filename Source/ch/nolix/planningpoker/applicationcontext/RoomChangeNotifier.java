@@ -3,9 +3,9 @@ package ch.nolix.planningpoker.applicationcontext;
 import ch.nolix.core.container.linkedlist.LinkedList;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequestableTriggerable;
-import ch.nolix.planningpokerapi.applicationcontextapi.IEventController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 
-public final class EventController implements IEventController {
+public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	
 	private boolean isTriggeringRoomSubscribers;
 	
