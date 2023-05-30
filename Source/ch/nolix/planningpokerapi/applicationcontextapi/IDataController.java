@@ -14,7 +14,7 @@ public interface IDataController extends IChangeSaver {
 	
 	IRoom getOriRoomById(String id);
 	
-	IRoom getOriRoomByIdentification(String identification);
+	IRoom getOriRoomByNumber(String number);
 	
 	IUser getOriUserById(String id);
 }

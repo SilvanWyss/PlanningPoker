@@ -16,12 +16,12 @@ public final class RoomSubscriber implements CloseStateRequestableTriggerable {
 	
 	private final CloseStateRequestableTriggerable subscriber;
 	
-	private RoomSubscriber(final String roomIdentification, final CloseStateRequestableTriggerable subscriber) {
+	private RoomSubscriber(final String roomNumber, final CloseStateRequestableTriggerable subscriber) {
 		
-		GlobalValidator.assertThat(roomIdentification).thatIsNamed("room identification").isNotBlank();
+		GlobalValidator.assertThat(roomNumber).thatIsNamed("room number").isNotBlank();
 		GlobalValidator.assertThat(subscriber).thatIsNamed("subscriber").isNotNull();
 		
-		this.roomId = roomIdentification;
+		this.roomId = roomNumber;
 		this.subscriber = subscriber;
 	}
 	

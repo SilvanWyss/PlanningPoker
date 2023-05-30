@@ -7,7 +7,7 @@ public interface IRoom extends Identified {
 	
 	void addVisitor(IUser visitor);
 	
-	String getIdentification();
+	String getNumber();
 	
 	IContainer<? extends IEstimationRound> getOriEstimationRounds();
 	

@@ -54,12 +54,12 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
-	public IRoom getOriRoomByIdentification(final String identification) {
+	public IRoom getOriRoomByNumber(final String number) {
 		return
 		databaseAdapter
 		.getOriTableByEntityType(Room.class)
 		.getOriEntities()
-		.getOriFirst(r -> r.getIdentification().equals(identification));		
+		.getOriFirst(r -> r.getNumber().equals(number));		
 	}
 	
 	@Override

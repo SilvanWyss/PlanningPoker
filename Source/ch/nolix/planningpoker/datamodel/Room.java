@@ -1,6 +1,7 @@
 package ch.nolix.planningpoker.datamodel;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.programatom.name.LowerCaseCatalogue;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.planningpokerapi.datamodelapi.IEstimationRound;
 import ch.nolix.planningpokerapi.datamodelapi.IRoom;
@@ -23,7 +24,7 @@ public final class Room extends Entity implements IRoom {
 		return room;
 	}
 	
-	private final Value<String> identification = new Value<>();
+	private final Value<String> number = new Value<>();
 	
 	private final Reference<User> parentCreator = Reference.forEntity(User.class);
 			
@@ -37,7 +38,7 @@ public final class Room extends Entity implements IRoom {
 		
 		initialize();
 		
-		setInsertAction(this::setIdentification);
+		setInsertAction(this::setNumber);
 	}
 	
 	@Override
@@ -51,8 +52,8 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public String getIdentification() {
-		return identification.getOriValue();
+	public String getNumber() {
+		return number.getOriValue();
 	}
 	
 	@Override
@@ -90,19 +91,19 @@ public final class Room extends Entity implements IRoom {
 		estimationsVisible.setValue(true);
 	}
 	
-	private String createIdentification() {
+	private String createNumber() {
 		return String.valueOf(getOriParentTable().getEntityCount());
 	}
 	
-	private void setIdentification() {
-		setIdentification(createIdentification());
+	private void setNumber() {
+		setNumber(createNumber());
 	}
 	
-	private void setIdentification(final String identification) {
+	private void setNumber(final String number) {
 		
-		GlobalValidator.assertThat(identification).thatIsNamed("identification").isNotNull();
+		GlobalValidator.assertThat(number).thatIsNamed(LowerCaseCatalogue.NUMBER).isNotNull();
 		
-		this.identification.setValue(identification);
+		this.number.setValue(number);
 	}
 	
 	private void setParentCreator(final User parentCreator) {

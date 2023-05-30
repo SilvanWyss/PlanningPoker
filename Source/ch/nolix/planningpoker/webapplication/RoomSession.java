@@ -34,7 +34,7 @@ public final class RoomSession extends PlanningPokerSession {
 		new VerticalStack()
 		.addControl(
 			new Label()
-			.setText("Room " + room.getIdentification()),
+			.setText("Room " + room.getNumber()),
 			new Label()
 			.setText(room.getOriParentCreator().getName() + " is our captain."),
 			new HorizontalStack()

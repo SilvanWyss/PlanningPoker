@@ -50,7 +50,7 @@ public final class CreateRoomSession extends PlanningPokerSession {
 		
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
-			final var room = dataController.getOriRoomByIdentification(roomIdentification);
+			final var room = dataController.getOriRoomByNumber(roomIdentification);
 			final var user = dataController.getOriUserById(getUserId());
 			room.addVisitor(user);
 			dataController.saveChanges();
