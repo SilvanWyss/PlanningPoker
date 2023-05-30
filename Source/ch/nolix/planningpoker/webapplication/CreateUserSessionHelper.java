@@ -1,5 +1,7 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+
 public final class CreateUserSessionHelper {
 	
 	public void createUserAndSetCookieAndRedirect(final String userName, final CreateUserSession session) {
@@ -13,7 +15,24 @@ public final class CreateUserSessionHelper {
 			
 			session.getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 			
-			session.setNext(new CreateRoomSession());
+			session.setNext(createNextSession(session, dataController));
 		}
+	}
+	
+	private PlanningPokerSession createNextSession(
+		final CreateUserSession session,
+		final IDataController dataController
+	) {
+		
+		final var roomNumber = session.getOriParentClient().getCookieValueByCookieNameOrNull("roomNumber");
+		
+		if (roomNumber != null) {
+			
+			final var room = dataController.getOriRoomByNumber(roomNumber);
+			
+			return RoomSession.withRoomId(room.getId());
+		}
+		
+		return new CreateRoomSession();
 	}
 }
