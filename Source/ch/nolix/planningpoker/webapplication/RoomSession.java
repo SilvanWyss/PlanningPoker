@@ -58,7 +58,7 @@ public final class RoomSession extends PlanningPokerSession {
 		final var roomVisitGridContainer = new GridContainer();
 		
 		var index = 1;
-		for (final var v : room.getOriVisits()) {
+		for (final var v : room.getOriRoomVisits()) {
 			
 			roomVisitGridContainer.insertControlAtRowAndColumn(
 				index,

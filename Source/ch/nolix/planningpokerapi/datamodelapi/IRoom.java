@@ -13,7 +13,7 @@ public interface IRoom extends Identified {
 	
 	IUser getOriParentCreator();
 	
-	IContainer<? extends IRoomVisit> getOriVisits();
+	IContainer<? extends IRoomVisit> getOriRoomVisits();
 	
 	boolean hasSetEstimationsInvisible();
 	

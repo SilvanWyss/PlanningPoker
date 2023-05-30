@@ -30,7 +30,7 @@ public final class Room extends Entity implements IRoom {
 			
 	private final Value<Boolean> estimationsVisible = Value.withInitialValue(DEFAULT_ESTIMATIONS_VISIBLE_VALUE);
 	
-	private final MultiReference<RoomVisit> visits = MultiReference.forEntity(RoomVisit.class);
+	private final MultiReference<RoomVisit> roomVisits = MultiReference.forEntity(RoomVisit.class);
 	
 	private final MultiReference<EstimationRound> estimationRounds = MultiReference.forEntity(EstimationRound.class);
 	
@@ -48,7 +48,7 @@ public final class Room extends Entity implements IRoom {
 		
 		getOriParentDatabase().insertEntity(roomVisit);
 		
-		visits.addEntity(roomVisit);
+		roomVisits.addEntity(roomVisit);
 	}
 	
 	@Override
@@ -67,8 +67,8 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public IContainer<? extends IRoomVisit> getOriVisits() {
-		return visits.getReferencedEntities();
+	public IContainer<? extends IRoomVisit> getOriRoomVisits() {
+		return roomVisits.getReferencedEntities();
 	}
 	
 	@Override
