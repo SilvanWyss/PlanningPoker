@@ -12,6 +12,8 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateUserSession extends PlanningPokerSession {
 	
+	private static final CreateUserSessionHelper CREATE_USER_CONTROLLER = new CreateUserSessionHelper();
+	
 	private final Textbox userNameTextbox = new Textbox();
 	
 	@Override
@@ -28,27 +30,15 @@ public final class CreateUserSession extends PlanningPokerSession {
 				new Button()
 				.setRole(ButtonRole.CONFIRM_BUTTON)
 				.setText("Ok")
-				.setLeftMouseButtonPressAction(this::createUserAndRedirect)
+				.setLeftMouseButtonPressAction(this::createUserAndCookieAndRedirect)
 			)
 		);
 	}
 	
-	private void createUserAndRedirect() {
+	private void createUserAndCookieAndRedirect() {
 		
 		final var userName = userNameTextbox.getText();
 		
-		createUserAndRedirectWithUserName(userName);
-	}
-	
-	private void createUserAndRedirectWithUserName(final String userName) {
-		try (final var dataController = getOriApplicationContext().createDataController()) {
-			
-			final var user = dataController.createUserWithName(userName);
-			dataController.saveChanges();
-			getOriParentClient().setSessionVariableWithKeyAndValue("userId", user.getId());
-			getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
-		
-			setNext(new CreateRoomSession());
-		}
+		CREATE_USER_CONTROLLER.createUserAndAddCookieAndRedirect(userName, this);
 	}
 }
