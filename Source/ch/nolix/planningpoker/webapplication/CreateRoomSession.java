@@ -10,16 +10,17 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateRoomSession extends PlanningPokerSession {
 	
-	private final Textbox roomIdentificationTextbox = new Textbox();
+	private final Textbox roomNumberTextbox = new Textbox();
 	
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
 		return
-		new VerticalStack().addControl(
+		new VerticalStack()
+		.addControl(
 			new ValidationLabel(),
 			new HorizontalStack()
 			.addControl(
-				roomIdentificationTextbox,
+				roomNumberTextbox,
 				new Button()
 				.setText("Enter room")
 				.setLeftMouseButtonPressAction(this::enterRoom)
@@ -46,7 +47,7 @@ public final class CreateRoomSession extends PlanningPokerSession {
 	
 	private void enterRoom() {
 		
-		final var roomIdentification = roomIdentificationTextbox.getText();
+		final var roomIdentification = roomNumberTextbox.getText();
 		
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
