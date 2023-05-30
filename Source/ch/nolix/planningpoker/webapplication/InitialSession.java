@@ -23,6 +23,15 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 					return RoomSession.withRoomId(user.getOriCurrentRoomVisit().getOriParentRoom().getId());
 				}
 				
+				final var roomNumber = getOriParentClient().getCookieValueByCookieNameOrNull("roomNumber");
+				
+				if (roomNumber != null) {
+					
+					final var room = dataController.getOriRoomByNumber(roomNumber);
+					
+					return RoomSession.withRoomId(room.getId());
+				}
+				
 				return new CreateRoomSession();
 			}
 			
