@@ -30,15 +30,15 @@ public final class CreateUserSession extends PlanningPokerSession {
 				new Button()
 				.setRole(ButtonRole.CONFIRM_BUTTON)
 				.setText("Ok")
-				.setLeftMouseButtonPressAction(this::createUserAndCookieAndRedirect)
+				.setLeftMouseButtonPressAction(this::createUserAndSetCookieAndRedirect)
 			)
 		);
 	}
 	
-	private void createUserAndCookieAndRedirect() {
+	private void createUserAndSetCookieAndRedirect() {
 		
 		final var userName = userNameTextbox.getText();
 		
-		CREATE_USER_CONTROLLER.createUserAndAddCookieAndRedirect(userName, this);
+		CREATE_USER_CONTROLLER.createUserAndSetCookieAndRedirect(userName, this);
 	}
 }

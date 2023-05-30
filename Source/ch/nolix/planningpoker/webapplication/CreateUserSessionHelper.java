@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication;
 
 public final class CreateUserSessionHelper {
 	
-	public void createUserAndAddCookieAndRedirect(final String userName, final CreateUserSession session) {
+	public void createUserAndSetCookieAndRedirect(final String userName, final CreateUserSession session) {
 		
 		final var applicationContext = session.getOriApplicationContext();
 		
