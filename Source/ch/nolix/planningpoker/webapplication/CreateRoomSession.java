@@ -10,6 +10,8 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateRoomSession extends PlanningPokerSession {
 	
+	private static final CreateRoomSessionHelper CREATE_ROOM_SESSION_HELPER = new CreateRoomSessionHelper();
+	
 	private final Textbox roomNumberTextbox = new Textbox();
 	
 	@Override
@@ -23,40 +25,25 @@ public final class CreateRoomSession extends PlanningPokerSession {
 				roomNumberTextbox,
 				new Button()
 				.setText("Enter room")
-				.setLeftMouseButtonPressAction(this::enterRoom)
+				.setLeftMouseButtonPressAction(this::enterRoomAndRedirect)
 			),
 			new VerticalStack()
 			.addControl(
 				new Button()
 				.setText("Create new room")
-				.setLeftMouseButtonPressAction(this::createAndEnterNewRoom)
+				.setLeftMouseButtonPressAction(this::createRoomAndEnterRoomAndRedirect)
 			)
 		);
 	}
 	
-	private void createAndEnterNewRoom() {
-		try (final var dataController = getOriApplicationContext().createDataController()) {
-			
-			final var user = dataController.getOriUserById(getUserId());
-			final var room = dataController.createAndEnterNewRoom(user);
-			dataController.saveChanges();
-			
-			setNext(RoomSession.withRoomId(room.getId()));
-		}
+	private void createRoomAndEnterRoomAndRedirect() {
+		CREATE_ROOM_SESSION_HELPER.createRoomAndEnterRoomAndRedirect(this);
 	}
 	
-	private void enterRoom() {
+	private void enterRoomAndRedirect() {
 		
-		final var roomIdentification = roomNumberTextbox.getText();
+		final var roomNumber = roomNumberTextbox.getText();
 		
-		try (final var dataController = getOriApplicationContext().createDataController()) {
-			
-			final var room = dataController.getOriRoomByNumber(roomIdentification);
-			final var user = dataController.getOriUserById(getUserId());
-			room.addVisitor(user);
-			dataController.saveChanges();
-			
-			setNext(RoomSession.withRoomId(room.getId()));
-		}
+		CREATE_ROOM_SESSION_HELPER.enterRoomAndRedirect(roomNumber, this);
 	}
 }
