@@ -10,7 +10,7 @@ import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class RoomSession extends PlanningPokerSession {
+public final class RoomSession extends PageSession {
 	
 	public static RoomSession withRoomId(final String roomId) {
 		return new RoomSession(roomId);

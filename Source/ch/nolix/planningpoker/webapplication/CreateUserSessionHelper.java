@@ -24,7 +24,7 @@ public final class CreateUserSessionHelper {
 		}
 	}
 	
-	private PlanningPokerSession createNextSession(final IUser user) {
+	private PageSession createNextSession(final IUser user) {
 		
 		if (user.isInARoom()) {
 			return RoomSession.withRoomId(user.getOriCurrentRoomVisit().getOriParentRoom().getId());

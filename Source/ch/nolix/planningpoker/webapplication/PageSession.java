@@ -9,7 +9,7 @@ import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public abstract class PlanningPokerSession extends BackendWebClientSession<IApplicationContext> {
+public abstract class PageSession extends BackendWebClientSession<IApplicationContext> {
 	
 	protected abstract IControl<?, ?> createMainControl(IDataController dataController);
 	

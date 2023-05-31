@@ -10,7 +10,7 @@ import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.controlapi.ButtonRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class CreateUserSession extends PlanningPokerSession {
+public final class CreateUserSession extends PageSession {
 	
 	private static final CreateUserSessionHelper CREATE_USER_SESSION_HELPER = new CreateUserSessionHelper();
 	

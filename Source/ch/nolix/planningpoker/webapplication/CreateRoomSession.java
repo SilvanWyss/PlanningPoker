@@ -8,7 +8,7 @@ import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class CreateRoomSession extends PlanningPokerSession {
+public final class CreateRoomSession extends PageSession {
 	
 	private static final CreateRoomSessionHelper CREATE_ROOM_SESSION_HELPER = new CreateRoomSessionHelper();
 	
