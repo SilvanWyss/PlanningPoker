@@ -28,9 +28,11 @@ public final class CreateUserSessionHelper {
 		
 		if (roomNumber != null) {
 			
-			final var room = dataController.getOriRoomByNumber(roomNumber);
+			final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
 			
-			return RoomSession.withRoomId(room.getId());
+			if (room != null) {
+				return RoomSession.withRoomId(room.getId());
+			}
 		}
 		
 		return new CreateRoomSession();
