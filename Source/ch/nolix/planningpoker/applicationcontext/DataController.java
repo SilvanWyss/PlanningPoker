@@ -63,6 +63,15 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
+	public IRoom getOriRoomByNumberOrNull(final String number) {
+		return
+		databaseAdapter
+		.getOriTableByEntityType(Room.class)
+		.getOriEntities()
+		.getOriFirstOrNull(r -> r.getNumber().equals(number));
+	}
+	
+	@Override
 	public IUser getOriUserById(final String id) {
 		return databaseAdapter.getOriTableByEntityType(User.class).getOriEntityById(id);
 	}
