@@ -77,6 +77,11 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
+	public IUser getOriUserByIdOrNull(String id) {
+		return databaseAdapter.getOriTableByEntityType(User.class).getOriEntityByIdOrNull(id);
+	}
+	
+	@Override
 	public boolean hasChanges() {
 		return databaseAdapter.hasChanges();
 	}
