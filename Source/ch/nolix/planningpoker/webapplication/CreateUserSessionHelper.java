@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication;
 
-import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.datamodelapi.IUser;
 
 public final class CreateUserSessionHelper {
 	
@@ -11,28 +11,23 @@ public final class CreateUserSessionHelper {
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var user = dataController.createUserWithName(userName);
+			final var roomNumber = session.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
+			final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
+			if (room != null) {
+				room.addVisitor(user);
+			}
 			dataController.saveChanges();
 			
 			session.getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 			
-			session.setNext(createNextSession(session, dataController));
+			session.setNext(createNextSession(user));
 		}
 	}
 	
-	private PlanningPokerSession createNextSession(
-		final CreateUserSession session,
-		final IDataController dataController
-	) {
+	private PlanningPokerSession createNextSession(final IUser user) {
 		
-		final var roomNumber = session.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
-		
-		if (roomNumber != null) {
-			
-			final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
-			
-			if (room != null) {
-				return RoomSession.withRoomId(room.getId());
-			}
+		if (user.isInARoom()) {
+			return RoomSession.withRoomId(user.getOriCurrentRoomVisit().getOriParentRoom().getId());
 		}
 		
 		return new CreateRoomSession();

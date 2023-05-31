@@ -1,6 +1,8 @@
 package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.datamodelapi.IUser;
 import ch.nolix.system.application.webapplication.BackendWebClientSession;
 
 public final class InitialSession extends BackendWebClientSession<IApplicationContext> {
@@ -14,28 +16,38 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
 			final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
+			final var user = dataController.getOriUserByIdOrNull(userId);
 			
-			if (dataController.containsUserWithId(userId)) {
-				
-				final var user = dataController.getOriUserById(userId);
-				
-				if (user.isInARoom()) {
-					return RoomSession.withRoomId(user.getOriCurrentRoomVisit().getOriParentRoom().getId());
-				}
-				
-				final var roomNumber = getOriParentClient().getCookieValueByCookieNameOrNull("roomNumber");
-				
-				if (roomNumber != null) {
-					
-					final var room = dataController.getOriRoomByNumber(roomNumber);
-					
-					return RoomSession.withRoomId(room.getId());
-				}
-				
-				return new CreateRoomSession();
+			if (user != null) {
+				return createNextSession(dataController, user);
 			}
 			
 			return new CreateUserSession();
 		}
+	}
+	
+	private BackendWebClientSession<IApplicationContext> createNextSession(
+		final IDataController dataController,
+		final IUser user
+	) {
+		
+		final var roomNumber = getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
+		final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
+		
+		if (room != null) {
+			
+			if (!user.isInARoom() || !user.getOriCurrentRoomVisit().getOriParentRoom().hasId(room.getId())) {
+				room.addVisitor(user);
+				dataController.saveChanges();
+			}
+			
+			return RoomSession.withRoomId(room.getId());
+		}
+		
+		if (user.isInARoom()) {
+			return RoomSession.withRoomId(user.getOriCurrentRoomVisit().getOriParentRoom().getId());
+		}
+		
+		return new CreateRoomSession();
 	}
 }
