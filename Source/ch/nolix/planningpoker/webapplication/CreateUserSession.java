@@ -12,7 +12,7 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateUserSession extends PlanningPokerSession {
 	
-	private static final CreateUserSessionHelper CREATE_USER_CONTROLLER = new CreateUserSessionHelper();
+	private static final CreateUserSessionHelper CREATE_USER_SESSION_HELPER = new CreateUserSessionHelper();
 	
 	private final Textbox userNameTextbox = new Textbox();
 	
@@ -39,6 +39,6 @@ public final class CreateUserSession extends PlanningPokerSession {
 		
 		final var userName = userNameTextbox.getText();
 		
-		CREATE_USER_CONTROLLER.createUserAndSetCookieAndRedirect(userName, this);
+		CREATE_USER_SESSION_HELPER.createUserAndSetCookieAndRedirect(userName, this);
 	}
 }

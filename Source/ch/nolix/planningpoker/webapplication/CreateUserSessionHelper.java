@@ -24,7 +24,7 @@ public final class CreateUserSessionHelper {
 		final IDataController dataController
 	) {
 		
-		final var roomNumber = session.getOriParentClient().getCookieValueByCookieNameOrNull("roomNumber");
+		final var roomNumber = session.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
 		
 		if (roomNumber != null) {
 			
