@@ -14,7 +14,7 @@ public final class ApplicationContext implements IApplicationContext {
 	
 	private final DatabaseAdapter databaseAdapter;
 	
-	private final IRoomChangeNotifier eventController = new RoomChangeNotifier();
+	private final IRoomChangeNotifier roomChangeNotifier = new RoomChangeNotifier();
 	
 	private ApplicationContext(final DatabaseAdapter databaseAdapter) {
 		
@@ -29,7 +29,7 @@ public final class ApplicationContext implements IApplicationContext {
 	}
 	
 	@Override
-	public IRoomChangeNotifier getOriEventController() {
-		return eventController;
+	public IRoomChangeNotifier getOriRoomChangeNotifier() {
+		return roomChangeNotifier;
 	}
 }

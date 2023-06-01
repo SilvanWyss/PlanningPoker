@@ -4,5 +4,5 @@ public interface IApplicationContext {
 	
 	IDataController createDataController();
 	
-	IRoomChangeNotifier getOriEventController();
+	IRoomChangeNotifier getOriRoomChangeNotifier();
 }

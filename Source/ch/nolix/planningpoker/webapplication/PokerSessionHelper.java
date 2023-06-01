@@ -43,7 +43,7 @@ public final class PokerSessionHelper {
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
-			applicationContext.getOriEventController().noteRoomChange(room.getId());
+			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 }
