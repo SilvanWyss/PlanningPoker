@@ -1,9 +1,11 @@
 package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.planningpoker.datamodel.Room;
+import ch.nolix.planningpoker.datamodel.RoomVisit;
 import ch.nolix.planningpoker.datamodel.User;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.datamodelapi.IRoom;
+import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.IUser;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 
@@ -69,6 +71,14 @@ public final class DataController implements IDataController {
 		.getOriTableByEntityType(Room.class)
 		.getOriEntities()
 		.getOriFirstOrNull(r -> r.getNumber().equals(number));
+	}
+	
+	@Override
+	public IRoomVisit getOriRoomVisitById(final String id) {
+		return
+		databaseAdapter
+		.getOriTableByEntityType(RoomVisit.class)
+		.getOriEntityById(id);
 	}
 	
 	@Override
