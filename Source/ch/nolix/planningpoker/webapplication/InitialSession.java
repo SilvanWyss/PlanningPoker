@@ -41,11 +41,11 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 				dataController.saveChanges();
 			}
 			
-			return RoomSession.withRoomId(room.getId());
+			return new PokerSession();
 		}
 		
 		if (user.isInARoom()) {
-			return RoomSession.withRoomId(user.getOriCurrentRoomVisit().getOriParentRoom().getId());
+			return new PokerSession();
 		}
 		
 		return new CreateRoomSession();

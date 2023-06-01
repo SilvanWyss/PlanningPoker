@@ -7,14 +7,13 @@ public final class CreateRoomSessionHelper {
 		final var applicationContext = session.getOriApplicationContext();
 		
 		try (final var dataController = applicationContext.createDataController()) {
-			
 			final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
 			final var user = dataController.getOriUserById(userId);
-			final var room = dataController.createAndEnterNewRoom(user);
+			dataController.createAndEnterNewRoom(user);
 			dataController.saveChanges();
-			
-			session.setNext(RoomSession.withRoomId(room.getId()));
 		}
+		
+		session.setNext(new PokerSession());
 	}
 	
 	public void enterRoomAndRedirect(String roomNumber, final CreateRoomSession session) {
@@ -29,7 +28,7 @@ public final class CreateRoomSessionHelper {
 			room.addVisitor(user);
 			dataController.saveChanges();
 			
-			session.setNext(RoomSession.withRoomId(room.getId()));
+			session.setNext(new PokerSession());
 		}
 	}
 }
