@@ -27,7 +27,7 @@ public final class Room extends Entity implements IRoom {
 	private final Value<String> number = new Value<>();
 	
 	private final Reference<User> parentCreator = Reference.forEntity(User.class);
-			
+	
 	private final Value<Boolean> estimationsVisible = Value.withInitialValue(DEFAULT_ESTIMATIONS_VISIBLE_VALUE);
 	
 	private final MultiReference<RoomVisit> roomVisits = MultiReference.forEntity(RoomVisit.class);
@@ -79,6 +79,15 @@ public final class Room extends Entity implements IRoom {
 	@Override
 	public boolean hasSetEstimationsVisible() {
 		return estimationsVisible.getOriValue();
+	}
+	
+	@Override
+	public void removeVisitor(final IUser visitor) {
+		
+		final var roomVisit = (RoomVisit)visitor.getOriCurrentRoomVisit();
+		
+		roomVisits.removeEntity(roomVisit);
+		roomVisit.delete();
 	}
 	
 	@Override

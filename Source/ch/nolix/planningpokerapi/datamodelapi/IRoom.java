@@ -19,6 +19,8 @@ public interface IRoom extends Identified {
 	
 	boolean hasSetEstimationsVisible();
 	
+	void removeVisitor(IUser visitor);
+	
 	void setEstimationsInvisible();
 	
 	void setEstimationsVisible();
