@@ -1,5 +1,6 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequestableTriggerable;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.system.webgui.control.Label;
@@ -8,11 +9,19 @@ import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class PokerSession extends PageSession {
+public final class PokerSession extends PageSession implements CloseStateRequestableTriggerable {
 	
 	private static final PokerSessionAssembler POKER_SESSION_ASSEMBLER = new PokerSessionAssembler();
 	
 	private static final PokerSessionHelper POKER_SESSION_HELPER = new PokerSessionHelper();
+	
+	@Override
+	public void trigger() {
+		
+		initialize();
+		
+		updateCounterpart();
+	}
 	
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
@@ -20,6 +29,10 @@ public final class PokerSession extends PageSession {
 		final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
 		final var user = dataController.getOriUserById(userId);
 		final var roomVisit = user.getOriCurrentRoomVisit();
+		final var room = roomVisit.getOriParentRoom();
+		final var roomChangeNotifier = getOriApplicationContext().getOriRoomChangeNotifier();
+		
+		roomChangeNotifier.registerSubscriberForRoomChange(room.getId(), this);
 		
 		return createMainControl(roomVisit);
 	}
