@@ -1,6 +1,8 @@
 package ch.nolix.planningpokerapi.datamodelapi;
 
-public interface IRoomVisit {
+import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.Identified;
+
+public interface IRoomVisit extends Identified {
 	
 	void deleteEstimation();
 	
