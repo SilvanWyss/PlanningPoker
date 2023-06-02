@@ -38,7 +38,14 @@ public final class PokerSessionHelper {
 		
 		return StringCatalogue.QUESTION_MARK;
 	}
-
+	
+	public boolean isAllowedToConfigureRoom(final IRoomVisit roomVisit, final PokerSession session) {
+		
+		final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
+		
+		return roomVisit.getOriParentRoom().getOriParentCreator().hasId(userId);
+	}
+	
 	public void setEstimationInStoryPointsAndUpdate(
 		final String roomVisitId,
 		final int estimationInStoryPoints,
@@ -66,6 +73,23 @@ public final class PokerSessionHelper {
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
+			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+		}
+	}
+	
+	public void toggleEstimationVisibilityAndUpdate(final String roomId, final IApplicationContext applicationContext) {
+		try (final var dataController = applicationContext.createDataController()) {
+			
+			final var room = dataController.getOriRoomById(roomId);
+			
+			if (room.hasSetEstimationsInvisible()) {
+				room.setEstimationsVisible();
+			} else {
+				room.setEstimationsInvisible();
+			}
+			
+			dataController.saveChanges();
+			
 			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}

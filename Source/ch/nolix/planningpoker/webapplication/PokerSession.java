@@ -3,6 +3,7 @@ package ch.nolix.planningpoker.webapplication;
 import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequestableTriggerable;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
+import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
@@ -46,6 +47,16 @@ public final class PokerSession extends PageSession implements CloseStateRequest
 			.setText("Room " + roomVisit.getOriParentRoom().getNumber()),
 			new Label()
 			.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
+			new Button()
+			.setText("Show/hide estimations")
+			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit, this))
+			.setLeftMouseButtonPressAction(
+				() ->
+				POKER_SESSION_HELPER.toggleEstimationVisibilityAndUpdate(
+					roomVisit.getOriParentRoom().getId(),
+					getOriApplicationContext()
+				)
+			),
 			new HorizontalStack()
 			.addControl(
 				new VerticalStack()
