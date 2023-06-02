@@ -50,7 +50,7 @@ public final class PokerSession extends PageSession implements CloseStateRequest
 			.addControl(
 				new VerticalStack()
 				.addControl(
-					POKER_SESSION_ASSEMBLER.createEstimationCardsControl(roomVisit),
+					POKER_SESSION_ASSEMBLER.createEstimationCardsControl(roomVisit, getOriApplicationContext()),
 					POKER_SESSION_ASSEMBLER.createEstimationsControl(roomVisit.getOriParentRoom())
 				)
 			)
