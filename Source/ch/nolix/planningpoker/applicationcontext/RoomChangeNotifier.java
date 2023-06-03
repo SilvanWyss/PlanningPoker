@@ -2,8 +2,8 @@ package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.core.container.linkedlist.LinkedList;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
-import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.CloseStateRequestableTriggerable;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
+import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
 
 public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	
@@ -11,7 +11,7 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	
 	private boolean triggeringRoomSubscribersIsRequired;
 	
-	private final LinkedList<RoomSubscriber> roomSubscribers = new LinkedList<>();
+	private final LinkedList<RoomSubscriberWrapper> roomSubscriberWrappers = new LinkedList<>();
 	
 	@Override
 	public void noteRoomChange(final String roomId) {
@@ -35,31 +35,32 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	}
 
 	@Override
-	public void registerSubscriberForRoomChange(
+	public void registerRoomSubscriber(
 		final String roomId,
-		final CloseStateRequestableTriggerable subscriber
+		final IRoomSubscriber roomSubscriber
 	) {
-		registerRoomSubscriber(RoomSubscriber.forRoomAndSubscriber(roomId, subscriber));
+		registerRoomSubscriber(RoomSubscriberWrapper.forRoomAndSubscriber(roomId, roomSubscriber));
 	}
 	
-	private IContainer<RoomSubscriber> getOriRoomSubscribers() {
-		return roomSubscribers;
+	private IContainer<RoomSubscriberWrapper> getOriRoomSubscribers() {
+		return roomSubscriberWrappers;
 	}
 	
 	private boolean isTriggeringRoomSubscribers() {
 		return isTriggeringRoomSubscribers;
 	}
 	
-	private void registerRoomSubscriber(final RoomSubscriber roomSubscriber) {
-		roomSubscribers.addAtEnd(roomSubscriber);
+	private void registerRoomSubscriber(final RoomSubscriberWrapper roomSubscriber) {
+		roomSubscriberWrappers.addAtEnd(roomSubscriber);
 	}
 	
-	private void removeClosedRoomSubscribers() {
-		roomSubscribers.removeAll(RoomSubscriber::isClosed);
+	private void removeInactiveRoomSubscribers() {
+		roomSubscriberWrappers.removeAll(rsw -> !rsw.isActive());
 	}
 	
 	private void triggerRoomSubscribers(final String roomId) {
-		removeClosedRoomSubscribers();
+		
+		removeInactiveRoomSubscribers();
 		
 		triggerRoomSubscribersOfRoom(roomId);
 	}
