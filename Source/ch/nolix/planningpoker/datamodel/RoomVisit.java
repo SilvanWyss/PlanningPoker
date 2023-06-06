@@ -13,7 +13,7 @@ import ch.nolix.system.objectdatabase.database.Value;
 
 public final class RoomVisit extends Entity implements IRoomVisit {
 	
-	private static final boolean DEFAULT_INFINITE_ESTIMATION_FLAG = false;
+	private static final boolean DEFAULT_INFINITE_ESTIMATE_FLAG = false;
 	
 	public static RoomVisit forVisitor(final User visitor) {
 		
@@ -28,25 +28,25 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 	
 	private final Reference<User> visitor = Reference.forEntity(User.class);
 	
-	private final OptionalValue<Double> estimationInStoryPoints = new OptionalValue<>();
+	private final OptionalValue<Double> estimateInStoryPoints = new OptionalValue<>();
 	
-	private final Value<Boolean> infiniteEstimationFlag = Value.withInitialValue(DEFAULT_INFINITE_ESTIMATION_FLAG);
+	private final Value<Boolean> infiniteEstimateFlag = Value.withInitialValue(DEFAULT_INFINITE_ESTIMATE_FLAG);
 	
 	private RoomVisit() {
 		initialize();
 	}
 	
 	@Override
-	public void deleteEstimation() {
+	public void deleteEstimate() {
 		
-		estimationInStoryPoints.clear();
+		estimateInStoryPoints.clear();
 		
-		infiniteEstimationFlag.setValue(false);
+		infiniteEstimateFlag.setValue(false);
 	}
 	
 	@Override
-	public double getEstimationInStoryPoints() {
-		return estimationInStoryPoints.getOriValue();
+	public double getEstimateInStoryPoints() {
+		return estimateInStoryPoints.getOriValue();
 	}
 	
 	@Override
@@ -55,8 +55,8 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 	}
 	
 	@Override
-	public boolean hasEstimationInStorypoints() {
-		return estimationInStoryPoints.containsAny();
+	public boolean hasEstimateInStorypoints() {
+		return estimateInStoryPoints.containsAny();
 	}
 	
 	@Override
@@ -65,26 +65,26 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 	}
 	
 	@Override
-	public boolean hasInfiniteEstimation() {
-		return infiniteEstimationFlag.getOriValue();
+	public boolean hasInfiniteEstimate() {
+		return infiniteEstimateFlag.getOriValue();
 	}
 	
 	@Override
-	public void setEstimationInStoryPoints(final double estimationInStoryPoints) {
+	public void setEstimateInStoryPoints(final double estimateInStoryPoints) {
 		
-		GlobalValidator.assertThat(estimationInStoryPoints).thatIsNamed("estimation in story points").isNotNegative();
+		GlobalValidator.assertThat(estimateInStoryPoints).thatIsNamed("estimate in story points").isNotNegative();
 		
-		deleteEstimation();
+		deleteEstimate();
 		
-		this.estimationInStoryPoints.setValue(estimationInStoryPoints);
+		this.estimateInStoryPoints.setValue(estimateInStoryPoints);
 	}
 	
 	@Override
-	public void setInfiniteEstimation() {
+	public void setInfiniteEstimate() {
 		
-		deleteEstimation();
+		deleteEstimate();
 		
-		infiniteEstimationFlag.setValue(true);
+		infiniteEstimateFlag.setValue(true);
 	}
 	
 	private void assertVisitorIsNotInARoom(final User visitor) {

@@ -9,19 +9,19 @@ public interface IRoom extends Identified {
 	
 	String getNumber();
 	
-	IContainer<? extends IEstimationRound> getOriEstimationRounds();
+	IContainer<? extends IEstimateRound> getOriEstimateRounds();
 	
 	IUser getOriParentCreator();
 	
 	IContainer<? extends IRoomVisit> getOriRoomVisits();
 	
-	boolean hasSetEstimationsInvisible();
+	boolean hasSetEstimatesInvisible();
 	
-	boolean hasSetEstimationsVisible();
+	boolean hasSetEstimatesVisible();
 	
 	void removeRoomVisit(IRoomVisit roomVisit);
 	
-	void setEstimationsInvisible();
+	void setEstimatesInvisible();
 	
-	void setEstimationsVisible();
+	void setEstimatesVisible();
 }

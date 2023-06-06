@@ -2,28 +2,28 @@ package ch.nolix.planningpoker.datamodel;
 
 import ch.nolix.core.errorcontrol.invalidargumentexception.ArgumentHasAttributeException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.datamodelapi.IEstimation;
+import ch.nolix.planningpokerapi.datamodelapi.IEstimate;
 import ch.nolix.planningpokerapi.datamodelapi.IUser;
 import ch.nolix.system.objectdatabase.database.Entity;
 import ch.nolix.system.objectdatabase.database.Reference;
 import ch.nolix.system.objectdatabase.database.Value;
 
-public final class Estimation extends Entity implements IEstimation {
+public final class Estimate extends Entity implements IEstimate {
 	
-	public static Estimation forParentUserAndStoryPoints(final User parentUser, final int storyPoints) {
+	public static Estimate forParentUserAndStoryPoints(final User parentUser, final int storyPoints) {
 		
-		final var estimation = new Estimation();
-		estimation.setParentUser(parentUser);
-		estimation.setStoryPoints(storyPoints);
+		final var estimate = new Estimate();
+		estimate.setParentUser(parentUser);
+		estimate.setStoryPoints(storyPoints);
 		
-		return estimation;
+		return estimate;
 	}
 	
 	private final Reference<User> parentUser = Reference.forEntity(User.class);
 	
 	private final Value<Double> storyPoints = new Value<>();
 	
-	private Estimation() {
+	private Estimate() {
 		initialize();
 	}
 	

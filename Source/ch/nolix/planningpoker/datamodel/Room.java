@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.datamodel;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.programatom.name.LowerCaseCatalogue;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
-import ch.nolix.planningpokerapi.datamodelapi.IEstimationRound;
+import ch.nolix.planningpokerapi.datamodelapi.IEstimateRound;
 import ch.nolix.planningpokerapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.IUser;
@@ -14,7 +14,7 @@ import ch.nolix.system.objectdatabase.database.Value;
 
 public final class Room extends Entity implements IRoom {
 	
-	public static final boolean DEFAULT_ESTIMATIONS_VISIBLE_VALUE = false;
+	public static final boolean DEFAULT_ESTIMATES_VISIBLE_VALUE = false;
 	
 	public static Room fromParentCreator(final User parentCreator) {
 		
@@ -28,11 +28,11 @@ public final class Room extends Entity implements IRoom {
 	
 	private final Reference<User> parentCreator = Reference.forEntity(User.class);
 	
-	private final Value<Boolean> estimationsVisible = Value.withInitialValue(DEFAULT_ESTIMATIONS_VISIBLE_VALUE);
+	private final Value<Boolean> estimatesVisible = Value.withInitialValue(DEFAULT_ESTIMATES_VISIBLE_VALUE);
 	
 	private final MultiReference<RoomVisit> roomVisits = MultiReference.forEntity(RoomVisit.class);
 	
-	private final MultiReference<EstimationRound> estimationRounds = MultiReference.forEntity(EstimationRound.class);
+	private final MultiReference<EstimateRound> estimateRounds = MultiReference.forEntity(EstimateRound.class);
 	
 	private Room() {
 		
@@ -52,8 +52,8 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public IContainer<? extends IEstimationRound> getOriEstimationRounds() {
-		return estimationRounds.getReferencedEntities();
+	public IContainer<? extends IEstimateRound> getOriEstimateRounds() {
+		return estimateRounds.getReferencedEntities();
 	}
 	
 	@Override
@@ -67,13 +67,13 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public boolean hasSetEstimationsInvisible() {
-		return !hasSetEstimationsVisible();
+	public boolean hasSetEstimatesInvisible() {
+		return !hasSetEstimatesVisible();
 	}
 
 	@Override
-	public boolean hasSetEstimationsVisible() {
-		return estimationsVisible.getOriValue();
+	public boolean hasSetEstimatesVisible() {
+		return estimatesVisible.getOriValue();
 	}
 	
 	@Override
@@ -82,13 +82,13 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public void setEstimationsInvisible() {
-		estimationsVisible.setValue(false);
+	public void setEstimatesInvisible() {
+		estimatesVisible.setValue(false);
 	}
 	
 	@Override
-	public void setEstimationsVisible() {
-		estimationsVisible.setValue(true);
+	public void setEstimatesVisible() {
+		estimatesVisible.setValue(true);
 	}
 	
 	private String createNumber() {

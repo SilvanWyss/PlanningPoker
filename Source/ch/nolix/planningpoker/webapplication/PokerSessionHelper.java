@@ -9,11 +9,11 @@ public final class PokerSessionHelper {
 	
 	private static final YesNoDialogFactory YES_NO_DIALOG_FACTORY = YesNoDialogFactory.INSTANCE;
 	
-	public void deleteEstimationAndUpdate(final String roomVisitId, final IApplicationContext applicationContext) {
+	public void deleteEstimateAndUpdate(final String roomVisitId, final IApplicationContext applicationContext) {
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var roomVisit = dataController.getOriRoomVisitById(roomVisitId);
-			roomVisit.deleteEstimation();
+			roomVisit.deleteEstimate();
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
@@ -33,10 +33,10 @@ public final class PokerSessionHelper {
 		return (roomCreator.getName() + " is our captain.");
 	}
 	
-	public String getEstimationText(final IRoomVisit roomVisit) {
+	public String getEstimateText(final IRoomVisit roomVisit) {
 		
-		if (roomVisit.getOriParentRoom().hasSetEstimationsVisible()) {
-			return getEstimationTextWhenEstimationIsVisible(roomVisit);
+		if (roomVisit.getOriParentRoom().hasSetEstimatesVisible()) {
+			return getEstimateTextWhenEstimateIsVisible(roomVisit);
 		}
 		
 		return StringCatalogue.QUESTION_MARK;
@@ -58,15 +58,15 @@ public final class PokerSessionHelper {
 		);
 	}
 	
-	public void setEstimationInStoryPointsAndUpdate(
+	public void setEstimateInStoryPointsAndUpdate(
 		final String roomVisitId,
-		final int estimationInStoryPoints,
+		final int estimateInStoryPoints,
 		final IApplicationContext applicationContext
 	) {
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var roomVisit = dataController.getOriRoomVisitById(roomVisitId);
-			roomVisit.setEstimationInStoryPoints(estimationInStoryPoints);
+			roomVisit.setEstimateInStoryPoints(estimateInStoryPoints);
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
@@ -74,14 +74,14 @@ public final class PokerSessionHelper {
 		}
 	}
 	
-	public void setInfiniteEstimationAndUpdate(
+	public void setInfiniteEstimateAndUpdate(
 		final String roomVisitId,
 		final IApplicationContext applicationContext
 	) {
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var roomVisit = dataController.getOriRoomVisitById(roomVisitId);
-			roomVisit.setInfiniteEstimation();
+			roomVisit.setInfiniteEstimate();
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
@@ -89,15 +89,15 @@ public final class PokerSessionHelper {
 		}
 	}
 	
-	public void toggleEstimationVisibilityAndUpdate(final String roomId, final IApplicationContext applicationContext) {
+	public void toggleEstimateVisibilityAndUpdate(final String roomId, final IApplicationContext applicationContext) {
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var room = dataController.getOriRoomById(roomId);
 			
-			if (room.hasSetEstimationsInvisible()) {
-				room.setEstimationsVisible();
+			if (room.hasSetEstimatesInvisible()) {
+				room.setEstimatesVisible();
 			} else {
-				room.setEstimationsInvisible();
+				room.setEstimatesInvisible();
 			}
 			
 			dataController.saveChanges();
@@ -106,13 +106,13 @@ public final class PokerSessionHelper {
 		}
 	}
 	
-	private String getEstimationTextWhenEstimationIsVisible(final IRoomVisit roomVisit) {
+	private String getEstimateTextWhenEstimateIsVisible(final IRoomVisit roomVisit) {
 		
-		if (roomVisit.hasEstimationInStorypoints()) {
-			return String.valueOf(roomVisit.getEstimationInStoryPoints());
+		if (roomVisit.hasEstimateInStorypoints()) {
+			return String.valueOf(roomVisit.getEstimateInStoryPoints());
 		}
 		
-		if (roomVisit.hasInfiniteEstimation()) {
+		if (roomVisit.hasInfiniteEstimate()) {
 			return StringCatalogue.INFINITY;
 		}
 		

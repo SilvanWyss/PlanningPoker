@@ -58,11 +58,11 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			new Label()
 			.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
 			new Button()
-			.setText("Show/hide estimations")
+			.setText("Show/hide estimates")
 			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit, this))
 			.setLeftMouseButtonPressAction(
 				() ->
-				POKER_SESSION_HELPER.toggleEstimationVisibilityAndUpdate(
+				POKER_SESSION_HELPER.toggleEstimateVisibilityAndUpdate(
 					roomVisit.getOriParentRoom().getId(),
 					getOriApplicationContext()
 				)
@@ -71,8 +71,8 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			.addControl(
 				new VerticalStack()
 				.addControl(
-					POKER_SESSION_ASSEMBLER.createEstimationCardsControl(roomVisit, getOriApplicationContext()),
-					POKER_SESSION_ASSEMBLER.createEstimationsControl(roomVisit.getOriParentRoom())
+					POKER_SESSION_ASSEMBLER.createEstimateCardsControl(roomVisit, getOriApplicationContext()),
+					POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getOriParentRoom())
 				)
 			)
 		);

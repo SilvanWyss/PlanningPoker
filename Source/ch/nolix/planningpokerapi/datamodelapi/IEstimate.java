@@ -1,6 +1,6 @@
 package ch.nolix.planningpokerapi.datamodelapi;
 
-public interface IEstimation {
+public interface IEstimate {
 	
 	IUser getOriParentUser();
 	

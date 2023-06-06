@@ -13,49 +13,49 @@ public final class PokerSessionAssembler {
 	
 	private static final PokerSessionHelper POKER_SESSION_HELPER = new PokerSessionHelper();
 	
-	public IControl<?, ?> createEstimationCardsControl(
+	public IControl<?, ?> createEstimateCardsControl(
 		final IRoomVisit roomVisit,
 		final IApplicationContext applicationContext
 	) {
 		return
 		new HorizontalStack()
 		.addControl(
-			createDeleteEstimationCardControl(roomVisit, applicationContext),
-			createEstimationCardControl(roomVisit, 0, applicationContext),
-			createEstimationCardControl(roomVisit, 1, applicationContext),
-			createEstimationCardControl(roomVisit, 2, applicationContext),
-			createEstimationCardControl(roomVisit, 3, applicationContext),
-			createEstimationCardControl(roomVisit, 5, applicationContext),
-			createEstimationCardControl(roomVisit, 8, applicationContext),
-			createEstimationCardControl(roomVisit, 13, applicationContext),
-			createEstimationCardControl(roomVisit, 21, applicationContext),
-			createEstimationCardControl(roomVisit, 34, applicationContext),
-			createEstimationCardControl(roomVisit, 55, applicationContext),
-			createEstimationCardControl(roomVisit, 89, applicationContext),
-			createInfiniteEstimationCardControl(roomVisit, applicationContext)
+			createDeleteEstimateCardControl(roomVisit, applicationContext),
+			createEstimateCardControl(roomVisit, 0, applicationContext),
+			createEstimateCardControl(roomVisit, 1, applicationContext),
+			createEstimateCardControl(roomVisit, 2, applicationContext),
+			createEstimateCardControl(roomVisit, 3, applicationContext),
+			createEstimateCardControl(roomVisit, 5, applicationContext),
+			createEstimateCardControl(roomVisit, 8, applicationContext),
+			createEstimateCardControl(roomVisit, 13, applicationContext),
+			createEstimateCardControl(roomVisit, 21, applicationContext),
+			createEstimateCardControl(roomVisit, 34, applicationContext),
+			createEstimateCardControl(roomVisit, 55, applicationContext),
+			createEstimateCardControl(roomVisit, 89, applicationContext),
+			createInfiniteEstimateCardControl(roomVisit, applicationContext)
 		);
 	}
 	
-	public IControl<?, ?> createEstimationsControl(final IRoom room) {
+	public IControl<?, ?> createEstimatesControl(final IRoom room) {
 		
-		final var estimationsGridContainer = new GridContainer();
+		final var estimatesGridContainer = new GridContainer();
 		
 		var rowIndex = 1;
 		for (final var rv : room.getOriRoomVisits()) {
 			
 			final var visitorName = rv.getOriVisitor().getName();
-			estimationsGridContainer.insertTextAtRowAndColumn(rowIndex, 1, visitorName);
+			estimatesGridContainer.insertTextAtRowAndColumn(rowIndex, 1, visitorName);
 			
-			final var estimationText = POKER_SESSION_HELPER.getEstimationText(rv);
-			estimationsGridContainer.insertTextAtRowAndColumn(rowIndex, 2, estimationText);
+			final var estimateText = POKER_SESSION_HELPER.getEstimateText(rv);
+			estimatesGridContainer.insertTextAtRowAndColumn(rowIndex, 2, estimateText);
 			
 			rowIndex++;
 		}
 		
-		return estimationsGridContainer;
+		return estimatesGridContainer;
 	}
 	
-	private IControl<?, ?> createDeleteEstimationCardControl(
+	private IControl<?, ?> createDeleteEstimateCardControl(
 		final IRoomVisit roomVisit,
 		final IApplicationContext applicationContext
 	) {
@@ -63,51 +63,51 @@ public final class PokerSessionAssembler {
 		new Button()
 		.setText("\u2715")
 		.setLeftMouseButtonPressAction(
-			() -> POKER_SESSION_HELPER.deleteEstimationAndUpdate(roomVisit.getId(), applicationContext)
+			() -> POKER_SESSION_HELPER.deleteEstimateAndUpdate(roomVisit.getId(), applicationContext)
 		);
 	}
 	
-	private IControl<?, ?> createEstimationCardControl(
+	private IControl<?, ?> createEstimateCardControl(
 		final IRoomVisit roomVisit,
-		final int estimationInStoryPoints,
+		final int estimateInStoryPoints,
 		final IApplicationContext applicationContext
 	) {
 		
-		final var estimationCardButton =
+		final var estimateCardButton =
 		new Button()
-		.setText(String.valueOf(estimationInStoryPoints))
+		.setText(String.valueOf(estimateInStoryPoints))
 		.setLeftMouseButtonPressAction(
 			() ->
-			POKER_SESSION_HELPER.setEstimationInStoryPointsAndUpdate(
+			POKER_SESSION_HELPER.setEstimateInStoryPointsAndUpdate(
 				roomVisit.getId(),
-				estimationInStoryPoints,
+				estimateInStoryPoints,
 				applicationContext
 			)
 		);
 		
-		if (roomVisit.hasEstimationInStorypoints() && roomVisit.getEstimationInStoryPoints() == estimationInStoryPoints) {
-			estimationCardButton.setToken("currentEstimation");
+		if (roomVisit.hasEstimateInStorypoints() && roomVisit.getEstimateInStoryPoints() == estimateInStoryPoints) {
+			estimateCardButton.setToken("currentEstimate");
 		}
 		
-		return estimationCardButton;
+		return estimateCardButton;
 	}
 	
-	private IControl<?, ?> createInfiniteEstimationCardControl(
+	private IControl<?, ?> createInfiniteEstimateCardControl(
 		final IRoomVisit roomVisit,
 		final IApplicationContext applicationContext
 	) {
 		
-		final var infiniteEstimationCardButton =
+		final var infiniteEstimateCardButton =
 		new Button()
 		.setText(StringCatalogue.INFINITY)
 		.setLeftMouseButtonPressAction(
-			() -> POKER_SESSION_HELPER.setInfiniteEstimationAndUpdate(roomVisit.getId(), applicationContext)
+			() -> POKER_SESSION_HELPER.setInfiniteEstimateAndUpdate(roomVisit.getId(), applicationContext)
 		);
 		
-		if (roomVisit.hasInfiniteEstimation()) {
-			infiniteEstimationCardButton.setToken("currentEstimation");
+		if (roomVisit.hasInfiniteEstimate()) {
+			infiniteEstimateCardButton.setToken("currentEstimate");
 		}
 		
-		return infiniteEstimationCardButton;
+		return infiniteEstimateCardButton;
 	}
 }

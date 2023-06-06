@@ -4,19 +4,19 @@ import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.Identified;
 
 public interface IRoomVisit extends Identified {
 	
-	void deleteEstimation();
+	void deleteEstimate();
 	
-	double getEstimationInStoryPoints();
+	double getEstimateInStoryPoints();
 	
 	IRoom getOriParentRoom();
 	
 	IUser getOriVisitor();
 	
-	boolean hasEstimationInStorypoints();
+	boolean hasEstimateInStorypoints();
 	
-	boolean hasInfiniteEstimation();
+	boolean hasInfiniteEstimate();
 	
-	void setEstimationInStoryPoints(double estimationInStoryPoints);
+	void setEstimateInStoryPoints(double estimateInStoryPoints);
 	
-	void setInfiniteEstimation();
+	void setInfiniteEstimate();
 }
