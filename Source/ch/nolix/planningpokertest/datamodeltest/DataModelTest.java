@@ -33,9 +33,6 @@ public final class DataModelTest {
 		databaseAdapter.insert(developer3);
 		final var room = Room.fromParentCreator(scrumMaster);
 		databaseAdapter.insert(room);
-		room.addVisitor(developer1);
-		room.addVisitor(developer2);
-		room.addVisitor(developer3);
 		
 		//execution & verification
 		GlobalExaminer.expect(databaseAdapter::saveChangesAndReset).doesNotThrowException();

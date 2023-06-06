@@ -32,15 +32,14 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
-	public IRoom createAndEnterNewRoom(final IUser user) {
+	public IRoom createNewRoomAndEnterRoom(final IUser user) {
 		
-		final var room = Room.fromParentCreator((User)user);
-		databaseAdapter.insert(room);
-		room.addVisitor(user);
+		final var room = createNewRoom(user);
+		enterRoom(user, room);
 		
 		return room;
 	}
-	
+
 	@Override
 	public IUser createUserWithName(final String name) {
 		
@@ -48,6 +47,23 @@ public final class DataController implements IDataController {
 		databaseAdapter.insert(user);
 		
 		return user;
+	}
+	
+	@Override
+	public IRoomVisit enterRoom(IUser user, IRoom room) {
+				
+		if (user.isInARoom()) {
+			
+			final var currentRoomVisit = user.getOriCurrentRoomVisit();
+			
+			if (currentRoomVisit.getOriParentRoom().hasId(room.getId())) {
+				return currentRoomVisit;
+			}
+			
+			leaveRoom(user);
+		}
+		
+		return onlyEnterRoom(user, room);
 	}
 	
 	@Override
@@ -97,7 +113,34 @@ public final class DataController implements IDataController {
 	}
 	
 	@Override
+	public void leaveRoom(final IUser user) {
+		
+		final var roomVisit = (RoomVisit)user.getOriCurrentRoomVisit();
+		final var room = roomVisit.getOriParentRoom();
+		
+		room.removeRoomVisit(roomVisit);
+		roomVisit.deleteWithoutReferenceCheck();
+	}
+	
+	@Override
 	public void saveChanges() {
 		databaseAdapter.saveChangesAndReset();
+	}
+	
+	private Room createNewRoom(final IUser user) {
+		
+		final var room = Room.fromParentCreator((User)user);
+		databaseAdapter.insert(room);
+		
+		return room;
+	}
+	
+	private IRoomVisit onlyEnterRoom(IUser user, IRoom room) {
+		
+		final var roomVisit = RoomVisit.forVisitor((User)user);
+		databaseAdapter.insert(roomVisit);
+		room.addRoomVisit(roomVisit);
+		
+		return roomVisit;
 	}
 }

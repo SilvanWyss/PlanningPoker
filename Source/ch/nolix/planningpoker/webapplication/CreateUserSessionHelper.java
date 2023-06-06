@@ -14,7 +14,7 @@ public final class CreateUserSessionHelper {
 			final var roomNumber = session.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
 			final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
 			if (room != null) {
-				room.addVisitor(user);
+				dataController.enterRoom(user, room);
 			}
 			dataController.saveChanges();
 			

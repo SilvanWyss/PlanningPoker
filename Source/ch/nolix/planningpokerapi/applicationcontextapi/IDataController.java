@@ -9,9 +9,11 @@ public interface IDataController extends IChangeSaver {
 	
 	boolean containsUserWithId(String id);
 	
-	IRoom createAndEnterNewRoom(IUser user);
+	IRoom createNewRoomAndEnterRoom(IUser user);
 	
 	IUser createUserWithName(String name);
+	
+	IRoomVisit enterRoom(IUser user, IRoom room);
 	
 	IRoom getOriRoomById(String id);
 	
@@ -24,4 +26,6 @@ public interface IDataController extends IChangeSaver {
 	IUser getOriUserById(String id);
 	
 	IUser getOriUserByIdOrNull(String id);
+	
+	void leaveRoom(IUser user);
 }

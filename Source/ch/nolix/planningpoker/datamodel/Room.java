@@ -42,13 +42,8 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public void addVisitor(final IUser visitor) {
-		
-		final var roomVisit = RoomVisit.forVisitor((User)visitor);
-		
-		getOriParentDatabase().insertEntity(roomVisit);
-		
-		roomVisits.addEntity(roomVisit);
+	public void addRoomVisit(final IRoomVisit roomVisit) {
+		roomVisits.addEntity((RoomVisit)roomVisit);
 	}
 	
 	@Override
@@ -82,12 +77,8 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public void removeVisitor(final IUser visitor) {
-		
-		final var roomVisit = (RoomVisit)visitor.getOriCurrentRoomVisit();
-		
-		roomVisits.removeEntity(roomVisit);
-		roomVisit.delete();
+	public void removeRoomVisit(final IRoomVisit roomVisit) {
+		roomVisits.removeEntity((RoomVisit)roomVisit);
 	}
 	
 	@Override

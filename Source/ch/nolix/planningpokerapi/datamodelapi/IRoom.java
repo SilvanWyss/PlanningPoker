@@ -5,7 +5,7 @@ import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 
 public interface IRoom extends Identified {
 	
-	void addVisitor(IUser visitor);
+	void addRoomVisit(IRoomVisit roomVisit);
 	
 	String getNumber();
 	
@@ -19,7 +19,7 @@ public interface IRoom extends Identified {
 	
 	boolean hasSetEstimationsVisible();
 	
-	void removeVisitor(IUser visitor);
+	void removeRoomVisit(IRoomVisit roomVisit);
 	
 	void setEstimationsInvisible();
 	
