@@ -50,6 +50,11 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			new Label()
 			.setRole(LabelRole.LEVEL1_HEADER)
 			.setText("Room " + roomVisit.getOriParentRoom().getNumber()),
+			new Button()
+			.setText("Go to another room")
+			.setLeftMouseButtonPressAction(
+				() -> POKER_SESSION_HELPER.openGoToOtherRoomDialog(roomVisit.getOriVisitor().getId(), this)
+			),
 			new Label()
 			.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
 			new Button()
