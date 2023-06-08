@@ -67,6 +67,15 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 					getOriApplicationContext()
 				)
 			),
+			new Button()
+			.setText("Delete estimates")
+			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit, this))
+			.setLeftMouseButtonPressAction(
+				() -> POKER_SESSION_HELPER.deleteEstimatesAndUpdate(
+					roomVisit.getOriParentRoom().getId(),
+					getOriApplicationContext()
+				)
+			),
 			new HorizontalStack()
 			.addControl(
 				new VerticalStack()

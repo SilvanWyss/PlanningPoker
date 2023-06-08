@@ -21,6 +21,18 @@ public final class PokerSessionHelper {
 		}
 	}
 	
+	public void deleteEstimatesAndUpdate(final String roomId, final IApplicationContext applicationContext) {
+		try (final var dataController = applicationContext.createDataController()) {
+			
+			final var room = dataController.getOriRoomById(roomId);
+			room.setEstimatesInvisible();
+			room.getOriRoomVisits().forEach(IRoomVisit::deleteEstimate);
+			dataController.saveChanges();
+			
+			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+		}
+	}
+	
 	public String getCaptainInfoText(final IRoomVisit roomVisit) {
 		
 		final var roomCreator = roomVisit.getOriParentRoom().getOriParentCreator();
