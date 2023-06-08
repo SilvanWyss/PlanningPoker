@@ -25,6 +25,10 @@ public final class RoomSubscriberWrapper implements IRoomSubscriber {
 		this.roomSubscriber = roomSubscriber;
 	}
 	
+	public boolean containsRoomSubscriber(final IRoomSubscriber roomSubscriber) {
+		return (this.roomSubscriber == roomSubscriber);
+	}
+	
 	public String getRoomId() {
 		return roomId;
 	}

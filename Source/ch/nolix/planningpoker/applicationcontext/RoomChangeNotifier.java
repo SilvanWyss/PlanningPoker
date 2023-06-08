@@ -33,21 +33,28 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 			triggeringRoomSubscribersIsRequired = true;
 		}
 	}
-
+	
 	@Override
-	public void registerRoomSubscriber(
-		final String roomId,
-		final IRoomSubscriber roomSubscriber
-	) {
-		registerRoomSubscriber(RoomSubscriberWrapper.forRoomAndSubscriber(roomId, roomSubscriber));
+	public void registerRoomSubscriberIfNotRegistered(final String roomId, final IRoomSubscriber roomSubscriber) {
+		if (!hasRegisteredRoomSubscriber(roomSubscriber)) {
+			registerRoomSubscriber(roomId, roomSubscriber);
+		}
 	}
 	
 	private IContainer<RoomSubscriberWrapper> getOriRoomSubscribers() {
 		return roomSubscriberWrappers;
 	}
 	
+	private boolean hasRegisteredRoomSubscriber(final IRoomSubscriber roomSubscriber) {
+		return roomSubscriberWrappers.containsAny(rsw -> rsw.containsRoomSubscriber(roomSubscriber));
+	}
+	
 	private boolean isTriggeringRoomSubscribers() {
 		return isTriggeringRoomSubscribers;
+	}
+	
+	private void registerRoomSubscriber(final String roomId, final IRoomSubscriber roomSubscriber) {
+		registerRoomSubscriber(RoomSubscriberWrapper.forRoomAndSubscriber(roomId, roomSubscriber));
 	}
 	
 	private void registerRoomSubscriber(final RoomSubscriberWrapper roomSubscriber) {

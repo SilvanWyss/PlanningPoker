@@ -38,7 +38,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 		final var room = roomVisit.getOriParentRoom();
 		final var roomChangeNotifier = getOriApplicationContext().getOriRoomChangeNotifier();
 		
-		roomChangeNotifier.registerRoomSubscriber(room.getId(), this);
+		roomChangeNotifier.registerRoomSubscriberIfNotRegistered(room.getId(), this);
 		
 		return createMainControl(roomVisit);
 	}

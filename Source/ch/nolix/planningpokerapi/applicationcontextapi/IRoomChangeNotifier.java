@@ -4,5 +4,5 @@ public interface IRoomChangeNotifier {
 	
 	void noteRoomChange(String roomId);
 	
-	void registerRoomSubscriber(String roomId, IRoomSubscriber roomSubscriber);
+	void registerRoomSubscriberIfNotRegistered(String roomId, IRoomSubscriber roomSubscriber);
 }
