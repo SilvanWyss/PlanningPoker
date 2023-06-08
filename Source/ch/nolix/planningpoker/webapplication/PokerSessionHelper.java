@@ -109,7 +109,7 @@ public final class PokerSessionHelper {
 	private String getEstimateTextWhenEstimateIsVisible(final IRoomVisit roomVisit) {
 		
 		if (roomVisit.hasEstimateInStorypoints()) {
-			return String.valueOf(roomVisit.getEstimateInStoryPoints());
+			return getEstimateTextWhenEstimateIsVisibleAndHasEstimateInStoryPoints(roomVisit);
 		}
 		
 		if (roomVisit.hasInfiniteEstimate()) {
@@ -117,6 +117,18 @@ public final class PokerSessionHelper {
 		}
 		
 		return StringCatalogue.THIN_CROSS;
+	}
+	
+	private String getEstimateTextWhenEstimateIsVisibleAndHasEstimateInStoryPoints(
+		final IRoomVisit roomVisit
+	) {
+		final var estimateInStoryPoints = roomVisit.getEstimateInStoryPoints();
+		
+		if (estimateInStoryPoints == 0.5) {
+			return "0.5";
+		}
+		
+		return String.valueOf((int)estimateInStoryPoints);
 	}
 	
 	private void goToOtherRoomAndUpdate(final String userId, final PokerSession session) {
