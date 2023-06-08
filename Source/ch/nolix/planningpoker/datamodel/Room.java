@@ -92,7 +92,11 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	private String createNumber() {
-		return String.valueOf(getOriParentTable().getEntityCount());
+		
+		final var roomCount = getOriParentTable().getEntityCount();
+		final var localNumber = 100_000 + (56 * (roomCount + 2));
+		
+		return String.valueOf(localNumber);
 	}
 	
 	private void setNumber() {
