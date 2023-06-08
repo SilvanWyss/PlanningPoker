@@ -1,11 +1,15 @@
 package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
+import ch.nolix.planningpoker.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.dataevaluatorapi.IRoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.system.webgui.dialog.YesNoDialogFactory;
 
 public final class PokerSessionHelper {
+	
+	private static final IRoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 	
 	private static final YesNoDialogFactory YES_NO_DIALOG_FACTORY = YesNoDialogFactory.INSTANCE;
 	
@@ -51,7 +55,7 @@ public final class PokerSessionHelper {
 			return getEstimateTextWhenEstimateIsVisible(roomVisit);
 		}
 		
-		return StringCatalogue.QUESTION_MARK;
+		return getEstimateTextWhenEstimateIsInvisible(roomVisit);
 	}
 	
 	public boolean isAllowedToConfigureRoom(final IRoomVisit roomVisit, final PokerSession session) {
@@ -118,6 +122,15 @@ public final class PokerSessionHelper {
 		}
 	}
 	
+	private String getEstimateTextWhenEstimateIsInvisible(final IRoomVisit roomVisit) {
+		
+		if (ROOM_VISIT_EVALUATOR.hasAnyEstimation(roomVisit)) {
+			return StringCatalogue.QUESTION_MARK;
+		}
+		
+		return StringCatalogue.MINUS;
+	}
+	
 	private String getEstimateTextWhenEstimateIsVisible(final IRoomVisit roomVisit) {
 		
 		if (roomVisit.hasEstimateInStorypoints()) {
@@ -128,7 +141,7 @@ public final class PokerSessionHelper {
 			return StringCatalogue.INFINITY;
 		}
 		
-		return StringCatalogue.THIN_CROSS;
+		return StringCatalogue.MINUS;
 	}
 	
 	private String getEstimateTextWhenEstimateIsVisibleAndHasEstimateInStoryPoints(
