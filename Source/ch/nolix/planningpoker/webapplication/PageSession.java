@@ -2,6 +2,7 @@ package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.webapplication.BackendWebClientSession;
 import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
@@ -15,8 +16,13 @@ public abstract class PageSession extends BackendWebClientSession<IApplicationCo
 	
 	protected abstract IControl<?, ?> createMainControl(IDataController dataController);
 	
+	protected abstract void doRegistrations(IRoomChangeNotifier roomChangeNotifier);
+	
 	@Override
 	protected void initialize() {
+		
+		doRegistrations(getOriApplicationContext().getOriRoomChangeNotifier());
+		
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			getOriGUI()
 			.pushLayerWithRootControl(

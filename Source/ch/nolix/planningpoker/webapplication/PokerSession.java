@@ -2,6 +2,7 @@ package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.system.webgui.control.Button;
@@ -49,12 +50,13 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 		final var userId = configuration.getUserId();
 		final var user = dataController.getOriUserById(userId);
 		final var roomVisit = user.getOriCurrentRoomVisit();
-		final var room = roomVisit.getOriParentRoom();
-		final var roomChangeNotifier = getOriApplicationContext().getOriRoomChangeNotifier();
-		
-		roomChangeNotifier.registerRoomSubscriberIfNotRegistered(room.getId(), this);
-		
+				
 		return createMainControl(roomVisit);
+	}
+	
+	@Override
+	protected void doRegistrations(final IRoomChangeNotifier roomChangeNotifier) {
+		roomChangeNotifier.registerRoomSubscriberIfNotRegistered(configuration.getRoomId(), this);
 	}
 	
 	private IControl<?, ?> createMainControl(final IRoomVisit roomVisit) {

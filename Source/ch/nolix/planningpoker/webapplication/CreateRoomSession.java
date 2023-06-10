@@ -1,6 +1,7 @@
 package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.control.Textbox;
 import ch.nolix.system.webgui.control.ValidationLabel;
@@ -34,6 +35,11 @@ public final class CreateRoomSession extends PageSession {
 				.setLeftMouseButtonPressAction(this::createRoomAndEnterRoomAndRedirect)
 			)
 		);
+	}
+	
+	@Override
+	protected void doRegistrations(final IRoomChangeNotifier roomChangeNotifier) {
+		//Does nothing.
 	}
 	
 	private void createRoomAndEnterRoomAndRedirect() {
