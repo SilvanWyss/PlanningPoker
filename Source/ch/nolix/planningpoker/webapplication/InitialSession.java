@@ -35,14 +35,18 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 		final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
 		
 		if (room != null) {
-			
 			dataController.enterRoom(user, room);
-			
-			return new PokerSession();
+			dataController.saveChanges();
 		}
 		
 		if (user.isInARoom()) {
-			return new PokerSession();
+			return
+			PokerSession.withConfiguration(
+				new PokerSessionConfiguration(
+					user.getId(),
+					user.getOriCurrentRoomVisit().getOriParentRoom().getId()
+				)
+			);
 		}
 		
 		return new CreateRoomSession();

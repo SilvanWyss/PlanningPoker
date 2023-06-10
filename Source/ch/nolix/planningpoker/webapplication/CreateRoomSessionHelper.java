@@ -12,12 +12,11 @@ public final class CreateRoomSessionHelper {
 			
 			final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
 			final var user = dataController.getOriUserById(userId);
-			
-			dataController.createNewRoomAndEnterRoom(user);
+			final var room = dataController.createNewRoomAndEnterRoom(user);
 			dataController.saveChanges();
+			
+			session.setNext(PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId())));
 		}
-		
-		session.setNext(new PokerSession());
 	}
 	
 	public void enterRoomAndRedirect(String roomNumber, final CreateRoomSession session) {
@@ -29,11 +28,10 @@ public final class CreateRoomSessionHelper {
 			final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
 			final var user = (User)dataController.getOriUserById(userId);
 			final var room = dataController.getOriRoomByNumber(roomNumber);
-			
 			dataController.enterRoom(user, room);
 			dataController.saveChanges();
+			
+			session.setNext(PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId())));
 		}
-		
-		session.setNext(new PokerSession());
 	}
 }

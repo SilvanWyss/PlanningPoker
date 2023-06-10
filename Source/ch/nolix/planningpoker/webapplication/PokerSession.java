@@ -1,5 +1,6 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
@@ -15,6 +16,19 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	private static final PokerSessionAssembler POKER_SESSION_ASSEMBLER = new PokerSessionAssembler();
 	
 	private static final PokerSessionHelper POKER_SESSION_HELPER = new PokerSessionHelper();
+	
+	public static PokerSession withConfiguration(final PokerSessionConfiguration pokerSessionConfiguration) {
+		return new PokerSession(pokerSessionConfiguration);
+	}
+	
+	private PokerSessionConfiguration configuration;
+	
+	private PokerSession(final PokerSessionConfiguration pokerSessionConfiguration) {
+		
+		GlobalValidator.assertThat(pokerSessionConfiguration).thatIsNamed(PokerSessionConfiguration.class).isNotNull();
+		
+		this.configuration = pokerSessionConfiguration;
+	}
 	
 	@Override
 	public boolean isActive() {
@@ -32,7 +46,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
 		
-		final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
+		final var userId = configuration.getUserId();
 		final var user = dataController.getOriUserById(userId);
 		final var roomVisit = user.getOriCurrentRoomVisit();
 		final var room = roomVisit.getOriParentRoom();
