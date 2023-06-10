@@ -75,7 +75,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
 			new Button()
 			.setText("Show/hide estimates")
-			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit, this))
+			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
 			.setLeftMouseButtonPressAction(
 				() ->
 				POKER_SESSION_HELPER.toggleEstimateVisibilityAndUpdate(
@@ -85,7 +85,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			),
 			new Button()
 			.setText("Delete estimates")
-			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit, this))
+			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
 			.setLeftMouseButtonPressAction(
 				() -> POKER_SESSION_HELPER.deleteEstimatesAndUpdate(
 					roomVisit.getOriParentRoom().getId(),

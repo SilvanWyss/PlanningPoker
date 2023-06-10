@@ -29,8 +29,8 @@ public final class PokerSessionHelper {
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var room = dataController.getOriRoomById(roomId);
-			room.setEstimatesInvisible();
 			room.getOriRoomVisits().forEach(IRoomVisit::deleteEstimate);
+			room.setEstimatesInvisible();
 			dataController.saveChanges();
 			
 			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
@@ -58,11 +58,13 @@ public final class PokerSessionHelper {
 		return getEstimateTextWhenEstimateIsInvisible(roomVisit);
 	}
 	
-	public boolean isAllowedToConfigureRoom(final IRoomVisit roomVisit, final PokerSession session) {
+	public boolean isAllowedToConfigureRoom(final IRoomVisit roomVisit) {
 		
-		final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
+		final var visitor = roomVisit.getOriVisitor();
+		final var room = roomVisit.getOriParentRoom();
+		final var roomCreator = room.getOriParentCreator();
 		
-		return roomVisit.getOriParentRoom().getOriParentCreator().hasId(userId);
+		return visitor.hasId(roomCreator.getId());
 	}
 	
 	public void openGoToOtherRoomDialog(final String userId, final PokerSession session) {
@@ -128,7 +130,7 @@ public final class PokerSessionHelper {
 			return StringCatalogue.QUESTION_MARK;
 		}
 		
-		return StringCatalogue.MINUS;
+		return StringCatalogue.THIN_CROSS;
 	}
 	
 	private String getEstimateTextWhenEstimateIsVisible(final IRoomVisit roomVisit) {
@@ -141,7 +143,7 @@ public final class PokerSessionHelper {
 			return StringCatalogue.INFINITY;
 		}
 		
-		return StringCatalogue.MINUS;
+		return StringCatalogue.THIN_CROSS;
 	}
 	
 	private String getEstimateTextWhenEstimateIsVisibleAndHasEstimateInStoryPoints(
