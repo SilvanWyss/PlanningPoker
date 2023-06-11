@@ -5,6 +5,7 @@ import ch.nolix.planningpoker.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.dataevaluatorapi.IRoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
+import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.dialog.YesNoDialogFactory;
 
 public final class PokerSessionHelper {
@@ -67,11 +68,14 @@ public final class PokerSessionHelper {
 		return visitor.hasId(roomCreator.getId());
 	}
 	
-	public void openGoToOtherRoomDialog(final String userId, final PokerSession session) {
-		session.getOriGUI().pushLayer(
+	public void openGoToOtherRoomDialog(
+		final String userId,
+		final WebClientSession<IApplicationContext> webClientSession
+	) {
+		webClientSession.getOriGUI().pushLayer(
 			YES_NO_DIALOG_FACTORY.createYesNoDialogWithYesNoQuestionAndConfirmAction(
 				"Do you really want to leave the current room?",
-				() -> goToOtherRoomAndUpdate(userId, session)
+				() -> goToOtherRoomAndUpdate(userId, webClientSession)
 			)
 		);
 	}
@@ -158,9 +162,12 @@ public final class PokerSessionHelper {
 		return String.valueOf((int)estimateInStoryPoints);
 	}
 	
-	private void goToOtherRoomAndUpdate(final String userId, final PokerSession session) {
+	private void goToOtherRoomAndUpdate(
+		final String userId,
+		final WebClientSession<IApplicationContext> webClientSession
+	) {
 		
-		final var applicationContext = session.getOriApplicationContext();
+		final var applicationContext = webClientSession.getOriApplicationContext();
 		
 		try (final var dataController = applicationContext.createDataController()) {
 			
@@ -171,6 +178,6 @@ public final class PokerSessionHelper {
 			dataController.saveChanges();
 		}
 		
-		session.setNext(SelectRoomSession.withUserId(userId));
+		webClientSession.setNext(SelectRoomSession.withUserId(userId));
 	}
 }
