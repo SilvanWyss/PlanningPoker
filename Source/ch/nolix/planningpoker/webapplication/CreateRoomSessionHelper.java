@@ -31,6 +31,8 @@ public final class CreateRoomSessionHelper {
 			dataController.enterRoom(user, room);
 			dataController.saveChanges();
 			
+			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			
 			session.setNext(PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId())));
 		}
 	}
