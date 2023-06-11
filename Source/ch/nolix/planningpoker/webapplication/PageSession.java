@@ -45,7 +45,7 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 		
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
-			final var userLabel = new Label().setText(PAGE_SESSION_HELPER.getUserLabelText(dataController, this));
+			final var userLabel = new Label().setText(PAGE_SESSION_HELPER.getUserLabelText(userIdContainer, dataController));
 			
 			getOriGUI()
 			.pushLayerWithRootControl(
@@ -63,7 +63,9 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 							new Button()
 							.setVisibility(hasUserId())
 							.setText("Edit user name")
-							.setLeftMouseButtonPressAction(() -> PAGE_SESSION_HELPER.editUserName(dataController, this, userLabel))
+							.setLeftMouseButtonPressAction(
+								() -> PAGE_SESSION_HELPER.openEditUserNameDialog(getUserId(), this, userLabel)
+							)
 						)
 					),
 					createMainControl(dataController)

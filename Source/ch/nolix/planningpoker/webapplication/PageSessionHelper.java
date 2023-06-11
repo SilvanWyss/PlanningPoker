@@ -1,6 +1,10 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer;
+import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.datamodelapi.IUser;
+import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.dialog.EnterValueDialogFactory;
 
@@ -8,51 +12,74 @@ public final class PageSessionHelper {
 	
 	private static final EnterValueDialogFactory ENTER_VALUE_DIALOG_FACTORY = new EnterValueDialogFactory();
 	
-	public void editUserName(final IDataController dataController, PageSession session, final Label userLabel) {
+	public String getUserLabelText(
+		final ISingleContainer<String> userIdContainer,
+		final IDataController dataController
+	) {
 		
-		final var user = dataController.getOriUserById(session.getUserId());
-		final var originUserName = user.getName();
-		
-		session
-		.getOriGUI()
-		.pushLayer(
-			ENTER_VALUE_DIALOG_FACTORY.createEnterValueDialogWithTextAndOriginalValueAndValueTaker(
-				"Edit your user name",
-				originUserName,
-				un -> setUserName(session, un, userLabel)
-			)
-		);
-	}
-	
-	public String getUserLabelText(final IDataController dataController, final PageSession session) {
-		
-		if (session.hasUserId()) {
+		if (userIdContainer.containsAny()) {
 			
-			final var userId = session.getUserId();
-			final var user = dataController.getOriUserByIdOrNull(userId);
+			final var userId = userIdContainer.getOriElement();
+			final var user = dataController.getOriUserById(userId);
 			
-			return ("you: " + user.getName());
+			return getUserLabelText(user);
 		}
 		
 		return "Welcome!";
 	}
 	
-	private void setUserName(
-		final PageSession session,
-		final String newUserName,
+	public void openEditUserNameDialog(
+		final String userId,
+		final WebClientSession<IApplicationContext> webClientSession,
 		final Label userLabel
 	) {
 		
-		final var applicationContext = session.getOriApplicationContext();
+		final var applicationContext = webClientSession.getOriApplicationContext();
+		
+		try (final var dataController = applicationContext.createDataController()) {
+		
+			final var user = dataController.getOriUserById(userId);
+			final var originUserName = user.getName();
+			
+			webClientSession
+			.getOriGUI()
+			.pushLayer(
+				ENTER_VALUE_DIALOG_FACTORY.createEnterValueDialogWithTextAndOriginalValueAndValueTaker(
+					"Edit your user name",
+					originUserName,
+					newUserName -> setUserNameAndRefresh(userId, newUserName, webClientSession, userLabel)
+				)
+			);
+		}
+	}
+	
+	private String getUserLabelText(final IUser user) {
+		
+		final var userName = user.getName();
+		
+		return getUserLabelText(userName);
+	}
+	
+	private String getUserLabelText(final String userName) {
+		return ("you: " + userName);
+	}
+	
+	private void setUserNameAndRefresh(
+		final String userId,
+		final String newUserName,
+		final WebClientSession<IApplicationContext> webClientSession,
+		final Label userLabel
+	) {
+		
+		final var applicationContext = webClientSession.getOriApplicationContext();
 		
 		try (final var dataController = applicationContext.createDataController()) {
 			
-			final var userId = session.getUserId();
 			final var user = dataController.getOriUserById(userId);
 			user.setName(newUserName);
 			dataController.saveChanges();
 			
-			userLabel.setText(getUserLabelText(dataController, session));
+			userLabel.setText(getUserLabelText(user));
 		}
 	}
 }
