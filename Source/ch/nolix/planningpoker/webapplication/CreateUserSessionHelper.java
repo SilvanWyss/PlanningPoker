@@ -36,6 +36,6 @@ public final class CreateUserSessionHelper {
 			);
 		}
 		
-		return new CreateRoomSession();
+		return CreateRoomSession.withUserId(user.getId());
 	}
 }

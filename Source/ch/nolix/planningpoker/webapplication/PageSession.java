@@ -1,5 +1,7 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.core.container.singlecontainer.SingleContainer;
+import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
@@ -13,6 +15,23 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 public abstract class PageSession extends BackendWebClientSession<IApplicationContext> {
 	
 	private static final PageSessionHelper PAGE_SESSION_HELPER = new PageSessionHelper();
+	
+	private final SingleContainer<String> userIdContainer;
+	
+	protected PageSession(final SingleContainer<String> userIdContainer) {
+		
+		GlobalValidator.assertThat(userIdContainer).thatIsNamed("user id container").isNotNull();
+		
+		this.userIdContainer = userIdContainer;
+	}
+	
+	public String getUserId() {
+		return userIdContainer.getOriElement();
+	}
+	
+	public boolean hasUserId() {
+		return userIdContainer.containsAny();
+	}
 	
 	protected abstract IControl<?, ?> createMainControl(IDataController dataController);
 	

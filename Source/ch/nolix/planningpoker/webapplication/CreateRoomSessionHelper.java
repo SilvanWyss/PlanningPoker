@@ -10,7 +10,7 @@ public final class CreateRoomSessionHelper {
 		
 		try (final var dataController = applicationContext.createDataController()) {
 			
-			final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
+			final var userId = session.getUserId();
 			final var user = dataController.getOriUserById(userId);
 			final var room = dataController.createNewRoomAndEnterRoom(user);
 			dataController.saveChanges();

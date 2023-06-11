@@ -6,10 +6,11 @@ public final class PageSessionHelper {
 	
 	public String getUserLabelText(final IDataController dataController, final PageSession session) {
 		
-		final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
-		final var user = dataController.getOriUserByIdOrNull(userId);
-		
-		if (user != null) {
+		if (session.hasUserId()) {
+			
+			final var userId = session.getUserId();
+			final var user = dataController.getOriUserByIdOrNull(userId);
+			
 			return ("you: " + user.getName());
 		}
 		

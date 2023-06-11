@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
@@ -24,11 +24,11 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	private PokerSessionConfiguration configuration;
 	
-	private PokerSession(final PokerSessionConfiguration pokerSessionConfiguration) {
+	private PokerSession(final PokerSessionConfiguration configuration) {
 		
-		GlobalValidator.assertThat(pokerSessionConfiguration).thatIsNamed(PokerSessionConfiguration.class).isNotNull();
+		super(new SingleContainer<>(configuration.getUserId()));
 		
-		this.configuration = pokerSessionConfiguration;
+		this.configuration = configuration;
 	}
 	
 	@Override

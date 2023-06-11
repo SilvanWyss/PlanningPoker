@@ -49,6 +49,6 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 			);
 		}
 		
-		return new CreateRoomSession();
+		return CreateRoomSession.withUserId(user.getId());
 	}
 }

@@ -1,5 +1,6 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.webgui.control.Button;
@@ -11,10 +12,18 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateRoomSession extends PageSession {
 	
+	public static CreateRoomSession withUserId(final String userId) {
+		return new CreateRoomSession(userId);
+	}
+	
 	private static final CreateRoomSessionHelper CREATE_ROOM_SESSION_HELPER = new CreateRoomSessionHelper();
 	
-	private final Textbox roomNumberTextbox = new Textbox();
+	private CreateRoomSession(final String userId) {
+		super(new SingleContainer<>(userId));
+	}
 	
+	private final Textbox roomNumberTextbox = new Textbox();
+			
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
 		return
