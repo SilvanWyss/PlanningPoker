@@ -23,7 +23,7 @@ public final class CreateRoomSession extends PageSession {
 	}
 	
 	private final Textbox roomNumberTextbox = new Textbox();
-			
+	
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
 		return

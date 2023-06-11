@@ -6,6 +6,7 @@ import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.webapplication.BackendWebClientSession;
+import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.containerapi.ContainerRole;
@@ -43,6 +44,9 @@ public abstract class PageSession extends BackendWebClientSession<IApplicationCo
 		doRegistrations(getOriApplicationContext().getOriRoomChangeNotifier());
 		
 		try (final var dataController = getOriApplicationContext().createDataController()) {
+			
+			final var userLabel = new Label().setText(PAGE_SESSION_HELPER.getUserLabelText(dataController, this));
+			
 			getOriGUI()
 			.pushLayerWithRootControl(
 				new VerticalStack()
@@ -53,8 +57,14 @@ public abstract class PageSession extends BackendWebClientSession<IApplicationCo
 						new Label()
 						.setRole(LabelRole.TITLE)
 						.setText(getApplicationName()),
-						new Label()
-						.setText(PAGE_SESSION_HELPER.getUserLabelText(dataController, this))
+						new VerticalStack()
+						.addControl(
+							userLabel,
+							new Button()
+							.setVisibility(hasUserId())
+							.setText("Edit user name")
+							.setLeftMouseButtonPressAction(() -> PAGE_SESSION_HELPER.editUserName(dataController, this, userLabel))
+						)
 					),
 					createMainControl(dataController)
 				)
