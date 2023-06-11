@@ -171,6 +171,6 @@ public final class PokerSessionHelper {
 			dataController.saveChanges();
 		}
 		
-		session.setNext(CreateRoomSession.withUserId(userId));
+		session.setNext(SelectRoomSession.withUserId(userId));
 	}
 }

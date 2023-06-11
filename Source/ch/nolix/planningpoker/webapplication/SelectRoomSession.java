@@ -10,15 +10,15 @@ import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class CreateRoomSession extends PageSession {
+public final class SelectRoomSession extends PageSession {
 	
-	public static CreateRoomSession withUserId(final String userId) {
-		return new CreateRoomSession(userId);
+	public static SelectRoomSession withUserId(final String userId) {
+		return new SelectRoomSession(userId);
 	}
 	
-	private static final CreateRoomSessionHelper CREATE_ROOM_SESSION_HELPER = new CreateRoomSessionHelper();
+	private static final SelectRoomSessionHelper CREATE_ROOM_SESSION_HELPER = new SelectRoomSessionHelper();
 	
-	private CreateRoomSession(final String userId) {
+	private SelectRoomSession(final String userId) {
 		super(new SingleContainer<>(userId));
 	}
 	

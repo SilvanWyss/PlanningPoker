@@ -1,8 +1,8 @@
 package ch.nolix.planningpoker.webapplication;
 
-public final class CreateRoomSessionHelper {
+public final class SelectRoomSessionHelper {
 	
-	public void createRoomAndEnterRoomAndRedirect(final CreateRoomSession session) {
+	public void createRoomAndEnterRoomAndRedirect(final SelectRoomSession session) {
 		
 		final var applicationContext = session.getOriApplicationContext();
 		
@@ -17,7 +17,7 @@ public final class CreateRoomSessionHelper {
 		}
 	}
 	
-	public void enterRoomAndRedirect(String roomNumber, final CreateRoomSession session) {
+	public void enterRoomAndRedirect(String roomNumber, final SelectRoomSession session) {
 		
 		final var applicationContext = session.getOriApplicationContext();
 		
