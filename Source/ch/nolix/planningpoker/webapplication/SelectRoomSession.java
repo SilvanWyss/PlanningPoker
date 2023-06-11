@@ -22,10 +22,11 @@ public final class SelectRoomSession extends PageSession {
 		super(new SingleContainer<>(userId));
 	}
 	
-	private final Textbox roomNumberTextbox = new Textbox();
-	
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
+		
+		final var roomNumberTextbox = new Textbox();
+		
 		return
 		new VerticalStack()
 		.addControl(
@@ -35,13 +36,18 @@ public final class SelectRoomSession extends PageSession {
 				roomNumberTextbox,
 				new Button()
 				.setText("Enter room")
-				.setLeftMouseButtonPressAction(this::enterRoomAndRedirect)
+				.setLeftMouseButtonPressAction(
+					() ->
+					CREATE_ROOM_SESSION_HELPER.enterRoomAndRedirect(getUserId(), roomNumberTextbox.getText(), this)
+				)
 			),
 			new VerticalStack()
 			.addControl(
 				new Button()
 				.setText("Create new room")
-				.setLeftMouseButtonPressAction(this::createRoomAndEnterRoomAndRedirect)
+				.setLeftMouseButtonPressAction(
+					() -> CREATE_ROOM_SESSION_HELPER.createAndEnterRoomAndRedirect(getUserId(), this)
+				)
 			)
 		);
 	}
@@ -49,16 +55,5 @@ public final class SelectRoomSession extends PageSession {
 	@Override
 	protected void doRegistrations(final IRoomChangeNotifier roomChangeNotifier) {
 		//Does nothing.
-	}
-	
-	private void createRoomAndEnterRoomAndRedirect() {
-		CREATE_ROOM_SESSION_HELPER.createRoomAndEnterRoomAndRedirect(this);
-	}
-	
-	private void enterRoomAndRedirect() {
-		
-		final var roomNumber = roomNumberTextbox.getText();
-		
-		CREATE_ROOM_SESSION_HELPER.enterRoomAndRedirect(roomNumber, this);
 	}
 }

@@ -1,29 +1,39 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.system.application.webapplication.WebClientSession;
+
 public final class SelectRoomSessionHelper {
 	
-	public void createRoomAndEnterRoomAndRedirect(final SelectRoomSession session) {
+	public void createAndEnterRoomAndRedirect(
+		final String userId,
+		final WebClientSession<IApplicationContext> webClientSession
+	) {
 		
-		final var applicationContext = session.getOriApplicationContext();
+		final var applicationContext = webClientSession.getOriApplicationContext();
 		
 		try (final var dataController = applicationContext.createDataController()) {
 			
-			final var userId = session.getUserId();
 			final var user = dataController.getOriUserById(userId);
 			final var room = dataController.createNewRoomAndEnterRoom(user);
 			dataController.saveChanges();
 			
-			session.setNext(PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId())));
+			webClientSession.setNext(
+				PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId()))
+			);
 		}
 	}
 	
-	public void enterRoomAndRedirect(String roomNumber, final SelectRoomSession session) {
+	public void enterRoomAndRedirect(
+		final String userId,
+		final String roomNumber,
+		final WebClientSession<IApplicationContext> webClientSession
+	) {
 		
-		final var applicationContext = session.getOriApplicationContext();
+		final var applicationContext = webClientSession.getOriApplicationContext();
 		
 		try (final var dataController = applicationContext.createDataController()) {
 			
-			final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
 			final var user = dataController.getOriUserById(userId);
 			final var room = dataController.getOriRoomByNumber(roomNumber);
 			dataController.enterRoom(user, room);
@@ -31,7 +41,9 @@ public final class SelectRoomSessionHelper {
 			
 			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 			
-			session.setNext(PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId())));
+			webClientSession.setNext(
+				PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId()))
+			);
 		}
 	}
 }
