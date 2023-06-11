@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import ch.nolix.core.document.node.MutableNode;
 import ch.nolix.core.testing.validation.GlobalExaminer;
-import ch.nolix.planningpoker.datamodel.Estimate;
-import ch.nolix.planningpoker.datamodel.EstimateRound;
 import ch.nolix.planningpoker.datamodel.Room;
 import ch.nolix.planningpoker.datamodel.RoomVisit;
 import ch.nolix.planningpoker.datamodel.User;
@@ -20,7 +18,7 @@ public final class DataModelTest {
 		//setup
 		final var database = new MutableNode();
 		final var schema =
-		Schema.withEntityType(Estimate.class, EstimateRound.class, Room.class, RoomVisit.class, User.class);
+		Schema.withEntityType(User.class, Room.class, RoomVisit.class);
 		final var databaseAdapter =
 		NodeDatabaseAdapter.forNodeDatabase(database).withName("TestDatabase").usingSchema(schema);
 		final var scrumMaster = User.withName("Scrum Master");

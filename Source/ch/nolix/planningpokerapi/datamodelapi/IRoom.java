@@ -9,8 +9,6 @@ public interface IRoom extends Identified {
 	
 	String getNumber();
 	
-	IContainer<? extends IEstimateRound> getOriEstimateRounds();
-	
 	IUser getOriParentCreator();
 	
 	IContainer<? extends IRoomVisit> getOriRoomVisits();

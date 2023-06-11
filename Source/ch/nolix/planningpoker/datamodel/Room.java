@@ -3,7 +3,6 @@ package ch.nolix.planningpoker.datamodel;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.programatom.name.LowerCaseCatalogue;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
-import ch.nolix.planningpokerapi.datamodelapi.IEstimateRound;
 import ch.nolix.planningpokerapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.IUser;
@@ -32,8 +31,6 @@ public final class Room extends Entity implements IRoom {
 	
 	private final MultiReference<RoomVisit> roomVisits = MultiReference.forEntity(RoomVisit.class);
 	
-	private final MultiReference<EstimateRound> estimateRounds = MultiReference.forEntity(EstimateRound.class);
-	
 	private Room() {
 		
 		initialize();
@@ -49,11 +46,6 @@ public final class Room extends Entity implements IRoom {
 	@Override
 	public String getNumber() {
 		return number.getOriValue();
-	}
-	
-	@Override
-	public IContainer<? extends IEstimateRound> getOriEstimateRounds() {
-		return estimateRounds.getReferencedEntities();
 	}
 	
 	@Override

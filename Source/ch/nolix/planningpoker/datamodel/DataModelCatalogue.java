@@ -5,8 +5,7 @@ import ch.nolix.systemapi.objectdatabaseapi.schemaapi.ISchema;
 
 public final class DataModelCatalogue {
 	
-	public static final ISchema SCHEMA =
-	Schema.withEntityType(Estimate.class, EstimateRound.class, Room.class, RoomVisit.class, User.class);
+	public static final ISchema SCHEMA = Schema.withEntityType(User.class, Room.class, RoomVisit.class);
 	
 	private DataModelCatalogue() {}
 }
