@@ -1,7 +1,5 @@
 package ch.nolix.planningpoker.webapplication;
 
-import ch.nolix.planningpoker.datamodel.User;
-
 public final class CreateRoomSessionHelper {
 	
 	public void createRoomAndEnterRoomAndRedirect(final CreateRoomSession session) {
@@ -26,7 +24,7 @@ public final class CreateRoomSessionHelper {
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var userId = session.getOriParentClient().getCookieValueByCookieNameOrNull("userId");
-			final var user = (User)dataController.getOriUserById(userId);
+			final var user = dataController.getOriUserById(userId);
 			final var room = dataController.getOriRoomByNumber(roomNumber);
 			dataController.enterRoom(user, room);
 			dataController.saveChanges();
