@@ -13,6 +13,7 @@ public final class InitialSession extends WebClientSession<IApplicationContext> 
 	}
 	
 	private WebClientSession<IApplicationContext> createNextSession() {
+		
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
 			final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
@@ -21,9 +22,9 @@ public final class InitialSession extends WebClientSession<IApplicationContext> 
 			if (user != null) {
 				return createNextSession(dataController, user);
 			}
-			
-			return new CreateUserSession();
 		}
+		
+		return new CreateUserSession();
 	}
 	
 	private WebClientSession<IApplicationContext> createNextSession(
