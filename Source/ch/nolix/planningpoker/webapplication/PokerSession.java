@@ -98,7 +98,8 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 				.addControl(
 					POKER_SESSION_ASSEMBLER.createEstimateCardsControl(roomVisit, getOriApplicationContext()),
 					POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getOriParentRoom())
-				)
+				),
+				POKER_SESSION_ASSEMBLER.createRoomAnalysisControl(roomVisit.getOriParentRoom())
 			)
 		);
 	}
