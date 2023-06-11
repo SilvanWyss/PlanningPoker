@@ -6,13 +6,12 @@ import ch.nolix.planningpoker.applicationcontext.ApplicationContext;
 import ch.nolix.planningpoker.datamodel.DataModelCatalogue;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.system.application.main.Application;
-import ch.nolix.system.application.webapplication.BackendWebClient;
+import ch.nolix.system.application.webapplication.WebClient;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 import ch.nolix.system.objectdatabase.databaseadapter.NodeDatabaseAdapter;
 import ch.nolix.systemapi.objectdatabaseapi.schemaapi.ISchema;
 
-public final class PlanningPokerApplication
-extends Application<BackendWebClient<IApplicationContext>, IApplicationContext> {
+public final class PlanningPokerApplication extends Application<WebClient<IApplicationContext>, IApplicationContext> {
 	
 	public static final String APPLICATION_NAME = "Planning Poker";
 	

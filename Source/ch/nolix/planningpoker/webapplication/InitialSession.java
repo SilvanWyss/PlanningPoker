@@ -3,16 +3,16 @@ package ch.nolix.planningpoker.webapplication;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.datamodelapi.IUser;
-import ch.nolix.system.application.webapplication.BackendWebClientSession;
+import ch.nolix.system.application.webapplication.WebClientSession;
 
-public final class InitialSession extends BackendWebClientSession<IApplicationContext> {
+public final class InitialSession extends WebClientSession<IApplicationContext> {
 	
 	@Override
 	protected void initialize() {
 		setNext(createNextSession());
 	}
 	
-	private BackendWebClientSession<IApplicationContext> createNextSession() {
+	private WebClientSession<IApplicationContext> createNextSession() {
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
 			final var userId = getOriParentClient().getCookieValueByCookieNameOrNull("userId");
@@ -26,7 +26,7 @@ public final class InitialSession extends BackendWebClientSession<IApplicationCo
 		}
 	}
 	
-	private BackendWebClientSession<IApplicationContext> createNextSession(
+	private WebClientSession<IApplicationContext> createNextSession(
 		final IDataController dataController,
 		final IUser user
 	) {

@@ -5,7 +5,7 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
-import ch.nolix.system.application.webapplication.BackendWebClientSession;
+import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
@@ -13,7 +13,7 @@ import ch.nolix.systemapi.webguiapi.containerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public abstract class PageSession extends BackendWebClientSession<IApplicationContext> {
+public abstract class PageSession extends WebClientSession<IApplicationContext> {
 	
 	private static final PageSessionHelper PAGE_SESSION_HELPER = new PageSessionHelper();
 	
