@@ -1,26 +1,34 @@
 package ch.nolix.planningpoker.webapplication;
 
+import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.datamodelapi.IUser;
+import ch.nolix.system.application.webapplication.WebClientSession;
 
 public final class CreateUserSessionHelper {
 	
-	public void createUserAndSetCookieAndRedirect(final String userName, final CreateUserSession session) {
+	public void createUserAndSetCookieAndRedirect(
+		final String userName,
+		final WebClientSession<IApplicationContext> webClientSession
+	) {
 		
-		final var applicationContext = session.getOriApplicationContext();
+		final var applicationContext = webClientSession.getOriApplicationContext();
+		
+		final var roomNumber =
+		webClientSession.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
 		
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var user = dataController.createUserWithName(userName);
-			final var roomNumber = session.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
+			
 			final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
 			if (room != null) {
 				dataController.enterRoom(user, room);
 			}
 			dataController.saveChanges();
 			
-			session.getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
+			webClientSession.getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 			
-			session.setNext(createNextSession(user));
+			webClientSession.setNext(createNextSession(user));
 		}
 	}
 	
