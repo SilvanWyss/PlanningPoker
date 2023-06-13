@@ -70,7 +70,8 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 					),
 					createMainControl(dataController)
 				)
-			);
+			)
+			.setStyle(PAGE_SESSION_HELPER.createStyle());
 		}
 	}
 }

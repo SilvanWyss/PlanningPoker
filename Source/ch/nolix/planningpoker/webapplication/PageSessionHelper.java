@@ -5,12 +5,32 @@ import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.datamodelapi.IUser;
 import ch.nolix.system.application.webapplication.WebClientSession;
+import ch.nolix.system.element.style.DeepStyle;
 import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.dialog.EnterValueDialogFactory;
+import ch.nolix.systemapi.elementapi.styleapi.IStyle;
+import ch.nolix.template.webgui.style.DarkModeStyleCreator;
 
 public final class PageSessionHelper {
 	
 	private static final EnterValueDialogFactory ENTER_VALUE_DIALOG_FACTORY = new EnterValueDialogFactory();
+	
+	private static final DarkModeStyleCreator DARK_MODE_STYLE_CREATOR = new DarkModeStyleCreator();
+	
+	public IStyle createStyle() {
+		return
+		DARK_MODE_STYLE_CREATOR
+		.createDarkModeStyle()
+		.addConfiguration(
+			new DeepStyle()
+			.addSelectorToken("currentEstimate")
+			.addAttachingAttribute(
+				"BaseBackground(Color(Blue))",
+				"HoverBackground(Color(Blue))",
+				"FocusBackground(Color(Blue))"
+			)
+		);
+	}
 	
 	public String getUserLabelText(
 		final ISingleContainer<String> userIdContainer,
