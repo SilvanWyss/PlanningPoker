@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.planningpoker.analysis.RoomAnalysis;
+import ch.nolix.planningpoker.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.analysisapi.IRoomAnalysis;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.datamodelapi.IRoom;
@@ -16,6 +17,8 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 public final class PokerSessionAssembler {
 	
 	private static final PokerSessionHelper POKER_SESSION_HELPER = new PokerSessionHelper();
+	
+	private static final RoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 	
 	public IControl<?, ?> createEstimateCardsControl(
 		final IRoomVisit roomVisit,
@@ -72,12 +75,19 @@ public final class PokerSessionAssembler {
 		final IRoomVisit roomVisit,
 		final IApplicationContext applicationContext
 	) {
-		return
+		
+		final var deleteEstimateCardControl =
 		new Button()
 		.setText("\u2715")
 		.setLeftMouseButtonPressAction(
 			() -> POKER_SESSION_HELPER.deleteEstimateAndUpdate(roomVisit.getId(), applicationContext)
 		);
+		
+		if (!ROOM_VISIT_EVALUATOR.hasAnyEstimation(roomVisit)) {
+			deleteEstimateCardControl.setToken("currentEstimate");
+		}
+		
+		return deleteEstimateCardControl;
 	}
 	
 	private IControl<?, ?> createEstimateCardControl(
