@@ -7,31 +7,14 @@ import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
 
 public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	
-	private boolean isTriggeringRoomSubscribers;
-	
-	private boolean triggeringRoomSubscribersIsRequired;
-	
 	private final LinkedList<RoomSubscriberWrapper> roomSubscriberWrappers = new LinkedList<>();
 	
 	@Override
 	public void noteRoomChange(final String roomId) {
-		if (!isTriggeringRoomSubscribers()) {
-			
-			isTriggeringRoomSubscribers = true;
-			
-			triggerRoomSubscribers(roomId);
-			
-			while (triggeringRoomSubscribersIsRequired()) {
-				
-				triggeringRoomSubscribersIsRequired = false;
-				
-				triggerRoomSubscribers(roomId);
-			}
-			
-			isTriggeringRoomSubscribers = false;
-		} else {
-			triggeringRoomSubscribersIsRequired = true;
-		}
+		
+		removeInactiveRoomSubscribers();
+		
+		triggerRoomSubscribersOfRoom(roomId);
 	}
 	
 	@Override
@@ -49,10 +32,6 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 		return roomSubscriberWrappers.containsAny(rsw -> rsw.containsRoomSubscriber(roomSubscriber));
 	}
 	
-	private boolean isTriggeringRoomSubscribers() {
-		return isTriggeringRoomSubscribers;
-	}
-	
 	private void registerRoomSubscriber(final String roomId, final IRoomSubscriber roomSubscriber) {
 		registerRoomSubscriber(RoomSubscriberWrapper.forRoomAndSubscriber(roomId, roomSubscriber));
 	}
@@ -63,17 +42,6 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	
 	private void removeInactiveRoomSubscribers() {
 		roomSubscriberWrappers.removeAll(rsw -> !rsw.isActive());
-	}
-	
-	private void triggerRoomSubscribers(final String roomId) {
-		
-		removeInactiveRoomSubscribers();
-		
-		triggerRoomSubscribersOfRoom(roomId);
-	}
-	
-	private boolean triggeringRoomSubscribersIsRequired() {
-		return triggeringRoomSubscribersIsRequired;
 	}
 	
 	private void triggerRoomSubscribersOfRoom(final String roomId) {
