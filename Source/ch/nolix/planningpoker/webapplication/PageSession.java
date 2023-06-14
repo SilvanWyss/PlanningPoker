@@ -43,6 +43,9 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 		
 		doRegistrations(getOriApplicationContext().getOriRoomChangeNotifier());
 		
+		//Clearing the GUI is important because some Sessions will call the initialize method several times.
+		getOriGUI().clear();
+		
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
 			final var userLabel = new Label().setText(PAGE_SESSION_HELPER.getUserLabelText(userIdContainer, dataController));
