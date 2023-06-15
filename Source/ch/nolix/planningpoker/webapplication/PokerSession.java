@@ -63,33 +63,35 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 		return
 		new VerticalStack()
 		.addControl(
-			new Label()
-			.setRole(LabelRole.LEVEL1_HEADER)
-			.setText("Room " + roomVisit.getOriParentRoom().getNumber()),
 			new Button()
 			.setText("Go to another room")
 			.setLeftMouseButtonPressAction(
 				() -> POKER_SESSION_HELPER.openGoToOtherRoomDialog(roomVisit.getOriVisitor().getId(), this)
 			),
 			new Label()
+			.setRole(LabelRole.LEVEL1_HEADER)
+			.setText("Room " + roomVisit.getOriParentRoom().getNumber()),
+			new Label()
 			.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
-			new Button()
-			.setText("Show/hide estimates")
+			new HorizontalStack()
 			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
-			.setLeftMouseButtonPressAction(
-				() ->
-				POKER_SESSION_HELPER.toggleEstimateVisibilityAndUpdate(
-					roomVisit.getOriParentRoom().getId(),
-					getOriApplicationContext()
-				)
-			),
-			new Button()
-			.setText("Delete estimates")
-			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
-			.setLeftMouseButtonPressAction(
-				() -> POKER_SESSION_HELPER.deleteEstimatesAndUpdate(
-					roomVisit.getOriParentRoom().getId(),
-					getOriApplicationContext()
+			.addControl(
+				new Button()
+				.setText("Show/hide estimates")
+				.setLeftMouseButtonPressAction(
+					() ->
+					POKER_SESSION_HELPER.toggleEstimateVisibilityAndUpdate(
+						roomVisit.getOriParentRoom().getId(),
+						getOriApplicationContext()
+					)
+				),
+				new Button()
+				.setText("Delete estimates")
+				.setLeftMouseButtonPressAction(
+					() -> POKER_SESSION_HELPER.deleteEstimatesAndUpdate(
+						roomVisit.getOriParentRoom().getId(),
+						getOriApplicationContext()
+					)
 				)
 			),
 			new HorizontalStack()
