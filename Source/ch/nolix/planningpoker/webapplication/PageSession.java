@@ -8,6 +8,7 @@ import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.control.Label;
+import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.containerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
@@ -60,7 +61,7 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 						new Label()
 						.setRole(LabelRole.TITLE)
 						.setText(getApplicationName()),
-						new VerticalStack()
+						new HorizontalStack()
 						.addControl(
 							userLabel,
 							new Button()
