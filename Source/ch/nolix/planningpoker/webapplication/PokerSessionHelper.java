@@ -1,5 +1,7 @@
 package ch.nolix.planningpoker.webapplication;
 
+import java.util.Locale;
+
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.planningpoker.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
@@ -50,6 +52,15 @@ public final class PokerSessionHelper {
 		return (roomCreator.getName() + " is our captain.");
 	}
 	
+	public String getEstimateCardText(final double estimateInStoryPoints) {
+		
+		if (estimateInStoryPoints == 0.5) {
+			return "0.5";
+		}
+		
+		return String.format(Locale.ENGLISH, "%.0f", estimateInStoryPoints);
+	}
+	
 	public String getEstimateText(final IRoomVisit roomVisit) {
 		
 		if (roomVisit.getOriParentRoom().hasSetEstimatesVisible()) {
@@ -82,7 +93,7 @@ public final class PokerSessionHelper {
 	
 	public void setEstimateInStoryPointsAndUpdate(
 		final String roomVisitId,
-		final int estimateInStoryPoints,
+		final double estimateInStoryPoints,
 		final IApplicationContext applicationContext
 	) {
 		try (final var dataController = applicationContext.createDataController()) {
@@ -159,7 +170,7 @@ public final class PokerSessionHelper {
 			return "0.5";
 		}
 		
-		return String.valueOf((int)estimateInStoryPoints);
+		return String.format(Locale.ENGLISH, "%.0f", estimateInStoryPoints);
 	}
 	
 	private void goToOtherRoomAndUpdate(

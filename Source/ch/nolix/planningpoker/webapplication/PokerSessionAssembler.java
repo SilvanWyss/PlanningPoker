@@ -29,6 +29,7 @@ public final class PokerSessionAssembler {
 		.addControl(
 			createDeleteEstimateCardControl(roomVisit, applicationContext),
 			createEstimateCardControl(roomVisit, 0, applicationContext),
+			createEstimateCardControl(roomVisit, 0.5, applicationContext),
 			createEstimateCardControl(roomVisit, 1, applicationContext),
 			createEstimateCardControl(roomVisit, 2, applicationContext),
 			createEstimateCardControl(roomVisit, 3, applicationContext),
@@ -92,13 +93,13 @@ public final class PokerSessionAssembler {
 	
 	private IControl<?, ?> createEstimateCardControl(
 		final IRoomVisit roomVisit,
-		final int estimateInStoryPoints,
+		final double estimateInStoryPoints,
 		final IApplicationContext applicationContext
 	) {
 		
 		final var estimateCardButton =
 		new Button()
-		.setText(String.valueOf(estimateInStoryPoints))
+		.setText(POKER_SESSION_HELPER.getEstimateCardText(estimateInStoryPoints))
 		.setLeftMouseButtonPressAction(
 			() ->
 			POKER_SESSION_HELPER.setEstimateInStoryPointsAndUpdate(
