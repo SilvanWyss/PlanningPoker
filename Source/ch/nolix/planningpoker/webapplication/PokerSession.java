@@ -88,9 +88,9 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 				new Button()
 				.setText("Delete estimates")
 				.setLeftMouseButtonPressAction(
-					() -> POKER_SESSION_HELPER.deleteEstimatesAndUpdate(
+					() -> POKER_SESSION_HELPER.openDeleteEstimatesDialog(
 						roomVisit.getOriParentRoom().getId(),
-						getOriApplicationContext()
+						this
 					)
 				)
 			),

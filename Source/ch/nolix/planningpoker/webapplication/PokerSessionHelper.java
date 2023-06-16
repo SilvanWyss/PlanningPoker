@@ -3,14 +3,18 @@ package ch.nolix.planningpoker.webapplication;
 import java.util.Locale;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
+import ch.nolix.planningpoker.dataevaluator.RoomEvaluator;
 import ch.nolix.planningpoker.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.dataevaluatorapi.IRoomEvaluator;
 import ch.nolix.planningpokerapi.dataevaluatorapi.IRoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.dialog.YesNoDialogFactory;
 
 public final class PokerSessionHelper {
+	
+	private static final IRoomEvaluator ROOM_EVALUATOR = new RoomEvaluator();
 	
 	private static final IRoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 	
@@ -24,18 +28,6 @@ public final class PokerSessionHelper {
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
-			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
-		}
-	}
-	
-	public void deleteEstimatesAndUpdate(final String roomId, final IApplicationContext applicationContext) {
-		try (final var dataController = applicationContext.createDataController()) {
-			
-			final var room = dataController.getOriRoomById(roomId);
-			room.getOriRoomVisits().forEach(IRoomVisit::deleteEstimate);
-			room.setEstimatesInvisible();
-			dataController.saveChanges();
-			
 			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
@@ -77,6 +69,23 @@ public final class PokerSessionHelper {
 		final var roomCreator = room.getOriParentCreator();
 		
 		return visitor.hasId(roomCreator.getId());
+	}
+	
+	public void openDeleteEstimatesDialog(
+		final String roomId,
+		final WebClientSession<IApplicationContext> webClientSession
+	) {
+		
+		final var applicationContext = webClientSession.getOriApplicationContext();
+		
+		try (final var dataController = applicationContext.createDataController()) {
+			
+			final var room = dataController.getOriRoomById(roomId);
+			
+			if (ROOM_EVALUATOR.containsEstimate(room)) {
+				openDeleteEstimatesDialogWhenRoomContainsEstimates(roomId, webClientSession);
+			}
+		}		
 	}
 	
 	public void openGoToOtherRoomDialog(
@@ -139,6 +148,18 @@ public final class PokerSessionHelper {
 		}
 	}
 	
+	private void deleteEstimatesAndUpdate(final String roomId, final IApplicationContext applicationContext) {
+		try (final var dataController = applicationContext.createDataController()) {
+			
+			final var room = dataController.getOriRoomById(roomId);
+			room.getOriRoomVisits().forEach(IRoomVisit::deleteEstimate);
+			room.setEstimatesInvisible();
+			dataController.saveChanges();
+			
+			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+		}
+	}
+	
 	private String getEstimateTextWhenEstimateIsInvisible(final IRoomVisit roomVisit) {
 		
 		if (ROOM_VISIT_EVALUATOR.hasAnyEstimation(roomVisit)) {
@@ -190,5 +211,21 @@ public final class PokerSessionHelper {
 		}
 		
 		webClientSession.setNext(SelectRoomSession.withUserId(userId));
+	}
+	
+	private void openDeleteEstimatesDialogWhenRoomContainsEstimates(
+		final String roomId,
+		final WebClientSession<IApplicationContext> webClientSession
+	) {
+		
+		final var deleteEstimateDialog =
+		YES_NO_DIALOG_FACTORY.createYesNoDialogWithYesNoQuestionAndConfirmAction(
+			"Do you want to delete all estimates?",
+			() -> deleteEstimatesAndUpdate(roomId, webClientSession.getOriApplicationContext())
+		);
+		
+		webClientSession.getOriGUI().pushLayer(
+			deleteEstimateDialog
+		);
 	}
 }
