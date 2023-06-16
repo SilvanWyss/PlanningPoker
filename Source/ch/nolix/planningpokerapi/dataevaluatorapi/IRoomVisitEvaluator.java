@@ -4,5 +4,5 @@ import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 
 public interface IRoomVisitEvaluator {
 	
-	boolean hasAnyEstimation(IRoomVisit roomVisit);
+	boolean hasEstimate(IRoomVisit roomVisit);
 }

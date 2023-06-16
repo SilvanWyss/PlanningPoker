@@ -61,7 +61,7 @@ public final class PokerSessionAssembler {
 			
 			final var visitor = rv.getOriVisitor();
 			
-			if (!visitor.hasId(roomCreator.getId()) || ROOM_VISIT_EVALUATOR.hasAnyEstimation(rv)) {
+			if (!visitor.hasId(roomCreator.getId()) || ROOM_VISIT_EVALUATOR.hasEstimate(rv)) {
 				
 				final var visitorName = visitor.getName();
 				estimatesGridContainer.insertTextAtRowAndColumn(rowIndex, 1, visitorName);
@@ -98,7 +98,7 @@ public final class PokerSessionAssembler {
 			() -> POKER_SESSION_HELPER.deleteEstimateAndUpdate(roomVisit.getId(), applicationContext)
 		);
 		
-		if (!ROOM_VISIT_EVALUATOR.hasAnyEstimation(roomVisit)) {
+		if (!ROOM_VISIT_EVALUATOR.hasEstimate(roomVisit)) {
 			deleteEstimateCardControl.addToken("activated_card");
 		}
 		

@@ -162,7 +162,7 @@ public final class PokerSessionHelper {
 	
 	private String getEstimateTextWhenEstimateIsInvisible(final IRoomVisit roomVisit) {
 		
-		if (ROOM_VISIT_EVALUATOR.hasAnyEstimation(roomVisit)) {
+		if (ROOM_VISIT_EVALUATOR.hasEstimate(roomVisit)) {
 			return StringCatalogue.QUESTION_MARK;
 		}
 		

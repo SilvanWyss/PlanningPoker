@@ -18,6 +18,6 @@ public final class RoomEvaluator implements IRoomEvaluator {
 		
 		final var roomVisits = room.getOriRoomVisits();
 		
-		return roomVisits.containsAny(ROOM_VISIT_EVALUATOR::hasAnyEstimation);
+		return roomVisits.containsAny(ROOM_VISIT_EVALUATOR::hasEstimate);
 	}
 }

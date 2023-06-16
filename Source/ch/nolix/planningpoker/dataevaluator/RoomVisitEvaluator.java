@@ -6,9 +6,13 @@ import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 public final class RoomVisitEvaluator implements IRoomVisitEvaluator {
 	
 	@Override
-	public boolean hasAnyEstimation(final IRoomVisit roomVisit) {
+	public boolean hasEstimate(final IRoomVisit roomVisit) {
 		return
 		roomVisit != null
-		&& (roomVisit.hasEstimateInStorypoints() || roomVisit.hasInfiniteEstimate());
+		&& hasEstimateWhenIsNotNull(roomVisit);
+	}
+	
+	private boolean hasEstimateWhenIsNotNull(final IRoomVisit roomVisit) {
+		return roomVisit.hasEstimateInStorypoints() || roomVisit.hasInfiniteEstimate();
 	}
 }
