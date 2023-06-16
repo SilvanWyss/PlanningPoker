@@ -58,11 +58,12 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 				.addControl(
 					new VerticalStack()
 					.addControl(
-						new Label()
-						.setRole(LabelRole.TITLE)
-						.setText(getApplicationName()),
 						new HorizontalStack()
+						.setRole(ContainerRole.HEADER_CONTAINER)
 						.addControl(
+							new Label()
+							.setRole(LabelRole.TITLE)
+							.setText(getApplicationName()),
 							userLabel,
 							new Button()
 							.setVisibility(hasUserId())
