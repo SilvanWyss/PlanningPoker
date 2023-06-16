@@ -85,7 +85,7 @@ public final class PokerSessionAssembler {
 		);
 		
 		if (!ROOM_VISIT_EVALUATOR.hasAnyEstimation(roomVisit)) {
-			deleteEstimateCardControl.setToken("currentEstimate");
+			deleteEstimateCardControl.addToken("currentEstimate");
 		}
 		
 		return deleteEstimateCardControl;
@@ -99,6 +99,7 @@ public final class PokerSessionAssembler {
 		
 		final var estimateCardButton =
 		new Button()
+		.addToken("estimate_card")
 		.setText(POKER_SESSION_HELPER.getEstimateCardText(estimateInStoryPoints))
 		.setLeftMouseButtonPressAction(
 			() ->
@@ -110,7 +111,7 @@ public final class PokerSessionAssembler {
 		);
 		
 		if (roomVisit.hasEstimateInStorypoints() && roomVisit.getEstimateInStoryPoints() == estimateInStoryPoints) {
-			estimateCardButton.setToken("currentEstimate");
+			estimateCardButton.addToken("currentEstimate");
 		}
 		
 		return estimateCardButton;
@@ -129,7 +130,7 @@ public final class PokerSessionAssembler {
 		);
 		
 		if (roomVisit.hasInfiniteEstimate()) {
-			infiniteEstimateCardButton.setToken("currentEstimate");
+			infiniteEstimateCardButton.addToken("currentEstimate");
 		}
 		
 		return infiniteEstimateCardButton;
