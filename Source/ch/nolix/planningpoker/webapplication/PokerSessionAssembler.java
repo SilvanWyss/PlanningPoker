@@ -12,6 +12,7 @@ import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.system.webgui.container.GridContainer;
 import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
+import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class PokerSessionAssembler {
@@ -25,22 +26,28 @@ public final class PokerSessionAssembler {
 		final IApplicationContext applicationContext
 	) {
 		return
-		new HorizontalStack()
+		new VerticalStack()
 		.addControl(
-			createDeleteEstimateCardControl(roomVisit, applicationContext),
-			createEstimateCardControl(roomVisit, 0, applicationContext),
-			createEstimateCardControl(roomVisit, 0.5, applicationContext),
-			createEstimateCardControl(roomVisit, 1, applicationContext),
-			createEstimateCardControl(roomVisit, 2, applicationContext),
-			createEstimateCardControl(roomVisit, 3, applicationContext),
-			createEstimateCardControl(roomVisit, 5, applicationContext),
-			createEstimateCardControl(roomVisit, 8, applicationContext),
-			createEstimateCardControl(roomVisit, 13, applicationContext),
-			createEstimateCardControl(roomVisit, 21, applicationContext),
-			createEstimateCardControl(roomVisit, 34, applicationContext),
-			createEstimateCardControl(roomVisit, 55, applicationContext),
-			createEstimateCardControl(roomVisit, 89, applicationContext),
-			createInfiniteEstimateCardControl(roomVisit, applicationContext)
+			new HorizontalStack()
+			.addControl(
+				createDeleteEstimateCardControl(roomVisit, applicationContext),
+				createEstimateCardControl(roomVisit, 0, applicationContext),
+				createEstimateCardControl(roomVisit, 0.5, applicationContext),
+				createEstimateCardControl(roomVisit, 1, applicationContext),
+				createEstimateCardControl(roomVisit, 2, applicationContext),
+				createEstimateCardControl(roomVisit, 3, applicationContext),
+				createEstimateCardControl(roomVisit, 5, applicationContext)
+			),
+			new HorizontalStack()
+			.addControl(
+				createEstimateCardControl(roomVisit, 8, applicationContext),
+				createEstimateCardControl(roomVisit, 13, applicationContext),
+				createEstimateCardControl(roomVisit, 21, applicationContext),
+				createEstimateCardControl(roomVisit, 34, applicationContext),
+				createEstimateCardControl(roomVisit, 55, applicationContext),
+				createEstimateCardControl(roomVisit, 89, applicationContext),
+				createInfiniteEstimateCardControl(roomVisit, applicationContext)
+			)
 		);
 	}
 	
@@ -79,13 +86,14 @@ public final class PokerSessionAssembler {
 		
 		final var deleteEstimateCardControl =
 		new Button()
+		.addToken("card")
 		.setText("\u2715")
 		.setLeftMouseButtonPressAction(
 			() -> POKER_SESSION_HELPER.deleteEstimateAndUpdate(roomVisit.getId(), applicationContext)
 		);
 		
 		if (!ROOM_VISIT_EVALUATOR.hasAnyEstimation(roomVisit)) {
-			deleteEstimateCardControl.addToken("currentEstimate");
+			deleteEstimateCardControl.addToken("activated_card");
 		}
 		
 		return deleteEstimateCardControl;
@@ -99,7 +107,7 @@ public final class PokerSessionAssembler {
 		
 		final var estimateCardButton =
 		new Button()
-		.addToken("estimate_card")
+		.addToken("card")
 		.setText(POKER_SESSION_HELPER.getEstimateCardText(estimateInStoryPoints))
 		.setLeftMouseButtonPressAction(
 			() ->
@@ -111,7 +119,7 @@ public final class PokerSessionAssembler {
 		);
 		
 		if (roomVisit.hasEstimateInStorypoints() && roomVisit.getEstimateInStoryPoints() == estimateInStoryPoints) {
-			estimateCardButton.addToken("currentEstimate");
+			estimateCardButton.addToken("activated_card");
 		}
 		
 		return estimateCardButton;
@@ -124,13 +132,14 @@ public final class PokerSessionAssembler {
 		
 		final var infiniteEstimateCardButton =
 		new Button()
+		.addToken("card")
 		.setText(StringCatalogue.INFINITY)
 		.setLeftMouseButtonPressAction(
 			() -> POKER_SESSION_HELPER.setInfiniteEstimateAndUpdate(roomVisit.getId(), applicationContext)
 		);
 		
 		if (roomVisit.hasInfiniteEstimate()) {
-			infiniteEstimateCardButton.addToken("currentEstimate");
+			infiniteEstimateCardButton.addToken("activated_card");
 		}
 		
 		return infiniteEstimateCardButton;
