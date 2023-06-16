@@ -92,12 +92,14 @@ public final class PokerSessionHelper {
 		final String userId,
 		final WebClientSession<IApplicationContext> webClientSession
 	) {
-		webClientSession.getOriGUI().pushLayer(
-			YES_NO_DIALOG_FACTORY.createYesNoDialogWithYesNoQuestionAndConfirmAction(
-				"Do you really want to leave the current room?",
-				() -> goToOtherRoomAndUpdate(userId, webClientSession)
-			)
+		
+		final var goToOtherRoomDialog =
+		YES_NO_DIALOG_FACTORY.createYesNoDialogWithYesNoQuestionAndConfirmAction(
+			"Do you really want to leave the current room?",
+			() -> goToOtherRoomAndUpdate(userId, webClientSession)
 		);
+		
+		webClientSession.getOriGUI().pushLayer(goToOtherRoomDialog);
 	}
 	
 	public void setEstimateInStoryPointsAndUpdate(
