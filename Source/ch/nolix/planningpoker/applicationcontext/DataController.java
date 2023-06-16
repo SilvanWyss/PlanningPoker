@@ -39,7 +39,7 @@ public final class DataController implements IDataController {
 		
 		return room;
 	}
-
+	
 	@Override
 	public IUser createUserWithName(final String name) {
 		
@@ -51,7 +51,7 @@ public final class DataController implements IDataController {
 	
 	@Override
 	public IRoomVisit enterRoom(IUser user, IRoom room) {
-				
+		
 		if (user.isInARoom()) {
 			
 			final var currentRoomVisit = user.getOriCurrentRoomVisit();
