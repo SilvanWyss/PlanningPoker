@@ -18,6 +18,8 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 	
 	private static final PageSessionHelper PAGE_SESSION_HELPER = new PageSessionHelper();
 	
+	private static final PageSessionStyleCreator PAGE_SESSION_STYLE_CREATOR = new PageSessionStyleCreator();
+	
 	private final SingleContainer<String> userIdContainer;
 	
 	protected PageSession(final SingleContainer<String> userIdContainer) {
@@ -76,7 +78,7 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 					createMainControl(dataController)
 				)
 			)
-			.setStyle(PAGE_SESSION_HELPER.createStyle());
+			.setStyle(PAGE_SESSION_STYLE_CREATOR.createPageSessionStyle());
 		}
 	}
 }
