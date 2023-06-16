@@ -1,5 +1,9 @@
 package ch.nolix.planningpoker.applicationcontext;
 
+import ch.nolix.core.commontype.commontypehelper.GlobalStringHelper;
+import ch.nolix.core.errorcontrol.exception.GeneralException;
+import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.programatom.name.LowerCaseCatalogue;
 import ch.nolix.planningpoker.datamodel.Room;
 import ch.nolix.planningpoker.datamodel.RoomVisit;
 import ch.nolix.planningpoker.datamodel.User;
@@ -73,11 +77,22 @@ public final class DataController implements IDataController {
 	
 	@Override
 	public IRoom getOriRoomByNumber(final String number) {
-		return
+		
+		GlobalValidator.assertThat(number).thatIsNamed("room number").isNotBlank();
+		
+		final var room =
 		databaseAdapter
 		.getOriTableByEntityType(Room.class)
 		.getOriEntities()
-		.getOriFirst(r -> r.getNumber().equals(number));		
+		.getOriFirstOrNull(r -> r.getNumber().equals(number));
+		
+		if (room == null) {
+			throw GeneralException.withErrorMessage(
+				"There does not exist a room " + GlobalStringHelper.getInQuotes(number) + "."
+			);
+		}
+		
+		return room;
 	}
 	
 	@Override
