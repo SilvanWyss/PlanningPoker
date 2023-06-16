@@ -55,16 +55,22 @@ public final class PokerSessionAssembler {
 		
 		final var estimatesGridContainer = new GridContainer();
 		
+		final var roomCreator = room.getOriParentCreator();
 		var rowIndex = 1;
 		for (final var rv : room.getOriRoomVisits()) {
 			
-			final var visitorName = rv.getOriVisitor().getName();
-			estimatesGridContainer.insertTextAtRowAndColumn(rowIndex, 1, visitorName);
+			final var visitor = rv.getOriVisitor();
 			
-			final var estimateText = POKER_SESSION_HELPER.getEstimateText(rv);
-			estimatesGridContainer.insertTextAtRowAndColumn(rowIndex, 2, estimateText);
-			
-			rowIndex++;
+			if (!visitor.hasId(roomCreator.getId()) || ROOM_VISIT_EVALUATOR.hasAnyEstimation(rv)) {
+				
+				final var visitorName = visitor.getName();
+				estimatesGridContainer.insertTextAtRowAndColumn(rowIndex, 1, visitorName);
+				
+				final var estimateText = POKER_SESSION_HELPER.getEstimateText(rv);
+				estimatesGridContainer.insertTextAtRowAndColumn(rowIndex, 2, estimateText);
+				
+				rowIndex++;
+			}
 		}
 		
 		return estimatesGridContainer;
