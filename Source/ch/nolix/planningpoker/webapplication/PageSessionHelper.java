@@ -23,11 +23,27 @@ public final class PageSessionHelper {
 		.createDarkModeStyle()
 		.addConfiguration(
 			new DeepStyle()
-			.addSelectorToken("currentEstimate")
+			.addSelectorToken("card")
 			.addAttachingAttribute(
-				"BaseBackground(Color(Blue))",
-				"HoverBackground(Color(Blue))",
-				"FocusBackground(Color(Blue))"
+				"BaseWidth(63)",
+				"BaseHeight(88)",
+				"BaseBackground(Color(Beige))",
+				"HoverBackground(Color(Black))",
+				"FocusBackground(Color(Black))",
+				"BaseTextSize(30)",
+				"BaseTextColor(Black)",
+				"HoverTextColor(White)",
+				"FocusTextColor(White)"
+			)
+		)
+		.addConfiguration(
+			new DeepStyle()
+			.addSelectorToken("activated_card")
+			.addAttachingAttribute(
+				"BaseBackground(Color(Black))",
+				"HoverBackground(Color(Black))",
+				"FocusBackground(Color(Black))",
+				"BaseTextColor(White)"
 			)
 		);
 	}
