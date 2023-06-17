@@ -3,7 +3,6 @@ package ch.nolix.planningpoker.applicationcontext;
 import ch.nolix.core.commontype.commontypehelper.GlobalStringHelper;
 import ch.nolix.core.errorcontrol.exception.GeneralException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.core.programatom.name.LowerCaseCatalogue;
 import ch.nolix.planningpoker.datamodel.Room;
 import ch.nolix.planningpoker.datamodel.RoomVisit;
 import ch.nolix.planningpoker.datamodel.User;
