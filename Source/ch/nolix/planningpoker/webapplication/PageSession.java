@@ -30,16 +30,16 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 		this.userIdContainer = userIdContainer;
 	}
 	
-	public String getUserId() {
+	public final String getUserId() {
 		return userIdContainer.getOriElement();
 	}
 	
-	public boolean hasUserId() {
+	public final boolean hasUserId() {
 		return userIdContainer.containsAny();
 	}
 	
 	@Override
-	public void refresh() {
+	public final void refresh() {
 		
 		clearGui();
 		
@@ -53,7 +53,7 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 	protected abstract void doRegistrations(IRoomChangeNotifier roomChangeNotifier);
 	
 	@Override
-	protected void initialize() {
+	protected final void initialize() {
 		
 		doRegistrations(getOriApplicationContext().getOriRoomChangeNotifier());
 		
@@ -66,10 +66,6 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 	
 	private void fillUpGui() {
 		try (final var dataController = getOriApplicationContext().createDataController()) {
-			
-			final var userLabel =
-			new Label().setText(PAGE_SESSION_HELPER.getUserLabelText(userIdContainer, dataController));
-			
 			getOriGUI()
 			.pushLayerWithRootControl(
 				new VerticalStack()
@@ -83,12 +79,13 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 							new Label()
 							.setRole(LabelRole.TITLE)
 							.setText(getApplicationName()),
-							userLabel,
+							new Label()
+							.setText(PAGE_SESSION_HELPER.getUserLabelText(userIdContainer, dataController)),
 							new Button()
 							.setVisibility(hasUserId())
 							.setText("Edit user name")
 							.setLeftMouseButtonPressAction(
-								() -> PAGE_SESSION_HELPER.openEditUserNameDialog(getUserId(), this, userLabel)
+								() -> PAGE_SESSION_HELPER.openEditUserNameDialog(getUserId(), this)
 							)
 						)
 					),
