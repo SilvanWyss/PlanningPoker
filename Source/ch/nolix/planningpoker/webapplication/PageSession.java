@@ -2,6 +2,7 @@ package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.Refreshable;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
@@ -14,7 +15,7 @@ import ch.nolix.systemapi.webguiapi.containerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public abstract class PageSession extends WebClientSession<IApplicationContext> {
+public abstract class PageSession extends WebClientSession<IApplicationContext> implements Refreshable {
 	
 	private static final PageSessionHelper PAGE_SESSION_HELPER = new PageSessionHelper();
 	
@@ -37,6 +38,16 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 		return userIdContainer.containsAny();
 	}
 	
+	@Override
+	public void refresh() {
+		
+		clearGui();
+		
+		fillUpGui();
+		
+		updateCounterpart();
+	}
+	
 	protected abstract IControl<?, ?> createMainControl(IDataController dataController);
 	
 	protected abstract void doRegistrations(IRoomChangeNotifier roomChangeNotifier);
@@ -46,12 +57,18 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 		
 		doRegistrations(getOriApplicationContext().getOriRoomChangeNotifier());
 		
-		//Clearing the GUI is important because some Sessions will call the initialize method several times.
+		fillUpGui();
+	}
+	
+	private void clearGui() {
 		getOriGUI().clear();
-		
+	}
+	
+	private void fillUpGui() {
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
-			final var userLabel = new Label().setText(PAGE_SESSION_HELPER.getUserLabelText(userIdContainer, dataController));
+			final var userLabel =
+			new Label().setText(PAGE_SESSION_HELPER.getUserLabelText(userIdContainer, dataController));
 			
 			getOriGUI()
 			.pushLayerWithRootControl(

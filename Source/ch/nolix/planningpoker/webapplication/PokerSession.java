@@ -38,10 +38,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	@Override
 	public void trigger() {
-		
-		initialize();
-		
-		updateCounterpart();
+		refresh();
 	}
 	
 	@Override
