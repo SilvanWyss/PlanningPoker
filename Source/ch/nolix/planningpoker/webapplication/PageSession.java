@@ -79,13 +79,16 @@ public abstract class PageSession extends WebClientSession<IApplicationContext> 
 							new Label()
 							.setRole(LabelRole.TITLE)
 							.setText(getApplicationName()),
-							new Label()
-							.setText(PAGE_SESSION_HELPER.getUserLabelText(userIdContainer, dataController)),
-							new Button()
+							new HorizontalStack()
 							.setVisibility(hasUserId())
-							.setText("Edit user name")
-							.setLeftMouseButtonPressAction(
-								() -> PAGE_SESSION_HELPER.openEditUserNameDialog(getUserId(), this)
+							.addControl(
+								new Label()
+								.setText("you: "),
+								new Button()
+								.setText(PAGE_SESSION_HELPER.getUserName(userIdContainer, dataController))
+								.setLeftMouseButtonPressAction(
+									() -> PAGE_SESSION_HELPER.openEditUserNameDialog(getUserId(), this)
+								)
 							)
 						)
 					),
