@@ -14,7 +14,7 @@ public final class CreateUserSessionHelper {
 		final var applicationContext = webClientSession.getOriApplicationContext();
 		
 		final var roomNumber =
-		webClientSession.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
+		webClientSession.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("room");
 		
 		try (final var dataController = applicationContext.createDataController()) {
 			

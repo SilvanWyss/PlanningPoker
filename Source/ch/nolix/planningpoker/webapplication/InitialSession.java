@@ -32,7 +32,7 @@ public final class InitialSession extends WebClientSession<IApplicationContext> 
 		final IUser user
 	) {
 		
-		final var roomNumber = getOriParentClient().getURLParameterValueByURLParameterNameOrNull("roomNumber");
+		final var roomNumber = getOriParentClient().getURLParameterValueByURLParameterNameOrNull("room");
 		final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
 		
 		if (room != null) {

@@ -18,6 +18,8 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	private static final PokerSessionHelper POKER_SESSION_HELPER = new PokerSessionHelper();
 	
+	private static final RoomHyperlinkCreator ROOM_HYPERLINK_CREATOR = new RoomHyperlinkCreator();
+	
 	public static PokerSession withConfiguration(final PokerSessionConfiguration pokerSessionConfiguration) {
 		return new PokerSession(pokerSessionConfiguration);
 	}
@@ -65,9 +67,19 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			.setLeftMouseButtonPressAction(
 				() -> POKER_SESSION_HELPER.openGoToOtherRoomDialog(roomVisit.getOriVisitor().getId(), this)
 			),
-			new Label()
-			.setRole(LabelRole.LEVEL1_HEADER)
-			.setText("Room " + roomVisit.getOriParentRoom().getNumber()),
+			new HorizontalStack()
+			.addControl(
+				new Label()
+				.setRole(LabelRole.LEVEL1_HEADER)
+				.setText("Room " + roomVisit.getOriParentRoom().getNumber()),
+				new Label()
+				.setText(
+					"Link: " +
+					ROOM_HYPERLINK_CREATOR.createHyperlinkToRoom(
+						roomVisit.getOriParentRoom(),
+						getOriParentClient().getOriParentApplication())
+					)
+			),
 			new Label()
 			.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
 			new HorizontalStack()
