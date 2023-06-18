@@ -8,15 +8,21 @@ import ch.nolix.planningpoker.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.dataevaluatorapi.IRoomEvaluator;
 import ch.nolix.planningpokerapi.dataevaluatorapi.IRoomVisitEvaluator;
+import ch.nolix.planningpokerapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
 import ch.nolix.system.application.webapplication.WebClientSession;
+import ch.nolix.system.webgui.dialog.ShowValueDialogFactory;
 import ch.nolix.system.webgui.dialog.YesNoDialogFactory;
 
 public final class PokerSessionHelper {
 	
 	private static final IRoomEvaluator ROOM_EVALUATOR = new RoomEvaluator();
 	
+	private static final RoomHyperlinkCreator ROOM_HYPERLINK_CREATOR = new RoomHyperlinkCreator();
+	
 	private static final IRoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
+		
+	private static final ShowValueDialogFactory SHOW_VALUE_DIALOG_FACTORY = new ShowValueDialogFactory();
 	
 	private static final YesNoDialogFactory YES_NO_DIALOG_FACTORY = YesNoDialogFactory.INSTANCE;
 	
@@ -100,6 +106,18 @@ public final class PokerSessionHelper {
 		);
 		
 		webClientSession.getOriGUI().pushLayer(goToOtherRoomDialog);
+	}
+	
+	public void openShareRoomDialog(final IRoom room, final WebClientSession<IApplicationContext> webClientSession) {
+		
+		final var application = webClientSession.getOriParentClient().getOriParentApplication();
+		
+		final var roomHyperlink = ROOM_HYPERLINK_CREATOR.createHyperlinkToRoom(room, application);
+		
+		final var shareRoomDialog =
+		SHOW_VALUE_DIALOG_FACTORY.createShowValueDialogForValueNameAndValue("Link to room", roomHyperlink);
+		
+		webClientSession.getOriGUI().pushLayer(shareRoomDialog);
 	}
 	
 	public void setEstimateInStoryPointsAndUpdate(
