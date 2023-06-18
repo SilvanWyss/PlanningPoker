@@ -10,6 +10,8 @@ import ch.nolix.system.objectdatabase.database.Value;
 
 public final class User extends Entity implements IUser {
 	
+	public static final int MAX_NAME_LENGTH = 20;
+	
 	public static User withName(final String name) {
 		
 		final var user = new User();
@@ -45,8 +47,10 @@ public final class User extends Entity implements IUser {
 	@Override
 	public void setName(final String name) {
 		
-		GlobalValidator.assertThat(name).thatIsNamed(LowerCaseCatalogue.NAME).isNotBlank();
-		
+		GlobalValidator.assertThat(name).thatIsNamed(LowerCaseCatalogue.NAME).isNotEmpty();
+		GlobalValidator.assertThat(name).thatIsNamed(LowerCaseCatalogue.NAME).isNotLongerThan(MAX_NAME_LENGTH);
+		GlobalValidator.assertThat(name).thatIsNamed(LowerCaseCatalogue.NAME).matches("[a-zA-Z0-9]*");
+				
 		this.name.setValue(name);
 	}
 }
