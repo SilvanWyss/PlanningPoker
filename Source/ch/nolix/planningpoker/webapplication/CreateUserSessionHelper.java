@@ -22,9 +22,14 @@ public final class CreateUserSessionHelper {
 			
 			final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
 			if (room != null) {
+				
 				dataController.enterRoom(user, room);
+				dataController.saveChanges();
+				
+				applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			} else {
+				dataController.saveChanges();
 			}
-			dataController.saveChanges();
 			
 			webClientSession.getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 			
