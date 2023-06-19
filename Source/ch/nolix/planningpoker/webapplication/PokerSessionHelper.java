@@ -91,7 +91,7 @@ public final class PokerSessionHelper {
 			if (ROOM_EVALUATOR.containsEstimate(room)) {
 				openDeleteEstimatesDialogWhenRoomContainsEstimates(roomId, webClientSession);
 			}
-		}		
+		}
 	}
 	
 	public void openGoToOtherRoomDialog(
