@@ -56,4 +56,9 @@ public final class SelectRoomSession extends PageSession {
 	protected void doRegistrations(final IRoomChangeNotifier roomChangeNotifier) {
 		//Does nothing.
 	}
+	
+	@Override
+	protected void noteSelfChange() {
+		refreshIfDoesNotHaveOpenDialog();
+	}
 }

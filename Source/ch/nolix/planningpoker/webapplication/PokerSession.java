@@ -39,7 +39,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	@Override
 	public void trigger() {
-		refresh();
+		refreshIfDoesNotHaveOpenDialog();
 	}
 	
 	@Override
@@ -55,6 +55,11 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	@Override
 	protected void doRegistrations(final IRoomChangeNotifier roomChangeNotifier) {
 		roomChangeNotifier.registerRoomSubscriberIfNotRegistered(configuration.getRoomId(), this);
+	}
+	
+	@Override
+	protected void noteSelfChange() {
+		getOriApplicationContext().getOriRoomChangeNotifier().noteRoomChange(configuration.getRoomId());
 	}
 	
 	private IControl<?, ?> createMainControl(final IRoomVisit roomVisit) {

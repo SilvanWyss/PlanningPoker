@@ -46,6 +46,11 @@ public final class CreateUserSession extends PageSession {
 		//Does nothing.
 	}
 	
+	@Override
+	protected void noteSelfChange() {
+		refreshIfDoesNotHaveOpenDialog();
+	}
+	
 	private void createUserAndSetCookieAndRedirect() {
 		
 		final var userName = userNameTextbox.getText();

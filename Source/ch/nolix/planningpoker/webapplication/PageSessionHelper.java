@@ -2,7 +2,6 @@ package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer;
-import ch.nolix.coreapi.programcontrolapi.triggeruniversalapi.Refreshable;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.system.application.webapplication.WebClientSession;
@@ -25,45 +24,40 @@ public final class PageSessionHelper {
 		return StringCatalogue.MINUS;
 	}
 	
-	public <WCS extends WebClientSession<IApplicationContext> & Refreshable> void openEditUserNameDialog(
+	public void openEditUserNameDialog(
 		final String userId,
-		final WCS refreshableWebClientSession
+		final WebClientSession<IApplicationContext> webClientSession
 	) {
 		
-		final var applicationContext = refreshableWebClientSession.getOriApplicationContext();
+		final var applicationContext = webClientSession.getOriApplicationContext();
 		
 		try (final var dataController = applicationContext.createDataController()) {
 		
 			final var user = dataController.getOriUserById(userId);
 			final var originUserName = user.getName();
 			
-			refreshableWebClientSession
+			webClientSession
 			.getOriGUI()
 			.pushLayer(
 				ENTER_VALUE_DIALOG_FACTORY.createEnterValueDialogWithTextAndOriginalValueAndValueTaker(
 					"Edit your user name",
 					originUserName,
-					newUserName -> setUserNameAndRefresh(userId, newUserName, refreshableWebClientSession)
+					newUserName -> setUserName(userId, newUserName, webClientSession.getOriApplicationContext())
 				)
 			);
 		}
 	}
 	
-	private <WCS extends WebClientSession<IApplicationContext> & Refreshable> void setUserNameAndRefresh(
+	private void setUserName(
 		final String userId,
 		final String newUserName,
-		final WCS refreshableWebClientSession
+		final IApplicationContext applicationContext
 	) {
 		
-		final var applicationContext = refreshableWebClientSession.getOriApplicationContext();
-		
 		try (final var dataController = applicationContext.createDataController()) {
-			
 			final var user = dataController.getOriUserById(userId);
 			user.setName(newUserName);
 			dataController.saveChanges();
-			
-			refreshableWebClientSession.refresh();
 		}
 	}
 }
