@@ -224,13 +224,15 @@ public final class PokerSessionHelper {
 		try (final var dataController = applicationContext.createDataController()) {
 			
 			final var user = dataController.getOriUserById(userId);
-			user.getOriCurrentRoomVisit().getOriParentRoom();
+			final var room = user.getOriCurrentRoomVisit().getOriParentRoom();
 			dataController.leaveRoom(user);
 			
 			dataController.saveChanges();
+			
+			webClientSession.setNext(SelectRoomSession.withUserId(userId));
+			
+			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
-		
-		webClientSession.setNext(SelectRoomSession.withUserId(userId));
 	}
 	
 	private void openDeleteEstimatesDialogWhenRoomContainsEstimates(
