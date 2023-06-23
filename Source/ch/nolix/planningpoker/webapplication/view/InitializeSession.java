@@ -4,7 +4,7 @@ import ch.nolix.planningpoker.webapplication.controller.InitializeController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
-public final class InitialSession extends WebClientSession<IApplicationContext> {
+public final class InitializeSession extends WebClientSession<IApplicationContext> {
 	
 	private static final InitializeController INITIALIZE_CONTROLLER = new InitializeController();
 	
