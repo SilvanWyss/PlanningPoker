@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.webapplication;
 import ch.nolix.core.document.node.MutableNode;
 import ch.nolix.coreapi.functionapi.genericfunctionapi.IElementTakerElementGetter;
 import ch.nolix.planningpoker.applicationcontext.ApplicationContext;
-import ch.nolix.planningpoker.datamodel.DataModelCatalogue;
+import ch.nolix.planningpoker.datamodel.schema.DataModelCatalogue;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.system.application.main.Application;
 import ch.nolix.system.application.webapplication.WebClient;

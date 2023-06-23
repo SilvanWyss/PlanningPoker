@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.datamodel;
+package ch.nolix.planningpoker.datamodel.schema;
 
 import ch.nolix.system.objectdatabase.schema.Schema;
 import ch.nolix.systemapi.objectdatabaseapi.schemaapi.ISchema;

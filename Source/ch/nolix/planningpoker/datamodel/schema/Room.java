@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.datamodel;
+package ch.nolix.planningpoker.datamodel.schema;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.programatom.name.LowerCaseCatalogue;
