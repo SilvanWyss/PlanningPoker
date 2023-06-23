@@ -6,10 +6,10 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.datamodel.schema.Room;
 import ch.nolix.planningpoker.datamodel.schema.RoomVisit;
 import ch.nolix.planningpoker.datamodel.schema.User;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
 
 public final class DatabaseAdapter implements IDatabaseAdapter {
 	

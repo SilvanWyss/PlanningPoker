@@ -5,7 +5,7 @@ import ch.nolix.coreapi.functionapi.genericfunctionapi.IElementTakerElementGette
 import ch.nolix.planningpoker.applicationcontext.PlanningPokerContext;
 import ch.nolix.planningpoker.datamodel.schema.SchemaCatalogue;
 import ch.nolix.planningpoker.webapplication.view.InitializeSession;
-import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.main.Application;
 import ch.nolix.system.application.webapplication.WebClient;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;

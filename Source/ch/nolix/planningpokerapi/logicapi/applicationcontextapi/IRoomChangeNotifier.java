@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.applicationcontextapi;
+package ch.nolix.planningpokerapi.logicapi.applicationcontextapi;
 
 public interface IRoomChangeNotifier {
 	

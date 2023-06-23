@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomSubscriber;
 
 public final class RoomSubscriberWrapper implements IRoomSubscriber {
 	

@@ -2,8 +2,8 @@ package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer;
-import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.dialog.EnterValueDialogFactory;
 

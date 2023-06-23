@@ -1,8 +1,8 @@
 package ch.nolix.planningpoker.webapplication.controller;
 
-import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ICreateUserSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;

@@ -1,9 +1,9 @@
 package ch.nolix.planningpoker.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
-import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 
 public final class PlanningPokerContext implements IPlanningPokerContext {
 	
