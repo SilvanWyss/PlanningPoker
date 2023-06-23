@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.main;
 
 import ch.nolix.core.document.node.MutableNode;
 import ch.nolix.coreapi.functionapi.genericfunctionapi.IElementTakerElementGetter;

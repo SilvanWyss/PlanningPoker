@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.main;
 
 import ch.nolix.system.application.main.SecureServer;
 
