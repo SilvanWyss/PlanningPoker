@@ -2,6 +2,7 @@ package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.planningpoker.webapplication.controller.PokerController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
@@ -18,7 +19,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	private static final PokerSessionAssembler POKER_SESSION_ASSEMBLER = new PokerSessionAssembler();
 	
-	private static final PokerSessionHelper POKER_SESSION_HELPER = new PokerSessionHelper();
+	private static final PokerController POKER_SESSION_HELPER = new PokerController();
 	
 	public static PokerSession withUserIdAndRoomId(final String userId, final String roomId) {
 		return new PokerSession(userId, roomId);
@@ -72,7 +73,12 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			new Button()
 			.setText("Go to another room")
 			.setLeftMouseButtonPressAction(
-				() -> POKER_SESSION_HELPER.openGoToOtherRoomDialog(roomVisit.getOriVisitor().getId(), this)
+				() ->
+				POKER_SESSION_HELPER.openGoToOtherRoomDialog(
+					roomVisit.getOriVisitor().getId(),
+					this,
+					SelectRoomSession::withUserId
+				)
 			),
 			new HorizontalStack()
 			.setRole(ContainerRole.HEADER_CONTAINER)

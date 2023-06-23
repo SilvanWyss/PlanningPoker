@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.controller;
 
 import java.util.Locale;
 
@@ -10,11 +10,12 @@ import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
+import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.dialog.ShowValueDialogFactory;
 import ch.nolix.system.webgui.dialog.YesNoDialogFactory;
 
-public final class PokerSessionHelper {
+public final class PokerController {
 	
 	private static final IRoomEvaluator ROOM_EVALUATOR = new RoomEvaluator();
 	
@@ -96,13 +97,14 @@ public final class PokerSessionHelper {
 	
 	public void openGoToOtherRoomDialog(
 		final String userId,
-		final WebClientSession<IApplicationContext> webClientSession
+		final WebClientSession<IApplicationContext> webClientSession,
+		final ISelectRoomSessionFactory selectRoomSessionFactory
 	) {
 		
 		final var goToOtherRoomDialog =
 		YES_NO_DIALOG_FACTORY.createYesNoDialogWithYesNoQuestionAndConfirmAction(
 			"Do you really want to leave the current room?",
-			() -> goToOtherRoomAndUpdate(userId, webClientSession)
+			() -> goToOtherRoomAndUpdate(userId, webClientSession, selectRoomSessionFactory)
 		);
 		
 		webClientSession.getOriGUI().pushLayer(goToOtherRoomDialog);
@@ -216,7 +218,8 @@ public final class PokerSessionHelper {
 	
 	private void goToOtherRoomAndUpdate(
 		final String userId,
-		final WebClientSession<IApplicationContext> webClientSession
+		final WebClientSession<IApplicationContext> webClientSession,
+		final ISelectRoomSessionFactory selectRoomSessionFactory
 	) {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
@@ -229,7 +232,7 @@ public final class PokerSessionHelper {
 			
 			dataController.saveChanges();
 			
-			webClientSession.setNext(SelectRoomSession.withUserId(userId));
+			webClientSession.setNext(selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId));
 			
 			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
