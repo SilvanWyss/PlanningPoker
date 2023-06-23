@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.applicationcontext;
+package ch.nolix.planningpoker.logic.applicationcontext;
 
 import ch.nolix.core.container.linkedlist.LinkedList;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;

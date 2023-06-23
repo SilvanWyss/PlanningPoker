@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.analysis;
+package ch.nolix.planningpoker.logic.analysis;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.math.main.GlobalCalculator;

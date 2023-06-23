@@ -2,8 +2,8 @@ package ch.nolix.planningpoker.webapplication.main;
 
 import ch.nolix.core.document.node.MutableNode;
 import ch.nolix.coreapi.functionapi.genericfunctionapi.IElementTakerElementGetter;
-import ch.nolix.planningpoker.applicationcontext.PlanningPokerContext;
 import ch.nolix.planningpoker.datamodel.schema.SchemaCatalogue;
+import ch.nolix.planningpoker.logic.applicationcontext.PlanningPokerContext;
 import ch.nolix.planningpoker.webapplication.view.InitializeSession;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.main.Application;

@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.applicationcontext;
+package ch.nolix.planningpoker.logic.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;

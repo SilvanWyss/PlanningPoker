@@ -3,8 +3,8 @@ package ch.nolix.planningpoker.webapplication.view;
 import java.util.Locale;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
-import ch.nolix.planningpoker.analysis.RoomAnalysis;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
+import ch.nolix.planningpoker.logic.analysis.RoomAnalysis;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
