@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.webapplication.controller.PageController;
-import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.webapplication.WebClientSession;
@@ -16,7 +16,7 @@ import ch.nolix.systemapi.webguiapi.containerapi.ISingleContainer;
 import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public abstract class PageSession extends WebClientSession<IApplicationContext> {
+public abstract class PageSession extends WebClientSession<IPlanningPokerContext> {
 	
 	private static final PageController PAGE_SESSION_HELPER = new PageController();
 	

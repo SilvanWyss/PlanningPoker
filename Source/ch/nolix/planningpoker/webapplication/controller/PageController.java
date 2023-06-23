@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer;
-import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.dialog.EnterValueDialogFactory;
@@ -26,7 +26,7 @@ public final class PageController {
 	
 	public void openEditUserNameDialog(
 		final String userId,
-		final WebClientSession<IApplicationContext> webClientSession
+		final WebClientSession<IPlanningPokerContext> webClientSession
 	) {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
@@ -51,10 +51,10 @@ public final class PageController {
 	private void setUserName(
 		final String userId,
 		final String newUserName,
-		final IApplicationContext applicationContext
+		final IPlanningPokerContext planningPokerContext
 	) {
 		
-		try (final var dataController = applicationContext.createDataController()) {
+		try (final var dataController = planningPokerContext.createDataController()) {
 			final var user = dataController.getOriUserById(userId);
 			user.setName(newUserName);
 			dataController.saveChanges();

@@ -1,6 +1,6 @@
 package ch.nolix.planningpokerapi.applicationcontextapi;
 
-public interface IApplicationContext {
+public interface IPlanningPokerContext {
 	
 	IDataController createDataController();
 	

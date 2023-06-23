@@ -5,7 +5,7 @@ import java.util.Locale;
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomEvaluator;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
-import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
@@ -27,15 +27,15 @@ public final class PokerController {
 	
 	private static final YesNoDialogFactory YES_NO_DIALOG_FACTORY = YesNoDialogFactory.INSTANCE;
 	
-	public void deleteEstimateAndUpdate(final String roomVisitId, final IApplicationContext applicationContext) {
-		try (final var dataController = applicationContext.createDataController()) {
+	public void deleteEstimateAndUpdate(final String roomVisitId, final IPlanningPokerContext planningPokerContext) {
+		try (final var dataController = planningPokerContext.createDataController()) {
 			
 			final var roomVisit = dataController.getOriRoomVisitById(roomVisitId);
 			roomVisit.deleteEstimate();
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
-			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
@@ -80,7 +80,7 @@ public final class PokerController {
 	
 	public void openDeleteEstimatesDialog(
 		final String roomId,
-		final WebClientSession<IApplicationContext> webClientSession
+		final WebClientSession<IPlanningPokerContext> webClientSession
 	) {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
@@ -97,7 +97,7 @@ public final class PokerController {
 	
 	public void openGoToOtherRoomDialog(
 		final String userId,
-		final WebClientSession<IApplicationContext> webClientSession,
+		final WebClientSession<IPlanningPokerContext> webClientSession,
 		final ISelectRoomSessionFactory selectRoomSessionFactory
 	) {
 		
@@ -110,7 +110,7 @@ public final class PokerController {
 		webClientSession.getOriGUI().pushLayer(goToOtherRoomDialog);
 	}
 	
-	public void openShareRoomDialog(final IRoom room, final WebClientSession<IApplicationContext> webClientSession) {
+	public void openShareRoomDialog(final IRoom room, final WebClientSession<IPlanningPokerContext> webClientSession) {
 		
 		final var application = webClientSession.getOriParentClient().getOriParentApplication();
 		
@@ -125,36 +125,36 @@ public final class PokerController {
 	public void setEstimateInStoryPointsAndUpdate(
 		final String roomVisitId,
 		final double estimateInStoryPoints,
-		final IApplicationContext applicationContext
+		final IPlanningPokerContext planningPokerContext
 	) {
-		try (final var dataController = applicationContext.createDataController()) {
+		try (final var dataController = planningPokerContext.createDataController()) {
 			
 			final var roomVisit = dataController.getOriRoomVisitById(roomVisitId);
 			roomVisit.setEstimateInStoryPoints(estimateInStoryPoints);
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
-			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
 	public void setInfiniteEstimateAndUpdate(
 		final String roomVisitId,
-		final IApplicationContext applicationContext
+		final IPlanningPokerContext planningPokerContext
 	) {
-		try (final var dataController = applicationContext.createDataController()) {
+		try (final var dataController = planningPokerContext.createDataController()) {
 			
 			final var roomVisit = dataController.getOriRoomVisitById(roomVisitId);
 			roomVisit.setInfiniteEstimate();
 			dataController.saveChanges();
 			
 			final var room = roomVisit.getOriParentRoom();	
-			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
-	public void toggleEstimateVisibilityAndUpdate(final String roomId, final IApplicationContext applicationContext) {
-		try (final var dataController = applicationContext.createDataController()) {
+	public void toggleEstimateVisibilityAndUpdate(final String roomId, final IPlanningPokerContext planningPokerContext) {
+		try (final var dataController = planningPokerContext.createDataController()) {
 			
 			final var room = dataController.getOriRoomById(roomId);
 			
@@ -166,19 +166,19 @@ public final class PokerController {
 			
 			dataController.saveChanges();
 			
-			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
-	private void deleteEstimatesAndUpdate(final String roomId, final IApplicationContext applicationContext) {
-		try (final var dataController = applicationContext.createDataController()) {
+	private void deleteEstimatesAndUpdate(final String roomId, final IPlanningPokerContext planningPokerContext) {
+		try (final var dataController = planningPokerContext.createDataController()) {
 			
 			final var room = dataController.getOriRoomById(roomId);
 			room.getOriRoomVisits().forEach(IRoomVisit::deleteEstimate);
 			room.setEstimatesInvisible();
 			dataController.saveChanges();
 			
-			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
@@ -218,7 +218,7 @@ public final class PokerController {
 	
 	private void goToOtherRoomAndUpdate(
 		final String userId,
-		final WebClientSession<IApplicationContext> webClientSession,
+		final WebClientSession<IPlanningPokerContext> webClientSession,
 		final ISelectRoomSessionFactory selectRoomSessionFactory
 	) {
 		
@@ -240,7 +240,7 @@ public final class PokerController {
 	
 	private void openDeleteEstimatesDialogWhenRoomContainsEstimates(
 		final String roomId,
-		final WebClientSession<IApplicationContext> webClientSession
+		final WebClientSession<IPlanningPokerContext> webClientSession
 	) {
 		
 		final var deleteEstimateDialog =

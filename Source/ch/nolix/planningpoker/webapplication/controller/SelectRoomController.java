@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.controller;
 
-import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
@@ -8,7 +8,7 @@ public final class SelectRoomController {
 	
 	public void createAndEnterRoomAndRedirect(
 		final String userId,
-		final WebClientSession<IApplicationContext> webClientSession,
+		final WebClientSession<IPlanningPokerContext> webClientSession,
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
@@ -32,7 +32,7 @@ public final class SelectRoomController {
 	public void enterRoomAndRedirect(
 		final String userId,
 		final String roomNumber,
-		final WebClientSession<IApplicationContext> webClientSession,
+		final WebClientSession<IPlanningPokerContext> webClientSession,
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		

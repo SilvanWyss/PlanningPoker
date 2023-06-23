@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.controller;
 
-import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ICreateUserSessionFactory;
@@ -10,8 +10,8 @@ import ch.nolix.system.application.webapplication.WebClientSession;
 
 public final class InitializeController {
 	
-	public WebClientSession<IApplicationContext> createFirstPageSession(
-		final WebClientSession<IApplicationContext> initialSession,
+	public WebClientSession<IPlanningPokerContext> createFirstPageSession(
+		final WebClientSession<IPlanningPokerContext> initialSession,
 		final ICreateUserSessionFactory createUserSessionFactory,
 		final ISelectRoomSessionFactory selectRoomSessionFactory,
 		final IPokerSessionFactory pokerSessionFactory
@@ -33,10 +33,10 @@ public final class InitializeController {
 		return createUserSessionFactory.createCreateUserSession();
 	}
 	
-	private WebClientSession<IApplicationContext> createNextSession(
+	private WebClientSession<IPlanningPokerContext> createNextSession(
 		final IUser user,
 		final IDataController dataController,
-		final WebClientSession<IApplicationContext> initialSession,
+		final WebClientSession<IPlanningPokerContext> initialSession,
 		final ISelectRoomSessionFactory selectRoomSessionFactory,
 		final IPokerSessionFactory pokerSessionFactory
 	) {

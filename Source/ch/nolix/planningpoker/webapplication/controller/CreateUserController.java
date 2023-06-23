@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.controller;
 
-import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
@@ -10,7 +10,7 @@ public final class CreateUserController {
 	
 	public void createUserAndSetCookieAndRedirect(
 		final String userName,
-		final WebClientSession<IApplicationContext> webClientSession,
+		final WebClientSession<IPlanningPokerContext> webClientSession,
 		final ISelectRoomSessionFactory selectRoomSessionFactory,
 		final IPokerSessionFactory pokerSessionFactory
 	) {
@@ -41,7 +41,7 @@ public final class CreateUserController {
 		}
 	}
 	
-	private WebClientSession<IApplicationContext> createNextSession(
+	private WebClientSession<IPlanningPokerContext> createNextSession(
 		final IUser user,
 		final ISelectRoomSessionFactory selectRoomSessionFactory,
 		final IPokerSessionFactory pokerSessionFactory
