@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.dataevaluatorapi;
+package ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi;
 
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 
