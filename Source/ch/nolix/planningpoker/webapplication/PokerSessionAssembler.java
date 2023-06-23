@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.planningpoker.analysis.RoomAnalysis;
-import ch.nolix.planningpoker.dataevaluator.RoomVisitEvaluator;
+import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.analysisapi.IRoomAnalysis;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;

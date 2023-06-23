@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.dataevaluator;
+package ch.nolix.planningpoker.datamodel.dataevaluator;
 
 import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
