@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer;
@@ -7,7 +7,7 @@ import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.dialog.EnterValueDialogFactory;
 
-public final class PageSessionHelper {
+public final class PageController {
 	
 	private static final EnterValueDialogFactory ENTER_VALUE_DIALOG_FACTORY = new EnterValueDialogFactory();
 	
