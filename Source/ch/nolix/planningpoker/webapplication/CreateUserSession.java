@@ -42,7 +42,8 @@ public final class CreateUserSession extends PageSession {
 					CREATE_USER_SESSION_HELPER.createUserAndSetCookieAndRedirect(
 						userNameTextbox.getText(),
 						this,
-						SelectRoomSession::withUserId
+						SelectRoomSession::withUserId,
+						PokerSession::withUserIdAndRoomId
 					)
 				)
 			)

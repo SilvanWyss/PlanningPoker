@@ -19,6 +19,10 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	private static final PokerSessionHelper POKER_SESSION_HELPER = new PokerSessionHelper();
 	
+	public static PokerSession withUserIdAndRoomId(final String userId, final String roomId) {
+		return new PokerSession(new PokerSessionConfiguration(userId, roomId));
+	}
+	
 	public static PokerSession withConfiguration(final PokerSessionConfiguration pokerSessionConfiguration) {
 		return new PokerSession(pokerSessionConfiguration);
 	}
