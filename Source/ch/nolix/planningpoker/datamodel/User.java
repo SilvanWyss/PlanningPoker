@@ -2,8 +2,8 @@ package ch.nolix.planningpoker.datamodel;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.programatom.name.LowerCaseCatalogue;
-import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
-import ch.nolix.planningpokerapi.datamodelapi.IUser;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.system.objectdatabase.database.Entity;
 import ch.nolix.system.objectdatabase.database.OptionalBackReference;
 import ch.nolix.system.objectdatabase.database.Value;

@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
-import ch.nolix.planningpokerapi.datamodelapi.IUser;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
 public final class InitialSession extends WebClientSession<IApplicationContext> {

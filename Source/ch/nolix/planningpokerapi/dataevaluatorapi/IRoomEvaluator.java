@@ -1,6 +1,6 @@
 package ch.nolix.planningpokerapi.dataevaluatorapi;
 
-import ch.nolix.planningpokerapi.datamodelapi.IRoom;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 
 public interface IRoomEvaluator {
 	

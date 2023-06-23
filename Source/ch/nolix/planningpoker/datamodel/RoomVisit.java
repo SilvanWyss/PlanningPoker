@@ -2,9 +2,9 @@ package ch.nolix.planningpoker.datamodel;
 
 import ch.nolix.core.errorcontrol.invalidargumentexception.InvalidArgumentException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.datamodelapi.IRoom;
-import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
-import ch.nolix.planningpokerapi.datamodelapi.IUser;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.system.objectdatabase.database.BackReference;
 import ch.nolix.system.objectdatabase.database.Entity;
 import ch.nolix.system.objectdatabase.database.OptionalValue;

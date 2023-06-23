@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.datamodelapi;
+package ch.nolix.planningpokerapi.datamodelapi.schemaapi;
 
 import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.Identified;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;

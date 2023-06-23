@@ -4,7 +4,7 @@ import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
-import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.system.webgui.control.Button;
 import ch.nolix.system.webgui.control.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;

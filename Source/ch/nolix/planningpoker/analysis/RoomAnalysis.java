@@ -5,8 +5,8 @@ import ch.nolix.core.math.main.GlobalCalculator;
 import ch.nolix.core.programatom.function.FunctionCatalogue;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.planningpokerapi.analysisapi.IRoomAnalysis;
-import ch.nolix.planningpokerapi.datamodelapi.IRoom;
-import ch.nolix.planningpokerapi.datamodelapi.IRoomVisit;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 
 public final class RoomAnalysis implements IRoomAnalysis {
 	

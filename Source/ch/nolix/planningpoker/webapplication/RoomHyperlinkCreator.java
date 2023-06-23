@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication;
 
-import ch.nolix.planningpokerapi.datamodelapi.IRoom;
+import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.webapplicationapi.IRoomTarget;
 import ch.nolix.systemapi.applicationapi.mainapi.IApplication;
 
