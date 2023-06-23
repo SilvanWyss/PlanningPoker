@@ -3,16 +3,21 @@ package ch.nolix.planningpoker.webapplication;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
+import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ICreateUserSessionFactory;
+import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
 public final class InitialSession extends WebClientSession<IApplicationContext> {
 	
 	@Override
 	protected void initialize() {
-		setNext(createNextSession());
+		setNext(createNextSession(CreateUserSession::new, PokerSession::withUserIdAndRoomId));
 	}
 	
-	private WebClientSession<IApplicationContext> createNextSession() {
+	private WebClientSession<IApplicationContext> createNextSession(
+		final ICreateUserSessionFactory createUserSessionFactory,
+		final IPokerSessionFactory pokerSessionFactory
+	) {
 		
 		try (final var dataController = getOriApplicationContext().createDataController()) {
 			
@@ -20,16 +25,17 @@ public final class InitialSession extends WebClientSession<IApplicationContext> 
 			final var user = dataController.getOriUserByIdOrNull(userId);
 			
 			if (user != null) {
-				return createNextSession(dataController, user);
+				return createNextSession(user, dataController, pokerSessionFactory);
 			}
 		}
 		
-		return new CreateUserSession();
+		return createUserSessionFactory.createCreateUserSession();
 	}
 	
 	private WebClientSession<IApplicationContext> createNextSession(
+		final IUser user,
 		final IDataController dataController,
-		final IUser user
+		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
 		final var roomNumber = getOriParentClient().getURLParameterValueByURLParameterNameOrNull("room");
@@ -42,7 +48,7 @@ public final class InitialSession extends WebClientSession<IApplicationContext> 
 		
 		if (user.isInARoom()) {
 			return
-			PokerSession.withUserIdAndRoomId(
+			pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(
 				user.getId(),
 				user.getOriCurrentRoomVisit().getOriParentRoom().getId()
 			);
