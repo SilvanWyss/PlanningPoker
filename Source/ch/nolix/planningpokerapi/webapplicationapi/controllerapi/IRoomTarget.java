@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.webapplicationapi;
+package ch.nolix.planningpokerapi.webapplicationapi.controllerapi;
 
 import ch.nolix.coreapi.programcontrolapi.targetuniversalapi.IApplicationInstanceTarget;
 

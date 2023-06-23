@@ -1,9 +1,9 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.net.target.ApplicationInstanceTarget;
 import ch.nolix.coreapi.programcontrolapi.processproperty.SecurityLevel;
-import ch.nolix.planningpokerapi.webapplicationapi.IRoomTarget;
+import ch.nolix.planningpokerapi.webapplicationapi.controllerapi.IRoomTarget;
 
 public final class RoomTarget extends ApplicationInstanceTarget implements IRoomTarget {
 	
