@@ -14,11 +14,11 @@ public final class SelectRoomController {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
 		
-		try (final var dataController = applicationContext.createDataController()) {
+		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
-			final var user = dataController.getOriUserById(userId);
-			final var room = dataController.createNewRoomAndEnterRoom(user);
-			dataController.saveChanges();
+			final var user = databaseAdapter.getOriUserById(userId);
+			final var room = databaseAdapter.createNewRoomAndEnterRoom(user);
+			databaseAdapter.saveChanges();
 			
 			webClientSession.setNext(
 				pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(
@@ -38,12 +38,12 @@ public final class SelectRoomController {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
 		
-		try (final var dataController = applicationContext.createDataController()) {
+		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
-			final var user = dataController.getOriUserById(userId);
-			final var room = dataController.getOriRoomByNumber(roomNumber);
-			dataController.enterRoom(user, room);
-			dataController.saveChanges();
+			final var user = databaseAdapter.getOriUserById(userId);
+			final var room = databaseAdapter.getOriRoomByNumber(roomNumber);
+			databaseAdapter.enterRoom(user, room);
+			databaseAdapter.saveChanges();
 			
 			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 			

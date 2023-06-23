@@ -5,7 +5,7 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 
-public interface IDataController extends IChangeSaver {
+public interface IDatabaseAdapter extends IChangeSaver {
 	
 	boolean containsUserWithId(String id);
 	

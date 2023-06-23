@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.webapplication.controller;
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer;
 import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.dialog.EnterValueDialogFactory;
 
@@ -11,12 +11,12 @@ public final class PageController {
 	
 	private static final EnterValueDialogFactory ENTER_VALUE_DIALOG_FACTORY = new EnterValueDialogFactory();
 	
-	public String getUserName(final ISingleContainer<String> userIdContainer, final IDataController dataController) {
+	public String getUserName(final ISingleContainer<String> userIdContainer, final IDatabaseAdapter databaseAdapter) {
 		
 		if (userIdContainer.containsAny()) {
 			
 			final var userId = userIdContainer.getOriElement();
-			final var user = dataController.getOriUserById(userId);
+			final var user = databaseAdapter.getOriUserById(userId);
 			
 			return user.getName();
 		}
@@ -31,9 +31,9 @@ public final class PageController {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
 		
-		try (final var dataController = applicationContext.createDataController()) {
+		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 		
-			final var user = dataController.getOriUserById(userId);
+			final var user = databaseAdapter.getOriUserById(userId);
 			final var originUserName = user.getName();
 			
 			webClientSession
@@ -54,10 +54,10 @@ public final class PageController {
 		final IPlanningPokerContext planningPokerContext
 	) {
 		
-		try (final var dataController = planningPokerContext.createDataController()) {
-			final var user = dataController.getOriUserById(userId);
+		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
+			final var user = databaseAdapter.getOriUserById(userId);
 			user.setName(newUserName);
-			dataController.saveChanges();
+			databaseAdapter.saveChanges();
 		}
 	}
 }

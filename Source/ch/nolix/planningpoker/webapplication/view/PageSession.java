@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.webapplication.view;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.webapplication.controller.PageController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.container.SingleContainer;
@@ -35,7 +35,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 		this.userIdContainer = userIdContainer;
 	}
 	
-	protected abstract IControl<?, ?> createMainControl(IDataController dataController);
+	protected abstract IControl<?, ?> createMainControl(IDatabaseAdapter databaseAdapter);
 	
 	protected abstract void doRegistrations(IRoomChangeNotifier roomChangeNotifier);
 	
@@ -69,7 +69,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	}
 	
 	private void fillUpRootControl() {
-		try (final var dataController = getOriApplicationContext().createDataController()) {
+		try (final var databaseAdapter = getOriApplicationContext().createDatabaseAdapter()) {
 			rootControl
 			.setControl(
 				new VerticalStack()
@@ -89,14 +89,14 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 								new Label()
 								.setText("you: "),
 								new Button()
-								.setText(PAGE_SESSION_HELPER.getUserName(userIdContainer, dataController))
+								.setText(PAGE_SESSION_HELPER.getUserName(userIdContainer, databaseAdapter))
 								.setLeftMouseButtonPressAction(
 									() -> PAGE_SESSION_HELPER.openEditUserNameDialog(getUserId(), this)
 								)
 							)
 						)
 					),
-					createMainControl(dataController)
+					createMainControl(databaseAdapter)
 				)
 			);
 		}

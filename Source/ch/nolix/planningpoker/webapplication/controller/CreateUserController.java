@@ -20,19 +20,19 @@ public final class CreateUserController {
 		final var roomNumber =
 		webClientSession.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("room");
 		
-		try (final var dataController = applicationContext.createDataController()) {
+		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
-			final var user = dataController.createUserWithName(userName);
+			final var user = databaseAdapter.createUserWithName(userName);
 			
-			final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
+			final var room = databaseAdapter.getOriRoomByNumberOrNull(roomNumber);
 			if (room != null) {
 				
-				dataController.enterRoom(user, room);
-				dataController.saveChanges();
+				databaseAdapter.enterRoom(user, room);
+				databaseAdapter.saveChanges();
 				
 				applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 			} else {
-				dataController.saveChanges();
+				databaseAdapter.saveChanges();
 			}
 			
 			webClientSession.getOriParentClient().setOrAddCookieWithNameAndValue("user_id", user.getId());

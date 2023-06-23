@@ -2,7 +2,7 @@ package ch.nolix.planningpokerapi.applicationcontextapi;
 
 public interface IPlanningPokerContext {
 	
-	IDataController createDataController();
+	IDatabaseAdapter createDatabaseAdapter();
 	
 	IRoomChangeNotifier getOriRoomChangeNotifier();
 }

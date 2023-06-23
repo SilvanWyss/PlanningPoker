@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.webapplication.view;
 import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
@@ -47,10 +47,10 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	}
 	
 	@Override
-	protected IControl<?, ?> createMainControl(final IDataController dataController) {
+	protected IControl<?, ?> createMainControl(final IDatabaseAdapter databaseAdapter) {
 		
 		final var userId = getUserId();
-		final var user = dataController.getOriUserById(userId);
+		final var user = databaseAdapter.getOriUserById(userId);
 		final var roomVisit = user.getOriCurrentRoomVisit();
 				
 		return createMainControl(roomVisit);

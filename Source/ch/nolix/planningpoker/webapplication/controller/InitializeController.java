@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ICreateUserSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
@@ -19,14 +19,14 @@ public final class InitializeController {
 		
 		final var applicationContext = initialSession.getOriApplicationContext();
 		
-		try (final var dataController = applicationContext.createDataController()) {
+		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
 			final var userId = initialSession.getOriParentClient().getCookieValueByCookieNameOrNull("user_id");
-			final var user = dataController.getOriUserByIdOrNull(userId);
+			final var user = databaseAdapter.getOriUserByIdOrNull(userId);
 			
 			if (user != null) {
 				return
-				createNextSession(user, dataController, initialSession, selectRoomSessionFactory, pokerSessionFactory);
+				createNextSession(user, databaseAdapter, initialSession, selectRoomSessionFactory, pokerSessionFactory);
 			}
 		}
 		
@@ -35,18 +35,18 @@ public final class InitializeController {
 	
 	private WebClientSession<IPlanningPokerContext> createNextSession(
 		final IUser user,
-		final IDataController dataController,
+		final IDatabaseAdapter databaseAdapter,
 		final WebClientSession<IPlanningPokerContext> initialSession,
 		final ISelectRoomSessionFactory selectRoomSessionFactory,
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
 		final var roomNumber = initialSession.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("room");
-		final var room = dataController.getOriRoomByNumberOrNull(roomNumber);
+		final var room = databaseAdapter.getOriRoomByNumberOrNull(roomNumber);
 		
 		if (room != null) {
-			dataController.enterRoom(user, room);
-			dataController.saveChanges();
+			databaseAdapter.enterRoom(user, room);
+			databaseAdapter.saveChanges();
 		}
 		
 		if (user.isInARoom()) {

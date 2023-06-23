@@ -6,32 +6,33 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.datamodel.schema.Room;
 import ch.nolix.planningpoker.datamodel.schema.RoomVisit;
 import ch.nolix.planningpoker.datamodel.schema.User;
-import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
+import ch.nolix.planningpokerapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
-import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 
-public final class DataController implements IDataController {
+public final class DatabaseAdapter implements IDatabaseAdapter {
 	
-	public static DataController usingDatabaseAdapter(final DatabaseAdapter databaseAdapter) {
-		return new DataController(databaseAdapter);
+	public static DatabaseAdapter usingDatabaseAdapter(
+		final ch.nolix.system.objectdatabase.database.DatabaseAdapter databaseAdapter
+	) {
+		return new DatabaseAdapter(databaseAdapter);
 	}
 	
-	private final DatabaseAdapter databaseAdapter;
+	private final ch.nolix.system.objectdatabase.database.DatabaseAdapter internalDatabaseAdapter;
 	
-	private DataController(final DatabaseAdapter databaseAdapter) {
-		this.databaseAdapter = databaseAdapter.getEmptyCopy();
+	private DatabaseAdapter(final ch.nolix.system.objectdatabase.database.DatabaseAdapter databaseAdapter) {
+		this.internalDatabaseAdapter = databaseAdapter.getEmptyCopy();
 	}
 	
 	@Override
 	public void close() {
-		databaseAdapter.close();
+		internalDatabaseAdapter.close();
 	}
 	
 	@Override
 	public boolean containsUserWithId(String id) {
-		return databaseAdapter.getOriTableByEntityType(User.class).containsEntityWithId(id);
+		return internalDatabaseAdapter.getOriTableByEntityType(User.class).containsEntityWithId(id);
 	}
 	
 	@Override
@@ -47,7 +48,7 @@ public final class DataController implements IDataController {
 	public IUser createUserWithName(final String name) {
 		
 		final var user = User.withName(name);
-		databaseAdapter.insert(user);
+		internalDatabaseAdapter.insert(user);
 		
 		return user;
 	}
@@ -71,7 +72,7 @@ public final class DataController implements IDataController {
 	
 	@Override
 	public IRoom getOriRoomById(String id) {
-		return databaseAdapter.getOriTableByEntityType(Room.class).getOriEntityById(id);
+		return internalDatabaseAdapter.getOriTableByEntityType(Room.class).getOriEntityById(id);
 	}
 	
 	@Override
@@ -80,7 +81,7 @@ public final class DataController implements IDataController {
 		GlobalValidator.assertThat(number).thatIsNamed("room number").isNotBlank();
 		
 		final var room =
-		databaseAdapter
+		internalDatabaseAdapter
 		.getOriTableByEntityType(Room.class)
 		.getOriEntities()
 		.getOriFirstOrNull(r -> r.getNumber().equals(number));
@@ -97,7 +98,7 @@ public final class DataController implements IDataController {
 	@Override
 	public IRoom getOriRoomByNumberOrNull(final String number) {
 		return
-		databaseAdapter
+		internalDatabaseAdapter
 		.getOriTableByEntityType(Room.class)
 		.getOriEntities()
 		.getOriFirstOrNull(r -> r.getNumber().equals(number));
@@ -106,24 +107,24 @@ public final class DataController implements IDataController {
 	@Override
 	public IRoomVisit getOriRoomVisitById(final String id) {
 		return
-		databaseAdapter
+		internalDatabaseAdapter
 		.getOriTableByEntityType(RoomVisit.class)
 		.getOriEntityById(id);
 	}
 	
 	@Override
 	public IUser getOriUserById(final String id) {
-		return databaseAdapter.getOriTableByEntityType(User.class).getOriEntityById(id);
+		return internalDatabaseAdapter.getOriTableByEntityType(User.class).getOriEntityById(id);
 	}
 	
 	@Override
 	public IUser getOriUserByIdOrNull(String id) {
-		return databaseAdapter.getOriTableByEntityType(User.class).getOriEntityByIdOrNull(id);
+		return internalDatabaseAdapter.getOriTableByEntityType(User.class).getOriEntityByIdOrNull(id);
 	}
 	
 	@Override
 	public boolean hasChanges() {
-		return databaseAdapter.hasChanges();
+		return internalDatabaseAdapter.hasChanges();
 	}
 	
 	@Override
@@ -138,13 +139,13 @@ public final class DataController implements IDataController {
 	
 	@Override
 	public void saveChanges() {
-		databaseAdapter.saveChangesAndReset();
+		internalDatabaseAdapter.saveChangesAndReset();
 	}
 	
 	private Room createNewRoom(final IUser user) {
 		
 		final var room = Room.fromParentCreator((User)user);
-		databaseAdapter.insert(room);
+		internalDatabaseAdapter.insert(room);
 		
 		return room;
 	}
@@ -152,7 +153,7 @@ public final class DataController implements IDataController {
 	private IRoomVisit onlyEnterRoom(IUser user, IRoom room) {
 		
 		final var roomVisit = RoomVisit.forVisitor((User)user);
-		databaseAdapter.insert(roomVisit);
+		internalDatabaseAdapter.insert(roomVisit);
 		room.addRoomVisit(roomVisit);
 		
 		return roomVisit;
