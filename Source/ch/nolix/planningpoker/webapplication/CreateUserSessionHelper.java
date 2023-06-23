@@ -35,7 +35,7 @@ public final class CreateUserSessionHelper {
 				dataController.saveChanges();
 			}
 			
-			webClientSession.getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
+			webClientSession.getOriParentClient().setOrAddCookieWithNameAndValue("user_id", user.getId());
 			
 			webClientSession.setNext(createNextSession(user, selectRoomSessionFactory, pokerSessionFactory));
 		}
