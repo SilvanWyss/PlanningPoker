@@ -20,10 +20,11 @@ public final class CreateUserSession extends PageSession {
 		super(new SingleContainer<>());
 	}
 	
-	private final Textbox userNameTextbox = new Textbox();
-	
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
+		
+		final var userNameTextbox = new Textbox();
+		
 		return
 		new VerticalStack()
 		.addControl(
@@ -36,7 +37,14 @@ public final class CreateUserSession extends PageSession {
 				new Button()
 				.setRole(ButtonRole.CONFIRM_BUTTON)
 				.setText("Ok")
-				.setLeftMouseButtonPressAction(this::createUserAndSetCookieAndRedirect)
+				.setLeftMouseButtonPressAction(
+					() ->
+					CREATE_USER_SESSION_HELPER.createUserAndSetCookieAndRedirect(
+						userNameTextbox.getText(),
+						this,
+						SelectRoomSession::withUserId
+					)
+				)
 			)
 		);
 	}
@@ -49,12 +57,5 @@ public final class CreateUserSession extends PageSession {
 	@Override
 	protected void noteSelfChange() {
 		refreshIfDoesNotHaveOpenDialog();
-	}
-	
-	private void createUserAndSetCookieAndRedirect() {
-		
-		final var userName = userNameTextbox.getText();
-		
-		CREATE_USER_SESSION_HELPER.createUserAndSetCookieAndRedirect(userName, this);
 	}
 }

@@ -2,13 +2,15 @@ package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
+import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
 public final class CreateUserSessionHelper {
 	
 	public void createUserAndSetCookieAndRedirect(
 		final String userName,
-		final WebClientSession<IApplicationContext> webClientSession
+		final WebClientSession<IApplicationContext> webClientSession,
+		final ISelectRoomSessionFactory selectRoomSessionFactory
 	) {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
@@ -33,11 +35,14 @@ public final class CreateUserSessionHelper {
 			
 			webClientSession.getOriParentClient().setOrAddCookieWithNameAndValue("userId", user.getId());
 			
-			webClientSession.setNext(createNextSession(user));
+			webClientSession.setNext(createNextSession(user, selectRoomSessionFactory));
 		}
 	}
 	
-	private PageSession createNextSession(final IUser user) {
+	private WebClientSession<IApplicationContext> createNextSession(
+		final IUser user,
+		final ISelectRoomSessionFactory selectRoomSessionFactory
+	) {
 		
 		if (user.isInARoom()) {
 			return
@@ -49,6 +54,6 @@ public final class CreateUserSessionHelper {
 			);
 		}
 		
-		return SelectRoomSession.withUserId(user.getId());
+		return selectRoomSessionFactory.createSelectRoomSessionWihtUserId(user.getId());
 	}
 }
