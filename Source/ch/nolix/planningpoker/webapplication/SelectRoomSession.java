@@ -38,7 +38,12 @@ public final class SelectRoomSession extends PageSession {
 				.setText("Enter room")
 				.setLeftMouseButtonPressAction(
 					() ->
-					CREATE_ROOM_SESSION_HELPER.enterRoomAndRedirect(getUserId(), roomNumberTextbox.getText(), this)
+					CREATE_ROOM_SESSION_HELPER.enterRoomAndRedirect(
+						getUserId(),
+						roomNumberTextbox.getText(),
+						this,
+						PokerSession::withUserIdAndRoomId
+					)
 				)
 			),
 			new VerticalStack()
@@ -46,7 +51,12 @@ public final class SelectRoomSession extends PageSession {
 				new Button()
 				.setText("Create new room")
 				.setLeftMouseButtonPressAction(
-					() -> CREATE_ROOM_SESSION_HELPER.createAndEnterRoomAndRedirect(getUserId(), this)
+					() ->
+					CREATE_ROOM_SESSION_HELPER.createAndEnterRoomAndRedirect(
+						getUserId(),
+						this,
+						PokerSession::withUserIdAndRoomId
+					)
 				)
 			)
 		);

@@ -1,13 +1,15 @@
 package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
+import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
 public final class SelectRoomSessionHelper {
 	
 	public void createAndEnterRoomAndRedirect(
 		final String userId,
-		final WebClientSession<IApplicationContext> webClientSession
+		final WebClientSession<IApplicationContext> webClientSession,
+		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
@@ -19,7 +21,10 @@ public final class SelectRoomSessionHelper {
 			dataController.saveChanges();
 			
 			webClientSession.setNext(
-				PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId()))
+				pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(
+					user.getId(),
+					room.getId()
+				)
 			);
 		}
 	}
@@ -27,7 +32,8 @@ public final class SelectRoomSessionHelper {
 	public void enterRoomAndRedirect(
 		final String userId,
 		final String roomNumber,
-		final WebClientSession<IApplicationContext> webClientSession
+		final WebClientSession<IApplicationContext> webClientSession,
+		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
 		final var applicationContext = webClientSession.getOriApplicationContext();
@@ -41,9 +47,7 @@ public final class SelectRoomSessionHelper {
 			
 			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 			
-			webClientSession.setNext(
-				PokerSession.withConfiguration(new PokerSessionConfiguration(user.getId(), room.getId()))
-			);
+			webClientSession.setNext(pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(userId, roomNumber));
 		}
 	}
 }

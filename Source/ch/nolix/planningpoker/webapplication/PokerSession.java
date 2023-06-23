@@ -1,6 +1,7 @@
 package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.container.singlecontainer.SingleContainer;
+import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomSubscriber;
@@ -20,20 +21,18 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	private static final PokerSessionHelper POKER_SESSION_HELPER = new PokerSessionHelper();
 	
 	public static PokerSession withUserIdAndRoomId(final String userId, final String roomId) {
-		return new PokerSession(new PokerSessionConfiguration(userId, roomId));
+		return new PokerSession(userId, roomId);
 	}
 	
-	public static PokerSession withConfiguration(final PokerSessionConfiguration pokerSessionConfiguration) {
-		return new PokerSession(pokerSessionConfiguration);
-	}
+	private final String roomId;
 	
-	private PokerSessionConfiguration configuration;
-	
-	private PokerSession(final PokerSessionConfiguration configuration) {
+	private PokerSession(final String userId, final String roomId) {
 		
-		super(new SingleContainer<>(configuration.getUserId()));
+		super(SingleContainer.withElementOrEmpty(userId));
 		
-		this.configuration = configuration;
+		GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
+		
+		this.roomId = roomId;
 	}
 	
 	@Override
@@ -49,7 +48,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataController dataController) {
 		
-		final var userId = configuration.getUserId();
+		final var userId = getUserId();
 		final var user = dataController.getOriUserById(userId);
 		final var roomVisit = user.getOriCurrentRoomVisit();
 				
@@ -58,12 +57,12 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	@Override
 	protected void doRegistrations(final IRoomChangeNotifier roomChangeNotifier) {
-		roomChangeNotifier.registerRoomSubscriberIfNotRegistered(configuration.getRoomId(), this);
+		roomChangeNotifier.registerRoomSubscriberIfNotRegistered(roomId, this);
 	}
 	
 	@Override
 	protected void noteSelfChange() {
-		getOriApplicationContext().getOriRoomChangeNotifier().noteRoomChange(configuration.getRoomId());
+		getOriApplicationContext().getOriRoomChangeNotifier().noteRoomChange(roomId);
 	}
 	
 	private IControl<?, ?> createMainControl(final IRoomVisit roomVisit) {

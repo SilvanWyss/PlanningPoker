@@ -42,11 +42,9 @@ public final class InitialSession extends WebClientSession<IApplicationContext> 
 		
 		if (user.isInARoom()) {
 			return
-			PokerSession.withConfiguration(
-				new PokerSessionConfiguration(
-					user.getId(),
-					user.getOriCurrentRoomVisit().getOriParentRoom().getId()
-				)
+			PokerSession.withUserIdAndRoomId(
+				user.getId(),
+				user.getOriCurrentRoomVisit().getOriParentRoom().getId()
 			);
 		}
 		
