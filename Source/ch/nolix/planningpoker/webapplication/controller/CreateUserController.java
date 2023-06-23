@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
@@ -6,7 +6,7 @@ import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessi
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
-public final class CreateUserSessionHelper {
+public final class CreateUserController {
 	
 	public void createUserAndSetCookieAndRedirect(
 		final String userName,

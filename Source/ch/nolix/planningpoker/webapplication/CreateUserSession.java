@@ -1,6 +1,7 @@
 package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.container.singlecontainer.SingleContainer;
+import ch.nolix.planningpoker.webapplication.controller.CreateUserController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.webgui.control.Button;
@@ -14,7 +15,7 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateUserSession extends PageSession {
 	
-	private static final CreateUserSessionHelper CREATE_USER_SESSION_HELPER = new CreateUserSessionHelper();
+	private static final CreateUserController CREATE_USER_SESSION_HELPER = new CreateUserController();
 	
 	public CreateUserSession() {
 		super(new SingleContainer<>());
