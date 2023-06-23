@@ -1,6 +1,7 @@
 package ch.nolix.planningpoker.webapplication;
 
 import ch.nolix.core.container.singlecontainer.SingleContainer;
+import ch.nolix.planningpoker.webapplication.controller.SelectRoomController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IDataController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.webgui.control.Button;
@@ -16,7 +17,7 @@ public final class SelectRoomSession extends PageSession {
 		return new SelectRoomSession(userId);
 	}
 	
-	private static final SelectRoomSessionHelper CREATE_ROOM_SESSION_HELPER = new SelectRoomSessionHelper();
+	private static final SelectRoomController CREATE_ROOM_SESSION_HELPER = new SelectRoomController();
 	
 	private SelectRoomSession(final String userId) {
 		super(new SingleContainer<>(userId));

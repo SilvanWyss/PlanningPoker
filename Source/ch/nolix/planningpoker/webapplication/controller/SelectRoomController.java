@@ -1,10 +1,10 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
-public final class SelectRoomSessionHelper {
+public final class SelectRoomController {
 	
 	public void createAndEnterRoomAndRedirect(
 		final String userId,
