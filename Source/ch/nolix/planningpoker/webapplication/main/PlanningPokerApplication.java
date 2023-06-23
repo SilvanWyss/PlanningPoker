@@ -12,7 +12,8 @@ import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 import ch.nolix.system.objectdatabase.databaseadapter.NodeDatabaseAdapter;
 import ch.nolix.systemapi.objectdatabaseapi.schemaapi.ISchema;
 
-public final class PlanningPokerApplication extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
+public final class PlanningPokerApplication
+extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 	
 	public static final String APPLICATION_NAME = "Planning Poker";
 	
