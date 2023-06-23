@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.view;
 
 import java.util.Locale;
 

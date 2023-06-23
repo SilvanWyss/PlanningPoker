@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.system.element.style.DeepStyle;
 import ch.nolix.systemapi.elementapi.styleapi.IStyle;

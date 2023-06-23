@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;

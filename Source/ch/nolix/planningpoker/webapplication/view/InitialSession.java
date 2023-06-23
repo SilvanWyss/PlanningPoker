@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication;
+package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.planningpoker.webapplication.controller.InitializeController;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;

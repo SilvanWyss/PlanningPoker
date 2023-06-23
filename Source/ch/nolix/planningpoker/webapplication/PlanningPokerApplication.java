@@ -4,6 +4,7 @@ import ch.nolix.core.document.node.MutableNode;
 import ch.nolix.coreapi.functionapi.genericfunctionapi.IElementTakerElementGetter;
 import ch.nolix.planningpoker.applicationcontext.ApplicationContext;
 import ch.nolix.planningpoker.datamodel.schema.SchemaCatalogue;
+import ch.nolix.planningpoker.webapplication.view.InitialSession;
 import ch.nolix.planningpokerapi.applicationcontextapi.IApplicationContext;
 import ch.nolix.system.application.main.Application;
 import ch.nolix.system.application.webapplication.WebClient;
