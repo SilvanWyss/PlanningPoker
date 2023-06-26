@@ -1,6 +1,8 @@
 package ch.nolix.planningpokerapi.logicapi.applicationcontextapi;
 
-public interface IPlanningPokerContext {
+import ch.nolix.systemapi.applicationapi.webapplicationapi.IWebApplicationContext;
+
+public interface IPlanningPokerContext extends IWebApplicationContext {
 	
 	IDatabaseAdapter createDatabaseAdapter();
 	
