@@ -117,7 +117,11 @@ public final class PokerController {
 		final var roomHyperlink = ROOM_HYPERLINK_CREATOR.createHyperlinkToRoom(room, application);
 		
 		final var shareRoomDialog =
-		SHOW_VALUE_DIALOG_FACTORY.createShowValueDialogForValueNameAndValue("Link to room", roomHyperlink);
+		SHOW_VALUE_DIALOG_FACTORY.createShowValueDialogForValueNameAndValueAndValueCopier(
+			"Link to room",
+			roomHyperlink,
+			v -> webClientSession.getOriGui().onFrontEnd().writeTextToClipboard(v)
+		);
 		
 		webClientSession.getOriGui().pushLayer(shareRoomDialog);
 	}
