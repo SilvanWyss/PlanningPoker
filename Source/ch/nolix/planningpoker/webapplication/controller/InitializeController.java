@@ -41,7 +41,7 @@ public final class InitializeController {
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
-		final var roomNumber = initialSession.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("room");
+		final var roomNumber = initialSession.getOriParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
 		final var room = databaseAdapter.getOriRoomByNumberOrNull(roomNumber);
 		
 		if (room != null) {

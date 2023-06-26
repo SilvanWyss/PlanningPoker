@@ -107,7 +107,7 @@ public final class PokerController {
 			() -> goToOtherRoomAndUpdate(userId, webClientSession, selectRoomSessionFactory)
 		);
 		
-		webClientSession.getOriGUI().pushLayer(goToOtherRoomDialog);
+		webClientSession.getOriGui().pushLayer(goToOtherRoomDialog);
 	}
 	
 	public void openShareRoomDialog(final IRoom room, final WebClientSession<IPlanningPokerContext> webClientSession) {
@@ -119,7 +119,7 @@ public final class PokerController {
 		final var shareRoomDialog =
 		SHOW_VALUE_DIALOG_FACTORY.createShowValueDialogForValueNameAndValue("Link to room", roomHyperlink);
 		
-		webClientSession.getOriGUI().pushLayer(shareRoomDialog);
+		webClientSession.getOriGui().pushLayer(shareRoomDialog);
 	}
 	
 	public void setEstimateInStoryPointsAndUpdate(
@@ -249,7 +249,7 @@ public final class PokerController {
 			() -> deleteEstimatesAndUpdate(roomId, webClientSession.getOriApplicationContext())
 		);
 		
-		webClientSession.getOriGUI().pushLayer(
+		webClientSession.getOriGui().pushLayer(
 			deleteEstimateDialog
 		);
 	}

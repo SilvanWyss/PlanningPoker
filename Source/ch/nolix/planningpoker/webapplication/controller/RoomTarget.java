@@ -41,7 +41,7 @@ public final class RoomTarget extends ApplicationInstanceTarget implements IRoom
 	}
 	
 	@Override
-	public String toURL() {
-		return (super.toURL() + "&room=" + getRoomNumber());
+	public String toUrl() {
+		return (super.toUrl() + "&room=" + getRoomNumber());
 	}
 }

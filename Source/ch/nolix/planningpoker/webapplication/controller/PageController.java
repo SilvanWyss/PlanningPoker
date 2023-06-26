@@ -37,7 +37,7 @@ public final class PageController {
 			final var originUserName = user.getName();
 			
 			webClientSession
-			.getOriGUI()
+			.getOriGui()
 			.pushLayer(
 				ENTER_VALUE_DIALOG_FACTORY.createEnterValueDialogWithTextAndOriginalValueAndValueTaker(
 					"Edit your user name",

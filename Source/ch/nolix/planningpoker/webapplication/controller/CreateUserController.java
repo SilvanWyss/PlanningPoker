@@ -18,7 +18,7 @@ public final class CreateUserController {
 		final var applicationContext = webClientSession.getOriApplicationContext();
 		
 		final var roomNumber =
-		webClientSession.getOriParentClient().getURLParameterValueByURLParameterNameOrNull("room");
+		webClientSession.getOriParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			

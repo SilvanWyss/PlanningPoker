@@ -24,6 +24,6 @@ public final class RoomHyperlinkCreator {
 		
 		final var roomTarget = createRoomTarget(room, application);
 		
-		return roomTarget.toURL();
+		return roomTarget.toUrl();
 	}
 }

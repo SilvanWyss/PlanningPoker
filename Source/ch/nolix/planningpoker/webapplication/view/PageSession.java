@@ -52,7 +52,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 		
 		doRegistrations(getOriApplicationContext().getOriRoomChangeNotifier());
 		
-		getOriGUI()
+		getOriGui()
 		.pushLayerWithRootControl(rootControl)
 		.setStyle(PAGE_SESSION_STYLE_CREATOR.createPageSessionStyle())
 		.setRemoveLayerAction(this::noteSelfChange);
@@ -103,7 +103,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	}
 	
 	private boolean hasOpenDialog() {
-		return (getOriGUI().getOriLayers().getElementCount() > 1);
+		return (getOriGui().getOriLayers().getElementCount() > 1);
 	}
 	
 	private void refreshActually() {

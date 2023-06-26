@@ -8,7 +8,7 @@ final class Launcher {
 	
 	public static void main(String[] args) {
 		
-		final var server = Server.forDefaultPort();
+		final var server = Server.forHttpPort();
 		
 		server.addDefaultApplication(PlanningPokerApplication.withTemporaryNodeDatabase());
 		
