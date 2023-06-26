@@ -63,7 +63,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	protected abstract void noteSelfChange();
 	
 	protected final void refreshIfDoesNotHaveOpenDialog() {
-		if (hasOpenDialog()) {
+		if (!hasOpenDialog()) {
 			refreshActually();
 		}
 	}
@@ -103,7 +103,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	}
 	
 	private boolean hasOpenDialog() {
-		return (getOriGUI().getOriLayers().getElementCount() < 2);
+		return (getOriGUI().getOriLayers().getElementCount() > 1);
 	}
 	
 	private void refreshActually() {
