@@ -9,11 +9,11 @@ import ch.nolix.systemapi.graphicapi.imageapi.IImage;
 
 public final class PlanningPokerContext implements IPlanningPokerContext {
 	
-	private static final String APPLICATION_LOGO_FILE_PATH = "ch/nolix/planningpoker/resource/poker_card.jpg";
+	private static final String APPLICATION_LOGO_RESOURCE_PATH = "ch/nolix/planningpoker/resource/poker_card.jpg";
 	
 	public static final IImage APPLICATION_LOGO =
 	Image
-	.fromResource(APPLICATION_LOGO_FILE_PATH)
+	.fromResource(APPLICATION_LOGO_RESOURCE_PATH)
 	.withWidthAndHeight(300, 400);
 	
 	public static PlanningPokerContext withDatabaseAdapter(
