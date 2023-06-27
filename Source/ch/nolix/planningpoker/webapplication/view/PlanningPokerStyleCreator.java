@@ -11,7 +11,7 @@ import ch.nolix.systemapi.elementapi.styleapi.IStyle;
 import ch.nolix.systemapi.webguiapi.containerapi.ContainerRole;
 import ch.nolix.template.webgui.style.DarkModeStyleCreator;
 
-public final class PageSessionStyleCreator {
+public final class PlanningPokerStyleCreator {
 	
 	private static final DarkModeStyleCreator DARK_MODE_STYLE_CREATOR = new DarkModeStyleCreator();
 	

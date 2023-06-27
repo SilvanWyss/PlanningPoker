@@ -35,7 +35,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	
 	private static final PageController PAGE_SESSION_HELPER = new PageController();
 	
-	private static final PageSessionStyleCreator PAGE_SESSION_STYLE_CREATOR = new PageSessionStyleCreator();
+	private static final PlanningPokerStyleCreator PAGE_SESSION_STYLE_CREATOR = new PlanningPokerStyleCreator();
 		
 	private final ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer<String> userIdContainer;
 	
