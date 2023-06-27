@@ -40,7 +40,7 @@ public final class PageController {
 			.getOriGui()
 			.pushLayer(
 				ENTER_VALUE_DIALOG_FACTORY.createEnterValueDialogWithTextAndOriginalValueAndValueTaker(
-					"Edit your user name",
+					"Edit user name:",
 					originUserName,
 					newUserName -> setUserName(userId, newUserName, webClientSession.getOriApplicationContext())
 				)

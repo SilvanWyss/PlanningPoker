@@ -88,7 +88,7 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 		
 		if (room == null) {
 			throw GeneralException.withErrorMessage(
-				"There does not exist a room " + GlobalStringHelper.getInQuotes(number) + "."
+				"The room " + GlobalStringHelper.getInQuotes(number) + " does not exist."
 			);
 		}
 		

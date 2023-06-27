@@ -33,7 +33,7 @@ public final class CreateUserSession extends PageSession {
 			new HorizontalStack()
 			.addControl(
 				new Label()
-				.setText("Enter your user name: "),
+				.setText("Enter user name:"),
 				userNameTextbox,
 				new Button()
 				.setRole(ButtonRole.CONFIRM_BUTTON)
