@@ -45,7 +45,7 @@ public final class PokerController {
 		final var user = roomVisit.getOriVisitor();
 		
 		if (roomCreator.hasId(user.getId())) {
-			return "You are our captain.";
+			return "You are the captain.";
 		}
 		
 		return (roomCreator.getName() + " is our captain.");
