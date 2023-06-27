@@ -70,16 +70,6 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 		return
 		new VerticalStack()
 		.addControl(
-			new Button()
-			.setText("Go to another room")
-			.setLeftMouseButtonPressAction(
-				() ->
-				POKER_SESSION_HELPER.openGoToOtherRoomDialog(
-					roomVisit.getOriVisitor().getId(),
-					this,
-					SelectRoomSession::withUserId
-				)
-			),
 			new HorizontalStack()
 			.setRole(ContainerRole.HEADER_CONTAINER)
 			.addControl(
@@ -87,16 +77,25 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 				.setRole(LabelRole.LEVEL1_HEADER)
 				.setText("Room " + roomVisit.getOriParentRoom().getNumber()),
 				new Button()
-				.setText("Link to room")
+				.setText("Show link to room")
 				.setLeftMouseButtonPressAction(
 					() -> POKER_SESSION_HELPER.openShareRoomDialog(roomVisit.getOriParentRoom(), this)
+				),
+				new Button()
+				.setText("Go to another room")
+				.setLeftMouseButtonPressAction(
+					() ->
+					POKER_SESSION_HELPER.openGoToOtherRoomDialog(
+						roomVisit.getOriVisitor().getId(),
+						this,
+						SelectRoomSession::withUserId
+					)
 				)
 			),
-			new Label()
-			.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
 			new HorizontalStack()
-			.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
 			.addControl(
+				new Label()
+				.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
 				new Button()
 				.setText("Show/hide estimates")
 				.setLeftMouseButtonPressAction(
@@ -105,7 +104,8 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 						roomVisit.getOriParentRoom().getId(),
 						getOriApplicationContext()
 					)
-				),
+				)
+				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit)),
 				new Button()
 				.setText("Delete estimates")
 				.setLeftMouseButtonPressAction(
@@ -114,6 +114,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 						this
 					)
 				)
+				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
 			),
 			POKER_SESSION_ASSEMBLER.createEstimateCardsControl(roomVisit, getOriApplicationContext()),
 			new HorizontalStack()
