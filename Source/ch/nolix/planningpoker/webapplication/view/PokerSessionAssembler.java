@@ -182,13 +182,13 @@ public final class PokerSessionAssembler {
 		
 		return
 		new GridContainer()
-		.insertTextAtRowAndColumn(1, 1, StringCatalogue.AVERAGE)
-		.insertTextAtRowAndColumn(1, 2, averageText)
-		.insertTextAtRowAndColumn(2, 1, StringCatalogue.AVERAGE + StringCatalogue.UPPERCASE_DELTA)
-		.insertTextAtRowAndColumn(2, 2,  averageDeviationFromAverageInStoryPointsText)
-		.insertTextAtRowAndColumn(3, 1, StringCatalogue.LONG_LEFT_RIGHT_ARROW)
-		.insertTextAtRowAndColumn(3, 2, rangeText)
-		.insertTextAtRowAndColumn(4, 1, StringCatalogue.UPPERCASE_DELTA)
-		.insertTextAtRowAndColumn(4, 2, differenceText);
+		.insertTextAtRowAndColumn(1, 1, StringCatalogue.LONG_LEFT_RIGHT_ARROW)
+		.insertTextAtRowAndColumn(1, 2, rangeText)
+		.insertTextAtRowAndColumn(2, 1, StringCatalogue.UPPERCASE_DELTA)
+		.insertTextAtRowAndColumn(2, 2, differenceText)
+		.insertTextAtRowAndColumn(3, 1, StringCatalogue.AVERAGE)
+		.insertTextAtRowAndColumn(3, 2, averageText)
+		.insertTextAtRowAndColumn(4, 1, StringCatalogue.AVERAGE + StringCatalogue.UPPERCASE_DELTA)
+		.insertTextAtRowAndColumn(4, 2,  averageDeviationFromAverageInStoryPointsText);
 	}
 }
