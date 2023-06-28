@@ -8,7 +8,7 @@ final class ProductionLauncher {
 		
 		final var secureServer = SecureServer.forHttpsPortAndDomainAndSSLCertificateFromNolixConfiguration();
 		
-		secureServer.addDefaultApplication(PlanningPokerApplication.withTemporaryNodeDatabase());
+		secureServer.addDefaultApplication(PlanningPokerApplication.withInMemoryNodeDatabase());
 	}
 	
 	private ProductionLauncher() {}

@@ -17,7 +17,7 @@ extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 	
 	public static final String APPLICATION_NAME = "Planning Poker";
 	
-	public static PlanningPokerApplication withTemporaryNodeDatabase() {
+	public static PlanningPokerApplication withInMemoryNodeDatabase() {
 		
 		final var nodeDatabase = new MutableNode();
 		

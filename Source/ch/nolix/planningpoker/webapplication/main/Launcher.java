@@ -9,7 +9,7 @@ final class Launcher {
 		
 		final var server = Server.forHttpPort();
 		
-		server.addDefaultApplication(PlanningPokerApplication.withTemporaryNodeDatabase());
+		server.addDefaultApplication(PlanningPokerApplication.withInMemoryNodeDatabase());
 		
 		ShellProvider.startDefaultWebBrowserOpeningLoopBackAddress();
 	}
