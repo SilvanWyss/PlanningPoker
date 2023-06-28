@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.webapplication.main;
 
+import ch.nolix.core.document.node.FileNode;
 import ch.nolix.core.document.node.MutableNode;
-import ch.nolix.coreapi.functionapi.genericfunctionapi.IElementTakerElementGetter;
 import ch.nolix.planningpoker.datamodel.schema.SchemaCatalogue;
 import ch.nolix.planningpoker.logic.applicationcontext.PlanningPokerContext;
 import ch.nolix.planningpoker.webapplication.view.InitializeSession;
@@ -10,27 +10,40 @@ import ch.nolix.system.application.main.Application;
 import ch.nolix.system.application.webapplication.WebClient;
 import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
 import ch.nolix.system.objectdatabase.databaseadapter.NodeDatabaseAdapter;
-import ch.nolix.systemapi.objectdatabaseapi.schemaapi.ISchema;
 
 public final class PlanningPokerApplication
 extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 	
 	public static final String APPLICATION_NAME = "Planning Poker";
 	
+	public static PlanningPokerApplication withFileNodeDatabase(final String filePath) {
+		
+		final var fileNodeDatabase = new FileNode(filePath);
+		
+		final var databaseAdapter =
+		NodeDatabaseAdapter
+		.forNodeDatabase(fileNodeDatabase)
+		.withName("PlanningPokerDatabase")
+		.usingSchema(SchemaCatalogue.SCHEMA);
+		
+		return new PlanningPokerApplication(databaseAdapter);
+	}
+	
 	public static PlanningPokerApplication withInMemoryNodeDatabase() {
 		
 		final var nodeDatabase = new MutableNode();
 		
-		final var databaseAdapterCreator =
-		NodeDatabaseAdapter.forNodeDatabase(nodeDatabase).withName("PlanningPokerDatabase");
+		final var databaseAdapter =
+		NodeDatabaseAdapter
+		.forNodeDatabase(nodeDatabase)
+		.withName("PlanningPokerDatabase")
+		.usingSchema(SchemaCatalogue.SCHEMA);
 		
-		return new PlanningPokerApplication(databaseAdapterCreator::usingSchema);
+		return new PlanningPokerApplication(databaseAdapter);
 	}
 	
-	private PlanningPokerApplication(
-		final IElementTakerElementGetter<ISchema, DatabaseAdapter> databaseAdapterCreator
-	) {
-		super(PlanningPokerContext.withDatabaseAdapter(databaseAdapterCreator.getOutput(SchemaCatalogue.SCHEMA)));
+	private PlanningPokerApplication(final DatabaseAdapter databaseAdapter) {
+		super(PlanningPokerContext.withDatabaseAdapter(databaseAdapter));
 	}
 	
 	@Override
