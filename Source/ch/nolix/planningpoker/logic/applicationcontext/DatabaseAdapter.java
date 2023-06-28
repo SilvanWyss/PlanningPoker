@@ -59,8 +59,9 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 		if (user.isInARoom()) {
 			
 			final var currentRoomVisit = user.getOriCurrentRoomVisit();
+			final var currentRoom = currentRoomVisit.getOriParentRoom();
 			
-			if (currentRoomVisit.getOriParentRoom().hasId(room.getId())) {
+			if (currentRoom.hasId(room.getId())) {
 				return currentRoomVisit;
 			}
 			
