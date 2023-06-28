@@ -47,7 +47,7 @@ public final class SelectRoomController {
 			
 			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
 			
-			webClientSession.setNext(pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(userId, roomNumber));
+			webClientSession.setNext(pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(userId, room.getId()));
 		}
 	}
 }
