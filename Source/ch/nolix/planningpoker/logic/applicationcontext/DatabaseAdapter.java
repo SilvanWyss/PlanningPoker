@@ -58,8 +58,8 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 		
 		if (user.isInARoom()) {
 			
-			final var currentRoomVisit = user.getOriCurrentRoomVisit();
-			final var currentRoom = currentRoomVisit.getOriParentRoom();
+			final var currentRoomVisit = user.getStoredCurrentRoomVisit();
+			final var currentRoom = currentRoomVisit.getStoredParentRoom();
 			
 			if (currentRoom.hasId(room.getId())) {
 				return currentRoomVisit;
@@ -72,12 +72,12 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	}
 	
 	@Override
-	public IRoom getOriRoomById(String id) {
+	public IRoom getStoredRoomById(String id) {
 		return internalDatabaseAdapter.getStoredTableByEntityType(Room.class).getStoredEntityById(id);
 	}
 	
 	@Override
-	public IRoom getOriRoomByNumber(final String number) {
+	public IRoom getStoredRoomByNumber(final String number) {
 		
 		GlobalValidator.assertThat(number).thatIsNamed("room number").isNotBlank();
 		
@@ -97,7 +97,7 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	}
 	
 	@Override
-	public IRoom getOriRoomByNumberOrNull(final String number) {
+	public IRoom getStoredRoomByNumberOrNull(final String number) {
 		return
 		internalDatabaseAdapter
 		.getStoredTableByEntityType(Room.class)
@@ -106,7 +106,7 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	}
 	
 	@Override
-	public IRoomVisit getOriRoomVisitById(final String id) {
+	public IRoomVisit getStoredRoomVisitById(final String id) {
 		return
 		internalDatabaseAdapter
 		.getStoredTableByEntityType(RoomVisit.class)
@@ -114,12 +114,12 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	}
 	
 	@Override
-	public IUser getOriUserById(final String id) {
+	public IUser getStoredUserById(final String id) {
 		return internalDatabaseAdapter.getStoredTableByEntityType(User.class).getStoredEntityById(id);
 	}
 	
 	@Override
-	public IUser getOriUserByIdOrNull(String id) {
+	public IUser getStoredUserByIdOrNull(String id) {
 		return internalDatabaseAdapter.getStoredTableByEntityType(User.class).getStoredEntityByIdOrNull(id);
 	}
 	
@@ -131,8 +131,8 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	@Override
 	public void leaveRoom(final IUser user) {
 		
-		final var roomVisit = (RoomVisit)user.getOriCurrentRoomVisit();
-		final var room = roomVisit.getOriParentRoom();
+		final var roomVisit = (RoomVisit)user.getStoredCurrentRoomVisit();
+		final var room = roomVisit.getStoredParentRoom();
 		
 		room.removeRoomVisit(roomVisit);
 		roomVisit.deleteWithoutReferenceCheck();

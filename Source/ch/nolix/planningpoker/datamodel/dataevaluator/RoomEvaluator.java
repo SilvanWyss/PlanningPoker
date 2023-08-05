@@ -16,7 +16,7 @@ public final class RoomEvaluator implements IRoomEvaluator {
 	
 	private boolean containsEstimateWhenIsNotNull(final IRoom room) {
 		
-		final var roomVisits = room.getOriRoomVisits();
+		final var roomVisits = room.getStoredRoomVisits();
 		
 		return roomVisits.containsAny(ROOM_VISIT_EVALUATOR::hasEstimate);
 	}

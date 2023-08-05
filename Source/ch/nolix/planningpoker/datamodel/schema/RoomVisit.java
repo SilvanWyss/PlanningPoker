@@ -50,7 +50,7 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 	}
 	
 	@Override
-	public IRoom getOriParentRoom() {
+	public IRoom getStoredParentRoom() {
 		return parentRoom.getBackReferencedEntity();
 	}
 	
@@ -60,7 +60,7 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 	}
 	
 	@Override
-	public IUser getOriVisitor() {
+	public IUser getStoredVisitor() {
 		return visitor.getReferencedEntity();
 	}
 	

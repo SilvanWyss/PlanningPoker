@@ -9,9 +9,9 @@ public interface IRoom extends Identified {
 	
 	String getNumber();
 	
-	IUser getOriParentCreator();
+	IUser getStoredParentCreator();
 	
-	IContainer<? extends IRoomVisit> getOriRoomVisits();
+	IContainer<? extends IRoomVisit> getStoredRoomVisits();
 	
 	boolean hasSetEstimatesInvisible();
 	

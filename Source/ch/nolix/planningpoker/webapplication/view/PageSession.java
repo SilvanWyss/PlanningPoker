@@ -65,7 +65,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	@Override
 	protected final void initialize() {
 		
-		doRegistrations(getStoredApplicationContext().getOriRoomChangeNotifier());
+		doRegistrations(getStoredApplicationContext().getStoredRoomChangeNotifier());
 		
 		getStoredGui()
 		.pushLayerWithRootControl(rootControl)

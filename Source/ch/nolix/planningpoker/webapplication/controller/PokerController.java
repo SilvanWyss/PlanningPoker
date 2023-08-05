@@ -26,19 +26,19 @@ public final class PokerController {
 	public void deleteEstimateAndUpdate(final String roomVisitId, final IPlanningPokerContext planningPokerContext) {
 		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
 			
-			final var roomVisit = databaseAdapter.getOriRoomVisitById(roomVisitId);
+			final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
 			roomVisit.deleteEstimate();
 			databaseAdapter.saveChanges();
 			
-			final var room = roomVisit.getOriParentRoom();	
-			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			final var room = roomVisit.getStoredParentRoom();	
+			planningPokerContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
 	public String getCaptainInfoText(final IRoomVisit roomVisit) {
 		
-		final var roomCreator = roomVisit.getOriParentRoom().getOriParentCreator();
-		final var user = roomVisit.getOriVisitor();
+		final var roomCreator = roomVisit.getStoredParentRoom().getStoredParentCreator();
+		final var user = roomVisit.getStoredVisitor();
 		
 		if (roomCreator.hasId(user.getId())) {
 			return "You are the captain.";
@@ -58,7 +58,7 @@ public final class PokerController {
 	
 	public String getEstimateText(final IRoomVisit roomVisit) {
 		
-		if (roomVisit.getOriParentRoom().hasSetEstimatesVisible()) {
+		if (roomVisit.getStoredParentRoom().hasSetEstimatesVisible()) {
 			return getEstimateTextWhenEstimateIsVisible(roomVisit);
 		}
 		
@@ -67,9 +67,9 @@ public final class PokerController {
 	
 	public boolean isAllowedToConfigureRoom(final IRoomVisit roomVisit) {
 		
-		final var visitor = roomVisit.getOriVisitor();
-		final var room = roomVisit.getOriParentRoom();
-		final var roomCreator = room.getOriParentCreator();
+		final var visitor = roomVisit.getStoredVisitor();
+		final var room = roomVisit.getStoredParentRoom();
+		final var roomCreator = room.getStoredParentCreator();
 		
 		return visitor.hasId(roomCreator.getId());
 	}
@@ -83,7 +83,7 @@ public final class PokerController {
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
-			final var room = databaseAdapter.getOriRoomById(roomId);
+			final var room = databaseAdapter.getStoredRoomById(roomId);
 			
 			if (ROOM_EVALUATOR.containsEstimate(room)) {
 				openDeleteEstimatesDialogWhenRoomContainsEstimates(roomId, webClientSession);
@@ -129,12 +129,12 @@ public final class PokerController {
 	) {
 		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
 			
-			final var roomVisit = databaseAdapter.getOriRoomVisitById(roomVisitId);
+			final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
 			roomVisit.setEstimateInStoryPoints(estimateInStoryPoints);
 			databaseAdapter.saveChanges();
 			
-			final var room = roomVisit.getOriParentRoom();	
-			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			final var room = roomVisit.getStoredParentRoom();	
+			planningPokerContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
@@ -144,19 +144,19 @@ public final class PokerController {
 	) {
 		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
 			
-			final var roomVisit = databaseAdapter.getOriRoomVisitById(roomVisitId);
+			final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
 			roomVisit.setInfiniteEstimate();
 			databaseAdapter.saveChanges();
 			
-			final var room = roomVisit.getOriParentRoom();	
-			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			final var room = roomVisit.getStoredParentRoom();	
+			planningPokerContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
 	public void toggleEstimateVisibilityAndUpdate(final String roomId, final IPlanningPokerContext planningPokerContext) {
 		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
 			
-			final var room = databaseAdapter.getOriRoomById(roomId);
+			final var room = databaseAdapter.getStoredRoomById(roomId);
 			
 			if (room.hasSetEstimatesInvisible()) {
 				room.setEstimatesVisible();
@@ -166,19 +166,19 @@ public final class PokerController {
 			
 			databaseAdapter.saveChanges();
 			
-			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			planningPokerContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
 	private void deleteEstimatesAndUpdate(final String roomId, final IPlanningPokerContext planningPokerContext) {
 		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
 			
-			final var room = databaseAdapter.getOriRoomById(roomId);
-			room.getOriRoomVisits().forEach(IRoomVisit::deleteEstimate);
+			final var room = databaseAdapter.getStoredRoomById(roomId);
+			room.getStoredRoomVisits().forEach(IRoomVisit::deleteEstimate);
 			room.setEstimatesInvisible();
 			databaseAdapter.saveChanges();
 			
-			planningPokerContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			planningPokerContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	
@@ -226,15 +226,15 @@ public final class PokerController {
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
-			final var user = databaseAdapter.getOriUserById(userId);
-			final var room = user.getOriCurrentRoomVisit().getOriParentRoom();
+			final var user = databaseAdapter.getStoredUserById(userId);
+			final var room = user.getStoredCurrentRoomVisit().getStoredParentRoom();
 			databaseAdapter.leaveRoom(user);
 			
 			databaseAdapter.saveChanges();
 			
 			webClientSession.setNext(selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId));
 			
-			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 		}
 	}
 	

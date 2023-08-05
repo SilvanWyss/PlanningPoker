@@ -56,11 +56,11 @@ public final class PokerSessionAssembler {
 		
 		final var estimatesGridContainer = new Grid();
 		
-		final var roomCreator = room.getOriParentCreator();
+		final var roomCreator = room.getStoredParentCreator();
 		var rowIndex = 1;
-		for (final var rv : room.getOriRoomVisits()) {
+		for (final var rv : room.getStoredRoomVisits()) {
 			
-			final var visitor = rv.getOriVisitor();
+			final var visitor = rv.getStoredVisitor();
 			
 			if (!visitor.hasId(roomCreator.getId()) || ROOM_VISIT_EVALUATOR.hasEstimate(rv)) {
 				

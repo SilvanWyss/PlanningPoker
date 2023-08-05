@@ -35,7 +35,7 @@ public final class User extends Entity implements IUser {
 	}
 	
 	@Override
-	public IRoomVisit getOriCurrentRoomVisit() {
+	public IRoomVisit getStoredCurrentRoomVisit() {
 		return currentRoomVisit.getBackReferencedEntity();
 	}
 	

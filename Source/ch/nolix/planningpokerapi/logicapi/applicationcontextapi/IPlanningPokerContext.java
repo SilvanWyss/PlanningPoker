@@ -6,5 +6,5 @@ public interface IPlanningPokerContext extends IWebApplicationContext {
 	
 	IDatabaseAdapter createDatabaseAdapter();
 	
-	IRoomChangeNotifier getOriRoomChangeNotifier();
+	IRoomChangeNotifier getStoredRoomChangeNotifier();
 }

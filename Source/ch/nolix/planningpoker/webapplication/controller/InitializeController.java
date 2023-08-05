@@ -22,7 +22,7 @@ public final class InitializeController {
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
 			final var userId = initialSession.getStoredParentClient().getCookieValueByCookieNameOrNull("user_id");
-			final var user = databaseAdapter.getOriUserByIdOrNull(userId);
+			final var user = databaseAdapter.getStoredUserByIdOrNull(userId);
 			
 			if (user != null) {
 				return
@@ -42,7 +42,7 @@ public final class InitializeController {
 	) {
 		
 		final var roomNumber = initialSession.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
-		final var room = databaseAdapter.getOriRoomByNumberOrNull(roomNumber);
+		final var room = databaseAdapter.getStoredRoomByNumberOrNull(roomNumber);
 		
 		if (room != null) {
 			databaseAdapter.enterRoom(user, room);
@@ -53,7 +53,7 @@ public final class InitializeController {
 			return
 			pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(
 				user.getId(),
-				user.getOriCurrentRoomVisit().getOriParentRoom().getId()
+				user.getStoredCurrentRoomVisit().getStoredParentRoom().getId()
 			);
 		}
 		

@@ -15,17 +15,17 @@ public interface IDatabaseAdapter extends IChangeSaver {
 	
 	IRoomVisit enterRoom(IUser user, IRoom room);
 	
-	IRoom getOriRoomById(String id);
+	IRoom getStoredRoomById(String id);
 	
-	IRoom getOriRoomByNumber(String number);
+	IRoom getStoredRoomByNumber(String number);
 	
-	IRoom getOriRoomByNumberOrNull(String number);
+	IRoom getStoredRoomByNumberOrNull(String number);
 	
-	IRoomVisit getOriRoomVisitById(String id);
+	IRoomVisit getStoredRoomVisitById(String id);
 	
-	IUser getOriUserById(String id);
+	IUser getStoredUserById(String id);
 	
-	IUser getOriUserByIdOrNull(String id);
+	IUser getStoredUserByIdOrNull(String id);
 	
 	void leaveRoom(IUser user);
 }

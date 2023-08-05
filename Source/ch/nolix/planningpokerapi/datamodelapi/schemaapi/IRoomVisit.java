@@ -8,9 +8,9 @@ public interface IRoomVisit extends Identified {
 	
 	double getEstimateInStoryPoints();
 	
-	IRoom getOriParentRoom();
+	IRoom getStoredParentRoom();
 	
-	IUser getOriVisitor();
+	IUser getStoredVisitor();
 	
 	boolean hasEstimateInStorypoints();
 	

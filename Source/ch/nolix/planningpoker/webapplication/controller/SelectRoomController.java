@@ -16,7 +16,7 @@ public final class SelectRoomController {
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
-			final var user = databaseAdapter.getOriUserById(userId);
+			final var user = databaseAdapter.getStoredUserById(userId);
 			final var room = databaseAdapter.createNewRoomAndEnterRoom(user);
 			databaseAdapter.saveChanges();
 			
@@ -40,12 +40,12 @@ public final class SelectRoomController {
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
-			final var user = databaseAdapter.getOriUserById(userId);
-			final var room = databaseAdapter.getOriRoomByNumber(roomNumber);
+			final var user = databaseAdapter.getStoredUserById(userId);
+			final var room = databaseAdapter.getStoredRoomByNumber(roomNumber);
 			databaseAdapter.enterRoom(user, room);
 			databaseAdapter.saveChanges();
 			
-			applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+			applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 			
 			webClientSession.setNext(pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(userId, room.getId()));
 		}

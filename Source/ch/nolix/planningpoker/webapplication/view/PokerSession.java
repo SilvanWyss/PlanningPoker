@@ -50,8 +50,8 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	protected IControl<?, ?> createMainControl(final IDatabaseAdapter databaseAdapter) {
 		
 		final var userId = getUserId();
-		final var user = databaseAdapter.getOriUserById(userId);
-		final var roomVisit = user.getOriCurrentRoomVisit();
+		final var user = databaseAdapter.getStoredUserById(userId);
+		final var roomVisit = user.getStoredCurrentRoomVisit();
 				
 		return createMainControl(roomVisit);
 	}
@@ -63,7 +63,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	@Override
 	protected void noteSelfChange() {
-		getStoredApplicationContext().getOriRoomChangeNotifier().noteRoomChange(roomId);
+		getStoredApplicationContext().getStoredRoomChangeNotifier().noteRoomChange(roomId);
 	}
 	
 	private IControl<?, ?> createMainControl(final IRoomVisit roomVisit) {
@@ -75,18 +75,18 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			.addControl(
 				new Label()
 				.setRole(LabelRole.LEVEL1_HEADER)
-				.setText("Room " + roomVisit.getOriParentRoom().getNumber()),
+				.setText("Room " + roomVisit.getStoredParentRoom().getNumber()),
 				new Button()
 				.setText("Show link to room")
 				.setLeftMouseButtonPressAction(
-					() -> POKER_SESSION_HELPER.openShareRoomDialog(roomVisit.getOriParentRoom(), this)
+					() -> POKER_SESSION_HELPER.openShareRoomDialog(roomVisit.getStoredParentRoom(), this)
 				),
 				new Button()
 				.setText("Go to another room")
 				.setLeftMouseButtonPressAction(
 					() ->
 					POKER_SESSION_HELPER.openGoToOtherRoomDialog(
-						roomVisit.getOriVisitor().getId(),
+						roomVisit.getStoredVisitor().getId(),
 						this,
 						SelectRoomSession::withUserId
 					)
@@ -101,7 +101,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 				.setLeftMouseButtonPressAction(
 					() ->
 					POKER_SESSION_HELPER.toggleEstimateVisibilityAndUpdate(
-						roomVisit.getOriParentRoom().getId(),
+						roomVisit.getStoredParentRoom().getId(),
 						getStoredApplicationContext()
 					)
 				)
@@ -110,7 +110,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 				.setText("Delete estimates")
 				.setLeftMouseButtonPressAction(
 					() -> POKER_SESSION_HELPER.openDeleteEstimatesDialog(
-						roomVisit.getOriParentRoom().getId(),
+						roomVisit.getStoredParentRoom().getId(),
 						this
 					)
 				)
@@ -119,8 +119,8 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 			POKER_SESSION_ASSEMBLER.createEstimateCardsControl(roomVisit, getStoredApplicationContext()),
 			new HorizontalStack()
 			.addControl(
-				POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getOriParentRoom()),
-				POKER_SESSION_ASSEMBLER.createRoomAnalysisControl(roomVisit.getOriParentRoom())
+				POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getStoredParentRoom()),
+				POKER_SESSION_ASSEMBLER.createRoomAnalysisControl(roomVisit.getStoredParentRoom())
 			)
 		);
 	}

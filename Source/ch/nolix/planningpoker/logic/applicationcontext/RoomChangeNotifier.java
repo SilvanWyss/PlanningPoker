@@ -24,7 +24,7 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 		}
 	}
 	
-	private IContainer<RoomSubscriberWrapper> getOriRoomSubscribers() {
+	private IContainer<RoomSubscriberWrapper> getStoredRoomSubscribers() {
 		return roomSubscriberWrappers;
 	}
 	
@@ -45,7 +45,7 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	}
 	
 	private void triggerRoomSubscribersOfRoom(final String roomId) {
-		for (final var rs : getOriRoomSubscribers()) {
+		for (final var rs : getStoredRoomSubscribers()) {
 			if (rs.getRoomId().equals(roomId)) {
 				rs.trigger();
 			}

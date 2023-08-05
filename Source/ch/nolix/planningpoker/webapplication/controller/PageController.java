@@ -14,7 +14,7 @@ public final class PageController {
 		if (userIdContainer.containsAny()) {
 			
 			final var userId = userIdContainer.getStoredElement();
-			final var user = databaseAdapter.getOriUserById(userId);
+			final var user = databaseAdapter.getStoredUserById(userId);
 			
 			return user.getName();
 		}
@@ -31,7 +31,7 @@ public final class PageController {
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 		
-			final var user = databaseAdapter.getOriUserById(userId);
+			final var user = databaseAdapter.getStoredUserById(userId);
 			final var originUserName = user.getName();
 			
 			webClientSession
@@ -53,7 +53,7 @@ public final class PageController {
 	) {
 		
 		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
-			final var user = databaseAdapter.getOriUserById(userId);
+			final var user = databaseAdapter.getStoredUserById(userId);
 			user.setName(newUserName);
 			databaseAdapter.saveChanges();
 		}

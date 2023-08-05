@@ -44,7 +44,7 @@ public final class PlanningPokerContext implements IPlanningPokerContext {
 	}
 	
 	@Override
-	public IRoomChangeNotifier getOriRoomChangeNotifier() {
+	public IRoomChangeNotifier getStoredRoomChangeNotifier() {
 		return roomChangeNotifier;
 	}
 }

@@ -24,13 +24,13 @@ public final class CreateUserController {
 			
 			final var user = databaseAdapter.createUserWithName(userName);
 			
-			final var room = databaseAdapter.getOriRoomByNumberOrNull(roomNumber);
+			final var room = databaseAdapter.getStoredRoomByNumberOrNull(roomNumber);
 			if (room != null) {
 				
 				databaseAdapter.enterRoom(user, room);
 				databaseAdapter.saveChanges();
 				
-				applicationContext.getOriRoomChangeNotifier().noteRoomChange(room.getId());
+				applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 			} else {
 				databaseAdapter.saveChanges();
 			}
@@ -49,7 +49,7 @@ public final class CreateUserController {
 		
 		if (user.isInARoom()) {
 			
-			final var room = user.getOriCurrentRoomVisit().getOriParentRoom();
+			final var room = user.getStoredCurrentRoomVisit().getStoredParentRoom();
 			
 			return pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(user.getId(), room.getId());
 		}

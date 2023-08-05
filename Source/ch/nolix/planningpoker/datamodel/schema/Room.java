@@ -49,12 +49,12 @@ public final class Room extends Entity implements IRoom {
 	}
 	
 	@Override
-	public IUser getOriParentCreator() {
+	public IUser getStoredParentCreator() {
 		return parentCreator.getReferencedEntity();
 	}
 	
 	@Override
-	public IContainer<? extends IRoomVisit> getOriRoomVisits() {
+	public IContainer<? extends IRoomVisit> getStoredRoomVisits() {
 		return roomVisits.getReferencedEntities();
 	}
 	

@@ -5,7 +5,7 @@ import ch.nolix.coreapi.attributeapi.mutablemandatoryattributeapi.Nameable;
 
 public interface IUser extends Identified, Nameable {
 	
-	IRoomVisit getOriCurrentRoomVisit();
+	IRoomVisit getStoredCurrentRoomVisit();
 	
 	boolean isInARoom();
 }
