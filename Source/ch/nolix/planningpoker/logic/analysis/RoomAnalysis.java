@@ -15,7 +15,7 @@ public final class RoomAnalysis implements IRoomAnalysis {
 		final var estimatesInStoryPoints =
 		room
 		.getOriRoomVisits()
-		.getOriSelected(IRoomVisit::hasEstimateInStorypoints)
+		.getStoredSelected(IRoomVisit::hasEstimateInStorypoints)
 		.to(IRoomVisit::getEstimateInStoryPoints);
 		
 		return new RoomAnalysis(estimatesInStoryPoints);

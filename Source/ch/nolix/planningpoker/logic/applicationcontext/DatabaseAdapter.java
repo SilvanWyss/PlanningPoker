@@ -32,7 +32,7 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	
 	@Override
 	public boolean containsUserWithId(String id) {
-		return internalDatabaseAdapter.getOriTableByEntityType(User.class).containsEntityWithId(id);
+		return internalDatabaseAdapter.getStoredTableByEntityType(User.class).containsEntityWithId(id);
 	}
 	
 	@Override
@@ -73,7 +73,7 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	
 	@Override
 	public IRoom getOriRoomById(String id) {
-		return internalDatabaseAdapter.getOriTableByEntityType(Room.class).getOriEntityById(id);
+		return internalDatabaseAdapter.getStoredTableByEntityType(Room.class).getStoredEntityById(id);
 	}
 	
 	@Override
@@ -83,9 +83,9 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 		
 		final var room =
 		internalDatabaseAdapter
-		.getOriTableByEntityType(Room.class)
-		.getOriEntities()
-		.getOriFirstOrNull(r -> r.getNumber().equals(number));
+		.getStoredTableByEntityType(Room.class)
+		.getStoredEntities()
+		.getStoredFirstOrNull(r -> r.getNumber().equals(number));
 		
 		if (room == null) {
 			throw GeneralException.withErrorMessage(
@@ -100,27 +100,27 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	public IRoom getOriRoomByNumberOrNull(final String number) {
 		return
 		internalDatabaseAdapter
-		.getOriTableByEntityType(Room.class)
-		.getOriEntities()
-		.getOriFirstOrNull(r -> r.getNumber().equals(number));
+		.getStoredTableByEntityType(Room.class)
+		.getStoredEntities()
+		.getStoredFirstOrNull(r -> r.getNumber().equals(number));
 	}
 	
 	@Override
 	public IRoomVisit getOriRoomVisitById(final String id) {
 		return
 		internalDatabaseAdapter
-		.getOriTableByEntityType(RoomVisit.class)
-		.getOriEntityById(id);
+		.getStoredTableByEntityType(RoomVisit.class)
+		.getStoredEntityById(id);
 	}
 	
 	@Override
 	public IUser getOriUserById(final String id) {
-		return internalDatabaseAdapter.getOriTableByEntityType(User.class).getOriEntityById(id);
+		return internalDatabaseAdapter.getStoredTableByEntityType(User.class).getStoredEntityById(id);
 	}
 	
 	@Override
 	public IUser getOriUserByIdOrNull(String id) {
-		return internalDatabaseAdapter.getOriTableByEntityType(User.class).getOriEntityByIdOrNull(id);
+		return internalDatabaseAdapter.getStoredTableByEntityType(User.class).getStoredEntityByIdOrNull(id);
 	}
 	
 	@Override
@@ -140,7 +140,7 @@ public final class DatabaseAdapter implements IDatabaseAdapter {
 	
 	@Override
 	public void saveChanges() {
-		internalDatabaseAdapter.saveChangesAndReset();
+		internalDatabaseAdapter.saveChanges();
 	}
 	
 	private Room createNewRoom(final IUser user) {

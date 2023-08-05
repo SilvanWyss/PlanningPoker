@@ -12,8 +12,8 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
-import ch.nolix.system.webgui.dialog.ShowValueDialogFactory;
-import ch.nolix.system.webgui.dialog.YesNoDialogFactory;
+import ch.nolix.template.webgui.dialog.ShowValueDialogBuilder;
+import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
 public final class PokerController {
 	
@@ -22,10 +22,6 @@ public final class PokerController {
 	private static final RoomHyperlinkCreator ROOM_HYPERLINK_CREATOR = new RoomHyperlinkCreator();
 	
 	private static final IRoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
-		
-	private static final ShowValueDialogFactory SHOW_VALUE_DIALOG_FACTORY = new ShowValueDialogFactory();
-	
-	private static final YesNoDialogFactory YES_NO_DIALOG_FACTORY = YesNoDialogFactory.INSTANCE;
 	
 	public void deleteEstimateAndUpdate(final String roomVisitId, final IPlanningPokerContext planningPokerContext) {
 		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
@@ -83,7 +79,7 @@ public final class PokerController {
 		final WebClientSession<IPlanningPokerContext> webClientSession
 	) {
 		
-		final var applicationContext = webClientSession.getOriApplicationContext();
+		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
@@ -102,28 +98,28 @@ public final class PokerController {
 	) {
 		
 		final var goToOtherRoomDialog =
-		YES_NO_DIALOG_FACTORY.createYesNoDialogWithYesNoQuestionAndConfirmAction(
-			"Do you really want to leave the current room?",
-			() -> goToOtherRoomAndUpdate(userId, webClientSession, selectRoomSessionFactory)
-		);
+		new YesNoDialogBuilder()
+		.setYesNoQuestion("Do you really want to leave the current room?")
+		.setConfirmAction(() -> goToOtherRoomAndUpdate(userId, webClientSession, selectRoomSessionFactory))
+		.build();
 		
-		webClientSession.getOriGui().pushLayer(goToOtherRoomDialog);
+		webClientSession.getStoredGui().pushLayer(goToOtherRoomDialog);
 	}
 	
 	public void openShareRoomDialog(final IRoom room, final WebClientSession<IPlanningPokerContext> webClientSession) {
 		
-		final var application = webClientSession.getOriParentClient().getOriParentApplication();
+		final var application = webClientSession.getStoredParentClient().getStoredParentApplication();
 		
 		final var roomHyperlink = ROOM_HYPERLINK_CREATOR.createHyperlinkToRoom(room, application);
 		
 		final var shareRoomDialog =
-		SHOW_VALUE_DIALOG_FACTORY.createShowValueDialogForValueNameAndValueAndValueCopier(
-			"Link to room",
-			roomHyperlink,
-			v -> webClientSession.getOriGui().onFrontEnd().writeTextToClipboard(v)
-		);
-		
-		webClientSession.getOriGui().pushLayer(shareRoomDialog);
+		new ShowValueDialogBuilder()
+		.setValueName("Link to room")
+		.setValue(roomHyperlink)
+		.setValueCopier(v -> webClientSession.getStoredGui().onFrontEnd().writeTextToClipboard(v))
+		.build();
+				
+		webClientSession.getStoredGui().pushLayer(shareRoomDialog);
 	}
 	
 	public void setEstimateInStoryPointsAndUpdate(
@@ -226,7 +222,7 @@ public final class PokerController {
 		final ISelectRoomSessionFactory selectRoomSessionFactory
 	) {
 		
-		final var applicationContext = webClientSession.getOriApplicationContext();
+		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
@@ -248,12 +244,12 @@ public final class PokerController {
 	) {
 		
 		final var deleteEstimateDialog =
-		YES_NO_DIALOG_FACTORY.createYesNoDialogWithYesNoQuestionAndConfirmAction(
-			"Do you want to delete all estimates?",
-			() -> deleteEstimatesAndUpdate(roomId, webClientSession.getOriApplicationContext())
-		);
+		new YesNoDialogBuilder()
+		.setYesNoQuestion("Do you want to delete all estimates?")
+		.setConfirmAction(() -> deleteEstimatesAndUpdate(roomId, webClientSession.getStoredApplicationContext()))
+		.build();
 		
-		webClientSession.getOriGui().pushLayer(
+		webClientSession.getStoredGui().pushLayer(
 			deleteEstimateDialog
 		);
 	}

@@ -5,17 +5,15 @@ import ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.webapplication.WebClientSession;
-import ch.nolix.system.webgui.dialog.EnterValueDialogFactory;
+import ch.nolix.template.webgui.dialog.EnterValueDialogBuilder;
 
 public final class PageController {
-	
-	private static final EnterValueDialogFactory ENTER_VALUE_DIALOG_FACTORY = new EnterValueDialogFactory();
 	
 	public String getUserName(final ISingleContainer<String> userIdContainer, final IDatabaseAdapter databaseAdapter) {
 		
 		if (userIdContainer.containsAny()) {
 			
-			final var userId = userIdContainer.getOriElement();
+			final var userId = userIdContainer.getStoredElement();
 			final var user = databaseAdapter.getOriUserById(userId);
 			
 			return user.getName();
@@ -29,7 +27,7 @@ public final class PageController {
 		final WebClientSession<IPlanningPokerContext> webClientSession
 	) {
 		
-		final var applicationContext = webClientSession.getOriApplicationContext();
+		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 		
@@ -37,13 +35,13 @@ public final class PageController {
 			final var originUserName = user.getName();
 			
 			webClientSession
-			.getOriGui()
+			.getStoredGui()
 			.pushLayer(
-				ENTER_VALUE_DIALOG_FACTORY.createEnterValueDialogWithTextAndOriginalValueAndValueTaker(
-					"Edit user name:",
-					originUserName,
-					newUserName -> setUserName(userId, newUserName, webClientSession.getOriApplicationContext())
-				)
+				new EnterValueDialogBuilder()
+				.setInfoText("Edit user name:")
+				.setOriginalValue(originUserName)
+				.setValueTaker(newUserName -> setUserName(userId, newUserName, webClientSession.getStoredApplicationContext()))
+				.build()
 			);
 		}
 	}

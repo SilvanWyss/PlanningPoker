@@ -17,11 +17,11 @@ public final class InitializeController {
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
-		final var applicationContext = initialSession.getOriApplicationContext();
+		final var applicationContext = initialSession.getStoredApplicationContext();
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
-			final var userId = initialSession.getOriParentClient().getCookieValueByCookieNameOrNull("user_id");
+			final var userId = initialSession.getStoredParentClient().getCookieValueByCookieNameOrNull("user_id");
 			final var user = databaseAdapter.getOriUserByIdOrNull(userId);
 			
 			if (user != null) {
@@ -41,7 +41,7 @@ public final class InitializeController {
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
-		final var roomNumber = initialSession.getOriParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
+		final var roomNumber = initialSession.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
 		final var room = databaseAdapter.getOriRoomByNumberOrNull(roomNumber);
 		
 		if (room != null) {

@@ -45,7 +45,7 @@ public final class Room extends Entity implements IRoom {
 	
 	@Override
 	public String getNumber() {
-		return number.getOriValue();
+		return number.getStoredValue();
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public final class Room extends Entity implements IRoom {
 
 	@Override
 	public boolean hasSetEstimatesVisible() {
-		return estimatesVisible.getOriValue();
+		return estimatesVisible.getStoredValue();
 	}
 	
 	@Override
@@ -85,7 +85,7 @@ public final class Room extends Entity implements IRoom {
 	
 	private String createNumber() {
 		
-		final var roomCount = getOriParentTable().getEntityCount();
+		final var roomCount = getStoredParentTable().getEntityCount();
 		final var localNumber = 100_000 + (56 * (roomCount + 2));
 		
 		return String.valueOf(localNumber);

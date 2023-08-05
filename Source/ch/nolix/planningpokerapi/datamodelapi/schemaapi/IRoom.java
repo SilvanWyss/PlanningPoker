@@ -1,6 +1,6 @@
 package ch.nolix.planningpokerapi.datamodelapi.schemaapi;
 
-import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.Identified;
+import ch.nolix.coreapi.attributeapi.mandatoryattributeapi.Identified;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 
 public interface IRoom extends Identified {

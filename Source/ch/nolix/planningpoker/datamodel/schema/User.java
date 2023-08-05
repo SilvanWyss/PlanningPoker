@@ -31,7 +31,7 @@ public final class User extends Entity implements IUser {
 	
 	@Override
 	public String getName() {
-		return name.getOriValue();
+		return name.getStoredValue();
 	}
 	
 	@Override

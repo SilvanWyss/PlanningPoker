@@ -12,9 +12,10 @@ public final class RoomHyperlinkCreator {
 		
 		return
 		RoomTarget.forIpOrAddressNameAndPortAndApplicationInstanceNameAndRoomNumberAndSecurityLevelForConnections(
-			applicationTarget.getIpOrAddressName(),
+			applicationTarget.getIpOrDomain(),
 			applicationTarget.getPort(),
 			applicationTarget.getApplicationInstanceName(),
+			applicationTarget.getApplicationUrlInstanceName(),
 			room.getNumber(),
 			applicationTarget.getSecurityLevelForConnections()
 		);

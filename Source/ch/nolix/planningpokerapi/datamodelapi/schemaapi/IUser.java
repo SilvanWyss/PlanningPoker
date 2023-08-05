@@ -1,7 +1,7 @@
 package ch.nolix.planningpokerapi.datamodelapi.schemaapi;
 
-import ch.nolix.coreapi.attributeapi.mandatoryattributeuniversalapi.Identified;
-import ch.nolix.coreapi.attributeapi.mutablemandatoryattributeuniversalapi.Nameable;
+import ch.nolix.coreapi.attributeapi.mandatoryattributeapi.Identified;
+import ch.nolix.coreapi.attributeapi.mutablemandatoryattributeapi.Nameable;
 
 public interface IUser extends Identified, Nameable {
 	

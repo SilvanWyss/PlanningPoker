@@ -7,12 +7,12 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomSubscriber;
-import ch.nolix.system.webgui.control.Button;
-import ch.nolix.system.webgui.control.Label;
+import ch.nolix.system.webgui.atomiccontrol.Button;
+import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
-import ch.nolix.systemapi.webguiapi.containerapi.ContainerRole;
-import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
+import ch.nolix.systemapi.webguiapi.atomiccontrolapi.LabelRole;
+import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class PokerSession extends PageSession implements IRoomSubscriber {
@@ -38,7 +38,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	@Override
 	public boolean isActive() {
-		return belongsToOpenClient();
+		return isAlive();
 	}
 	
 	@Override
@@ -63,7 +63,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 	
 	@Override
 	protected void noteSelfChange() {
-		getOriApplicationContext().getOriRoomChangeNotifier().noteRoomChange(roomId);
+		getStoredApplicationContext().getOriRoomChangeNotifier().noteRoomChange(roomId);
 	}
 	
 	private IControl<?, ?> createMainControl(final IRoomVisit roomVisit) {
@@ -102,7 +102,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 					() ->
 					POKER_SESSION_HELPER.toggleEstimateVisibilityAndUpdate(
 						roomVisit.getOriParentRoom().getId(),
-						getOriApplicationContext()
+						getStoredApplicationContext()
 					)
 				)
 				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit)),
@@ -116,7 +116,7 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 				)
 				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
 			),
-			POKER_SESSION_ASSEMBLER.createEstimateCardsControl(roomVisit, getOriApplicationContext()),
+			POKER_SESSION_ASSEMBLER.createEstimateCardsControl(roomVisit, getStoredApplicationContext()),
 			new HorizontalStack()
 			.addControl(
 				POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getOriParentRoom()),

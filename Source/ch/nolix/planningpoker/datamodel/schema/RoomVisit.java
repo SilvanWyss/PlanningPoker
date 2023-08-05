@@ -46,7 +46,7 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 	
 	@Override
 	public double getEstimateInStoryPoints() {
-		return estimateInStoryPoints.getOriValue();
+		return estimateInStoryPoints.getStoredValue();
 	}
 	
 	@Override
@@ -66,7 +66,7 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 	
 	@Override
 	public boolean hasInfiniteEstimate() {
-		return infiniteEstimateFlag.getOriValue();
+		return infiniteEstimateFlag.getStoredValue();
 	}
 	
 	@Override

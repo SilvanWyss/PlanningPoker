@@ -12,10 +12,19 @@ public final class RoomTarget extends ApplicationInstanceTarget implements IRoom
 		final String ipOrAddressName,
 		final int port,
 		final String applicationName,
+		final String applicationUrlInstanceName,
 		final String roomNumber,
 		final SecurityLevel securityLevelForConnections
 	) {
-		return new RoomTarget(ipOrAddressName, port, applicationName, roomNumber, securityLevelForConnections);
+		return
+		new RoomTarget(
+			ipOrAddressName,
+			port,
+			applicationName,
+			applicationUrlInstanceName,
+			roomNumber,
+			securityLevelForConnections
+		);
 	}
 	
 	private final String roomNumber;
@@ -24,11 +33,12 @@ public final class RoomTarget extends ApplicationInstanceTarget implements IRoom
 		final String ipOrAddressName,
 		final int port,
 		final String applicationName,
+		final String applicationUrlInstanceName,
 		final String roomNumber,
 		final SecurityLevel securityLevelForConnections
 	) {
 		
-		super(ipOrAddressName, port, applicationName, securityLevelForConnections);
+		super(ipOrAddressName, port, applicationName, applicationUrlInstanceName, securityLevelForConnections);
 		
 		GlobalValidator.assertThat(roomNumber).thatIsNamed("room number").isNotBlank();
 		

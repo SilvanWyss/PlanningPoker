@@ -8,17 +8,17 @@ import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerCo
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.graphic.image.Image;
+import ch.nolix.system.webgui.atomiccontrol.Button;
+import ch.nolix.system.webgui.atomiccontrol.ImageControl;
+import ch.nolix.system.webgui.atomiccontrol.Label;
+import ch.nolix.system.webgui.atomiccontrol.Link;
 import ch.nolix.system.webgui.container.SingleContainer;
-import ch.nolix.system.webgui.control.Button;
-import ch.nolix.system.webgui.control.ImageControl;
-import ch.nolix.system.webgui.control.Label;
-import ch.nolix.system.webgui.control.Link;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.graphicapi.imageapi.IImage;
-import ch.nolix.systemapi.webguiapi.containerapi.ContainerRole;
+import ch.nolix.systemapi.webguiapi.atomiccontrolapi.LabelRole;
+import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.containerapi.ISingleContainer;
-import ch.nolix.systemapi.webguiapi.controlapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public abstract class PageSession extends WebClientSession<IPlanningPokerContext> {
@@ -39,7 +39,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 		
 	private final ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer<String> userIdContainer;
 	
-	private final ISingleContainer<?, ?> rootControl = new SingleContainer();
+	private final ISingleContainer rootControl = new SingleContainer();
 	
 	protected PageSession(
 		final ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer<String> userIdContainer
@@ -55,7 +55,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	protected abstract void doRegistrations(IRoomChangeNotifier roomChangeNotifier);
 	
 	protected final String getUserId() {
-		return userIdContainer.getOriElement();
+		return userIdContainer.getStoredElement();
 	}
 	
 	protected final boolean hasUserId() {
@@ -65,9 +65,9 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	@Override
 	protected final void initialize() {
 		
-		doRegistrations(getOriApplicationContext().getOriRoomChangeNotifier());
+		doRegistrations(getStoredApplicationContext().getOriRoomChangeNotifier());
 		
-		getOriGui()
+		getStoredGui()
 		.pushLayerWithRootControl(rootControl)
 		.setStyle(PAGE_SESSION_STYLE_CREATOR.createPageSessionStyle())
 		.setRemoveLayerAction(this::noteSelfChange);
@@ -84,7 +84,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	}
 	
 	private void fillUpRootControl() {
-		try (final var databaseAdapter = getOriApplicationContext().createDatabaseAdapter()) {
+		try (final var databaseAdapter = getStoredApplicationContext().createDatabaseAdapter()) {
 			rootControl
 			.setControl(
 				new VerticalStack()
@@ -144,7 +144,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	}
 	
 	private boolean hasOpenDialog() {
-		return (getOriGui().getOriLayers().getElementCount() > 1);
+		return (getStoredGui().getStoredLayers().getElementCount() > 1);
 	}
 	
 	private void refreshActually() {

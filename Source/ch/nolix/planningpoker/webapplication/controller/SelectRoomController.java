@@ -12,7 +12,7 @@ public final class SelectRoomController {
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
-		final var applicationContext = webClientSession.getOriApplicationContext();
+		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
@@ -36,7 +36,7 @@ public final class SelectRoomController {
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
-		final var applicationContext = webClientSession.getOriApplicationContext();
+		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			

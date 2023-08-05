@@ -10,8 +10,8 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.analysisapi.IRoomAnalysis;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.system.webgui.container.GridContainer;
-import ch.nolix.system.webgui.control.Button;
+import ch.nolix.system.webgui.atomiccontrol.Button;
+import ch.nolix.system.webgui.container.Grid;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
@@ -54,7 +54,7 @@ public final class PokerSessionAssembler {
 	
 	public IControl<?, ?> createEstimatesControl(final IRoom room) {
 		
-		final var estimatesGridContainer = new GridContainer();
+		final var estimatesGridContainer = new Grid();
 		
 		final var roomCreator = room.getOriParentCreator();
 		var rowIndex = 1;
@@ -83,7 +83,7 @@ public final class PokerSessionAssembler {
 			return createRoomAnalysisControlWhenEstimatesAreVisible(room);
 		}
 		
-		return new GridContainer();
+		return new Grid();
 	}
 	
 	private IControl<?, ?> createDeleteEstimateCardControl(
@@ -181,7 +181,7 @@ public final class PokerSessionAssembler {
 		String.format(Locale.ENGLISH, "%.1f", maxestimateInStoryPoints - minEstimateInStoryPoints);
 		
 		return
-		new GridContainer()
+		new Grid()
 		.insertTextAtRowAndColumn(1, 1, StringCatalogue.LONG_LEFT_RIGHT_ARROW)
 		.insertTextAtRowAndColumn(1, 2, rangeText)
 		.insertTextAtRowAndColumn(2, 1, StringCatalogue.UPPERCASE_DELTA)

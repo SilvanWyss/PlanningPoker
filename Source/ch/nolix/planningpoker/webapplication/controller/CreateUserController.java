@@ -15,10 +15,10 @@ public final class CreateUserController {
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
-		final var applicationContext = webClientSession.getOriApplicationContext();
+		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
 		final var roomNumber =
-		webClientSession.getOriParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
+		webClientSession.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
 		
 		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
 			
@@ -35,7 +35,7 @@ public final class CreateUserController {
 				databaseAdapter.saveChanges();
 			}
 			
-			webClientSession.getOriParentClient().setOrAddCookieWithNameAndValue("user_id", user.getId());
+			webClientSession.getStoredParentClient().setOrAddCookieWithNameAndValue("user_id", user.getId());
 			
 			webClientSession.setNext(createNextSession(user, selectRoomSessionFactory, pokerSessionFactory));
 		}
