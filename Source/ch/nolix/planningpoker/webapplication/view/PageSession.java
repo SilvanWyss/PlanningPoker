@@ -151,6 +151,6 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 		
 		fillUpRootControl();
 		
-		updateCounterpart();
+		refresh();
 	}
 }
