@@ -2,11 +2,11 @@ package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomSubscriber;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
@@ -15,7 +15,7 @@ import ch.nolix.systemapi.webguiapi.atomiccontrolapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class PokerSession extends PageSession implements IRoomSubscriber {
+public final class PokerSession extends PageSession implements ITriggerableSubscriber {
 	
 	private static final PokerSessionAssembler POKER_SESSION_ASSEMBLER = new PokerSessionAssembler();
 	
@@ -34,11 +34,6 @@ public final class PokerSession extends PageSession implements IRoomSubscriber {
 		GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
 		
 		this.roomId = roomId;
-	}
-	
-	@Override
-	public boolean isActive() {
-		return isAlive();
 	}
 	
 	@Override

@@ -1,22 +1,22 @@
 package ch.nolix.planningpoker.logic.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomSubscriber;
+import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 
-public final class RoomSubscriberWrapper implements IRoomSubscriber {
+public final class RoomSubscriberWrapper implements ITriggerableSubscriber {
 	
 	public static RoomSubscriberWrapper forRoomAndSubscriber(
 		final String roomId,
-		final IRoomSubscriber roomSubscriber
+		final ITriggerableSubscriber roomSubscriber
 	) {
 		return new RoomSubscriberWrapper(roomId, roomSubscriber);
 	}
 	
 	private final String roomId;
 	
-	private final IRoomSubscriber roomSubscriber;
+	private final ITriggerableSubscriber roomSubscriber;
 	
-	private RoomSubscriberWrapper(final String roomId, final IRoomSubscriber roomSubscriber) {
+	private RoomSubscriberWrapper(final String roomId, final ITriggerableSubscriber roomSubscriber) {
 		
 		GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
 		GlobalValidator.assertThat(roomSubscriber).thatIsNamed("roomSubscriber").isNotNull();
@@ -25,7 +25,7 @@ public final class RoomSubscriberWrapper implements IRoomSubscriber {
 		this.roomSubscriber = roomSubscriber;
 	}
 	
-	public boolean containsRoomSubscriber(final IRoomSubscriber roomSubscriber) {
+	public boolean containsRoomSubscriber(final ITriggerableSubscriber roomSubscriber) {
 		return (this.roomSubscriber == roomSubscriber);
 	}
 	
@@ -34,8 +34,8 @@ public final class RoomSubscriberWrapper implements IRoomSubscriber {
 	}
 	
 	@Override
-	public boolean isActive() {
-		return roomSubscriber.isActive();
+	public boolean isAlive() {
+		return roomSubscriber.isAlive();
 	}
 	
 	@Override

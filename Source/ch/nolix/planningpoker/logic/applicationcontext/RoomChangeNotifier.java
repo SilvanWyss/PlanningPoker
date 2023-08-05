@@ -2,8 +2,8 @@ package ch.nolix.planningpoker.logic.applicationcontext;
 
 import ch.nolix.core.container.linkedlist.LinkedList;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
+import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomSubscriber;
 
 public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	
@@ -12,13 +12,16 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 	@Override
 	public void noteRoomChange(final String roomId) {
 		
-		removeInactiveRoomSubscribers();
+		removeOutdatedRoomSubscribers();
 		
 		triggerRoomSubscribersOfRoom(roomId);
 	}
 	
 	@Override
-	public void registerRoomSubscriberIfNotRegistered(final String roomId, final IRoomSubscriber roomSubscriber) {
+	public void registerRoomSubscriberIfNotRegistered(
+		final String roomId,
+		final ITriggerableSubscriber roomSubscriber
+	) {
 		if (!hasRegisteredRoomSubscriber(roomSubscriber)) {
 			registerRoomSubscriber(roomId, roomSubscriber);
 		}
@@ -28,11 +31,11 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 		return roomSubscriberWrappers;
 	}
 	
-	private boolean hasRegisteredRoomSubscriber(final IRoomSubscriber roomSubscriber) {
+	private boolean hasRegisteredRoomSubscriber(final ITriggerableSubscriber roomSubscriber) {
 		return roomSubscriberWrappers.containsAny(rsw -> rsw.containsRoomSubscriber(roomSubscriber));
 	}
 	
-	private void registerRoomSubscriber(final String roomId, final IRoomSubscriber roomSubscriber) {
+	private void registerRoomSubscriber(final String roomId, final ITriggerableSubscriber roomSubscriber) {
 		registerRoomSubscriber(RoomSubscriberWrapper.forRoomAndSubscriber(roomId, roomSubscriber));
 	}
 	
@@ -40,8 +43,8 @@ public final class RoomChangeNotifier implements IRoomChangeNotifier {
 		roomSubscriberWrappers.addAtEnd(roomSubscriber);
 	}
 	
-	private void removeInactiveRoomSubscribers() {
-		roomSubscriberWrappers.removeAll(rsw -> !rsw.isActive());
+	private void removeOutdatedRoomSubscribers() {
+		roomSubscriberWrappers.removeAll(ITriggerableSubscriber::isOutdated);
 	}
 	
 	private void triggerRoomSubscribersOfRoom(final String roomId) {
