@@ -33,60 +33,31 @@ public final class RoomAnalysis implements IRoomAnalysis {
 	@Override
 	public double getAverageDeviationFromAverageEstimateInStoryPointsOrZero() {
 		
-		if (containsEstimatesInStoryPoints()) {
-			
-			final var averageEstimateInStoryPoints = getAverageEstimateInStoryPointsOrZero();
-			
-			return
-			estimatesInStoryPoints.getAverage(
-				e -> GlobalCalculator.getAbsoluteDifference(averageEstimateInStoryPoints, e)
-			);
-		}
+		final var averageEstimateInStoryPoints = getAverageEstimateInStoryPointsOrZero();
 		
-		return 0;
+		return
+		estimatesInStoryPoints.getAverageOrZero(
+			e -> GlobalCalculator.getAbsoluteDifference(averageEstimateInStoryPoints, e)
+		);
 	}
 	
 	@Override
 	public double getAverageEstimateInStoryPointsOrZero() {
-		
-		if (containsEstimatesInStoryPoints()) {
-			return estimatesInStoryPoints.getAverage(FunctionCatalogue::getSelf);
-		}
-		
-		return 0;
+		return estimatesInStoryPoints.getAverageOrZero(FunctionCatalogue::getSelf);
 	}
 	
 	@Override
 	public double getMaxEstimateInStoryPointsOrZero() {
-		
-		if (containsEstimatesInStoryPoints()) {
-			return estimatesInStoryPoints.getMax(FunctionCatalogue::getSelf);
-		}
-		
-		return 0;
+		return estimatesInStoryPoints.getMaxOrZero(FunctionCatalogue::getSelf);
 	}
 	
 	@Override
 	public double getMedianEstimateInStoryPointsOrZero() {
-		
-		if (containsEstimatesInStoryPoints()) {
-			return estimatesInStoryPoints.getMedian(FunctionCatalogue::getSelf);
-		}
-		
-		return 0;
+		return estimatesInStoryPoints.getMedianOrZero(FunctionCatalogue::getSelf);
 	}
 	
 	@Override
 	public double getMinEstimateInStoryPointsOrZero() {
-		
-		if (containsEstimatesInStoryPoints()) {
-			return estimatesInStoryPoints.getMin(FunctionCatalogue::getSelf);
-		}
-		
-		return 0;
-	}
-	
-	private boolean containsEstimatesInStoryPoints() {
-		return estimatesInStoryPoints.containsAny();
+		return estimatesInStoryPoints.getMinOrZero(FunctionCatalogue::getSelf);
 	}
 }
