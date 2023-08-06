@@ -9,7 +9,6 @@ import ch.nolix.planningpoker.webapplication.estimateoverviewcomponent.EstimateO
 import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
@@ -50,11 +49,6 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 		final var roomVisit = user.getStoredCurrentRoomVisit();
 				
 		return createMainControl(roomVisit, dataAdapter);
-	}
-	
-	@Override
-	protected void doRegistrations(final IRoomChangeNotifier roomChangeNotifier) {
-		//roomChangeNotifier.registerRoomSubscriberIfNotRegistered(roomId, this);
 	}
 	
 	@Override

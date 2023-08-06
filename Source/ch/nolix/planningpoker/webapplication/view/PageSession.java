@@ -5,7 +5,6 @@ import ch.nolix.planningpoker.webapplication.controller.PageController;
 import ch.nolix.planningpoker.webapplication.footercomponent.FooterComponent;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
@@ -38,8 +37,6 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	
 	protected abstract IControl<?, ?> createMainControl(IDataAdapter dataAdapter);
 	
-	protected abstract void doRegistrations(IRoomChangeNotifier roomChangeNotifier);
-	
 	protected final String getUserId() {
 		return userIdContainer.getStoredElement();
 	}
@@ -50,8 +47,6 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	
 	@Override
 	protected final void initialize() {
-		
-		doRegistrations(getStoredApplicationContext().getStoredRoomChangeNotifier());
 		
 		getStoredGui()
 		.pushLayerWithRootControl(rootControl)
