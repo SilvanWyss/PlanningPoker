@@ -5,6 +5,7 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.webapplication.cardsetcomponent.CardSetComponent;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
+import ch.nolix.planningpoker.webapplication.estimateoverviewcomponent.EstimateOverviewComponent;
 import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
@@ -18,8 +19,6 @@ import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class PokerSession extends PageSession implements ITriggerableSubscriber {
-	
-	private static final PokerSessionAssembler POKER_SESSION_ASSEMBLER = new PokerSessionAssembler();
 	
 	private static final PokerController POKER_SESSION_HELPER = new PokerController();
 	
@@ -116,7 +115,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 			new CardSetComponent(roomVisit.getId(), roomId, this, dataAdapter).getStoredControl(),
 			new HorizontalStack()
 			.addControl(
-				POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getStoredParentRoom()),
+				new EstimateOverviewComponent(roomVisit.getId(), roomId, this, dataAdapter).getStoredControl(),
 				new RoomAnalysisComponent(roomId, this, dataAdapter).getStoredControl()
 			)
 		);
