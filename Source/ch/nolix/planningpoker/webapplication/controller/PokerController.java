@@ -24,7 +24,7 @@ public final class PokerController {
 	private static final IRoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 	
 	public void deleteEstimateAndUpdate(final String roomVisitId, final IPlanningPokerContext planningPokerContext) {
-		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = planningPokerContext.createDataAdapter()) {
 			
 			final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
 			roomVisit.deleteEstimate();
@@ -81,7 +81,7 @@ public final class PokerController {
 		
 		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
-		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = applicationContext.createDataAdapter()) {
 			
 			final var room = databaseAdapter.getStoredRoomById(roomId);
 			
@@ -127,7 +127,7 @@ public final class PokerController {
 		final double estimateInStoryPoints,
 		final IPlanningPokerContext planningPokerContext
 	) {
-		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = planningPokerContext.createDataAdapter()) {
 			
 			final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
 			roomVisit.setEstimateInStoryPoints(estimateInStoryPoints);
@@ -142,7 +142,7 @@ public final class PokerController {
 		final String roomVisitId,
 		final IPlanningPokerContext planningPokerContext
 	) {
-		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = planningPokerContext.createDataAdapter()) {
 			
 			final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
 			roomVisit.setInfiniteEstimate();
@@ -154,7 +154,7 @@ public final class PokerController {
 	}
 	
 	public void toggleEstimateVisibilityAndUpdate(final String roomId, final IPlanningPokerContext planningPokerContext) {
-		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = planningPokerContext.createDataAdapter()) {
 			
 			final var room = databaseAdapter.getStoredRoomById(roomId);
 			
@@ -171,7 +171,7 @@ public final class PokerController {
 	}
 	
 	private void deleteEstimatesAndUpdate(final String roomId, final IPlanningPokerContext planningPokerContext) {
-		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = planningPokerContext.createDataAdapter()) {
 			
 			final var room = databaseAdapter.getStoredRoomById(roomId);
 			room.getStoredRoomVisits().forEach(IRoomVisit::deleteEstimate);
@@ -224,7 +224,7 @@ public final class PokerController {
 		
 		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
-		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = applicationContext.createDataAdapter()) {
 			
 			final var user = databaseAdapter.getStoredUserById(userId);
 			final var room = user.getStoredCurrentRoomVisit().getStoredParentRoom();

@@ -14,7 +14,7 @@ public final class SelectRoomController {
 		
 		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
-		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = applicationContext.createDataAdapter()) {
 			
 			final var user = databaseAdapter.getStoredUserById(userId);
 			final var room = databaseAdapter.createNewRoomAndEnterRoom(user);
@@ -38,7 +38,7 @@ public final class SelectRoomController {
 		
 		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
-		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = applicationContext.createDataAdapter()) {
 			
 			final var user = databaseAdapter.getStoredUserById(userId);
 			final var room = databaseAdapter.getStoredRoomByNumber(roomNumber);

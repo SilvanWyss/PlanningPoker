@@ -20,7 +20,7 @@ public final class CreateUserController {
 		final var roomNumber =
 		webClientSession.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
 		
-		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = applicationContext.createDataAdapter()) {
 			
 			final var user = databaseAdapter.createUserWithName(userName);
 			

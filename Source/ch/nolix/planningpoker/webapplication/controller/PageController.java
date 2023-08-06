@@ -29,7 +29,7 @@ public final class PageController {
 		
 		final var applicationContext = webClientSession.getStoredApplicationContext();
 		
-		try (final var databaseAdapter = applicationContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = applicationContext.createDataAdapter()) {
 		
 			final var user = databaseAdapter.getStoredUserById(userId);
 			final var originUserName = user.getName();
@@ -52,7 +52,7 @@ public final class PageController {
 		final IPlanningPokerContext planningPokerContext
 	) {
 		
-		try (final var databaseAdapter = planningPokerContext.createDatabaseAdapter()) {
+		try (final var databaseAdapter = planningPokerContext.createDataAdapter()) {
 			final var user = databaseAdapter.getStoredUserById(userId);
 			user.setName(newUserName);
 			databaseAdapter.saveChanges();
