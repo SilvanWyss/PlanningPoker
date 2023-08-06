@@ -5,6 +5,7 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
 import ch.nolix.planningpoker.webapplication.estimatetablecomponent.EstimateTableComponent;
+import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
@@ -54,7 +55,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 	
 	@Override
 	protected void doRegistrations(final IRoomChangeNotifier roomChangeNotifier) {
-		roomChangeNotifier.registerRoomSubscriberIfNotRegistered(roomId, this);
+		//roomChangeNotifier.registerRoomSubscriberIfNotRegistered(roomId, this);
 	}
 	
 	@Override
@@ -116,7 +117,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 			new HorizontalStack()
 			.addControl(
 				POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getStoredParentRoom()),
-				POKER_SESSION_ASSEMBLER.createRoomAnalysisControl(roomVisit.getStoredParentRoom())
+				new RoomAnalysisComponent(roomId, this, dataAdapter).getStoredControl()
 			)
 		);
 	}
