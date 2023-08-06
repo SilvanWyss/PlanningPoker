@@ -20,11 +20,12 @@ implements ITriggerableSubscriber {
 	private static final RoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 	
 	public EstimateTableComponent(
-		final String userId,
+		final String roomVisitId,
+		final String roomId,
 		final WebClientSession<IPlanningPokerContext> session,
 		final IDataAdapter initialDataAdapter
 	) {
-		super(new EstimateTableController(userId, session), initialDataAdapter);
+		super(new EstimateTableController(roomVisitId, roomId, session), initialDataAdapter);
 	}
 	
 	@Override
@@ -39,6 +40,14 @@ implements ITriggerableSubscriber {
 		final var roomVisit = dataAdapter.getStoredRoomVisitById(roomVisitId);
 		
 		return createControl(roomVisit, controller);
+	}
+	
+	@Override
+	protected void doRegistrations(final EstimateTableController controller) {
+		
+		final var roomId = controller.getRoomId();
+		
+		controller.getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
 	}
 	
 	private IControl<?, ?> createControl(final IRoomVisit roomVisit, final EstimateTableController controller) {
@@ -125,13 +134,5 @@ implements ITriggerableSubscriber {
 		}
 		
 		return infiniteEstimateCardButton;
-	}
-	
-	@Override
-	protected void doRegistrations(final EstimateTableController controller) {
-		
-		final var roomId = controller.getRoomVisitId();
-		
-		controller.getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
 	}
 }

@@ -12,13 +12,21 @@ final class EstimateTableController extends Controller<IPlanningPokerContext> {
 	
 	private final String roomVisitId;
 	
-	public EstimateTableController(final String roomVisitId, final WebClientSession<IPlanningPokerContext> session) {
+	private final String roomId;
+	
+	public EstimateTableController(
+		final String roomVisitId,
+		final String roomId,
+		final WebClientSession<IPlanningPokerContext> session
+	) {
 		
 		super(session);
 		
 		GlobalValidator.assertThat(roomVisitId).thatIsNamed("room visit id").isNotBlank();
+		GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
 		
 		this.roomVisitId = roomVisitId;
+		this.roomId = roomId;
 	}
 	
 	public void deleteEstimateAndTrigger(final String roomVisitId) {
@@ -43,6 +51,10 @@ final class EstimateTableController extends Controller<IPlanningPokerContext> {
 		}
 		
 		return String.format(Locale.ENGLISH, "%.0f", estimateInStoryPoints);
+	}
+	
+	public String getRoomId() {
+		return roomId;
 	}
 	
 	public String getRoomVisitId() {

@@ -112,7 +112,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 				)
 				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
 			),
-			new EstimateTableComponent(roomVisit.getId(), this, dataAdapter).getStoredControl(),
+			new EstimateTableComponent(roomVisit.getId(), roomId, this, dataAdapter).getStoredControl(),
 			new HorizontalStack()
 			.addControl(
 				POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getStoredParentRoom()),
