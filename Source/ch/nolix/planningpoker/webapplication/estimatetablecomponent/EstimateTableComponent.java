@@ -38,9 +38,6 @@ implements ITriggerableSubscriber {
 		final var roomVisitId = controller.getRoomVisitId();
 		final var roomVisit = dataAdapter.getStoredRoomVisitById(roomVisitId);
 		
-		final var roomId = roomVisit.getId();
-		controller.getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
-		
 		return createControl(roomVisit, controller);
 	}
 	
@@ -128,5 +125,13 @@ implements ITriggerableSubscriber {
 		}
 		
 		return infiniteEstimateCardButton;
+	}
+	
+	@Override
+	protected void doRegistrations(final EstimateTableController controller) {
+		
+		final var roomId = controller.getRoomVisitId();
+		
+		controller.getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
 	}
 }

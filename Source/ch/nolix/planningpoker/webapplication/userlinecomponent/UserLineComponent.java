@@ -35,4 +35,9 @@ extends ComponentWithDataAdapter<UserLineController, IPlanningPokerContext, IDat
 			.setLeftMouseButtonPressAction(userLineController::openEditUserNameDialog)
 		);
 	}
+	
+	@Override
+	protected void doRegistrations(final UserLineController footerController) {
+		//Does nothing.
+	}
 }

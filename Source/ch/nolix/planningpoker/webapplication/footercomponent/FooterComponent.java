@@ -57,4 +57,9 @@ public final class FooterComponent extends Component<FooterController, IPlanning
 			)
 		);
 	}
+	
+	@Override
+	protected void doRegistrations(final FooterController footerController) {
+		//Does nothing.
+	}
 }

@@ -52,4 +52,9 @@ public final class SelectRoomComponent extends Component<SelectRoomController, I
 			)
 		);
 	}
+	
+	@Override
+	protected void doRegistrations(final SelectRoomController footerController) {
+		//Does nothing.
+	}
 }
