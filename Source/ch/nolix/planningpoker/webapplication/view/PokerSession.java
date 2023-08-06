@@ -5,7 +5,7 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
@@ -42,10 +42,10 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 	}
 	
 	@Override
-	protected IControl<?, ?> createMainControl(final IDatabaseAdapter databaseAdapter) {
+	protected IControl<?, ?> createMainControl(final IDataAdapter dataAdapter) {
 		
 		final var userId = getUserId();
-		final var user = databaseAdapter.getStoredUserById(userId);
+		final var user = dataAdapter.getStoredUserById(userId);
 		final var roomVisit = user.getStoredCurrentRoomVisit();
 				
 		return createMainControl(roomVisit);

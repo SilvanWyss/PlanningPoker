@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ICreateUserSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
@@ -35,18 +35,18 @@ public final class InitializeController {
 	
 	private WebClientSession<IPlanningPokerContext> createNextSession(
 		final IUser user,
-		final IDatabaseAdapter databaseAdapter,
+		final IDataAdapter dataAdapter,
 		final WebClientSession<IPlanningPokerContext> initialSession,
 		final ISelectRoomSessionFactory selectRoomSessionFactory,
 		final IPokerSessionFactory pokerSessionFactory
 	) {
 		
 		final var roomNumber = initialSession.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
-		final var room = databaseAdapter.getStoredRoomByNumberOrNull(roomNumber);
+		final var room = dataAdapter.getStoredRoomByNumberOrNull(roomNumber);
 		
 		if (room != null) {
-			databaseAdapter.enterRoom(user, room);
-			databaseAdapter.saveChanges();
+			dataAdapter.enterRoom(user, room);
+			dataAdapter.saveChanges();
 		}
 		
 		if (user.isInARoom()) {

@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.planningpoker.webapplication.controller.CreateUserController;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
@@ -22,7 +22,7 @@ public final class CreateUserSession extends PageSession {
 	}
 	
 	@Override
-	protected IControl<?, ?> createMainControl(final IDatabaseAdapter databaseAdapter) {
+	protected IControl<?, ?> createMainControl(final IDataAdapter dataAdapter) {
 		
 		final var userNameTextbox = new Textbox();
 		

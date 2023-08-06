@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.logic.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.graphic.image.Image;
@@ -39,7 +39,7 @@ public final class PlanningPokerContext implements IPlanningPokerContext {
 	}
 	
 	@Override
-	public IDatabaseAdapter createDataAdapter() {
+	public IDataAdapter createDataAdapter() {
 		return DatabaseAdapter.usingDatabaseAdapter(internalDatabaseAdapter.getEmptyCopy());
 	}
 	

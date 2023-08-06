@@ -2,19 +2,19 @@ package ch.nolix.planningpoker.webapplication.controller;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.coreapi.containerapi.singlecontainerapi.ISingleContainer;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.template.webgui.dialog.EnterValueDialogBuilder;
 
 public final class PageController {
 	
-	public String getUserName(final ISingleContainer<String> userIdContainer, final IDatabaseAdapter databaseAdapter) {
+	public String getUserName(final ISingleContainer<String> userIdContainer, final IDataAdapter dataAdapter) {
 		
 		if (userIdContainer.containsAny()) {
 			
 			final var userId = userIdContainer.getStoredElement();
-			final var user = databaseAdapter.getStoredUserById(userId);
+			final var user = dataAdapter.getStoredUserById(userId);
 			
 			return user.getName();
 		}

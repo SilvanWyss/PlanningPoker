@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.webapplication.view;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.webapi.webproperty.LinkTarget;
 import ch.nolix.planningpoker.webapplication.controller.PageController;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDatabaseAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.webapplication.WebClientSession;
@@ -50,7 +50,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 		this.userIdContainer = userIdContainer;
 	}
 	
-	protected abstract IControl<?, ?> createMainControl(IDatabaseAdapter databaseAdapter);
+	protected abstract IControl<?, ?> createMainControl(IDataAdapter dataAdapter);
 	
 	protected abstract void doRegistrations(IRoomChangeNotifier roomChangeNotifier);
 	
