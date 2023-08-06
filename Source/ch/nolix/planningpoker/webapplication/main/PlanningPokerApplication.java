@@ -8,8 +8,8 @@ import ch.nolix.planningpoker.webapplication.view.InitializeSession;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.main.Application;
 import ch.nolix.system.application.webapplication.WebClient;
-import ch.nolix.system.objectdatabase.database.DatabaseAdapter;
-import ch.nolix.system.objectdatabase.databaseadapter.NodeDatabaseAdapter;
+import ch.nolix.system.objectdatabase.database.DataAdapter;
+import ch.nolix.system.objectdatabase.dataadapter.NodeDataAdapter;
 
 public final class PlanningPokerApplication
 extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
@@ -21,7 +21,7 @@ extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 		final var fileNodeDatabase = new FileNode(filePath);
 		
 		final var databaseAdapter =
-		NodeDatabaseAdapter
+		NodeDataAdapter
 		.forNodeDatabase(fileNodeDatabase)
 		.withName("PlanningPokerDatabase")
 		.usingSchema(SchemaCatalogue.SCHEMA);
@@ -34,7 +34,7 @@ extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 		final var nodeDatabase = new MutableNode();
 		
 		final var databaseAdapter =
-		NodeDatabaseAdapter
+		NodeDataAdapter
 		.forNodeDatabase(nodeDatabase)
 		.withName("PlanningPokerDatabase")
 		.usingSchema(SchemaCatalogue.SCHEMA);
@@ -42,7 +42,7 @@ extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 		return new PlanningPokerApplication(databaseAdapter);
 	}
 	
-	private PlanningPokerApplication(final DatabaseAdapter databaseAdapter) {
+	private PlanningPokerApplication(final DataAdapter databaseAdapter) {
 		super(PlanningPokerContext.withDatabaseAdapter(databaseAdapter));
 	}
 	

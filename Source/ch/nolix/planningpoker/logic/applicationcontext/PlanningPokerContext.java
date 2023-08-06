@@ -17,16 +17,16 @@ public final class PlanningPokerContext implements IPlanningPokerContext {
 	.withWidthAndHeight(300, 400);
 	
 	public static PlanningPokerContext withDatabaseAdapter(
-		final ch.nolix.system.objectdatabase.database.DatabaseAdapter databaseAdapter
+		final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter
 	) {
 		return new PlanningPokerContext(databaseAdapter);
 	}
 	
-	private final ch.nolix.system.objectdatabase.database.DatabaseAdapter internalDatabaseAdapter;
+	private final ch.nolix.system.objectdatabase.database.DataAdapter internalDatabaseAdapter;
 	
 	private final IRoomChangeNotifier roomChangeNotifier = new RoomChangeNotifier();
 	
-	private PlanningPokerContext(final ch.nolix.system.objectdatabase.database.DatabaseAdapter databaseAdapter) {
+	private PlanningPokerContext(final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
 		
 		GlobalValidator.assertThat(databaseAdapter).thatIsNamed(DatabaseAdapter.class).isNotNull();
 		
