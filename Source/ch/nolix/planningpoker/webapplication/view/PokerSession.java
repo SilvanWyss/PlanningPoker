@@ -4,6 +4,7 @@ import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
+import ch.nolix.planningpoker.webapplication.estimatetablecomponent.EstimateTableComponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
@@ -48,7 +49,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 		final var user = dataAdapter.getStoredUserById(userId);
 		final var roomVisit = user.getStoredCurrentRoomVisit();
 				
-		return createMainControl(roomVisit);
+		return createMainControl(roomVisit, dataAdapter);
 	}
 	
 	@Override
@@ -61,7 +62,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 		getStoredApplicationContext().getStoredRoomChangeNotifier().noteRoomChange(roomId);
 	}
 	
-	private IControl<?, ?> createMainControl(final IRoomVisit roomVisit) {
+	private IControl<?, ?> createMainControl(final IRoomVisit roomVisit, final IDataAdapter dataAdapter) {
 		return
 		new VerticalStack()
 		.addControl(
@@ -111,7 +112,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 				)
 				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
 			),
-			POKER_SESSION_ASSEMBLER.createEstimateCardsControl(roomVisit, getStoredApplicationContext()),
+			new EstimateTableComponent(roomVisit.getId(), this, dataAdapter).getStoredControl(),
 			new HorizontalStack()
 			.addControl(
 				POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getStoredParentRoom()),
