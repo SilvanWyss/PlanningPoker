@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication.estimatetablecomponent;
+package ch.nolix.planningpoker.webapplication.cardsetcomponent;
 
 import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
@@ -13,19 +13,19 @@ import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class EstimateTableComponent
-extends ComponentWithDataAdapter<EstimateTableController, IPlanningPokerContext, IDataAdapter>
+public final class CardSetComponent
+extends ComponentWithDataAdapter<CardSetController, IPlanningPokerContext, IDataAdapter>
 implements ITriggerableSubscriber {
 	
 	private static final RoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 	
-	public EstimateTableComponent(
+	public CardSetComponent(
 		final String roomVisitId,
 		final String roomId,
 		final WebClientSession<IPlanningPokerContext> session,
 		final IDataAdapter initialDataAdapter
 	) {
-		super(new EstimateTableController(roomVisitId, roomId, session), initialDataAdapter);
+		super(new CardSetController(roomVisitId, roomId, session), initialDataAdapter);
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ implements ITriggerableSubscriber {
 	}
 	
 	@Override
-	protected IControl<?, ?> createControl(final EstimateTableController controller, final IDataAdapter dataAdapter) {
+	protected IControl<?, ?> createControl(final CardSetController controller, final IDataAdapter dataAdapter) {
 		
 		final var roomVisitId = controller.getRoomVisitId();
 		final var roomVisit = dataAdapter.getStoredRoomVisitById(roomVisitId);
@@ -43,14 +43,14 @@ implements ITriggerableSubscriber {
 	}
 	
 	@Override
-	protected void doRegistrations(final EstimateTableController controller) {
+	protected void doRegistrations(final CardSetController controller) {
 		
 		final var roomId = controller.getRoomId();
 		
 		controller.getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
 	}
 	
-	private IControl<?, ?> createControl(final IRoomVisit roomVisit, final EstimateTableController controller) {
+	private IControl<?, ?> createControl(final IRoomVisit roomVisit, final CardSetController controller) {
 		return
 		new VerticalStack()
 		.addControl(
@@ -79,7 +79,7 @@ implements ITriggerableSubscriber {
 	
 	private IControl<?, ?> createDeleteEstimateCardControl(
 		final IRoomVisit roomVisit,
-		final EstimateTableController controller
+		final CardSetController controller
 	) {
 		
 		final var deleteEstimateCardControl =
@@ -100,7 +100,7 @@ implements ITriggerableSubscriber {
 	private IControl<?, ?> createEstimateCardControl(
 		final IRoomVisit roomVisit,
 		final double estimateInStoryPoints,
-		final EstimateTableController controller
+		final CardSetController controller
 	) {
 		
 		final var estimateCardButton =
@@ -120,7 +120,7 @@ implements ITriggerableSubscriber {
 	
 	private IControl<?, ?> createInfiniteEstimateCardControl(
 		final IRoomVisit roomVisit,
-		final EstimateTableController controller
+		final CardSetController controller
 	) {
 		
 		final var infiniteEstimateCardButton =

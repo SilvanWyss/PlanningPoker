@@ -3,8 +3,8 @@ package ch.nolix.planningpoker.webapplication.view;
 import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
+import ch.nolix.planningpoker.webapplication.cardsetcomponent.CardSetComponent;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
-import ch.nolix.planningpoker.webapplication.estimatetablecomponent.EstimateTableComponent;
 import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
@@ -113,7 +113,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 				)
 				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
 			),
-			new EstimateTableComponent(roomVisit.getId(), roomId, this, dataAdapter).getStoredControl(),
+			new CardSetComponent(roomVisit.getId(), roomId, this, dataAdapter).getStoredControl(),
 			new HorizontalStack()
 			.addControl(
 				POKER_SESSION_ASSEMBLER.createEstimatesControl(roomVisit.getStoredParentRoom()),

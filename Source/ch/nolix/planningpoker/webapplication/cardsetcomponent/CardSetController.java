@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication.estimatetablecomponent;
+package ch.nolix.planningpoker.webapplication.cardsetcomponent;
 
 import java.util.Locale;
 
@@ -8,13 +8,13 @@ import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotif
 import ch.nolix.system.application.component.Controller;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
-final class EstimateTableController extends Controller<IPlanningPokerContext> {
+final class CardSetController extends Controller<IPlanningPokerContext> {
 	
 	private final String roomVisitId;
 	
 	private final String roomId;
 	
-	public EstimateTableController(
+	public CardSetController(
 		final String roomVisitId,
 		final String roomId,
 		final WebClientSession<IPlanningPokerContext> session
