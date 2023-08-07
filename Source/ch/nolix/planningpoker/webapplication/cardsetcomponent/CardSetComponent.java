@@ -44,10 +44,7 @@ implements ITriggerableSubscriber {
 	
 	@Override
 	protected void doRegistrations(final CardSetController controller) {
-		
-		final var roomId = controller.getRoomId();
-		
-		controller.getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
+		//Does nothing.
 	}
 	
 	private IControl<?, ?> createControl(final IRoomVisit roomVisit, final CardSetController controller) {

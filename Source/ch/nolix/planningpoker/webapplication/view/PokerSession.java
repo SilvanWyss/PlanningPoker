@@ -44,6 +44,8 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 	@Override
 	protected IControl<?, ?> createMainControl(final IDataAdapter dataAdapter) {
 		
+		getStoredApplicationContext().getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
+		
 		final var userId = getUserId();
 		final var user = dataAdapter.getStoredUserById(userId);
 		final var roomVisit = user.getStoredCurrentRoomVisit();

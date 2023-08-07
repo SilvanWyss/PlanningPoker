@@ -46,10 +46,7 @@ implements ITriggerableSubscriber {
 	
 	@Override
 	protected void doRegistrations(final RoomAnalysisController controller) {
-		
-		final var roomId = controller.getRoomId();
-		
-		controller.getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
+		//Does nothing.
 	}
 	
 	private IControl<?, ?> createRoomAnalysisControlWhenEstimatesAreVisible(final IRoom room) {
