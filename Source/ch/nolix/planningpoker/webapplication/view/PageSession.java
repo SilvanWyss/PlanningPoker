@@ -15,8 +15,6 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public abstract class PageSession extends WebClientSession<IPlanningPokerContext> {
 	
-	private static final PlanningPokerStyleCreator PAGE_SESSION_STYLE_CREATOR = new PlanningPokerStyleCreator();
-	
 	private final ISingleContainer rootControl = new SingleContainer();
 	
 	protected abstract IControl<?, ?> createMainControl(IDataAdapter dataAdapter);
@@ -28,7 +26,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 		
 		getStoredGui()
 		.pushLayerWithRootControl(rootControl)
-		.setStyle(PAGE_SESSION_STYLE_CREATOR.createPageSessionStyle())
+		.setStyle(PlanningPokerStyleCatalogue.DARK_MODE_STYLE)
 		.setRemoveLayerAction(this::noteSelfChange);
 		
 		fillUpRootControl();
