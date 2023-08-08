@@ -62,7 +62,7 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
 			return StringCatalogue.QUESTION_MARK;
 		}
 		
-		return StringCatalogue.THIN_CROSS;
+		return StringCatalogue.EMPTY_STRING;
 	}
 	
 	private String getEstimateTextWhenEstimateIsVisible(final IRoomVisit roomVisit) {
@@ -75,7 +75,7 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
 			return StringCatalogue.INFINITY;
 		}
 		
-		return StringCatalogue.THIN_CROSS;
+		return StringCatalogue.EMPTY_STRING;
 	}
 	
 	private String getEstimateTextWhenEstimateIsVisibleAndHasEstimateInStoryPoints(
