@@ -3,22 +3,18 @@ package ch.nolix.planningpoker.webapplication.view;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.webapplication.cardsetcomponent.CardSetComponent;
-import ch.nolix.planningpoker.webapplication.controller.PokerController;
 import ch.nolix.planningpoker.webapplication.estimateoverviewcomponent.EstimateOverviewComponent;
 import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
 import ch.nolix.planningpoker.webapplication.roomheadercomponent.RoomHeaderComponent;
+import ch.nolix.planningpoker.webapplication.roommanagercomponent.RoomManagerComponent;
 import ch.nolix.planningpoker.webapplication.userlinecomponent.UserLineComponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.system.webgui.atomiccontrol.Button;
-import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class PokerSession extends PageSession implements ITriggerableSubscriber {
-	
-	private static final PokerController POKER_SESSION_HELPER = new PokerController();
 	
 	public static PokerSession withUserIdAndRoomId(final String userId, final String roomId) {
 		return new PokerSession(userId, roomId);
@@ -68,30 +64,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 		new VerticalStack()
 		.addControl(
 			new RoomHeaderComponent(userId, this, dataAdapter, SelectRoomSession::withUserId).getStoredControl(),
-			new HorizontalStack()
-			.addControl(
-				new Label()
-				.setText(POKER_SESSION_HELPER.getCaptainInfoText(roomVisit)),
-				new Button()
-				.setText("Show/hide estimates")
-				.setLeftMouseButtonPressAction(
-					() ->
-					POKER_SESSION_HELPER.toggleEstimateVisibilityAndUpdate(
-						roomVisit.getStoredParentRoom().getId(),
-						getStoredApplicationContext()
-					)
-				)
-				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit)),
-				new Button()
-				.setText("Delete estimates")
-				.setLeftMouseButtonPressAction(
-					() -> POKER_SESSION_HELPER.openDeleteEstimatesDialog(
-						roomVisit.getStoredParentRoom().getId(),
-						this
-					)
-				)
-				.setVisibility(POKER_SESSION_HELPER.isAllowedToConfigureRoom(roomVisit))
-			),
+			new RoomManagerComponent(userId, this, dataAdapter).getStoredControl(),
 			new CardSetComponent(roomVisit.getId(), roomId, this, dataAdapter).getStoredControl(),
 			new HorizontalStack()
 			.addControl(
