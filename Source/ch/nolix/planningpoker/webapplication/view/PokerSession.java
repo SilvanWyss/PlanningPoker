@@ -6,6 +6,7 @@ import ch.nolix.planningpoker.webapplication.cardsetcomponent.CardSetComponent;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
 import ch.nolix.planningpoker.webapplication.estimateoverviewcomponent.EstimateOverviewComponent;
 import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
+import ch.nolix.planningpoker.webapplication.roomheadercomponent.RoomHeaderComponent;
 import ch.nolix.planningpoker.webapplication.userlinecomponent.UserLineComponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
@@ -13,8 +14,6 @@ import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
-import ch.nolix.systemapi.webguiapi.atomiccontrolapi.LabelRole;
-import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class PokerSession extends PageSession implements ITriggerableSubscriber {
@@ -68,28 +67,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 		return
 		new VerticalStack()
 		.addControl(
-			new HorizontalStack()
-			.setRole(ContainerRole.HEADER_CONTAINER)
-			.addControl(
-				new Label()
-				.setRole(LabelRole.LEVEL1_HEADER)
-				.setText("Room " + roomVisit.getStoredParentRoom().getNumber()),
-				new Button()
-				.setText("Show link to room")
-				.setLeftMouseButtonPressAction(
-					() -> POKER_SESSION_HELPER.openShareRoomDialog(roomVisit.getStoredParentRoom(), this)
-				),
-				new Button()
-				.setText("Go to another room")
-				.setLeftMouseButtonPressAction(
-					() ->
-					POKER_SESSION_HELPER.openGoToOtherRoomDialog(
-						roomVisit.getStoredVisitor().getId(),
-						this,
-						SelectRoomSession::withUserId
-					)
-				)
-			),
+			new RoomHeaderComponent(userId, this, dataAdapter, SelectRoomSession::withUserId).getStoredControl(),
 			new HorizontalStack()
 			.addControl(
 				new Label()
