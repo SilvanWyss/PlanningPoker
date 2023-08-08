@@ -1,6 +1,5 @@
 package ch.nolix.planningpoker.webapplication.view;
 
-import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.webapplication.cardsetcomponent.CardSetComponent;
@@ -26,14 +25,16 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 		return new PokerSession(userId, roomId);
 	}
 	
+	private final String userId;
+	
 	private final String roomId;
 	
 	private PokerSession(final String userId, final String roomId) {
 		
-		super(SingleContainer.withElementOrEmpty(userId));
-		
+		GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
 		GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
 		
+		this.userId = userId;
 		this.roomId = roomId;
 	}
 	
@@ -47,7 +48,6 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 		
 		getStoredApplicationContext().getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
 		
-		final var userId = getUserId();
 		final var user = dataAdapter.getStoredUserById(userId);
 		final var roomVisit = user.getStoredCurrentRoomVisit();
 				
@@ -56,7 +56,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 	
 	@Override
 	protected IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter) {
-		return new UserLineComponent(getUserId(), this, dataAdapter).getStoredControl();
+		return new UserLineComponent(userId, this, dataAdapter).getStoredControl();
 	}
 	
 	@Override
