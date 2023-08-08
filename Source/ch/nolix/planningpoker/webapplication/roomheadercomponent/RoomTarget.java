@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication.controller;
+package ch.nolix.planningpoker.webapplication.roomheadercomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.net.target.ApplicationInstanceTarget;

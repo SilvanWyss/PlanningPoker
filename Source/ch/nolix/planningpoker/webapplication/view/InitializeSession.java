@@ -1,6 +1,5 @@
 package ch.nolix.planningpoker.webapplication.view;
 
-import ch.nolix.planningpoker.webapplication.controller.InitializeController;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.webapplication.WebClientSession;
 

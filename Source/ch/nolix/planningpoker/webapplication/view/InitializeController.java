@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication.controller;
+package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;

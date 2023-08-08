@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication.controller;
+package ch.nolix.planningpoker.webapplication.roomheadercomponent;
 
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.webapplicationapi.controllerapi.IRoomTarget;
