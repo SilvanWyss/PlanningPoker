@@ -7,6 +7,7 @@ import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.component.ComponentWithDataAdapter;
 import ch.nolix.system.application.webapplication.WebClientSession;
+import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.container.Grid;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
@@ -52,6 +53,7 @@ implements ITriggerableSubscriber {
 		
 		final var room = roomVisit.getStoredParentRoom();
 		final var roomCreator = room.getStoredParentCreator();
+		final var roomVisitIsFromRoomCreator = roomVisit.getStoredVisitor().hasId(roomCreator.getId());
 		var rowIndex = 1;
 		for (final var rv : room.getStoredRoomVisits()) {
 			
@@ -64,6 +66,16 @@ implements ITriggerableSubscriber {
 				
 				final var estimateText = controller.getEstimateText(rv);
 				estimatesGridContainer.insertTextAtRowAndColumn(rowIndex, 2, estimateText);
+				
+				if (roomVisitIsFromRoomCreator && !visitor.hasId(roomCreator.getId())) {
+					
+					final var kickButton =
+					new Button()
+					.setText("&#128098;")
+					.setLeftMouseButtonPressAction(() -> controller.openKickUserDialog(visitor.getId()));
+					
+					estimatesGridContainer.insertControlAtRowAndColumn(rowIndex, 3, kickButton);
+				}
 				
 				rowIndex++;
 			}

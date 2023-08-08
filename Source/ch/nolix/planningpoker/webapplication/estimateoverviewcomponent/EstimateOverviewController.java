@@ -11,6 +11,7 @@ import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerCo
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.component.Controller;
 import ch.nolix.system.application.webapplication.WebClientSession;
+import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
 final class EstimateOverviewController extends Controller<IPlanningPokerContext> {
 	
@@ -56,6 +57,24 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
 		return getStoredApplicationContext().getStoredRoomChangeNotifier();
 	}
 	
+	public void openKickUserDialog(final String userId) {
+		
+		final var applicationContext = getStoredApplicationContext();
+		
+		try (final var dataAdapter = applicationContext.createDataAdapter()) {
+			
+			final var user = dataAdapter.getStoredUserById(userId);
+			
+			final var kickUserDialog =
+			new YesNoDialogBuilder()
+			.setYesNoQuestion("Do you want to kick out " + user.getName() + " of the room?")
+			.setConfirmAction(() -> kickUserAndTrigger(userId))
+			.build();
+			
+			getStoredSession().getStoredGui().pushLayer(kickUserDialog);
+		}
+	}
+	
 	private String getEstimateTextWhenEstimateIsInvisible(final IRoomVisit roomVisit) {
 		
 		if (ROOM_VISIT_EVALUATOR.hasEstimate(roomVisit)) {
@@ -88,5 +107,19 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
 		}
 		
 		return String.format(Locale.ENGLISH, "%.0f", estimateInStoryPoints);
+	}
+	
+	private void kickUserAndTrigger(final String userId) {
+		
+		final var applicationContext = getStoredApplicationContext();
+		
+		try (final var dataAdapter = applicationContext.createDataAdapter()) {
+			
+			final var user = dataAdapter.getStoredUserById(userId);
+			dataAdapter.leaveRoom(user);
+			dataAdapter.saveChanges();
+			
+			getStoredApplicationContext().getStoredRoomChangeNotifier().noteRoomChange(roomId);
+		}
 	}
 }

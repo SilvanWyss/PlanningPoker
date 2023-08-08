@@ -35,7 +35,19 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 	
 	@Override
 	public void trigger() {
-		refreshIfDoesNotHaveOpenDialog();
+		try (final var dataAdapter = getStoredApplicationContext().createDataAdapter()) {
+			
+			final var user = dataAdapter.getStoredUserById(userId);
+			
+			if (user.isInARoom()) {
+				refreshIfDoesNotHaveOpenDialog();
+			} else {
+				
+				final var selectRoomSession = SelectRoomSession.withUserId(userId);
+				
+				setNext(selectRoomSession);
+			}
+		}
 	}
 	
 	@Override
