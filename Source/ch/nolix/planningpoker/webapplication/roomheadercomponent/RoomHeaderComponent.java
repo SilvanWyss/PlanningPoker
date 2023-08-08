@@ -28,7 +28,8 @@ extends ComponentWithDataAdapter<RoomHeaderController, IPlanningPokerContext, ID
 	@Override
 	protected IControl<?, ?> createControl(final RoomHeaderController controller, final IDataAdapter dataAdapter) {
 		
-		final var user = dataAdapter.getStoredUserById(controller.getUserId());
+		final var userId = controller.getUserId();
+		final var user = dataAdapter.getStoredUserById(userId);
 		final var roomVisit = user.getStoredCurrentRoomVisit();
 		
 		return createControl(roomVisit, controller);
