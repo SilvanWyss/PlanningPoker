@@ -7,6 +7,7 @@ import ch.nolix.planningpoker.webapplication.cardsetcomponent.CardSetComponent;
 import ch.nolix.planningpoker.webapplication.controller.PokerController;
 import ch.nolix.planningpoker.webapplication.estimateoverviewcomponent.EstimateOverviewComponent;
 import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
+import ch.nolix.planningpoker.webapplication.userlinecomponent.UserLineComponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.system.webgui.atomiccontrol.Button;
@@ -51,6 +52,11 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 		final var roomVisit = user.getStoredCurrentRoomVisit();
 				
 		return createMainControl(roomVisit, dataAdapter);
+	}
+	
+	@Override
+	protected IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter) {
+		return new UserLineComponent(getUserId(), this, dataAdapter).getStoredControl();
 	}
 	
 	@Override

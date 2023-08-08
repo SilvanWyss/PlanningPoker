@@ -1,12 +1,10 @@
 package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpoker.webapplication.controller.PageController;
 import ch.nolix.planningpoker.webapplication.footercomponent.FooterComponent;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.webapplication.WebClientSession;
-import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.container.SingleContainer;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
@@ -17,8 +15,6 @@ import ch.nolix.systemapi.webguiapi.containerapi.ISingleContainer;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public abstract class PageSession extends WebClientSession<IPlanningPokerContext> {
-		
-	private static final PageController PAGE_SESSION_HELPER = new PageController();
 	
 	private static final PlanningPokerStyleCreator PAGE_SESSION_STYLE_CREATOR = new PlanningPokerStyleCreator();
 		
@@ -36,6 +32,8 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 	}
 	
 	protected abstract IControl<?, ?> createMainControl(IDataAdapter dataAdapter);
+	
+	protected abstract IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter);
 	
 	protected final String getUserId() {
 		return userIdContainer.getStoredElement();
@@ -79,17 +77,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 							new Label()
 							.setRole(LabelRole.TITLE)
 							.setText(getApplicationName()),
-							new HorizontalStack()
-							.setVisibility(hasUserId())
-							.addControl(
-								new Label()
-								.setText("you: "),
-								new Button()
-								.setText(PAGE_SESSION_HELPER.getUserName(userIdContainer, databaseAdapter))
-								.setLeftMouseButtonPressAction(
-									() -> PAGE_SESSION_HELPER.openEditUserNameDialog(getUserId(), this)
-								)
-							)
+							createUserProfileControl(databaseAdapter)
 						)
 					),
 					new SingleContainer()

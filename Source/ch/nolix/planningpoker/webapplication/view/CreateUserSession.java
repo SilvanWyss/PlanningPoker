@@ -3,6 +3,7 @@ package ch.nolix.planningpoker.webapplication.view;
 import ch.nolix.core.container.singlecontainer.SingleContainer;
 import ch.nolix.planningpoker.webapplication.createusercomponent.CreateUserComponent;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
+import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateUserSession extends PageSession {
@@ -20,6 +21,11 @@ public final class CreateUserSession extends PageSession {
 			PokerSession::withUserIdAndRoomId
 		)
 		.getStoredControl();
+	}
+	
+	@Override
+	protected IControl<?, ?> createUserProfileControl(final IDataAdapter dataAdapter) {
+		return new Label();
 	}
 	
 	@Override
