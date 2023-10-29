@@ -9,54 +9,49 @@ import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoom
 import ch.nolix.system.application.webapplication.WebClientSession;
 
 public final class InitializeController {
-	
-	public WebClientSession<IPlanningPokerContext> createFirstPageSession(
-		final WebClientSession<IPlanningPokerContext> initialSession,
-		final ICreateUserSessionFactory createUserSessionFactory,
-		final ISelectRoomSessionFactory selectRoomSessionFactory,
-		final IPokerSessionFactory pokerSessionFactory
-	) {
-		
-		final var applicationContext = initialSession.getStoredApplicationContext();
-		
-		try (final var databaseAdapter = applicationContext.createDataAdapter()) {
-			
-			final var userId = initialSession.getStoredParentClient().getCookieValueByCookieNameOrNull("user_id");
-			final var user = databaseAdapter.getStoredUserByIdOrNull(userId);
-			
-			if (user != null) {
-				return
-				createNextSession(user, databaseAdapter, initialSession, selectRoomSessionFactory, pokerSessionFactory);
-			}
-		}
-		
-		return createUserSessionFactory.createCreateUserSession();
-	}
-	
-	private WebClientSession<IPlanningPokerContext> createNextSession(
-		final IUser user,
-		final IDataAdapter dataAdapter,
-		final WebClientSession<IPlanningPokerContext> initialSession,
-		final ISelectRoomSessionFactory selectRoomSessionFactory,
-		final IPokerSessionFactory pokerSessionFactory
-	) {
-		
-		final var roomNumber = initialSession.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
-		final var room = dataAdapter.getStoredRoomByNumberOrNull(roomNumber);
-		
-		if (room != null) {
-			dataAdapter.enterRoom(user, room);
-			dataAdapter.saveChanges();
-		}
-		
-		if (user.isInARoom()) {
-			return
-			pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(
-				user.getId(),
-				user.getStoredCurrentRoomVisit().getStoredParentRoom().getId()
-			);
-		}
-		
-		return selectRoomSessionFactory.createSelectRoomSessionWihtUserId(user.getId());
-	}
+
+  public WebClientSession<IPlanningPokerContext> createFirstPageSession(
+    final WebClientSession<IPlanningPokerContext> initialSession,
+    final ICreateUserSessionFactory createUserSessionFactory,
+    final ISelectRoomSessionFactory selectRoomSessionFactory,
+    final IPokerSessionFactory pokerSessionFactory) {
+
+    final var applicationContext = initialSession.getStoredApplicationContext();
+
+    try (final var databaseAdapter = applicationContext.createDataAdapter()) {
+
+      final var userId = initialSession.getStoredParentClient().getCookieValueByCookieNameOrNull("user_id");
+      final var user = databaseAdapter.getStoredUserByIdOrNull(userId);
+
+      if (user != null) {
+        return createNextSession(user, databaseAdapter, initialSession, selectRoomSessionFactory, pokerSessionFactory);
+      }
+    }
+
+    return createUserSessionFactory.createCreateUserSession();
+  }
+
+  private WebClientSession<IPlanningPokerContext> createNextSession(
+    final IUser user,
+    final IDataAdapter dataAdapter,
+    final WebClientSession<IPlanningPokerContext> initialSession,
+    final ISelectRoomSessionFactory selectRoomSessionFactory,
+    final IPokerSessionFactory pokerSessionFactory) {
+
+    final var roomNumber = initialSession.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
+    final var room = dataAdapter.getStoredRoomByNumberOrNull(roomNumber);
+
+    if (room != null) {
+      dataAdapter.enterRoom(user, room);
+      dataAdapter.saveChanges();
+    }
+
+    if (user.isInARoom()) {
+      return pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(
+        user.getId(),
+        user.getStoredCurrentRoomVisit().getStoredParentRoom().getId());
+    }
+
+    return selectRoomSessionFactory.createSelectRoomSessionWihtUserId(user.getId());
+  }
 }

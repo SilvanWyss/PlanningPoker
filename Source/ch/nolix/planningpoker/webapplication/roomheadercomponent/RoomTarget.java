@@ -6,52 +6,47 @@ import ch.nolix.coreapi.programcontrolapi.processproperty.SecurityLevel;
 import ch.nolix.planningpokerapi.webapplicationapi.controllerapi.IRoomTarget;
 
 public final class RoomTarget extends ApplicationInstanceTarget implements IRoomTarget {
-	
-	public static RoomTarget
-	forIpOrAddressNameAndPortAndApplicationInstanceNameAndRoomNumberAndSecurityLevelForConnections(
-		final String ipOrAddressName,
-		final int port,
-		final String applicationName,
-		final String applicationUrlInstanceName,
-		final String roomNumber,
-		final SecurityLevel securityLevelForConnections
-	) {
-		return
-		new RoomTarget(
-			ipOrAddressName,
-			port,
-			applicationName,
-			applicationUrlInstanceName,
-			roomNumber,
-			securityLevelForConnections
-		);
-	}
-	
-	private final String roomNumber;
-	
-	private RoomTarget(
-		final String ipOrAddressName,
-		final int port,
-		final String applicationName,
-		final String applicationUrlInstanceName,
-		final String roomNumber,
-		final SecurityLevel securityLevelForConnections
-	) {
-		
-		super(ipOrAddressName, port, applicationName, applicationUrlInstanceName, securityLevelForConnections);
-		
-		GlobalValidator.assertThat(roomNumber).thatIsNamed("room number").isNotBlank();
-		
-		this.roomNumber = roomNumber;
-	}
-	
-	@Override
-	public String getRoomNumber() {
-		return roomNumber;
-	}
-	
-	@Override
-	public String toUrl() {
-		return (super.toUrl() + "&room=" + getRoomNumber());
-	}
+
+  public static RoomTarget forIpOrAddressNameAndPortAndApplicationInstanceNameAndRoomNumberAndSecurityLevelForConnections(
+    final String ipOrAddressName,
+    final int port,
+    final String applicationName,
+    final String applicationUrlInstanceName,
+    final String roomNumber,
+    final SecurityLevel securityLevelForConnections) {
+    return new RoomTarget(
+      ipOrAddressName,
+      port,
+      applicationName,
+      applicationUrlInstanceName,
+      roomNumber,
+      securityLevelForConnections);
+  }
+
+  private final String roomNumber;
+
+  private RoomTarget(
+    final String ipOrAddressName,
+    final int port,
+    final String applicationName,
+    final String applicationUrlInstanceName,
+    final String roomNumber,
+    final SecurityLevel securityLevelForConnections) {
+
+    super(ipOrAddressName, port, applicationName, applicationUrlInstanceName, securityLevelForConnections);
+
+    GlobalValidator.assertThat(roomNumber).thatIsNamed("room number").isNotBlank();
+
+    this.roomNumber = roomNumber;
+  }
+
+  @Override
+  public String getRoomNumber() {
+    return roomNumber;
+  }
+
+  @Override
+  public String toUrl() {
+    return (super.toUrl() + "&room=" + getRoomNumber());
+  }
 }

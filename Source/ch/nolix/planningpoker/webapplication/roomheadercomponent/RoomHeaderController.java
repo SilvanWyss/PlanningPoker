@@ -10,74 +10,71 @@ import ch.nolix.template.webgui.dialog.ShowValueDialogBuilder;
 import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
 final class RoomHeaderController extends Controller<IPlanningPokerContext> {
-	
-	private static final RoomHyperlinkCreator ROOM_HYPERLINK_CREATOR = new RoomHyperlinkCreator();
-	
-	private final String userId;
-	
-	private final ISelectRoomSessionFactory selectRoomSessionFactory;
-	
-	public RoomHeaderController(
-		final String userId,
-		final WebClientSession<IPlanningPokerContext> session,
-		final ISelectRoomSessionFactory selectRoomSessionFactory
-	) {
-		
-		super(session);
-		
-		GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
-		GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
-		
-		this.userId = userId;
-		this.selectRoomSessionFactory = selectRoomSessionFactory;
-	}
-	
-	public String getUserId() {
-		return userId;
-	}
-	
-	public void openGoToOtherRoomDialog() {
-		
-		final var goToOtherRoomDialog =
-		new YesNoDialogBuilder()
-		.setYesNoQuestion("Do you want to leave the current room?")
-		.setConfirmAction(this::goToOtherRoomAndTrigger)
-		.build();
-		
-		getStoredSession().getStoredGui().pushLayer(goToOtherRoomDialog);
-	}
-	
-	public void openShareRoomDialog(final IRoom room) {
-		
-		final var application = getStoredSession().getStoredParentClient().getStoredParentApplication();
-		
-		final var roomHyperlink = ROOM_HYPERLINK_CREATOR.createHyperlinkToRoom(room, application);
-		
-		final var shareRoomDialog =
-		new ShowValueDialogBuilder()
-		.setValueName("Link to room")
-		.setValue(roomHyperlink)
-		.setValueCopier(v -> getStoredSession().getStoredGui().onFrontEnd().writeTextToClipboard(v))
-		.build();
-			
-		getStoredSession().getStoredGui().pushLayer(shareRoomDialog);
-	}
-	
-	private void goToOtherRoomAndTrigger() {
-		
-		final var applicationContext = getStoredApplicationContext();
-		
-		try (final var databaseAdapter = applicationContext.createDataAdapter()) {
-			
-			final var user = databaseAdapter.getStoredUserById(userId);
-			final var room = user.getStoredCurrentRoomVisit().getStoredParentRoom();
-			databaseAdapter.leaveRoom(user);
-			
-			databaseAdapter.saveChanges();
-			
-			getStoredSession().setNext(selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId));
-			
-			applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
-		}
-	}
+
+  private static final RoomHyperlinkCreator ROOM_HYPERLINK_CREATOR = new RoomHyperlinkCreator();
+
+  private final String userId;
+
+  private final ISelectRoomSessionFactory selectRoomSessionFactory;
+
+  public RoomHeaderController(
+    final String userId,
+    final WebClientSession<IPlanningPokerContext> session,
+    final ISelectRoomSessionFactory selectRoomSessionFactory) {
+
+    super(session);
+
+    GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
+    GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
+
+    this.userId = userId;
+    this.selectRoomSessionFactory = selectRoomSessionFactory;
+  }
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void openGoToOtherRoomDialog() {
+
+    final var goToOtherRoomDialog = new YesNoDialogBuilder()
+      .setYesNoQuestion("Do you want to leave the current room?")
+      .setConfirmAction(this::goToOtherRoomAndTrigger)
+      .build();
+
+    getStoredSession().getStoredGui().pushLayer(goToOtherRoomDialog);
+  }
+
+  public void openShareRoomDialog(final IRoom room) {
+
+    final var application = getStoredSession().getStoredParentClient().getStoredParentApplication();
+
+    final var roomHyperlink = ROOM_HYPERLINK_CREATOR.createHyperlinkToRoom(room, application);
+
+    final var shareRoomDialog = new ShowValueDialogBuilder()
+      .setValueName("Link to room")
+      .setValue(roomHyperlink)
+      .setValueCopier(v -> getStoredSession().getStoredGui().onFrontEnd().writeTextToClipboard(v))
+      .build();
+
+    getStoredSession().getStoredGui().pushLayer(shareRoomDialog);
+  }
+
+  private void goToOtherRoomAndTrigger() {
+
+    final var applicationContext = getStoredApplicationContext();
+
+    try (final var databaseAdapter = applicationContext.createDataAdapter()) {
+
+      final var user = databaseAdapter.getStoredUserById(userId);
+      final var room = user.getStoredCurrentRoomVisit().getStoredParentRoom();
+      databaseAdapter.leaveRoom(user);
+
+      databaseAdapter.saveChanges();
+
+      getStoredSession().setNext(selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId));
+
+      applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+    }
+  }
 }

@@ -8,43 +8,41 @@ import ch.nolix.system.graphic.image.Image;
 import ch.nolix.systemapi.graphicapi.imageapi.IImage;
 
 public final class PlanningPokerContext implements IPlanningPokerContext {
-	
-	private static final String APPLICATION_LOGO_RESOURCE_PATH = "ch/nolix/planningpoker/resource/poker_card.jpg";
-	
-	public static final IImage APPLICATION_LOGO =
-	Image
-	.fromResource(APPLICATION_LOGO_RESOURCE_PATH)
-	.withWidthAndHeight(300, 400);
-	
-	public static PlanningPokerContext withDatabaseAdapter(
-		final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter
-	) {
-		return new PlanningPokerContext(databaseAdapter);
-	}
-	
-	private final ch.nolix.system.objectdatabase.database.DataAdapter internalDatabaseAdapter;
-	
-	private final IRoomChangeNotifier roomChangeNotifier = new RoomChangeNotifier();
-	
-	private PlanningPokerContext(final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
-		
-		GlobalValidator.assertThat(databaseAdapter).thatIsNamed(DatabaseAdapter.class).isNotNull();
-		
-		this.internalDatabaseAdapter = databaseAdapter;
-	}
-	
-	@Override
-	public IImage getApplicationLogo() {
-		return APPLICATION_LOGO;
-	}
-	
-	@Override
-	public IDataAdapter createDataAdapter() {
-		return DatabaseAdapter.usingDatabaseAdapter(internalDatabaseAdapter.getEmptyCopy());
-	}
-	
-	@Override
-	public IRoomChangeNotifier getStoredRoomChangeNotifier() {
-		return roomChangeNotifier;
-	}
+
+  private static final String APPLICATION_LOGO_RESOURCE_PATH = "ch/nolix/planningpoker/resource/poker_card.jpg";
+
+  public static final IImage APPLICATION_LOGO = Image
+    .fromResource(APPLICATION_LOGO_RESOURCE_PATH)
+    .withWidthAndHeight(300, 400);
+
+  public static PlanningPokerContext withDatabaseAdapter(
+    final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
+    return new PlanningPokerContext(databaseAdapter);
+  }
+
+  private final ch.nolix.system.objectdatabase.database.DataAdapter internalDatabaseAdapter;
+
+  private final IRoomChangeNotifier roomChangeNotifier = new RoomChangeNotifier();
+
+  private PlanningPokerContext(final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
+
+    GlobalValidator.assertThat(databaseAdapter).thatIsNamed(DatabaseAdapter.class).isNotNull();
+
+    this.internalDatabaseAdapter = databaseAdapter;
+  }
+
+  @Override
+  public IImage getApplicationLogo() {
+    return APPLICATION_LOGO;
+  }
+
+  @Override
+  public IDataAdapter createDataAdapter() {
+    return DatabaseAdapter.usingDatabaseAdapter(internalDatabaseAdapter.getEmptyCopy());
+  }
+
+  @Override
+  public IRoomChangeNotifier getStoredRoomChangeNotifier() {
+    return roomChangeNotifier;
+  }
 }

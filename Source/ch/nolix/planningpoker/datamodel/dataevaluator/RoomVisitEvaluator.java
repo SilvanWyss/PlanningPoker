@@ -4,15 +4,14 @@ import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomVisitEvaluat
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 
 public final class RoomVisitEvaluator implements IRoomVisitEvaluator {
-	
-	@Override
-	public boolean hasEstimate(final IRoomVisit roomVisit) {
-		return
-		roomVisit != null
-		&& hasEstimateWhenIsNotNull(roomVisit);
-	}
-	
-	private boolean hasEstimateWhenIsNotNull(final IRoomVisit roomVisit) {
-		return roomVisit.hasEstimateInStorypoints() || roomVisit.hasInfiniteEstimate();
-	}
+
+  @Override
+  public boolean hasEstimate(final IRoomVisit roomVisit) {
+    return roomVisit != null
+    && hasEstimateWhenIsNotNull(roomVisit);
+  }
+
+  private boolean hasEstimateWhenIsNotNull(final IRoomVisit roomVisit) {
+    return roomVisit.hasEstimateInStorypoints() || roomVisit.hasInfiniteEstimate();
+  }
 }

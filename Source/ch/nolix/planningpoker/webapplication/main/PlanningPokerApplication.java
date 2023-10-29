@@ -13,46 +13,44 @@ import ch.nolix.system.objectdatabase.dataadapter.NodeDataAdapter;
 
 public final class PlanningPokerApplication
 extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
-	
-	public static final String APPLICATION_NAME = "Planning Poker";
-	
-	public static PlanningPokerApplication withFileNodeDatabase(final String filePath) {
-		
-		final var fileNodeDatabase = new FileNode(filePath);
-		
-		final var databaseAdapter =
-		NodeDataAdapter
-		.forNodeDatabase(fileNodeDatabase)
-		.withName("PlanningPokerDatabase")
-		.usingSchema(SchemaCatalogue.SCHEMA);
-		
-		return new PlanningPokerApplication(databaseAdapter);
-	}
-	
-	public static PlanningPokerApplication withInMemoryNodeDatabase() {
-		
-		final var nodeDatabase = new MutableNode();
-		
-		final var databaseAdapter =
-		NodeDataAdapter
-		.forNodeDatabase(nodeDatabase)
-		.withName("PlanningPokerDatabase")
-		.usingSchema(SchemaCatalogue.SCHEMA);
-		
-		return new PlanningPokerApplication(databaseAdapter);
-	}
-	
-	private PlanningPokerApplication(final DataAdapter databaseAdapter) {
-		super(PlanningPokerContext.withDatabaseAdapter(databaseAdapter));
-	}
-	
-	@Override
-	public String getApplicationName() {
-		return APPLICATION_NAME;
-	}
-	
-	@Override
-	protected Class<?> getInitialSessionClass() {
-		return InitializeSession.class;
-	}
+
+  public static final String APPLICATION_NAME = "Planning Poker";
+
+  public static PlanningPokerApplication withFileNodeDatabase(final String filePath) {
+
+    final var fileNodeDatabase = new FileNode(filePath);
+
+    final var databaseAdapter = NodeDataAdapter
+      .forNodeDatabase(fileNodeDatabase)
+      .withName("PlanningPokerDatabase")
+      .usingSchema(SchemaCatalogue.SCHEMA);
+
+    return new PlanningPokerApplication(databaseAdapter);
+  }
+
+  public static PlanningPokerApplication withInMemoryNodeDatabase() {
+
+    final var nodeDatabase = new MutableNode();
+
+    final var databaseAdapter = NodeDataAdapter
+      .forNodeDatabase(nodeDatabase)
+      .withName("PlanningPokerDatabase")
+      .usingSchema(SchemaCatalogue.SCHEMA);
+
+    return new PlanningPokerApplication(databaseAdapter);
+  }
+
+  private PlanningPokerApplication(final DataAdapter databaseAdapter) {
+    super(PlanningPokerContext.withDatabaseAdapter(databaseAdapter));
+  }
+
+  @Override
+  public String getApplicationName() {
+    return APPLICATION_NAME;
+  }
+
+  @Override
+  protected Class<?> getInitialSessionClass() {
+    return InitializeSession.class;
+  }
 }

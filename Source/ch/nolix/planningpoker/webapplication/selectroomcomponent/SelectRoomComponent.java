@@ -12,49 +12,39 @@ import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class SelectRoomComponent extends Component<SelectRoomController, IPlanningPokerContext> {
-	
-	public SelectRoomComponent(final String userId, final WebClientSession<IPlanningPokerContext> session) {
-		super(new SelectRoomController(userId, session));
-	}
-	
-	@Override
-	protected IControl<?, ?> createControl(final SelectRoomController controller) {
-		
-		final var roomNumberTextbox = new Textbox();
-		
-		return
-		new VerticalStack()
-		.addControl(
-			new VerticalStack()
-			.addControl(
-				new Button()
-				.setText("Create new room")
-				.setLeftMouseButtonPressAction(
-					() ->
-					controller.createAndEnterRoomAndRedirect(
-						PokerSession::withUserIdAndRoomId
-					)
-				)
-			),
-			new ValidationLabel(),
-			new HorizontalStack()
-			.addControl(
-				roomNumberTextbox,
-				new Button()
-				.setText("Enter room")
-				.setLeftMouseButtonPressAction(
-					() ->
-					controller.enterRoomAndRedirect(
-						roomNumberTextbox.getText(),
-						PokerSession::withUserIdAndRoomId
-					)
-				)
-			)
-		);
-	}
-	
-	@Override
-	protected void doRegistrations(final SelectRoomController footerController) {
-		//Does nothing.
-	}
+
+  public SelectRoomComponent(final String userId, final WebClientSession<IPlanningPokerContext> session) {
+    super(new SelectRoomController(userId, session));
+  }
+
+  @Override
+  protected IControl<?, ?> createControl(final SelectRoomController controller) {
+
+    final var roomNumberTextbox = new Textbox();
+
+    return new VerticalStack()
+      .addControl(
+        new VerticalStack()
+          .addControl(
+            new Button()
+              .setText("Create new room")
+              .setLeftMouseButtonPressAction(
+                () -> controller.createAndEnterRoomAndRedirect(
+                  PokerSession::withUserIdAndRoomId))),
+        new ValidationLabel(),
+        new HorizontalStack()
+          .addControl(
+            roomNumberTextbox,
+            new Button()
+              .setText("Enter room")
+              .setLeftMouseButtonPressAction(
+                () -> controller.enterRoomAndRedirect(
+                  roomNumberTextbox.getText(),
+                  PokerSession::withUserIdAndRoomId))));
+  }
+
+  @Override
+  protected void doRegistrations(final SelectRoomController footerController) {
+    //Does nothing.
+  }
 }

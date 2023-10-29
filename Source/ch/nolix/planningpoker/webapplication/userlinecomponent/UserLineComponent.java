@@ -11,33 +11,29 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class UserLineComponent
 extends ComponentWithDataAdapter<UserLineController, IPlanningPokerContext, IDataAdapter> {
-	
-	public UserLineComponent(
-		final String userId,
-		final WebClientSession<IPlanningPokerContext> session,
-		final IDataAdapter initialDataAdapter
-	) {
-		super(new UserLineController(userId, session), initialDataAdapter);
-	}
-	
-	@Override
-	protected IControl<?, ?> createControl(
-		final UserLineController userLineController,
-		final IDataAdapter dataAdapter
-	) {
-		return
-		new HorizontalStack()
-		.addControl(
-			new Label()
-			.setText("you: "),
-			new Button()
-			.setText(userLineController.getLoggedInUserName(dataAdapter))
-			.setLeftMouseButtonPressAction(userLineController::openEditUserNameDialog)
-		);
-	}
-	
-	@Override
-	protected void doRegistrations(final UserLineController footerController) {
-		//Does nothing.
-	}
+
+  public UserLineComponent(
+    final String userId,
+    final WebClientSession<IPlanningPokerContext> session,
+    final IDataAdapter initialDataAdapter) {
+    super(new UserLineController(userId, session), initialDataAdapter);
+  }
+
+  @Override
+  protected IControl<?, ?> createControl(
+    final UserLineController userLineController,
+    final IDataAdapter dataAdapter) {
+    return new HorizontalStack()
+      .addControl(
+        new Label()
+          .setText("you: "),
+        new Button()
+          .setText(userLineController.getLoggedInUserName(dataAdapter))
+          .setLeftMouseButtonPressAction(userLineController::openEditUserNameDialog));
+  }
+
+  @Override
+  protected void doRegistrations(final UserLineController footerController) {
+    //Does nothing.
+  }
 }

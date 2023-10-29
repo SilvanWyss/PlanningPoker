@@ -6,25 +6,23 @@ import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateUserSession extends PageSession {
-	
-	@Override
-	protected IControl<?, ?> createMainControl(final IDataAdapter dataAdapter) {
-		return
-		new CreateUserComponent(
-			this,
-			SelectRoomSession::withUserId,
-			PokerSession::withUserIdAndRoomId
-		)
-		.getStoredControl();
-	}
-	
-	@Override
-	protected IControl<?, ?> createUserProfileControl(final IDataAdapter dataAdapter) {
-		return new Label();
-	}
-	
-	@Override
-	protected void noteSelfChange() {
-		refreshIfDoesNotHaveOpenDialog();
-	}
+
+  @Override
+  protected IControl<?, ?> createMainControl(final IDataAdapter dataAdapter) {
+    return new CreateUserComponent(
+      this,
+      SelectRoomSession::withUserId,
+      PokerSession::withUserIdAndRoomId)
+      .getStoredControl();
+  }
+
+  @Override
+  protected IControl<?, ?> createUserProfileControl(final IDataAdapter dataAdapter) {
+    return new Label();
+  }
+
+  @Override
+  protected void noteSelfChange() {
+    refreshIfDoesNotHaveOpenDialog();
+  }
 }

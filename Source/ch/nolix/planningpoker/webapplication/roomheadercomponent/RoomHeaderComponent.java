@@ -15,47 +15,43 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomHeaderComponent
 extends ComponentWithDataAdapter<RoomHeaderController, IPlanningPokerContext, IDataAdapter> {
-	
-	public RoomHeaderComponent(
-		final String userId,
-		final WebClientSession<IPlanningPokerContext> session,
-		final IDataAdapter initialDataAdapter,
-		final ISelectRoomSessionFactory selectRoomSessionFactory
-	) {
-		super(new RoomHeaderController(userId, session, selectRoomSessionFactory), initialDataAdapter);
-	}
-	
-	@Override
-	protected IControl<?, ?> createControl(final RoomHeaderController controller, final IDataAdapter dataAdapter) {
-		
-		final var userId = controller.getUserId();
-		final var user = dataAdapter.getStoredUserById(userId);
-		final var roomVisit = user.getStoredCurrentRoomVisit();
-		
-		return createControl(roomVisit, controller);
-	}
-	
-	private IControl<?, ?> createControl(final IRoomVisit roomVisit, final RoomHeaderController controller) {
-		return
-		new HorizontalStack()
-		.setRole(ContainerRole.HEADER_CONTAINER)
-		.addControl(
-			new Label()
-			.setRole(LabelRole.LEVEL1_HEADER)
-			.setText("Room " + roomVisit.getStoredParentRoom().getNumber()),
-			new Button()
-			.setText("Show link to room")
-			.setLeftMouseButtonPressAction(
-				() -> controller.openShareRoomDialog(roomVisit.getStoredParentRoom())
-			),
-			new Button()
-			.setText("Go to another room")
-			.setLeftMouseButtonPressAction(controller::openGoToOtherRoomDialog)
-		);
-	}
-	
-	@Override
-	protected void doRegistrations(final RoomHeaderController controller) {
-		//Do nothing.
-	}
+
+  public RoomHeaderComponent(
+    final String userId,
+    final WebClientSession<IPlanningPokerContext> session,
+    final IDataAdapter initialDataAdapter,
+    final ISelectRoomSessionFactory selectRoomSessionFactory) {
+    super(new RoomHeaderController(userId, session, selectRoomSessionFactory), initialDataAdapter);
+  }
+
+  @Override
+  protected IControl<?, ?> createControl(final RoomHeaderController controller, final IDataAdapter dataAdapter) {
+
+    final var userId = controller.getUserId();
+    final var user = dataAdapter.getStoredUserById(userId);
+    final var roomVisit = user.getStoredCurrentRoomVisit();
+
+    return createControl(roomVisit, controller);
+  }
+
+  private IControl<?, ?> createControl(final IRoomVisit roomVisit, final RoomHeaderController controller) {
+    return new HorizontalStack()
+      .setRole(ContainerRole.HEADER_CONTAINER)
+      .addControl(
+        new Label()
+          .setRole(LabelRole.LEVEL1_HEADER)
+          .setText("Room " + roomVisit.getStoredParentRoom().getNumber()),
+        new Button()
+          .setText("Show link to room")
+          .setLeftMouseButtonPressAction(
+            () -> controller.openShareRoomDialog(roomVisit.getStoredParentRoom())),
+        new Button()
+          .setText("Go to another room")
+          .setLeftMouseButtonPressAction(controller::openGoToOtherRoomDialog));
+  }
+
+  @Override
+  protected void doRegistrations(final RoomHeaderController controller) {
+    //Do nothing.
+  }
 }

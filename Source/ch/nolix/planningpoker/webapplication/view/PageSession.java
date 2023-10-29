@@ -14,67 +14,63 @@ import ch.nolix.systemapi.webguiapi.containerapi.ISingleContainer;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public abstract class PageSession extends WebClientSession<IPlanningPokerContext> {
-	
-	private final ISingleContainer rootControl = new SingleContainer();
-	
-	protected abstract IControl<?, ?> createMainControl(IDataAdapter dataAdapter);
-	
-	protected abstract IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter);
-	
-	@Override
-	protected final void initialize() {
-		
-		getStoredGui()
-		.pushLayerWithRootControl(rootControl)
-		.setStyle(PlanningPokerStyleCatalogue.DARK_MODE_STYLE)
-		.setRemoveLayerAction(this::noteSelfChange);
-		
-		fillUpRootControl();
-	}
-	
-	protected abstract void noteSelfChange();
-	
-	protected final void refreshIfDoesNotHaveOpenDialog() {
-		if (!hasOpenDialog()) {
-			refreshActually();
-		}
-	}
-	
-	private void fillUpRootControl() {
-		try (final var databaseAdapter = getStoredApplicationContext().createDataAdapter()) {
-			rootControl
-			.setControl(
-				new VerticalStack()
-				.setRole(ContainerRole.OVERALL_CONTAINER)
-				.addControl(
-					new VerticalStack()
-					.addControl(
-						new HorizontalStack()
-						.setRole(ContainerRole.HEADER_CONTAINER)
-						.addControl(
-							new Label()
-							.setRole(LabelRole.TITLE)
-							.setText(getApplicationName()),
-							createUserProfileControl(databaseAdapter)
-						)
-					),
-					new SingleContainer()
-					.setRole(ContainerRole.MAIN_CONTENT_CONTAINER)
-					.setControl(createMainControl(databaseAdapter)),
-					new FooterComponent(this).getStoredControl()
-				)
-			);
-		}
-	}
-	
-	private boolean hasOpenDialog() {
-		return (getStoredGui().getStoredLayers().getElementCount() > 1);
-	}
-	
-	private void refreshActually() {
-		
-		fillUpRootControl();
-		
-		refresh();
-	}
+
+  private final ISingleContainer rootControl = new SingleContainer();
+
+  protected abstract IControl<?, ?> createMainControl(IDataAdapter dataAdapter);
+
+  protected abstract IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter);
+
+  @Override
+  protected final void initialize() {
+
+    getStoredGui()
+      .pushLayerWithRootControl(rootControl)
+      .setStyle(PlanningPokerStyleCatalogue.DARK_MODE_STYLE)
+      .setRemoveLayerAction(this::noteSelfChange);
+
+    fillUpRootControl();
+  }
+
+  protected abstract void noteSelfChange();
+
+  protected final void refreshIfDoesNotHaveOpenDialog() {
+    if (!hasOpenDialog()) {
+      refreshActually();
+    }
+  }
+
+  private void fillUpRootControl() {
+    try (final var databaseAdapter = getStoredApplicationContext().createDataAdapter()) {
+      rootControl
+        .setControl(
+          new VerticalStack()
+            .setRole(ContainerRole.OVERALL_CONTAINER)
+            .addControl(
+              new VerticalStack()
+                .addControl(
+                  new HorizontalStack()
+                    .setRole(ContainerRole.HEADER_CONTAINER)
+                    .addControl(
+                      new Label()
+                        .setRole(LabelRole.TITLE)
+                        .setText(getApplicationName()),
+                      createUserProfileControl(databaseAdapter))),
+              new SingleContainer()
+                .setRole(ContainerRole.MAIN_CONTENT_CONTAINER)
+                .setControl(createMainControl(databaseAdapter)),
+              new FooterComponent(this).getStoredControl()));
+    }
+  }
+
+  private boolean hasOpenDialog() {
+    return (getStoredGui().getStoredLayers().getElementCount() > 1);
+  }
+
+  private void refreshActually() {
+
+    fillUpRootControl();
+
+    refresh();
+  }
 }
