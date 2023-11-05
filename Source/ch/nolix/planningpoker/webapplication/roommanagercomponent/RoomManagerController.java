@@ -57,7 +57,7 @@ final class RoomManagerController extends Controller<IPlanningPokerContext> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataAdapter()) {
+    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
 
       final var room = databaseAdapter.getStoredRoomById(roomId);
 
@@ -77,7 +77,7 @@ final class RoomManagerController extends Controller<IPlanningPokerContext> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataAdapter()) {
+    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
 
       final var room = databaseAdapter.getStoredRoomById(roomId);
       room.getStoredRoomVisits().forEach(IRoomVisit::deleteEstimate);

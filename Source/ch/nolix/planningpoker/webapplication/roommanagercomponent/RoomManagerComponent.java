@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.webapplication.roommanagercomponent;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.system.application.component.ComponentWithDataAdapter;
+import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
@@ -12,7 +12,7 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomManagerComponent
-extends ComponentWithDataAdapter<RoomManagerController, IPlanningPokerContext, IDataAdapter> {
+extends ComponentWithDataSupplier<RoomManagerController, IPlanningPokerContext, IDataAdapter> {
 
   public RoomManagerComponent(
     final String userId,
@@ -37,7 +37,7 @@ extends ComponentWithDataAdapter<RoomManagerController, IPlanningPokerContext, I
   }
 
   @Override
-  protected void doRegistrations(final RoomManagerController controller) {
+  protected void doRegistrations(final RoomManagerController controller, final IDataAdapter dataSupplier) {
     //Does nothing.
   }
 

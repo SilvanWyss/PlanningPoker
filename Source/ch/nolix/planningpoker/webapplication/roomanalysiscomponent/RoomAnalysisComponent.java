@@ -9,14 +9,14 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.logicapi.analysisapi.IRoomAnalysis;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.system.application.component.ComponentWithDataAdapter;
+import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.container.Grid;
 import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomAnalysisComponent
-extends ComponentWithDataAdapter<RoomAnalysisController, IPlanningPokerContext, IDataAdapter>
+extends ComponentWithDataSupplier<RoomAnalysisController, IPlanningPokerContext, IDataAdapter>
 implements ITriggerableSubscriber {
 
   public RoomAnalysisComponent(
@@ -50,7 +50,7 @@ implements ITriggerableSubscriber {
   }
 
   @Override
-  protected void doRegistrations(final RoomAnalysisController controller) {
+  protected void doRegistrations(final RoomAnalysisController controller, final IDataAdapter dataSupplier) {
     //Does nothing.
   }
 

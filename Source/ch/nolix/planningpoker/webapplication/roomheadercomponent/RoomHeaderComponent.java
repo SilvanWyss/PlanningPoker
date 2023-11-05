@@ -4,7 +4,7 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
-import ch.nolix.system.application.component.ComponentWithDataAdapter;
+import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
@@ -15,7 +15,7 @@ import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomHeaderComponent
-extends ComponentWithDataAdapter<RoomHeaderController, IPlanningPokerContext, IDataAdapter> {
+extends ComponentWithDataSupplier<RoomHeaderController, IPlanningPokerContext, IDataAdapter> {
 
   public RoomHeaderComponent(
     final String userId,
@@ -41,8 +41,8 @@ extends ComponentWithDataAdapter<RoomHeaderController, IPlanningPokerContext, ID
   }
 
   @Override
-  protected void doRegistrations(final RoomHeaderController controller) {
-    //Do nothing.
+  protected void doRegistrations(final RoomHeaderController controller, final IDataAdapter dataSupplier) {
+    //Does nothing.
   }
 
   private IControl<?, ?> createControl(final IRoomVisit roomVisit, final RoomHeaderController controller) {

@@ -20,7 +20,7 @@ final class SelectRoomController extends Controller<IPlanningPokerContext> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataAdapter()) {
+    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       final var room = databaseAdapter.createNewRoomAndEnterRoom(user);
@@ -35,7 +35,7 @@ final class SelectRoomController extends Controller<IPlanningPokerContext> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataAdapter()) {
+    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       final var room = databaseAdapter.getStoredRoomByNumber(roomNumber);

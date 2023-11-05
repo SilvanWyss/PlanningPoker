@@ -6,7 +6,7 @@ import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
-import ch.nolix.system.application.component.ComponentWithDataAdapter;
+import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
@@ -15,7 +15,7 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CardSetComponent
-extends ComponentWithDataAdapter<CardSetController, IPlanningPokerContext, IDataAdapter>
+extends ComponentWithDataSupplier<CardSetController, IPlanningPokerContext, IDataAdapter>
 implements ITriggerableSubscriber {
 
   private static final RoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
@@ -48,7 +48,7 @@ implements ITriggerableSubscriber {
   }
 
   @Override
-  protected void doRegistrations(final CardSetController controller) {
+  protected void doRegistrations(final CardSetController controller, final IDataAdapter dataSupplier) {
     //Does nothing.
   }
 

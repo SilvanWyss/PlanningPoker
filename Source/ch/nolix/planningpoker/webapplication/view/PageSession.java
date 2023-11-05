@@ -41,7 +41,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
   }
 
   private void fillUpRootControl() {
-    try (final var databaseAdapter = getStoredApplicationContext().createDataAdapter()) {
+    try (final var databaseAdapter = getStoredApplicationContext().createDataSupplier()) {
       rootControl
         .setControl(
           new VerticalStack()

@@ -37,7 +37,7 @@ public final class PlanningPokerContext implements IPlanningPokerContext {
   }
 
   @Override
-  public IDataAdapter createDataAdapter() {
+  public IDataAdapter createDataSupplier() {
     return DatabaseAdapter.usingDatabaseAdapter(internalDatabaseAdapter.getEmptyCopy());
   }
 

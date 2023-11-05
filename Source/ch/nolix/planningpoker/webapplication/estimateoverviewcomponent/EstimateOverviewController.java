@@ -54,7 +54,7 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var dataAdapter = applicationContext.createDataAdapter()) {
+    try (final var dataAdapter = applicationContext.createDataSupplier()) {
 
       final var user = dataAdapter.getStoredUserById(userId);
 
@@ -104,7 +104,7 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var dataAdapter = applicationContext.createDataAdapter()) {
+    try (final var dataAdapter = applicationContext.createDataSupplier()) {
 
       final var user = dataAdapter.getStoredUserById(userId);
       dataAdapter.leaveRoom(user);

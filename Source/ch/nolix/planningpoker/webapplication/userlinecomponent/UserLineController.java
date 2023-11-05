@@ -28,7 +28,7 @@ final class UserLineController extends Controller<IPlanningPokerContext> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataAdapter()) {
+    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       final var originUserName = user.getName();
@@ -48,7 +48,7 @@ final class UserLineController extends Controller<IPlanningPokerContext> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataAdapter()) {
+    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
       final var user = databaseAdapter.getStoredUserById(userId);
       user.setName(newUserName);
       databaseAdapter.saveChanges();

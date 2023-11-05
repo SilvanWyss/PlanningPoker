@@ -35,7 +35,7 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 
   @Override
   public void trigger() {
-    try (final var dataAdapter = getStoredApplicationContext().createDataAdapter()) {
+    try (final var dataAdapter = getStoredApplicationContext().createDataSupplier()) {
 
       final var user = dataAdapter.getStoredUserById(userId);
 
