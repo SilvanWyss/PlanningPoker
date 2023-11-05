@@ -16,6 +16,10 @@ extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 
   public static final String APPLICATION_NAME = "Planning Poker";
 
+  private PlanningPokerApplication(final DataAdapter databaseAdapter) {
+    super(PlanningPokerContext.withDatabaseAdapter(databaseAdapter));
+  }
+
   public static PlanningPokerApplication withFileNodeDatabase(final String filePath) {
 
     final var fileNodeDatabase = new FileNode(filePath);
@@ -38,10 +42,6 @@ extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
       .andSchema(SchemaCatalogue.SCHEMA);
 
     return new PlanningPokerApplication(databaseAdapter);
-  }
-
-  private PlanningPokerApplication(final DataAdapter databaseAdapter) {
-    super(PlanningPokerContext.withDatabaseAdapter(databaseAdapter));
   }
 
   @Override

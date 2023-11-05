@@ -8,10 +8,6 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class SelectRoomSession extends PageSession {
 
-  public static SelectRoomSession withUserId(final String userId) {
-    return new SelectRoomSession(userId);
-  }
-
   private final String userId;
 
   private SelectRoomSession(final String userId) {
@@ -19,6 +15,10 @@ public final class SelectRoomSession extends PageSession {
     GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
 
     this.userId = userId;
+  }
+
+  public static SelectRoomSession withUserId(final String userId) {
+    return new SelectRoomSession(userId);
   }
 
   @Override

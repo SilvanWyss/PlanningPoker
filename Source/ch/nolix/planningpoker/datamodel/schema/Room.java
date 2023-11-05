@@ -15,14 +15,6 @@ public final class Room extends Entity implements IRoom {
 
   public static final boolean DEFAULT_ESTIMATES_VISIBLE_VALUE = false;
 
-  public static Room fromParentCreator(final User parentCreator) {
-
-    final var room = new Room();
-    room.setParentCreator(parentCreator);
-
-    return room;
-  }
-
   private final Value<String> number = new Value<>();
 
   private final Reference<User> parentCreator = Reference.forEntity(User.class);
@@ -38,9 +30,17 @@ public final class Room extends Entity implements IRoom {
     setInsertAction(this::setNumber);
   }
 
+  public static Room fromParentCreator(final User parentCreator) {
+
+    final var room = new Room();
+    room.setParentCreator(parentCreator);
+
+    return room;
+  }
+
   @Override
   public void addRoomVisit(final IRoomVisit roomVisit) {
-    roomVisits.addEntity((RoomVisit) roomVisit);
+    roomVisits.addEntity(roomVisit);
   }
 
   @Override

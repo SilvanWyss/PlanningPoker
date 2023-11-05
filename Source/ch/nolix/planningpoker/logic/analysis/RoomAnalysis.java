@@ -10,16 +10,6 @@ import ch.nolix.planningpokerapi.logicapi.analysisapi.IRoomAnalysis;
 
 public final class RoomAnalysis implements IRoomAnalysis {
 
-  public static RoomAnalysis forRoom(final IRoom room) {
-
-    final var estimatesInStoryPoints = room
-      .getStoredRoomVisits()
-      .getStoredSelected(IRoomVisit::hasEstimateInStorypoints)
-      .to(IRoomVisit::getEstimateInStoryPoints);
-
-    return new RoomAnalysis(estimatesInStoryPoints);
-  }
-
   private final IContainer<Double> estimatesInStoryPoints;
 
   private RoomAnalysis(final IContainer<Double> estimatesInStoryPoints) {
@@ -27,6 +17,16 @@ public final class RoomAnalysis implements IRoomAnalysis {
     GlobalValidator.assertThat(estimatesInStoryPoints).thatIsNamed("estimates in story points").isNotNull();
 
     this.estimatesInStoryPoints = estimatesInStoryPoints;
+  }
+
+  public static RoomAnalysis forRoom(final IRoom room) {
+  
+    final var estimatesInStoryPoints = room
+      .getStoredRoomVisits()
+      .getStoredSelected(IRoomVisit::hasEstimateInStorypoints)
+      .to(IRoomVisit::getEstimateInStoryPoints);
+  
+    return new RoomAnalysis(estimatesInStoryPoints);
   }
 
   @Override

@@ -15,14 +15,6 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 
   private static final boolean DEFAULT_INFINITE_ESTIMATE_FLAG = false;
 
-  public static RoomVisit forVisitor(final User visitor) {
-
-    final var roomVisit = new RoomVisit();
-    roomVisit.setVisitor(visitor);
-
-    return roomVisit;
-  }
-
   private final BackReference<Room> parentRoom = BackReference.forEntityAndBackReferencedPropertyName(Room.class,
     "roomVisits");
 
@@ -34,6 +26,14 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 
   private RoomVisit() {
     initialize();
+  }
+
+  public static RoomVisit forVisitor(final User visitor) {
+  
+    final var roomVisit = new RoomVisit();
+    roomVisit.setVisitor(visitor);
+  
+    return roomVisit;
   }
 
   @Override

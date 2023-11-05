@@ -13,15 +13,15 @@ import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 
 public final class DatabaseAdapter implements IDataAdapter {
 
-  public static DatabaseAdapter usingDatabaseAdapter(
-    final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
-    return new DatabaseAdapter(databaseAdapter);
-  }
-
   private final ch.nolix.system.objectdatabase.database.DataAdapter internalDatabaseAdapter;
 
   private DatabaseAdapter(final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
     this.internalDatabaseAdapter = databaseAdapter.getEmptyCopy();
+  }
+
+  public static DatabaseAdapter usingDatabaseAdapter(
+    final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
+    return new DatabaseAdapter(databaseAdapter);
   }
 
   @Override

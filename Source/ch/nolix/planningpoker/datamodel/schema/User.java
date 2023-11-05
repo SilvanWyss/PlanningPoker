@@ -12,14 +12,6 @@ public final class User extends Entity implements IUser {
 
   public static final int MAX_NAME_LENGTH = 20;
 
-  public static User withName(final String name) {
-
-    final var user = new User();
-    user.setName(name);
-
-    return user;
-  }
-
   private final Value<String> name = new Value<>();
 
   private final OptionalBackReference<RoomVisit> currentRoomVisit = OptionalBackReference
@@ -27,6 +19,14 @@ public final class User extends Entity implements IUser {
 
   private User() {
     initialize();
+  }
+
+  public static User withName(final String name) {
+  
+    final var user = new User();
+    user.setName(name);
+  
+    return user;
   }
 
   @Override

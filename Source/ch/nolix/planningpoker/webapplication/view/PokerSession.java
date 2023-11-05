@@ -16,10 +16,6 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class PokerSession extends PageSession implements ITriggerableSubscriber {
 
-  public static PokerSession withUserIdAndRoomId(final String userId, final String roomId) {
-    return new PokerSession(userId, roomId);
-  }
-
   private final String userId;
 
   private final String roomId;
@@ -31,6 +27,10 @@ public final class PokerSession extends PageSession implements ITriggerableSubsc
 
     this.userId = userId;
     this.roomId = roomId;
+  }
+
+  public static PokerSession withUserIdAndRoomId(final String userId, final String roomId) {
+    return new PokerSession(userId, roomId);
   }
 
   @Override

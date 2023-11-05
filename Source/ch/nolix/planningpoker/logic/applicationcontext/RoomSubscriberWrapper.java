@@ -5,12 +5,6 @@ import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 
 public final class RoomSubscriberWrapper implements ITriggerableSubscriber {
 
-  public static RoomSubscriberWrapper forRoomAndSubscriber(
-    final String roomId,
-    final ITriggerableSubscriber roomSubscriber) {
-    return new RoomSubscriberWrapper(roomId, roomSubscriber);
-  }
-
   private final String roomId;
 
   private final ITriggerableSubscriber roomSubscriber;
@@ -22,6 +16,12 @@ public final class RoomSubscriberWrapper implements ITriggerableSubscriber {
 
     this.roomId = roomId;
     this.roomSubscriber = roomSubscriber;
+  }
+
+  public static RoomSubscriberWrapper forRoomAndSubscriber(
+    final String roomId,
+    final ITriggerableSubscriber roomSubscriber) {
+    return new RoomSubscriberWrapper(roomId, roomSubscriber);
   }
 
   public boolean containsRoomSubscriber(final ITriggerableSubscriber roomSubscriber) {

@@ -7,22 +7,6 @@ import ch.nolix.planningpokerapi.webapplicationapi.controllerapi.IRoomTarget;
 
 public final class RoomTarget extends ApplicationInstanceTarget implements IRoomTarget {
 
-  public static RoomTarget forIpOrAddressNameAndPortAndApplicationInstanceNameAndRoomNumberAndSecurityLevelForConnections(
-    final String ipOrAddressName,
-    final int port,
-    final String applicationName,
-    final String applicationUrlInstanceName,
-    final String roomNumber,
-    final SecurityLevel securityLevelForConnections) {
-    return new RoomTarget(
-      ipOrAddressName,
-      port,
-      applicationName,
-      applicationUrlInstanceName,
-      roomNumber,
-      securityLevelForConnections);
-  }
-
   private final String roomNumber;
 
   private RoomTarget(
@@ -38,6 +22,23 @@ public final class RoomTarget extends ApplicationInstanceTarget implements IRoom
     GlobalValidator.assertThat(roomNumber).thatIsNamed("room number").isNotBlank();
 
     this.roomNumber = roomNumber;
+  }
+
+  public static RoomTarget //
+  forIpOrAddressNameAndPortAndApplicationInstanceNameAndRoomNumberAndSecurityLevelForConnections(
+    final String ipOrAddressName,
+    final int port,
+    final String applicationName,
+    final String applicationUrlInstanceName,
+    final String roomNumber,
+    final SecurityLevel securityLevelForConnections) {
+    return new RoomTarget(
+      ipOrAddressName,
+      port,
+      applicationName,
+      applicationUrlInstanceName,
+      roomNumber,
+      securityLevelForConnections);
   }
 
   @Override
