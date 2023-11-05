@@ -8,6 +8,7 @@ import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
+import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomManagerComponent
@@ -17,7 +18,12 @@ extends ComponentWithDataAdapter<RoomManagerController, IPlanningPokerContext, I
     final String userId,
     final WebClientSession<IPlanningPokerContext> session,
     final IDataAdapter initialDataAdapter) {
-    super(new RoomManagerController(userId, session), initialDataAdapter);
+    super(new RoomManagerController(userId), initialDataAdapter, session);
+  }
+
+  @Override
+  public RefreshBehavior getRefreshBehavior() {
+    return RefreshBehavior.REFRESH_SELF;
   }
 
   @Override
@@ -28,6 +34,11 @@ extends ComponentWithDataAdapter<RoomManagerController, IPlanningPokerContext, I
     final var roomVisit = user.getStoredCurrentRoomVisit();
 
     return createControl(roomVisit, controller);
+  }
+
+  @Override
+  protected void doRegistrations(final RoomManagerController controller) {
+    //Does nothing.
   }
 
   private IControl<?, ?> createControl(final IRoomVisit roomVisit, final RoomManagerController controller) {
@@ -45,10 +56,5 @@ extends ComponentWithDataAdapter<RoomManagerController, IPlanningPokerContext, I
           .setText("Delete estimates")
           .setLeftMouseButtonPressAction(
             () -> controller.openDeleteEstimatesDialog(roomVisit.getStoredParentRoom().getId())));
-  }
-
-  @Override
-  protected void doRegistrations(final RoomManagerController controller) {
-    //Does nothing.
   }
 }

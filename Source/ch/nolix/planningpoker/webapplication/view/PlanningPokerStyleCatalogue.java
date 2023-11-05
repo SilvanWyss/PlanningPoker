@@ -15,7 +15,7 @@ import ch.nolix.template.webgui.style.StyleCatalogue;
 
 public final class PlanningPokerStyleCatalogue {
 
-  public static final IStyle DARK_MODE_STYLE = StyleCatalogue.DARK_MODE_STYLE
+  public static final IStyle DARK_MODE_STYLE = StyleCatalogue.DARK_STYLE
     .withAttachingAttributesAndSubStyles(
       new ImmutableList<>(),
       LinkedList

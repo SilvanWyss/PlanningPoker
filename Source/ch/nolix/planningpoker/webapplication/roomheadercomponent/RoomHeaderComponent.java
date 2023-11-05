@@ -9,6 +9,7 @@ import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
+import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.atomiccontrolapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
@@ -21,7 +22,12 @@ extends ComponentWithDataAdapter<RoomHeaderController, IPlanningPokerContext, ID
     final WebClientSession<IPlanningPokerContext> session,
     final IDataAdapter initialDataAdapter,
     final ISelectRoomSessionFactory selectRoomSessionFactory) {
-    super(new RoomHeaderController(userId, session, selectRoomSessionFactory), initialDataAdapter);
+    super(new RoomHeaderController(userId, selectRoomSessionFactory), initialDataAdapter, session);
+  }
+
+  @Override
+  public RefreshBehavior getRefreshBehavior() {
+    return RefreshBehavior.REFRESH_SELF;
   }
 
   @Override
@@ -32,6 +38,11 @@ extends ComponentWithDataAdapter<RoomHeaderController, IPlanningPokerContext, ID
     final var roomVisit = user.getStoredCurrentRoomVisit();
 
     return createControl(roomVisit, controller);
+  }
+
+  @Override
+  protected void doRegistrations(final RoomHeaderController controller) {
+    //Do nothing.
   }
 
   private IControl<?, ?> createControl(final IRoomVisit roomVisit, final RoomHeaderController controller) {
@@ -48,10 +59,5 @@ extends ComponentWithDataAdapter<RoomHeaderController, IPlanningPokerContext, ID
         new Button()
           .setText("Go to another room")
           .setLeftMouseButtonPressAction(controller::openGoToOtherRoomDialog));
-  }
-
-  @Override
-  protected void doRegistrations(final RoomHeaderController controller) {
-    //Do nothing.
   }
 }

@@ -11,6 +11,7 @@ import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
+import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CardSetComponent
@@ -24,7 +25,12 @@ implements ITriggerableSubscriber {
     final String roomId,
     final WebClientSession<IPlanningPokerContext> session,
     final IDataAdapter initialDataAdapter) {
-    super(new CardSetController(roomVisitId, roomId, session), initialDataAdapter);
+    super(new CardSetController(roomVisitId, roomId), initialDataAdapter, session);
+  }
+
+  @Override
+  public RefreshBehavior getRefreshBehavior() {
+    return RefreshBehavior.REFRESH_SELF;
   }
 
   @Override

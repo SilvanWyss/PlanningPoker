@@ -9,6 +9,7 @@ import ch.nolix.system.application.component.ComponentWithDataAdapter;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.Button;
 import ch.nolix.system.webgui.container.Grid;
+import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class EstimateOverviewComponent
@@ -22,7 +23,12 @@ implements ITriggerableSubscriber {
     final String roomId,
     final WebClientSession<IPlanningPokerContext> session,
     IDataAdapter initialDataAdapter) {
-    super(new EstimateOverviewController(roomVisitId, roomId, session), initialDataAdapter);
+    super(new EstimateOverviewController(roomVisitId, roomId), initialDataAdapter, session);
+  }
+
+  @Override
+  public RefreshBehavior getRefreshBehavior() {
+    return RefreshBehavior.REFRESH_SELF;
   }
 
   @Override

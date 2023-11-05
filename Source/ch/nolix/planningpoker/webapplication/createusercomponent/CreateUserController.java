@@ -15,11 +15,8 @@ final class CreateUserController extends Controller<IPlanningPokerContext> {
   private final IPokerSessionFactory pokerSessionFactory;
 
   public CreateUserController(
-    final WebClientSession<IPlanningPokerContext> session,
     final ISelectRoomSessionFactory selectRoomSessionFactory,
     final IPokerSessionFactory pokerSessionFactory) {
-
-    super(session);
 
     GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
     GlobalValidator.assertThat(pokerSessionFactory).thatIsNamed(IPokerSessionFactory.class).isNotNull();
@@ -31,7 +28,7 @@ final class CreateUserController extends Controller<IPlanningPokerContext> {
   public void createUserAndSetCookieAndRedirect(final String userName) {
 
     final var applicationContext = getStoredApplicationContext();
-    final var session = getStoredSession();
+    final var session = getStoredWebClientSession();
 
     final var roomNumber = session.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
 

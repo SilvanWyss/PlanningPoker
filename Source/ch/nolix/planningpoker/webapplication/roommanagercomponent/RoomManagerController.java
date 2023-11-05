@@ -4,16 +4,13 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.component.Controller;
-import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
 final class RoomManagerController extends Controller<IPlanningPokerContext> {
 
   private final String userId;
 
-  public RoomManagerController(final String userId, final WebClientSession<IPlanningPokerContext> session) {
-
-    super(session);
+  public RoomManagerController(final String userId) {
 
     GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
 
@@ -52,7 +49,7 @@ final class RoomManagerController extends Controller<IPlanningPokerContext> {
       .setConfirmAction(() -> deleteEstimatesAndTrigger(roomId))
       .build();
 
-    getStoredSession().getStoredGui().pushLayer(
+    getStoredWebClientSession().getStoredGui().pushLayer(
       deleteEstimateDialog);
   }
 

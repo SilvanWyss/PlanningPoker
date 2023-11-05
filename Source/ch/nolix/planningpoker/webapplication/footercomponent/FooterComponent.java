@@ -9,6 +9,7 @@ import ch.nolix.system.webgui.atomiccontrol.ImageControl;
 import ch.nolix.system.webgui.atomiccontrol.Label;
 import ch.nolix.system.webgui.atomiccontrol.Link;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
+import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.graphicapi.imageapi.IImage;
 import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
@@ -25,7 +26,12 @@ public final class FooterComponent extends Component<FooterController, IPlanning
   private static final String NOLIX_WEB_GUIS_LINK = "https://nolix.ch/nolix_web-guis.html";
 
   public FooterComponent(final WebClientSession<IPlanningPokerContext> session) {
-    super(new FooterController(session));
+    super(new FooterController(), session);
+  }
+
+  @Override
+  public RefreshBehavior getRefreshBehavior() {
+    return RefreshBehavior.REFRESH_SELF;
   }
 
   @Override

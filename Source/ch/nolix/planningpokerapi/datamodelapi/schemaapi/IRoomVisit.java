@@ -1,8 +1,8 @@
 package ch.nolix.planningpokerapi.datamodelapi.schemaapi;
 
-import ch.nolix.coreapi.attributeapi.mandatoryattributeapi.Identified;
+import ch.nolix.coreapi.attributeapi.mandatoryattributeapi.IIdHolder;
 
-public interface IRoomVisit extends Identified {
+public interface IRoomVisit extends IIdHolder {
 
   void deleteEstimate();
 

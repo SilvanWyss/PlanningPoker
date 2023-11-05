@@ -9,12 +9,18 @@ import ch.nolix.system.webgui.atomiccontrol.Textbox;
 import ch.nolix.system.webgui.atomiccontrol.ValidationLabel;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
+import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class SelectRoomComponent extends Component<SelectRoomController, IPlanningPokerContext> {
 
   public SelectRoomComponent(final String userId, final WebClientSession<IPlanningPokerContext> session) {
-    super(new SelectRoomController(userId, session));
+    super(new SelectRoomController(userId), session);
+  }
+
+  @Override
+  public RefreshBehavior getRefreshBehavior() {
+    return RefreshBehavior.REFRESH_SELF;
   }
 
   @Override

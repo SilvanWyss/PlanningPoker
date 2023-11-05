@@ -10,7 +10,6 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.component.Controller;
-import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
 final class EstimateOverviewController extends Controller<IPlanningPokerContext> {
@@ -21,12 +20,7 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
 
   private final String roomId;
 
-  public EstimateOverviewController(
-    final String roomVisitId,
-    final String roomId,
-    final WebClientSession<IPlanningPokerContext> session) {
-
-    super(session);
+  public EstimateOverviewController(final String roomVisitId, final String roomId) {
 
     GlobalValidator.assertThat(roomId).thatIsNamed("room visit id").isNotBlank();
     GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
@@ -69,7 +63,7 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
         .setConfirmAction(() -> kickUserAndTrigger(userId))
         .build();
 
-      getStoredSession().getStoredGui().pushLayer(kickUserDialog);
+      getStoredWebClientSession().getStoredGui().pushLayer(kickUserDialog);
     }
   }
 

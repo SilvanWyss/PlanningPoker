@@ -4,15 +4,12 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.system.application.component.Controller;
-import ch.nolix.system.application.webapplication.WebClientSession;
 
 final class SelectRoomController extends Controller<IPlanningPokerContext> {
 
   private final String userId;
 
-  public SelectRoomController(final String userId, final WebClientSession<IPlanningPokerContext> session) {
-
-    super(session);
+  public SelectRoomController(final String userId) {
 
     GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
 
@@ -30,7 +27,7 @@ final class SelectRoomController extends Controller<IPlanningPokerContext> {
       databaseAdapter.saveChanges();
 
       final var pokerSession = pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(userId, room.getId());
-      getStoredSession().setNext(pokerSession);
+      getStoredWebClientSession().setNext(pokerSession);
     }
   }
 
@@ -48,7 +45,7 @@ final class SelectRoomController extends Controller<IPlanningPokerContext> {
       applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 
       final var pokerSession = pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(userId, room.getId());
-      getStoredSession().setNext(pokerSession);
+      getStoredWebClientSession().setNext(pokerSession);
     }
   }
 }

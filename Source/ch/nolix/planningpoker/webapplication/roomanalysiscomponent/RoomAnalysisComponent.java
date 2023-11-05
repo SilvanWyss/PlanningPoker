@@ -12,6 +12,7 @@ import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerCo
 import ch.nolix.system.application.component.ComponentWithDataAdapter;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.container.Grid;
+import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomAnalysisComponent
@@ -22,7 +23,12 @@ implements ITriggerableSubscriber {
     final String roomId,
     final WebClientSession<IPlanningPokerContext> session,
     final IDataAdapter initialDataAdapter) {
-    super(new RoomAnalysisController(roomId, session), initialDataAdapter);
+    super(new RoomAnalysisController(roomId), initialDataAdapter, session);
+  }
+
+  @Override
+  public RefreshBehavior getRefreshBehavior() {
+    return RefreshBehavior.REFRESH_SELF;
   }
 
   @Override

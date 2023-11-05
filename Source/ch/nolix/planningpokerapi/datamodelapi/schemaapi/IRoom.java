@@ -1,9 +1,9 @@
 package ch.nolix.planningpokerapi.datamodelapi.schemaapi;
 
-import ch.nolix.coreapi.attributeapi.mandatoryattributeapi.Identified;
+import ch.nolix.coreapi.attributeapi.mandatoryattributeapi.IIdHolder;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 
-public interface IRoom extends Identified {
+public interface IRoom extends IIdHolder {
 
   void addRoomVisit(IRoomVisit roomVisit);
 

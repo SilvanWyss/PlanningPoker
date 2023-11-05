@@ -5,7 +5,6 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.component.Controller;
-import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.template.webgui.dialog.ShowValueDialogBuilder;
 import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
@@ -17,12 +16,7 @@ final class RoomHeaderController extends Controller<IPlanningPokerContext> {
 
   private final ISelectRoomSessionFactory selectRoomSessionFactory;
 
-  public RoomHeaderController(
-    final String userId,
-    final WebClientSession<IPlanningPokerContext> session,
-    final ISelectRoomSessionFactory selectRoomSessionFactory) {
-
-    super(session);
+  public RoomHeaderController(final String userId, final ISelectRoomSessionFactory selectRoomSessionFactory) {
 
     GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
     GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
@@ -42,22 +36,22 @@ final class RoomHeaderController extends Controller<IPlanningPokerContext> {
       .setConfirmAction(this::goToOtherRoomAndTrigger)
       .build();
 
-    getStoredSession().getStoredGui().pushLayer(goToOtherRoomDialog);
+    getStoredWebClientSession().getStoredGui().pushLayer(goToOtherRoomDialog);
   }
 
   public void openShareRoomDialog(final IRoom room) {
 
-    final var application = getStoredSession().getStoredParentClient().getStoredParentApplication();
+    final var application = getStoredWebClientSession().getStoredParentClient().getStoredParentApplication();
 
     final var roomHyperlink = ROOM_HYPERLINK_CREATOR.createHyperlinkToRoom(room, application);
 
     final var shareRoomDialog = new ShowValueDialogBuilder()
       .setValueName("Link to room")
       .setValue(roomHyperlink)
-      .setValueCopier(v -> getStoredSession().getStoredGui().onFrontEnd().writeTextToClipboard(v))
+      .setValueCopier(v -> getStoredWebClientSession().getStoredGui().onFrontEnd().writeTextToClipboard(v))
       .build();
 
-    getStoredSession().getStoredGui().pushLayer(shareRoomDialog);
+    getStoredWebClientSession().getStoredGui().pushLayer(shareRoomDialog);
   }
 
   private void goToOtherRoomAndTrigger() {
@@ -72,7 +66,7 @@ final class RoomHeaderController extends Controller<IPlanningPokerContext> {
 
       databaseAdapter.saveChanges();
 
-      getStoredSession().setNext(selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId));
+      getStoredWebClientSession().setNext(selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId));
 
       applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
     }

@@ -124,6 +124,11 @@ public final class DatabaseAdapter implements IDataAdapter {
   }
 
   @Override
+  public boolean isClosed() {
+    return internalDatabaseAdapter.isClosed();
+  }
+
+  @Override
   public void leaveRoom(final IUser user) {
 
     final var roomVisit = (RoomVisit) user.getStoredCurrentRoomVisit();

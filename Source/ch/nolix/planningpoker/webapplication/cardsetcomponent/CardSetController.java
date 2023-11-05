@@ -6,7 +6,6 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.application.component.Controller;
-import ch.nolix.system.application.webapplication.WebClientSession;
 
 final class CardSetController extends Controller<IPlanningPokerContext> {
 
@@ -14,12 +13,7 @@ final class CardSetController extends Controller<IPlanningPokerContext> {
 
   private final String roomId;
 
-  public CardSetController(
-    final String roomVisitId,
-    final String roomId,
-    final WebClientSession<IPlanningPokerContext> session) {
-
-    super(session);
+  public CardSetController(final String roomVisitId, final String roomId) {
 
     GlobalValidator.assertThat(roomVisitId).thatIsNamed("room visit id").isNotBlank();
     GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
