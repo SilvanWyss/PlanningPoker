@@ -1,0 +1,102 @@
+package ch.nolix.planningpoker.webapplication.roomcomponent;
+
+import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
+import ch.nolix.planningpoker.webapplication.cardsetcomponent.CardSetComponent;
+import ch.nolix.planningpoker.webapplication.estimateoverviewcomponent.EstimateOverviewComponent;
+import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
+import ch.nolix.planningpoker.webapplication.roomheadercomponent.RoomHeaderComponent;
+import ch.nolix.planningpoker.webapplication.roommanagercomponent.RoomManagerComponent;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
+import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
+import ch.nolix.system.application.component.ComponentWithDataSupplier;
+import ch.nolix.system.application.webapplication.WebClientSession;
+import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
+import ch.nolix.system.webgui.linearcontainer.VerticalStack;
+import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
+import ch.nolix.systemapi.webguiapi.mainapi.IControl;
+
+public final class RoomComponent
+extends ComponentWithDataSupplier<RoomComponentController, IPlanningPokerContext, IDataAdapter>
+implements ITriggerableSubscriber {
+
+  private final ISelectRoomSessionFactory selectRoomSessionFactory;
+
+  public RoomComponent(
+    final String userId,
+    final IDataAdapter initialDataAdapter,
+    final WebClientSession<IPlanningPokerContext> webClientSession,
+    final ISelectRoomSessionFactory selectRoomSessionFactory) {
+
+    super(new RoomComponentController(userId), initialDataAdapter, webClientSession);
+
+    GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
+
+    this.selectRoomSessionFactory = selectRoomSessionFactory;
+  }
+
+  @Override
+  public RefreshBehavior getRefreshBehavior() {
+    return RefreshBehavior.REFRESH_SELF;
+  }
+
+  @Override
+  public void trigger() {
+
+    final var userId = getStoredController().getUserId();
+
+    try (final var dataSpplier = getStoredApplicationContext().createDataSupplier()) {
+
+      final var user = dataSpplier.getStoredUserById(userId);
+
+      if (user.isInARoom()) {
+        refresh();
+      } else {
+
+        final var selectRoomSession = selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId);
+
+        getStoredWebClientSession().setNext(selectRoomSession);
+      }
+    }
+  }
+
+  @Override
+  protected IControl<?, ?> createControl(RoomComponentController controller, IDataAdapter dataAdapter) {
+
+    final var userId = getStoredController().getUserId();
+    final var user = dataAdapter.getStoredUserById(userId);
+    final var roomVisit = user.getStoredCurrentRoomVisit();
+    final var room = roomVisit.getStoredParentRoom();
+    final var roomId = room.getId();
+
+    return new VerticalStack()
+      .addControl(
+        new RoomHeaderComponent(userId, getStoredWebClientSession(), dataAdapter,
+          this::createSelectRoomSessionWihtUserId)
+          .getStoredControl(),
+        new RoomManagerComponent(userId, getStoredWebClientSession(), dataAdapter).getStoredControl(),
+        new CardSetComponent(roomVisit.getId(), roomId, getStoredWebClientSession(), dataAdapter).getStoredControl(),
+        new HorizontalStack()
+          .addControl(
+            new EstimateOverviewComponent(roomVisit.getId(), roomId, getStoredWebClientSession(), dataAdapter)
+              .getStoredControl(),
+            new RoomAnalysisComponent(roomId, getStoredWebClientSession(), dataAdapter).getStoredControl()));
+  }
+
+  @Override
+  protected void doRegistrations(final RoomComponentController controller, final IDataAdapter dataSupplier) {
+
+    final var userId = getStoredController().getUserId();
+    final var user = dataSupplier.getStoredUserById(userId);
+    final var roomVisit = user.getStoredCurrentRoomVisit();
+    final var room = roomVisit.getStoredParentRoom();
+    final var roomId = room.getId();
+
+    getStoredApplicationContext().getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
+  }
+
+  private WebClientSession<IPlanningPokerContext> createSelectRoomSessionWihtUserId(String userId) {
+    return selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId);
+  }
+}
