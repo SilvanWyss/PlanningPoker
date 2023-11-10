@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.webapplication.roomcomponent;
+package ch.nolix.planningpoker.webapplication.pokercomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
@@ -17,19 +17,19 @@ import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class RoomComponent
-extends ComponentWithDataSupplier<RoomComponentController, IPlanningPokerContext, IDataAdapter>
+public final class PokerComponent
+extends ComponentWithDataSupplier<PokerComponentController, IPlanningPokerContext, IDataAdapter>
 implements ITriggerableSubscriber {
 
   private final ISelectRoomSessionFactory selectRoomSessionFactory;
 
-  public RoomComponent(
+  public PokerComponent(
     final String userId,
     final IDataAdapter initialDataAdapter,
     final WebClientSession<IPlanningPokerContext> webClientSession,
     final ISelectRoomSessionFactory selectRoomSessionFactory) {
 
-    super(new RoomComponentController(userId), initialDataAdapter, webClientSession);
+    super(new PokerComponentController(userId), initialDataAdapter, webClientSession);
 
     GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
 
@@ -62,7 +62,7 @@ implements ITriggerableSubscriber {
   }
 
   @Override
-  protected IControl<?, ?> createControl(RoomComponentController controller, IDataAdapter dataAdapter) {
+  protected IControl<?, ?> createControl(PokerComponentController controller, IDataAdapter dataAdapter) {
 
     final var userId = getStoredController().getUserId();
     final var user = dataAdapter.getStoredUserById(userId);
@@ -85,7 +85,7 @@ implements ITriggerableSubscriber {
   }
 
   @Override
-  protected void doRegistrations(final RoomComponentController controller, final IDataAdapter dataSupplier) {
+  protected void doRegistrations(final PokerComponentController controller, final IDataAdapter dataSupplier) {
 
     final var userId = getStoredController().getUserId();
     final var user = dataSupplier.getStoredUserById(userId);
