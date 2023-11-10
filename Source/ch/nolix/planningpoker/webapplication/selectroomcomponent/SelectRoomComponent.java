@@ -36,7 +36,7 @@ public final class SelectRoomComponent extends Component<SelectRoomController, I
               .setText("Create new room")
               .setLeftMouseButtonPressAction(
                 () -> controller.createAndEnterRoomAndRedirect(
-                  PokerSession::withUserIdAndRoomId))),
+                  PokerSession::withUserId))),
         new ValidationLabel(),
         new HorizontalStack()
           .addControl(
@@ -46,7 +46,7 @@ public final class SelectRoomComponent extends Component<SelectRoomController, I
               .setLeftMouseButtonPressAction(
                 () -> controller.enterRoomAndRedirect(
                   roomNumberTextbox.getText(),
-                  PokerSession::withUserIdAndRoomId))));
+                  PokerSession::withUserId))));
   }
 
   @Override

@@ -30,9 +30,4 @@ public final class SelectRoomSession extends PageSession {
   protected IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter) {
     return new UserLineComponent(userId, this, dataAdapter).getStoredControl();
   }
-
-  @Override
-  protected void noteSelfChange() {
-    refreshIfDoesNotHaveOpenDialog();
-  }
 }

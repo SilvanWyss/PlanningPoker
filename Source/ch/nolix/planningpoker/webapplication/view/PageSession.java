@@ -10,12 +10,9 @@ import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.webguiapi.atomiccontrolapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
-import ch.nolix.systemapi.webguiapi.containerapi.ISingleContainer;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public abstract class PageSession extends WebClientSession<IPlanningPokerContext> {
-
-  private final ISingleContainer rootControl = new SingleContainer();
 
   protected abstract IControl<?, ?> createMainControl(IDataAdapter dataAdapter);
 
@@ -23,54 +20,29 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
 
   @Override
   protected final void initialize() {
-
     getStoredGui()
-      .pushLayerWithRootControl(rootControl)
-      .setStyle(PlanningPokerStyleCatalogue.DARK_MODE_STYLE)
-      .setRemoveLayerAction(this::noteSelfChange);
-
-    fillUpRootControl();
+      .pushLayerWithRootControl(createRootControl())
+      .setStyle(PlanningPokerStyleCatalogue.DARK_MODE_STYLE);
   }
 
-  protected abstract void noteSelfChange();
-
-  protected final void refreshIfDoesNotHaveOpenDialog() {
-    if (!hasOpenDialog()) {
-      refreshActually();
-    }
-  }
-
-  private void fillUpRootControl() {
+  private IControl<?, ?> createRootControl() {
     try (final var databaseAdapter = getStoredApplicationContext().createDataSupplier()) {
-      rootControl
-        .setControl(
+      return new VerticalStack()
+        .setRole(ContainerRole.OVERALL_CONTAINER)
+        .addControl(
           new VerticalStack()
-            .setRole(ContainerRole.OVERALL_CONTAINER)
             .addControl(
-              new VerticalStack()
+              new HorizontalStack()
+                .setRole(ContainerRole.HEADER_CONTAINER)
                 .addControl(
-                  new HorizontalStack()
-                    .setRole(ContainerRole.HEADER_CONTAINER)
-                    .addControl(
-                      new Label()
-                        .setRole(LabelRole.TITLE)
-                        .setText(getApplicationName()),
-                      createUserProfileControl(databaseAdapter))),
-              new SingleContainer()
-                .setRole(ContainerRole.MAIN_CONTENT_CONTAINER)
-                .setControl(createMainControl(databaseAdapter)),
-              new FooterComponent(this).getStoredControl()));
+                  new Label()
+                    .setRole(LabelRole.TITLE)
+                    .setText(getApplicationName()),
+                  createUserProfileControl(databaseAdapter))),
+          new SingleContainer()
+            .setRole(ContainerRole.MAIN_CONTENT_CONTAINER)
+            .setControl(createMainControl(databaseAdapter)),
+          new FooterComponent(this).getStoredControl());
     }
-  }
-
-  private boolean hasOpenDialog() {
-    return (getStoredGui().getStoredLayers().getElementCount() > 1);
-  }
-
-  private void refreshActually() {
-
-    fillUpRootControl();
-
-    refresh();
   }
 }

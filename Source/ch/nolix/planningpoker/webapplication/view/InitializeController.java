@@ -47,9 +47,7 @@ public final class InitializeController {
     }
 
     if (user.isInARoom()) {
-      return pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(
-        user.getId(),
-        user.getStoredCurrentRoomVisit().getStoredParentRoom().getId());
+      return pokerSessionFactory.createPokerSessionWihtUserId(user.getId());
     }
 
     return selectRoomSessionFactory.createSelectRoomSessionWihtUserId(user.getId());

@@ -14,7 +14,7 @@ public final class InitializeSession extends WebClientSession<IPlanningPokerCont
       this,
       CreateUserSession::new,
       SelectRoomSession::withUserId,
-      PokerSession::withUserIdAndRoomId);
+      PokerSession::withUserId);
 
     setNext(firstPageSession);
   }

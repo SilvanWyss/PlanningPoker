@@ -59,10 +59,7 @@ final class CreateUserController extends Controller<IPlanningPokerContext> {
     final IPokerSessionFactory pokerSessionFactory) {
 
     if (user.isInARoom()) {
-
-      final var room = user.getStoredCurrentRoomVisit().getStoredParentRoom();
-
-      return pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(user.getId(), room.getId());
+      return pokerSessionFactory.createPokerSessionWihtUserId(user.getId());
     }
 
     return selectRoomSessionFactory.createSelectRoomSessionWihtUserId(user.getId());

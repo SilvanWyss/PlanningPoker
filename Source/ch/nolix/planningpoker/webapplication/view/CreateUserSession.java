@@ -12,17 +12,12 @@ public final class CreateUserSession extends PageSession {
     return new CreateUserComponent(
       this,
       SelectRoomSession::withUserId,
-      PokerSession::withUserIdAndRoomId)
+      PokerSession::withUserId)
       .getStoredControl();
   }
 
   @Override
   protected IControl<?, ?> createUserProfileControl(final IDataAdapter dataAdapter) {
     return new Label();
-  }
-
-  @Override
-  protected void noteSelfChange() {
-    refreshIfDoesNotHaveOpenDialog();
   }
 }

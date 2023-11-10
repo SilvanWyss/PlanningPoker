@@ -5,5 +5,5 @@ import ch.nolix.system.application.webapplication.WebClientSession;
 
 public interface IPokerSessionFactory {
 
-  WebClientSession<IPlanningPokerContext> createPokerSessionWihtUserIdAndRoomId(String userId, String roomId);
+  WebClientSession<IPlanningPokerContext> createPokerSessionWihtUserId(String userId);
 }

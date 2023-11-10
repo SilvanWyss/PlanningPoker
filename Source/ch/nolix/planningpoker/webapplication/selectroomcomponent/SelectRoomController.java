@@ -23,10 +23,10 @@ final class SelectRoomController extends Controller<IPlanningPokerContext> {
     try (final var databaseAdapter = applicationContext.createDataSupplier()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
-      final var room = databaseAdapter.createNewRoomAndEnterRoom(user);
+      databaseAdapter.createNewRoomAndEnterRoom(user);
       databaseAdapter.saveChanges();
 
-      final var pokerSession = pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(userId, room.getId());
+      final var pokerSession = pokerSessionFactory.createPokerSessionWihtUserId(userId);
       getStoredWebClientSession().setNext(pokerSession);
     }
   }
@@ -44,7 +44,7 @@ final class SelectRoomController extends Controller<IPlanningPokerContext> {
 
       applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 
-      final var pokerSession = pokerSessionFactory.createPokerSessionWihtUserIdAndRoomId(userId, room.getId());
+      final var pokerSession = pokerSessionFactory.createPokerSessionWihtUserId(userId);
       getStoredWebClientSession().setNext(pokerSession);
     }
   }

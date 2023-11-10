@@ -10,19 +10,15 @@ public final class PokerSession extends PageSession {
 
   private final String userId;
 
-  private final String roomId;
-
-  private PokerSession(final String userId, final String roomId) {
+  private PokerSession(final String userId) {
 
     GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
-    GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
 
     this.userId = userId;
-    this.roomId = roomId;
   }
 
-  public static PokerSession withUserIdAndRoomId(final String userId, final String roomId) {
-    return new PokerSession(userId, roomId);
+  public static PokerSession withUserId(final String userId) {
+    return new PokerSession(userId);
   }
 
   @Override
@@ -33,10 +29,5 @@ public final class PokerSession extends PageSession {
   @Override
   protected IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter) {
     return new UserLineComponent(userId, this, dataAdapter).getStoredControl();
-  }
-
-  @Override
-  protected void noteSelfChange() {
-    getStoredApplicationContext().getStoredRoomChangeNotifier().noteRoomChange(roomId);
   }
 }
