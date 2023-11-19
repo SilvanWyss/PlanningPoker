@@ -3,7 +3,6 @@ package ch.nolix.planningpoker.webapplication.roomanalysiscomponent;
 import java.util.Locale;
 
 import ch.nolix.coreapi.commontypeapi.stringutilapi.StringCatalogue;
-import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.logic.analysis.RoomAnalysis;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.logicapi.analysisapi.IRoomAnalysis;
@@ -16,8 +15,7 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomAnalysisComponent
-extends ComponentWithDataSupplier<RoomAnalysisController, IPlanningPokerContext, IDataAdapter>
-implements ITriggerableSubscriber {
+extends ComponentWithDataSupplier<RoomAnalysisController, IPlanningPokerContext, IDataAdapter> {
 
   public RoomAnalysisComponent(
     final String roomId,
@@ -29,11 +27,6 @@ implements ITriggerableSubscriber {
   @Override
   public RefreshBehavior getRefreshBehavior() {
     return RefreshBehavior.REFRESH_SELF;
-  }
-
-  @Override
-  public void trigger() {
-    refresh();
   }
 
   @Override

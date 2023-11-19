@@ -1,6 +1,5 @@
 package ch.nolix.planningpoker.webapplication.estimateoverviewcomponent;
 
-import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
@@ -13,8 +12,7 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class EstimateOverviewComponent
-extends ComponentWithDataSupplier<EstimateOverviewController, IPlanningPokerContext, IDataAdapter>
-implements ITriggerableSubscriber {
+extends ComponentWithDataSupplier<EstimateOverviewController, IPlanningPokerContext, IDataAdapter> {
 
   private static final RoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 
@@ -29,11 +27,6 @@ implements ITriggerableSubscriber {
   @Override
   public RefreshBehavior getRefreshBehavior() {
     return RefreshBehavior.REFRESH_SELF;
-  }
-
-  @Override
-  public void trigger() {
-    refresh();
   }
 
   @Override
