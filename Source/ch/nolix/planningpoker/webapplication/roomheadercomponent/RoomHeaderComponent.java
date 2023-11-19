@@ -40,11 +40,6 @@ extends ComponentWithDataSupplier<RoomHeaderController, IPlanningPokerContext, I
     return createControl(roomVisit, controller);
   }
 
-  @Override
-  protected void doRegistrations(final RoomHeaderController controller, final IDataAdapter dataSupplier) {
-    //Does nothing.
-  }
-
   private IControl<?, ?> createControl(final IRoomVisit roomVisit, final RoomHeaderController controller) {
     return new HorizontalStack()
       .setRole(ContainerRole.HEADER_CONTAINER)

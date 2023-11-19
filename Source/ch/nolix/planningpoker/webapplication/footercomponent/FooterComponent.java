@@ -58,9 +58,4 @@ public final class FooterComponent extends Component<FooterController, IPlanning
               .setTarget(LinkTarget.NEW_TAB)
               .setUrl(NOLIX_WEB_GUIS_LINK)));
   }
-
-  @Override
-  protected void doRegistrations(final FooterController footerController) {
-    //Does nothing.
-  }
 }

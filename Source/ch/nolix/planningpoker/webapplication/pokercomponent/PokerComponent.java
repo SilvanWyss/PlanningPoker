@@ -34,6 +34,8 @@ implements ITriggerableSubscriber {
     GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
 
     this.selectRoomSessionFactory = selectRoomSessionFactory;
+
+    doRegistrations(initialDataAdapter);
   }
 
   @Override
@@ -84,8 +86,7 @@ implements ITriggerableSubscriber {
             new RoomAnalysisComponent(roomId, getStoredWebClientSession(), dataAdapter).getStoredControl()));
   }
 
-  @Override
-  protected void doRegistrations(final PokerComponentController controller, final IDataAdapter dataSupplier) {
+  private void doRegistrations(final IDataAdapter dataSupplier) {
 
     final var userId = getStoredController().getUserId();
     final var user = dataSupplier.getStoredUserById(userId);

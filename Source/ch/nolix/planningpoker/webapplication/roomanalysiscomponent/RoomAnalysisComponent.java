@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.roomanalysiscomponent;
 
 import java.util.Locale;
 
-import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
+import ch.nolix.coreapi.commontypeapi.stringutilapi.StringCatalogue;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.logic.analysis.RoomAnalysis;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
@@ -47,11 +47,6 @@ implements ITriggerableSubscriber {
     }
 
     return new Grid();
-  }
-
-  @Override
-  protected void doRegistrations(final RoomAnalysisController controller, final IDataAdapter dataSupplier) {
-    //Does nothing.
   }
 
   private IControl<?, ?> createRoomAnalysisControlWhenEstimatesAreVisible(final IRoom room) {

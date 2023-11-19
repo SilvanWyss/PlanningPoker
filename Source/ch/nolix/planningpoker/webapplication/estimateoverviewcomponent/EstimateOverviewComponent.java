@@ -47,11 +47,6 @@ implements ITriggerableSubscriber {
     return createControl(roomVisit, controller);
   }
 
-  @Override
-  protected void doRegistrations(final EstimateOverviewController controller, final IDataAdapter dataSupplier) {
-    //Does nothing.
-  }
-
   private IControl<?, ?> createControl(final IRoomVisit roomVisit, final EstimateOverviewController controller) {
     final var estimatesGridContainer = new Grid();
 

@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.cardsetcomponent;
 
-import ch.nolix.core.commontype.commontypeconstant.StringCatalogue;
+import ch.nolix.coreapi.commontypeapi.stringutilapi.StringCatalogue;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
@@ -45,11 +45,6 @@ implements ITriggerableSubscriber {
     final var roomVisit = dataAdapter.getStoredRoomVisitById(roomVisitId);
 
     return createControl(roomVisit, controller);
-  }
-
-  @Override
-  protected void doRegistrations(final CardSetController controller, final IDataAdapter dataSupplier) {
-    //Does nothing.
   }
 
   private IControl<?, ?> createControl(final IRoomVisit roomVisit, final CardSetController controller) {

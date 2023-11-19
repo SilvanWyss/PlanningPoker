@@ -36,11 +36,6 @@ extends ComponentWithDataSupplier<RoomManagerController, IPlanningPokerContext, 
     return createControl(roomVisit, controller);
   }
 
-  @Override
-  protected void doRegistrations(final RoomManagerController controller, final IDataAdapter dataSupplier) {
-    //Does nothing.
-  }
-
   private IControl<?, ?> createControl(final IRoomVisit roomVisit, final RoomManagerController controller) {
     return new HorizontalStack()
       .addControl(

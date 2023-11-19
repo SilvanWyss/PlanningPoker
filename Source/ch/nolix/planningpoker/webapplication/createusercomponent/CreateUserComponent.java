@@ -48,9 +48,4 @@ public final class CreateUserComponent extends Component<CreateUserController, I
               .setLeftMouseButtonPressAction(
                 () -> controller.createUserAndSetCookieAndRedirect(userNameTextbox.getText()))));
   }
-
-  @Override
-  protected void doRegistrations(final CreateUserController controller) {
-    //Does nothing.
-  }
 }

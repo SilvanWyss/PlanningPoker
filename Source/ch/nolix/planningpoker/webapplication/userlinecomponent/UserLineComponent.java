@@ -37,9 +37,4 @@ extends ComponentWithDataSupplier<UserLineController, IPlanningPokerContext, IDa
           .setText(userLineController.getLoggedInUserName(dataAdapter))
           .setLeftMouseButtonPressAction(userLineController::openEditUserNameDialog));
   }
-
-  @Override
-  protected void doRegistrations(final UserLineController footerController, final IDataAdapter dataSupplier) {
-    //Does nothing.
-  }
 }
