@@ -23,7 +23,7 @@ public final class FooterComponent extends Component<FooterController, IPlanning
 
   private static final String PLANNING_POKER_SOURCE_CODE_ON_GITHUB_URL = "https://github.com/Nimeon/PlanningPoker";
 
-  private static final String NOLIX_WEB_GUIS_LINK = "https://nolix.ch/nolix_web-guis.html";
+  private static final String NOLIX_WEB_APPLICATIONS_LINK = "https://nolix.ch/nolix_web_applications.html";
 
   public FooterComponent(final WebClientSession<IPlanningPokerContext> session) {
     super(new FooterController(), session);
@@ -56,6 +56,6 @@ public final class FooterComponent extends Component<FooterController, IPlanning
             new Link()
               .setDisplayText("Nolix Web-GUIs")
               .setTarget(LinkTarget.NEW_TAB)
-              .setUrl(NOLIX_WEB_GUIS_LINK)));
+              .setUrl(NOLIX_WEB_APPLICATIONS_LINK)));
   }
 }
