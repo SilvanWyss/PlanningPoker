@@ -42,7 +42,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerContext
           new SingleContainer()
             .setRole(ContainerRole.MAIN_CONTENT_CONTAINER)
             .setControl(createMainControl(databaseAdapter)),
-          new FooterComponent(this).getStoredControl());
+          new FooterComponent(this));
     }
   }
 }

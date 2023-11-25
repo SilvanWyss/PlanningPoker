@@ -23,11 +23,11 @@ public final class PokerSession extends PageSession {
 
   @Override
   protected IControl<?, ?> createMainControl(final IDataAdapter dataAdapter) {
-    return new PokerComponent(userId, dataAdapter, this, SelectRoomSession::withUserId).getStoredControl();
+    return new PokerComponent(userId, dataAdapter, this, SelectRoomSession::withUserId);
   }
 
   @Override
   protected IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter) {
-    return new UserLineComponent(userId, this, dataAdapter).getStoredControl();
+    return new UserLineComponent(userId, this, dataAdapter);
   }
 }

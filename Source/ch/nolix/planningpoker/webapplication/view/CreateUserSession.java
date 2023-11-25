@@ -13,7 +13,7 @@ public final class CreateUserSession extends PageSession {
       this,
       SelectRoomSession::withUserId,
       PokerSession::withUserId)
-      .getStoredControl();
+      ;
   }
 
   @Override

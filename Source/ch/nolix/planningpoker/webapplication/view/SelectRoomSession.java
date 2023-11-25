@@ -23,11 +23,11 @@ public final class SelectRoomSession extends PageSession {
 
   @Override
   protected IControl<?, ?> createMainControl(final IDataAdapter dataAdapter) {
-    return new SelectRoomComponent(userId, this).getStoredControl();
+    return new SelectRoomComponent(userId, this);
   }
 
   @Override
   protected IControl<?, ?> createUserProfileControl(IDataAdapter dataAdapter) {
-    return new UserLineComponent(userId, this, dataAdapter).getStoredControl();
+    return new UserLineComponent(userId, this, dataAdapter);
   }
 }
