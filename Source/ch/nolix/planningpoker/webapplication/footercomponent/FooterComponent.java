@@ -21,7 +21,7 @@ public final class FooterComponent extends Component<FooterController, IPlanning
   private static final IImage GITHUB_LOGO = Image.fromResource(GITHUB_LOGO_RESOURCE_PATH)
     .withWidthAndHeight(100, 100);
 
-  private static final String PLANNING_POKER_SOURCE_CODE_ON_GITHUB_URL = "https://github.com/Nimeon/PlanningPoker";
+  private static final String PLANNING_POKER_SOURCE_CODE_ON_GITHUB_URL = "https://github.com/SilvanWyss/PlanningPoker";
 
   private static final String NOLIX_WEB_APPLICATIONS_LINK = "https://nolix.ch/nolix_web_applications.html";
 
