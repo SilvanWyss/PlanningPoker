@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.logic.applicationcontext;
 
-import ch.nolix.core.commontype.commontypehelper.GlobalStringHelper;
+import ch.nolix.core.commontypetool.commontypehelper.GlobalStringHelper;
 import ch.nolix.core.errorcontrol.exception.GeneralException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.datamodel.schema.Room;

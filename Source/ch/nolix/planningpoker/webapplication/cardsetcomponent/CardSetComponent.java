@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.cardsetcomponent;
 
-import ch.nolix.coreapi.commontypeapi.stringutilapi.StringCatalogue;
+import ch.nolix.coreapi.commontypetoolapi.stringtoolapi.StringCatalogue;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;

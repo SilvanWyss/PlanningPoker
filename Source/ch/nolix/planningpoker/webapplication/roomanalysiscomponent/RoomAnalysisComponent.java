@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.roomanalysiscomponent;
 
 import java.util.Locale;
 
-import ch.nolix.coreapi.commontypeapi.stringutilapi.StringCatalogue;
+import ch.nolix.coreapi.commontypetoolapi.stringtoolapi.StringCatalogue;
 import ch.nolix.planningpoker.logic.analysis.RoomAnalysis;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.logicapi.analysisapi.IRoomAnalysis;
