@@ -40,7 +40,7 @@ public final class FooterComponent extends Component<FooterController, IPlanning
       .setRole(ContainerRole.FOOTER_CONTAINER)
       .addControl(
         new Label()
-          .setText("Copyright © 2023 Silvan Wyss"),
+          .setText("Copyright © 2024 Silvan Wyss"),
         new HorizontalStack()
           .addControl(
             new ImageControl()
