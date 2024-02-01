@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.logic.applicationcontext;
 
-import ch.nolix.core.commontypetool.commontypehelper.GlobalStringHelper;
+import ch.nolix.core.commontypetool.GlobalStringTool;
 import ch.nolix.core.errorcontrol.exception.GeneralException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpoker.datamodel.schema.Room;
@@ -83,14 +83,14 @@ public final class DatabaseAdapter implements IDataAdapter {
     final var room = internalDatabaseAdapter
       .getStoredTableByEntityType(Room.class)
       .getStoredEntities()
-      .getStoredFirstOrNull(r -> r.getNumber().equals(number));
+      .getOptionalStoredFirst(r -> r.getNumber().equals(number));
 
-    if (room == null) {
+    if (room.isEmpty()) {
       throw GeneralException.withErrorMessage(
-        "The room " + GlobalStringHelper.getInQuotes(number) + " does not exist.");
+        "The room " + GlobalStringTool.getInQuotes(number) + " does not exist.");
     }
 
-    return room;
+    return room.get();
   }
 
   @Override
@@ -98,7 +98,8 @@ public final class DatabaseAdapter implements IDataAdapter {
     return internalDatabaseAdapter
       .getStoredTableByEntityType(Room.class)
       .getStoredEntities()
-      .getStoredFirstOrNull(r -> r.getNumber().equals(number));
+      .getOptionalStoredFirst(r -> r.getNumber().equals(number))
+      .orElse(null);
   }
 
   @Override
@@ -115,7 +116,7 @@ public final class DatabaseAdapter implements IDataAdapter {
 
   @Override
   public IUser getStoredUserByIdOrNull(String id) {
-    return internalDatabaseAdapter.getStoredTableByEntityType(User.class).getStoredEntityByIdOrNull(id);
+    return internalDatabaseAdapter.getStoredTableByEntityType(User.class).getOptionalStoredEntityById(id).orElse(null);
   }
 
   @Override

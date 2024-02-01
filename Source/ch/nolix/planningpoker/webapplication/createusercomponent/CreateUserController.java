@@ -30,19 +30,21 @@ final class CreateUserController extends Controller<IPlanningPokerContext> {
     final var applicationContext = getStoredApplicationContext();
     final var session = getStoredWebClientSession();
 
-    final var roomNumber = session.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
+    final var roomNumber = session.getStoredParentClient().getOptionalUrlParameterValueByUrlParameterName("room");
 
     try (final var databaseAdapter = applicationContext.createDataSupplier()) {
 
       final var user = databaseAdapter.createUserWithName(userName);
 
-      final var room = databaseAdapter.getStoredRoomByNumberOrNull(roomNumber);
-      if (room != null) {
+      if (roomNumber.isPresent()) {
 
-        databaseAdapter.enterRoom(user, room);
-        databaseAdapter.saveChanges();
+        final var room = databaseAdapter.getStoredRoomByNumberOrNull(roomNumber.get());
 
-        applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+        if (room != null) {
+          databaseAdapter.enterRoom(user, room);
+          databaseAdapter.saveChanges();
+          applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+        }
       } else {
         databaseAdapter.saveChanges();
       }

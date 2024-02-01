@@ -20,11 +20,16 @@ public final class InitializeController {
 
     try (final var databaseAdapter = applicationContext.createDataSupplier()) {
 
-      final var userId = initialSession.getStoredParentClient().getCookieValueByCookieNameOrNull("user_id");
-      final var user = databaseAdapter.getStoredUserByIdOrNull(userId);
+      final var userId = initialSession.getStoredParentClient().getOptionalCookieValueByCookieName("user_id");
 
-      if (user != null) {
-        return createNextSession(user, databaseAdapter, initialSession, selectRoomSessionFactory, pokerSessionFactory);
+      if (userId.isPresent()) {
+
+        final var user = databaseAdapter.getStoredUserByIdOrNull(userId.get());
+
+        if (user != null) {
+          return createNextSession(user, databaseAdapter, initialSession, selectRoomSessionFactory,
+            pokerSessionFactory);
+        }
       }
     }
 
@@ -38,12 +43,17 @@ public final class InitializeController {
     final ISelectRoomSessionFactory selectRoomSessionFactory,
     final IPokerSessionFactory pokerSessionFactory) {
 
-    final var roomNumber = initialSession.getStoredParentClient().getUrlParameterValueByUrlParameterNameOrNull("room");
-    final var room = dataAdapter.getStoredRoomByNumberOrNull(roomNumber);
+    final var roomNumber = //
+    initialSession.getStoredParentClient().getOptionalUrlParameterValueByUrlParameterName("room");
 
-    if (room != null) {
-      dataAdapter.enterRoom(user, room);
-      dataAdapter.saveChanges();
+    if (roomNumber.isPresent()) {
+
+      final var room = dataAdapter.getStoredRoomByNumberOrNull(roomNumber.get());
+
+      if (room != null) {
+        dataAdapter.enterRoom(user, room);
+        dataAdapter.saveChanges();
+      }
     }
 
     if (user.isInARoom()) {

@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.datamodel.schema;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.coreapi.programatomapi.variablenameapi.LowerCaseCatalogue;
+import ch.nolix.coreapi.programatomapi.variableapi.LowerCaseVariableCatalogue;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.system.objectdatabase.database.Entity;
@@ -22,10 +22,10 @@ public final class User extends Entity implements IUser {
   }
 
   public static User withName(final String name) {
-  
+
     final var user = new User();
     user.setName(name);
-  
+
     return user;
   }
 
@@ -47,9 +47,9 @@ public final class User extends Entity implements IUser {
   @Override
   public void setName(final String name) {
 
-    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseCatalogue.NAME).isNotBlank();
-    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseCatalogue.NAME).isNotLongerThan(MAX_NAME_LENGTH);
-    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseCatalogue.NAME).matches("[a-zA-Z0-9[.]\s]*");
+    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseVariableCatalogue.NAME).isNotBlank();
+    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseVariableCatalogue.NAME).isNotLongerThan(MAX_NAME_LENGTH);
+    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseVariableCatalogue.NAME).matches("[a-zA-Z0-9[.]\s]*");
 
     this.name.setValue(name);
   }
