@@ -6,16 +6,16 @@ import ch.nolix.coreapi.programatomapi.variableapi.LowerCaseVariableCatalogue;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
-import ch.nolix.system.objectdatabase.database.Entity;
-import ch.nolix.system.objectdatabase.database.MultiReference;
-import ch.nolix.system.objectdatabase.database.Reference;
-import ch.nolix.system.objectdatabase.database.Value;
+import ch.nolix.system.objectdata.data.Entity;
+import ch.nolix.system.objectdata.data.MultiReference;
+import ch.nolix.system.objectdata.data.Reference;
+import ch.nolix.system.objectdata.data.Value;
 
 public final class Room extends Entity implements IRoom {
 
   public static final boolean DEFAULT_ESTIMATES_VISIBLE_VALUE = false;
 
-  private final Value<String> number = new Value<>();
+  private final Value<String> number = Value.withValueType(String.class);
 
   private final Reference<User> parentCreator = Reference.forEntity(User.class);
 
@@ -70,7 +70,7 @@ public final class Room extends Entity implements IRoom {
 
   @Override
   public void removeRoomVisit(final IRoomVisit roomVisit) {
-    roomVisits.removeEntity((RoomVisit) roomVisit);
+    roomVisits.removeEntity(roomVisit);
   }
 
   @Override

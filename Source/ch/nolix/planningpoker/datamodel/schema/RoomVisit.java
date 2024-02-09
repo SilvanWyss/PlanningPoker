@@ -5,11 +5,11 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
-import ch.nolix.system.objectdatabase.database.BackReference;
-import ch.nolix.system.objectdatabase.database.Entity;
-import ch.nolix.system.objectdatabase.database.OptionalValue;
-import ch.nolix.system.objectdatabase.database.Reference;
-import ch.nolix.system.objectdatabase.database.Value;
+import ch.nolix.system.objectdata.data.BackReference;
+import ch.nolix.system.objectdata.data.Entity;
+import ch.nolix.system.objectdata.data.OptionalValue;
+import ch.nolix.system.objectdata.data.Reference;
+import ch.nolix.system.objectdata.data.Value;
 
 public final class RoomVisit extends Entity implements IRoomVisit {
 
@@ -20,7 +20,7 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 
   private final Reference<User> visitor = Reference.forEntity(User.class);
 
-  private final OptionalValue<Double> estimateInStoryPoints = new OptionalValue<>();
+  private final OptionalValue<Double> estimateInStoryPoints = OptionalValue.withValueType(Double.class);
 
   private final Value<Boolean> infiniteEstimateFlag = Value.withInitialValue(DEFAULT_INFINITE_ESTIMATE_FLAG);
 
@@ -29,10 +29,10 @@ public final class RoomVisit extends Entity implements IRoomVisit {
   }
 
   public static RoomVisit forVisitor(final User visitor) {
-  
+
     final var roomVisit = new RoomVisit();
     roomVisit.setVisitor(visitor);
-  
+
     return roomVisit;
   }
 

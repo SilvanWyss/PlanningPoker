@@ -8,15 +8,15 @@ import ch.nolix.planningpoker.webapplication.view.InitializeSession;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.main.Application;
 import ch.nolix.system.application.webapplication.WebClient;
-import ch.nolix.system.objectdatabase.dataadapter.NodeDataAdapter;
-import ch.nolix.system.objectdatabase.database.DataAdapter;
+import ch.nolix.system.objectdata.dataadapter.NodeDataAdapter;
+import ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter;
 
 public final class PlanningPokerApplication
 extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 
   public static final String APPLICATION_NAME = "Planning Poker";
 
-  private PlanningPokerApplication(final DataAdapter databaseAdapter) {
+  private PlanningPokerApplication(final IDataAdapter databaseAdapter) {
     super(PlanningPokerContext.withDatabaseAdapter(databaseAdapter));
   }
 

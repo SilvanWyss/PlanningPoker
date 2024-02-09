@@ -11,17 +11,17 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 
-public final class DatabaseAdapter implements IDataAdapter {
+public final class DataAdapter implements IDataAdapter {
 
-  private final ch.nolix.system.objectdatabase.database.DataAdapter internalDatabaseAdapter;
+  private final ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter internalDatabaseAdapter;
 
-  private DatabaseAdapter(final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
+  private DataAdapter(final ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter databaseAdapter) {
     this.internalDatabaseAdapter = databaseAdapter.getEmptyCopy();
   }
 
-  public static DatabaseAdapter usingDatabaseAdapter(
-    final ch.nolix.system.objectdatabase.database.DataAdapter databaseAdapter) {
-    return new DatabaseAdapter(databaseAdapter);
+  public static DataAdapter usingDatabaseAdapter(
+    final ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter databaseAdapter) {
+    return new DataAdapter(databaseAdapter);
   }
 
   @Override
@@ -47,7 +47,7 @@ public final class DatabaseAdapter implements IDataAdapter {
   public IUser createUserWithName(final String name) {
 
     final var user = User.withName(name);
-    internalDatabaseAdapter.insert(user);
+    internalDatabaseAdapter.insertEntity(user);
 
     return user;
   }
@@ -87,7 +87,7 @@ public final class DatabaseAdapter implements IDataAdapter {
 
     if (room.isEmpty()) {
       throw GeneralException.withErrorMessage(
-        "The room " + GlobalStringTool.getInQuotes(number) + " does not exist.");
+        "The room " + GlobalStringTool.getInSingleQuotes(number) + " does not exist.");
     }
 
     return room.get();
@@ -147,7 +147,7 @@ public final class DatabaseAdapter implements IDataAdapter {
   private Room createNewRoom(final IUser user) {
 
     final var room = Room.fromParentCreator((User) user);
-    internalDatabaseAdapter.insert(room);
+    internalDatabaseAdapter.insertEntity(room);
 
     return room;
   }
@@ -155,7 +155,7 @@ public final class DatabaseAdapter implements IDataAdapter {
   private IRoomVisit onlyEnterRoom(IUser user, IRoom room) {
 
     final var roomVisit = RoomVisit.forVisitor((User) user);
-    internalDatabaseAdapter.insert(roomVisit);
+    internalDatabaseAdapter.insertEntity(roomVisit);
     room.addRoomVisit(roomVisit);
 
     return roomVisit;

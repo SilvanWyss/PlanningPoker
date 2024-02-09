@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.datamodel.schema;
 
-import ch.nolix.system.objectdatabase.schema.Schema;
-import ch.nolix.systemapi.objectdatabaseapi.schemaapi.ISchema;
+import ch.nolix.system.objectdata.schema.Schema;
+import ch.nolix.systemapi.objectdataapi.schemaapi.ISchema;
 
 public final class SchemaCatalogue {
 
