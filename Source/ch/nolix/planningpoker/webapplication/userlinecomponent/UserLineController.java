@@ -49,9 +49,16 @@ final class UserLineController extends Controller<IPlanningPokerContext> {
     final var applicationContext = getStoredApplicationContext();
 
     try (final var databaseAdapter = applicationContext.createDataSupplier()) {
+
       final var user = databaseAdapter.getStoredUserById(userId);
       user.setName(newUserName);
       databaseAdapter.saveChanges();
+
+      if (user.isInARoom()) {
+        applicationContext
+          .getStoredRoomChangeNotifier()
+          .noteRoomChange(user.getStoredCurrentRoomVisit().getStoredParentRoom().getId());
+      }
     }
   }
 }
