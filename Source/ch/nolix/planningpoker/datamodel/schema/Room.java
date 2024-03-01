@@ -21,7 +21,7 @@ public final class Room extends Entity implements IRoom {
 
   private final Value<Boolean> estimatesVisible = Value.withInitialValue(DEFAULT_ESTIMATES_VISIBLE_VALUE);
 
-  private final MultiReference<RoomVisit> roomVisits = MultiReference.forEntity(RoomVisit.class);
+  private final MultiReference<RoomVisit> roomVisits = MultiReference.forReferencedEntityType(RoomVisit.class);
 
   private Room() {
 
@@ -50,12 +50,12 @@ public final class Room extends Entity implements IRoom {
 
   @Override
   public IUser getStoredParentCreator() {
-    return parentCreator.getReferencedEntity();
+    return parentCreator.getStoredReferencedEntity();
   }
 
   @Override
   public IContainer<? extends IRoomVisit> getStoredRoomVisits() {
-    return roomVisits.getReferencedEntities();
+    return roomVisits.getAllStoredReferencedEntities();
   }
 
   @Override
