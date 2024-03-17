@@ -1,7 +1,9 @@
 /*
+!Gradle/
 !META-INF/
 !Source/
 !.classpath
 !.gitignore
+!build.gradle
 !nolix_formatter.xml
 !README.md
