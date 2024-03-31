@@ -1,3 +1,2 @@
 Manifest-Version: 2024-03-01
 Created-By: Silvan Wyss
-Class-Path: mssql-jdbc-7.0.0.jre10.jar netty-all-4.1.9.Final.jar nolix_2024-03-01.jar
