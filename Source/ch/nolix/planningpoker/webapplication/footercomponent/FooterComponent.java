@@ -16,7 +16,7 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class FooterComponent extends Component<FooterController, IPlanningPokerContext> {
 
-  private static final String GITHUB_LOGO_RESOURCE_PATH = "ch/nolix/planningpoker/resource/github_logo.jpg";
+  private static final String GITHUB_LOGO_RESOURCE_PATH = "image/github_logo.jpg";
 
   private static final IImage GITHUB_LOGO = Image.fromResource(GITHUB_LOGO_RESOURCE_PATH)
     .withWidthAndHeight(100, 100);
