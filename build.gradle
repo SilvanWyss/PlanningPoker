@@ -18,15 +18,17 @@ repositories {
 
 dependencies {
 
-  //foreign dependencies
-  implementation 'com.microsoft.sqlserver:mssql-jdbc:7.0.0.jre10'
+  //dependencies for productive code
+  implementation 'com.microsoft.sqlserver:mssql-jdbc:12.6.1.jre11'
   implementation 'io.netty:netty-all:4.1.90.Final'
-  implementation 'net.bytebuddy:byte-buddy:1.14.11'
-  implementation 'net.bytebuddy:byte-buddy-agent:1.14.11'
-  implementation 'org.mockito:mockito-core:5.8.0'
-
-  //own dependencies
   implementation name: 'nolix'
+
+  //dependencies for test code
+  testImplementation 'net.bytebuddy:byte-buddy:1.14.11'
+  testImplementation 'net.bytebuddy:byte-buddy-agent:1.14.11'
+  testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+  testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.2'
+  testImplementation 'org.mockito:mockito-core:5.8.0'
 }
 
 sourceSets {
