@@ -14,8 +14,8 @@ public final class User extends Entity implements IUser {
 
   private final Value<String> name = Value.withValueType(String.class);
 
-  private final OptionalBackReference<RoomVisit> currentRoomVisit = OptionalBackReference
-    .forEntityAndBackReferencedPropertyName(RoomVisit.class, "visitor");
+  private final OptionalBackReference<RoomVisit> currentRoomVisit = //
+  OptionalBackReference.forEntityAndBackReferencedFieldName(RoomVisit.class, "visitor");
 
   private User() {
     initialize();

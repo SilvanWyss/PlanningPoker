@@ -15,8 +15,8 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 
   private static final boolean DEFAULT_INFINITE_ESTIMATE_FLAG = false;
 
-  private final BackReference<Room> parentRoom = BackReference.forEntityAndBackReferencedPropertyName(Room.class,
-    "roomVisits");
+  private final BackReference<Room> parentRoom = //
+  BackReference.forEntityAndBackReferencedFieldName(Room.class, "roomVisits");
 
   private final Reference<User> visitor = Reference.forEntity(User.class);
 
