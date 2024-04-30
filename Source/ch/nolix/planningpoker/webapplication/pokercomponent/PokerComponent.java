@@ -75,14 +75,12 @@ implements ITriggerableSubscriber {
     return new VerticalStack()
       .addControl(
         new RoomHeaderComponent(userId, getStoredWebClientSession(), dataAdapter,
-          this::createSelectRoomSessionWihtUserId)
-          ,
+          this::createSelectRoomSessionWihtUserId),
         new RoomManagerComponent(userId, getStoredWebClientSession(), dataAdapter),
         new CardSetComponent(roomVisit.getId(), roomId, getStoredWebClientSession(), dataAdapter),
         new HorizontalStack()
           .addControl(
-            new EstimateOverviewComponent(roomVisit.getId(), roomId, getStoredWebClientSession(), dataAdapter)
-              ,
+            new EstimateOverviewComponent(roomVisit.getId(), roomId, getStoredWebClientSession(), dataAdapter),
             new RoomAnalysisComponent(roomId, getStoredWebClientSession(), dataAdapter)));
   }
 
