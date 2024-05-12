@@ -3,9 +3,8 @@ package ch.nolix.planningpoker.webapplication.view;
 import java.util.ResourceBundle.Control;
 
 import ch.nolix.core.container.immutablelist.ImmutableList;
-import ch.nolix.core.container.linkedlist.LinkedList;
-import ch.nolix.system.element.stylebuilder.DeepSelectingStyleBuilder;
-import ch.nolix.system.element.stylebuilder.SelectingStyleBuilder;
+import ch.nolix.system.element.style.DeepSelectingStyle;
+import ch.nolix.system.element.style.SelectingStyle;
 import ch.nolix.system.webgui.atomiccontrol.ImageControl;
 import ch.nolix.system.webgui.container.Grid;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
@@ -16,40 +15,34 @@ import ch.nolix.template.webgui.style.StyleCatalogue;
 public final class PlanningPokerStyleCatalogue {
 
   public static final IStyle DARK_MODE_STYLE = StyleCatalogue.DARK_STYLE
-    .withAttachingAttributesAndSubStyles(
-      new ImmutableList<>(),
-      LinkedList
+    .withSubStyles(
+      ImmutableList
         .withElement(
-          new DeepSelectingStyleBuilder()
-            .setSelectorType(HorizontalStack.class)
-            .addSelectorRole(ContainerRole.FOOTER_CONTAINER)
-            .addSubStyle(
-              new SelectingStyleBuilder()
-                .setSelectorType(HorizontalStack.class)
-                .addAttachingAttribute("ContentAlignment(BOTTOM)")
-                .addSubStyle(
-                  new SelectingStyleBuilder()
-                    .setSelectorType(ImageControl.class)
-                    .addAttachingAttribute(
+          new DeepSelectingStyle()
+            .withSelectorType(HorizontalStack.class)
+            .withSelectorRole(ContainerRole.FOOTER_CONTAINER)
+            .withSubStyle(
+              new SelectingStyle()
+                .withSelectorType(HorizontalStack.class)
+                .withAttachingAttribute("ContentAlignment(BOTTOM)")
+                .withSubStyle(
+                  new SelectingStyle()
+                    .withSelectorType(ImageControl.class)
+                    .withAttachingAttribute(
                       "BaseWidth(50)",
-                      "BaseHeight(50)")
-                    .build())
-                .build())
-            .build(),
-          new DeepSelectingStyleBuilder()
-            .setSelectorType(Grid.class)
-            .addAttachingAttribute(
+                      "BaseHeight(50)"))),
+          new DeepSelectingStyle()
+            .withSelectorType(Grid.class)
+            .withAttachingAttribute(
               "BaseGridThickness(1)",
               "BaseGridColor(0xC0C0C0)")
-            .addSubStyle(
-              new SelectingStyleBuilder()
-                .setSelectorType(Control.class)
-                .addAttachingAttribute("MinWidth(150)")
-                .build())
-            .build(),
-          new DeepSelectingStyleBuilder()
-            .addSelectorToken("card")
-            .addAttachingAttribute(
+            .withSubStyle(
+              new SelectingStyle()
+                .withSelectorType(Control.class)
+                .withAttachingAttribute("MinWidth(150)")),
+          new DeepSelectingStyle()
+            .withSelectorToken("card")
+            .withAttachingAttribute(
               "BaseWidth(63)",
               "BaseHeight(88)",
               "MinWidth(1)",
@@ -60,16 +53,14 @@ public final class PlanningPokerStyleCatalogue {
               "BaseTextSize(30)",
               "BaseTextColor(Black)",
               "HoverTextColor(White)",
-              "FocusTextColor(White)")
-            .build(),
-          new DeepSelectingStyleBuilder()
-            .addSelectorToken("activated_card")
-            .addAttachingAttribute(
+              "FocusTextColor(White)"),
+          new DeepSelectingStyle()
+            .withSelectorToken("activated_card")
+            .withAttachingAttribute(
               "BaseBackground(Color(Black))",
               "HoverBackground(Color(Black))",
               "FocusBackground(Color(Black))",
-              "BaseTextColor(White)")
-            .build()));
+              "BaseTextColor(White)")));
 
   private PlanningPokerStyleCatalogue() {
   }
