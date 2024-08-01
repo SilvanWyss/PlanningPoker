@@ -1,9 +1,13 @@
 /*
 !Gradle/
 !META-INF/
+!PerformanceTest/
+!Resource/
 !Source/
+!Test/
 !.classpath
 !.gitignore
 !build.gradle
 !nolix_formatter.xml
+!LICENSE.txt
 !README.md
