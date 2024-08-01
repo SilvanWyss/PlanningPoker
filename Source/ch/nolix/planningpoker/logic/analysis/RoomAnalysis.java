@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.logic.analysis;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.math.main.GlobalCalculator;
-import ch.nolix.core.programatom.function.FunctionCatalogue;
+import ch.nolix.core.programatom.function.GlobalFunctionService;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
@@ -40,21 +40,21 @@ public final class RoomAnalysis implements IRoomAnalysis {
 
   @Override
   public double getAverageEstimateInStoryPointsOrZero() {
-    return estimatesInStoryPoints.getAverageOrZero(FunctionCatalogue::getSelf);
+    return estimatesInStoryPoints.getAverageOrZero(GlobalFunctionService::getSelf);
   }
 
   @Override
   public double getMaxEstimateInStoryPointsOrZero() {
-    return estimatesInStoryPoints.getMaxOrZero(FunctionCatalogue::getSelf);
+    return estimatesInStoryPoints.getMaxOrZero(GlobalFunctionService::getSelf);
   }
 
   @Override
   public double getMedianEstimateInStoryPointsOrZero() {
-    return estimatesInStoryPoints.getMedianOrZero(FunctionCatalogue::getSelf);
+    return estimatesInStoryPoints.getMedianOrZero(GlobalFunctionService::getSelf);
   }
 
   @Override
   public double getMinEstimateInStoryPointsOrZero() {
-    return estimatesInStoryPoints.getMinOrZero(FunctionCatalogue::getSelf);
+    return estimatesInStoryPoints.getMinOrZero(GlobalFunctionService::getSelf);
   }
 }

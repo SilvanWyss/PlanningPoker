@@ -1,8 +1,9 @@
 package ch.nolix.planningpoker.logic.applicationcontext;
 
-import ch.nolix.core.commontypetool.GlobalStringTool;
+import ch.nolix.core.commontypetool.stringtool.StringTool;
 import ch.nolix.core.errorcontrol.exception.GeneralException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.coreapi.commontypetoolapi.stringtoolapi.IStringTool;
 import ch.nolix.planningpoker.datamodel.schema.Room;
 import ch.nolix.planningpoker.datamodel.schema.RoomVisit;
 import ch.nolix.planningpoker.datamodel.schema.User;
@@ -12,6 +13,8 @@ import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 
 public final class DataAdapter implements IDataAdapter {
+
+  private static final IStringTool STRING_TOOL = new StringTool();
 
   private final ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter internalDatabaseAdapter;
 
@@ -87,7 +90,7 @@ public final class DataAdapter implements IDataAdapter {
 
     if (room.isEmpty()) {
       throw GeneralException.withErrorMessage(
-        "The room " + GlobalStringTool.getInSingleQuotes(number) + " does not exist.");
+        "The room " + STRING_TOOL.getInSingleQuotes(number) + " does not exist.");
     }
 
     return room.get();

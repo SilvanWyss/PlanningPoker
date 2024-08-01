@@ -7,7 +7,7 @@ import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotif
 
 public final class RoomChangeNotifier implements IRoomChangeNotifier {
 
-  private final LinkedList<RoomSubscriberWrapper> roomSubscriberWrappers = new LinkedList<>();
+  private final LinkedList<RoomSubscriberWrapper> roomSubscriberWrappers = LinkedList.createEmpty();
 
   @Override
   public void noteRoomChange(final String roomId) {
