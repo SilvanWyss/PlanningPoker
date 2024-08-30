@@ -16,7 +16,7 @@ public final class RoomHyperlinkCreator {
       applicationTarget.getApplicationInstanceName(),
       applicationTarget.getApplicationUrlInstanceName(),
       room.getNumber(),
-      applicationTarget.getSecurityLevelForConnections());
+      applicationTarget.getSecurityModeForConnection());
   }
 
   public String createHyperlinkToRoom(final IRoom room, final IApplication<?> application) {

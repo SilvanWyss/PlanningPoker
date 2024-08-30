@@ -34,7 +34,7 @@ extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
 
   public static PlanningPokerApplication withInMemoryNodeDatabase() {
 
-    final var nodeDatabase = new MutableNode();
+    final var nodeDatabase = MutableNode.createEmpty();
 
     final var databaseAdapter = NodeDataAdapter
       .forNodeDatabase(nodeDatabase)
