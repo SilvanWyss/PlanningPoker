@@ -6,10 +6,10 @@ import ch.nolix.coreapi.programatomapi.variableapi.LowerCaseVariableCatalogue;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
-import ch.nolix.system.objectdata.data.Entity;
-import ch.nolix.system.objectdata.data.MultiReference;
-import ch.nolix.system.objectdata.data.Reference;
-import ch.nolix.system.objectdata.data.Value;
+import ch.nolix.system.objectdata.model.Entity;
+import ch.nolix.system.objectdata.model.MultiReference;
+import ch.nolix.system.objectdata.model.Reference;
+import ch.nolix.system.objectdata.model.Value;
 
 public final class Room extends Entity implements IRoom {
 

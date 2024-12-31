@@ -4,9 +4,9 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programatomapi.variableapi.LowerCaseVariableCatalogue;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
-import ch.nolix.system.objectdata.data.Entity;
-import ch.nolix.system.objectdata.data.OptionalBackReference;
-import ch.nolix.system.objectdata.data.Value;
+import ch.nolix.system.objectdata.model.Entity;
+import ch.nolix.system.objectdata.model.OptionalBackReference;
+import ch.nolix.system.objectdata.model.Value;
 
 public final class User extends Entity implements IUser {
 
@@ -36,7 +36,7 @@ public final class User extends Entity implements IUser {
 
   @Override
   public IRoomVisit getStoredCurrentRoomVisit() {
-    return currentRoomVisit.getBackReferencedEntity();
+    return currentRoomVisit.getStoredBackReferencedEntity();
   }
 
   @Override

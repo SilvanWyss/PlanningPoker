@@ -5,14 +5,14 @@ import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessi
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.component.Component;
 import ch.nolix.system.application.webapplication.WebClientSession;
-import ch.nolix.system.webgui.atomiccontrol.Button;
-import ch.nolix.system.webgui.atomiccontrol.Label;
-import ch.nolix.system.webgui.atomiccontrol.Textbox;
-import ch.nolix.system.webgui.atomiccontrol.ValidationLabel;
+import ch.nolix.system.webgui.atomiccontrol.button.Button;
+import ch.nolix.system.webgui.atomiccontrol.label.Label;
+import ch.nolix.system.webgui.atomiccontrol.textbox.Textbox;
+import ch.nolix.system.webgui.atomiccontrol.validationlabel.ValidationLabel;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
-import ch.nolix.systemapi.webguiapi.atomiccontrolapi.ButtonRole;
+import ch.nolix.systemapi.webguiapi.atomiccontrolapi.buttonapi.ButtonRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CreateUserComponent extends Component<CreateUserController, IPlanningPokerContext> {

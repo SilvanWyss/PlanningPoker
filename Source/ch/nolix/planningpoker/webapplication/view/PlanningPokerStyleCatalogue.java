@@ -5,7 +5,7 @@ import java.util.ResourceBundle.Control;
 import ch.nolix.core.container.immutablelist.ImmutableList;
 import ch.nolix.system.element.style.DeepSelectingStyle;
 import ch.nolix.system.element.style.SelectingStyle;
-import ch.nolix.system.webgui.atomiccontrol.ImageControl;
+import ch.nolix.system.webgui.atomiccontrol.imagecontrol.ImageControl;
 import ch.nolix.system.webgui.container.Grid;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.systemapi.elementapi.styleapi.IStyle;

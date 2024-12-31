@@ -16,14 +16,14 @@ public final class DataAdapter implements IDataAdapter {
 
   private static final IStringTool STRING_TOOL = new StringTool();
 
-  private final ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter internalDatabaseAdapter;
+  private final ch.nolix.systemapi.objectdataapi.adapterapi.IDataAdapter internalDatabaseAdapter;
 
-  private DataAdapter(final ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter databaseAdapter) {
-    this.internalDatabaseAdapter = databaseAdapter.getEmptyCopy();
+  private DataAdapter(final ch.nolix.systemapi.objectdataapi.adapterapi.IDataAdapter databaseAdapter) {
+    this.internalDatabaseAdapter = databaseAdapter.createEmptyCopy();
   }
 
   public static DataAdapter usingDatabaseAdapter(
-    final ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter databaseAdapter) {
+    final ch.nolix.systemapi.objectdataapi.adapterapi.IDataAdapter databaseAdapter) {
     return new DataAdapter(databaseAdapter);
   }
 
@@ -139,7 +139,7 @@ public final class DataAdapter implements IDataAdapter {
     final var room = roomVisit.getStoredParentRoom();
 
     room.removeRoomVisit(roomVisit);
-    roomVisit.deleteWithoutReferenceCheck();
+    roomVisit.delete();
   }
 
   @Override

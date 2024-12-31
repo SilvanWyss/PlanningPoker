@@ -5,11 +5,11 @@ import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
-import ch.nolix.system.objectdata.data.BackReference;
-import ch.nolix.system.objectdata.data.Entity;
-import ch.nolix.system.objectdata.data.OptionalValue;
-import ch.nolix.system.objectdata.data.Reference;
-import ch.nolix.system.objectdata.data.Value;
+import ch.nolix.system.objectdata.model.BackReference;
+import ch.nolix.system.objectdata.model.Entity;
+import ch.nolix.system.objectdata.model.OptionalValue;
+import ch.nolix.system.objectdata.model.Reference;
+import ch.nolix.system.objectdata.model.Value;
 
 public final class RoomVisit extends Entity implements IRoomVisit {
 

@@ -7,7 +7,7 @@ import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
-import ch.nolix.system.webgui.atomiccontrol.Button;
+import ch.nolix.system.webgui.atomiccontrol.button.Button;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;

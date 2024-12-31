@@ -4,11 +4,11 @@ import ch.nolix.planningpoker.webapplication.footercomponent.FooterComponent;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.webapplication.WebClientSession;
-import ch.nolix.system.webgui.atomiccontrol.Label;
+import ch.nolix.system.webgui.atomiccontrol.label.Label;
 import ch.nolix.system.webgui.container.SingleContainer;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
-import ch.nolix.systemapi.webguiapi.atomiccontrolapi.LabelRole;
+import ch.nolix.systemapi.webguiapi.atomiccontrolapi.labelapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 

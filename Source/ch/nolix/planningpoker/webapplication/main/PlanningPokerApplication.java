@@ -8,8 +8,8 @@ import ch.nolix.planningpoker.webapplication.view.InitializeSession;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.main.Application;
 import ch.nolix.system.application.webapplication.WebClient;
-import ch.nolix.system.objectdata.dataadapter.NodeDataAdapter;
-import ch.nolix.systemapi.objectdataapi.dataadapterapi.IDataAdapter;
+import ch.nolix.system.objectdata.adapter.NodeDataAdapter;
+import ch.nolix.systemapi.objectdataapi.adapterapi.IDataAdapter;
 
 public final class PlanningPokerApplication
 extends Application<WebClient<IPlanningPokerContext>, IPlanningPokerContext> {
