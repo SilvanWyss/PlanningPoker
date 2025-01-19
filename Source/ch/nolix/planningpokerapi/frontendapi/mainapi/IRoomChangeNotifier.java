@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.logicapi.applicationcontextapi;
+package ch.nolix.planningpokerapi.frontendapi.mainapi;
 
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 

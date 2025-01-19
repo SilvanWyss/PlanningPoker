@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.logic.applicationcontext;
 import ch.nolix.core.container.linkedlist.LinkedList;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IRoomChangeNotifier;
 
 public final class RoomChangeNotifier implements IRoomChangeNotifier {
 

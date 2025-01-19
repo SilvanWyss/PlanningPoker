@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.roomanalysiscomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IRoomChangeNotifier;
 import ch.nolix.system.application.component.Controller;
 
 final class RoomAnalysisController extends Controller<IPlanningPokerService> {

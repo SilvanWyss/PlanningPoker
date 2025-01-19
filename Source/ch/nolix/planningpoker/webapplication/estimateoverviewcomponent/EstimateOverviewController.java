@@ -8,7 +8,7 @@ import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.backendapi.examinerapi.IRoomVisitExaminer;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IRoomChangeNotifier;
 import ch.nolix.system.application.component.Controller;
 import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
