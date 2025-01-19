@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.logicapi.analysisapi;
+package ch.nolix.planningpokerapi.backendapi.analysisapi;
 
 public interface IRoomAnalysis {
 
