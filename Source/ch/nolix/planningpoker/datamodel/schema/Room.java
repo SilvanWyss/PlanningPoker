@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.datamodel.schema;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
-import ch.nolix.coreapi.programatomapi.variableapi.LowerCaseVariableCatalogue;
+import ch.nolix.coreapi.programatomapi.variableapi.LowerCaseVariableCatalog;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
@@ -97,7 +97,7 @@ public final class Room extends Entity implements IRoom {
 
   private void setNumber(final String number) {
 
-    GlobalValidator.assertThat(number).thatIsNamed(LowerCaseVariableCatalogue.NUMBER).isNotNull();
+    GlobalValidator.assertThat(number).thatIsNamed(LowerCaseVariableCatalog.NUMBER).isNotNull();
 
     this.number.setValue(number);
   }

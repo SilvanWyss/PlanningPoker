@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.roomanalysiscomponent;
 
 import java.util.Locale;
 
-import ch.nolix.coreapi.programatomapi.stringcatalogueapi.StringCatalogue;
+import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
 import ch.nolix.planningpoker.logic.analysis.RoomAnalysis;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 import ch.nolix.planningpokerapi.logicapi.analysisapi.IRoomAnalysis;
@@ -68,13 +68,13 @@ extends ComponentWithDataSupplier<RoomAnalysisController, IPlanningPokerContext,
       maxestimateInStoryPoints - minEstimateInStoryPoints);
 
     return new Grid()
-      .insertTextAtRowAndColumn(1, 1, StringCatalogue.LONG_LEFT_RIGHT_ARROW)
+      .insertTextAtRowAndColumn(1, 1, StringCatalog.LONG_LEFT_RIGHT_ARROW)
       .insertTextAtRowAndColumn(1, 2, rangeText)
-      .insertTextAtRowAndColumn(2, 1, StringCatalogue.UPPERCASE_DELTA)
+      .insertTextAtRowAndColumn(2, 1, StringCatalog.UPPERCASE_DELTA)
       .insertTextAtRowAndColumn(2, 2, differenceText)
-      .insertTextAtRowAndColumn(3, 1, StringCatalogue.AVERAGE)
+      .insertTextAtRowAndColumn(3, 1, StringCatalog.AVERAGE)
       .insertTextAtRowAndColumn(3, 2, averageText)
-      .insertTextAtRowAndColumn(4, 1, StringCatalogue.AVERAGE + StringCatalogue.UPPERCASE_DELTA)
+      .insertTextAtRowAndColumn(4, 1, StringCatalog.AVERAGE + StringCatalog.UPPERCASE_DELTA)
       .insertTextAtRowAndColumn(4, 2, averageDeviationFromAverageInStoryPointsText);
   }
 }

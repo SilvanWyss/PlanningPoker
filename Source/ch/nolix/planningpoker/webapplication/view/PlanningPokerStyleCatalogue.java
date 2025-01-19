@@ -10,11 +10,11 @@ import ch.nolix.system.webgui.container.Grid;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.systemapi.elementapi.styleapi.IStyle;
 import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
-import ch.nolix.template.webgui.style.StyleCatalogue;
+import ch.nolix.template.webgui.style.StyleCatalog;
 
 public final class PlanningPokerStyleCatalogue {
 
-  public static final IStyle DARK_MODE_STYLE = StyleCatalogue.DARK_STYLE
+  public static final IStyle DARK_MODE_STYLE = StyleCatalog.DARK_STYLE
     .withSubStyles(
       ImmutableList
         .withElement(

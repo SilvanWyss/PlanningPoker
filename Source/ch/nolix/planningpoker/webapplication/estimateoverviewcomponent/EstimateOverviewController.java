@@ -3,7 +3,7 @@ package ch.nolix.planningpoker.webapplication.estimateoverviewcomponent;
 import java.util.Locale;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.coreapi.programatomapi.stringcatalogueapi.StringCatalogue;
+import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
@@ -70,10 +70,10 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
   private String getEstimateTextWhenEstimateIsInvisible(final IRoomVisit roomVisit) {
 
     if (ROOM_VISIT_EVALUATOR.hasEstimate(roomVisit)) {
-      return StringCatalogue.QUESTION_MARK;
+      return StringCatalog.QUESTION_MARK;
     }
 
-    return StringCatalogue.EMPTY_STRING;
+    return StringCatalog.EMPTY_STRING;
   }
 
   private String getEstimateTextWhenEstimateIsVisible(final IRoomVisit roomVisit) {
@@ -83,10 +83,10 @@ final class EstimateOverviewController extends Controller<IPlanningPokerContext>
     }
 
     if (roomVisit.hasInfiniteEstimate()) {
-      return StringCatalogue.INFINITY;
+      return StringCatalog.INFINITY;
     }
 
-    return StringCatalogue.EMPTY_STRING;
+    return StringCatalog.EMPTY_STRING;
   }
 
   private String getEstimateTextWhenEstimateIsVisibleAndHasEstimateInStoryPoints(

@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.view;
 
-import ch.nolix.coreapi.programatomapi.stringcatalogueapi.StringCatalogue;
+import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
 import ch.nolix.planningpoker.webapplication.createusercomponent.CreateUserComponent;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.system.webgui.atomiccontrol.label.Label;
@@ -18,6 +18,6 @@ public final class CreateUserSession extends PageSession {
 
   @Override
   protected IControl<?, ?> createUserProfileControl(final IDataAdapter dataAdapter) {
-    return new Label().setText(StringCatalogue.EMPTY_STRING);
+    return new Label().setText(StringCatalog.EMPTY_STRING);
   }
 }

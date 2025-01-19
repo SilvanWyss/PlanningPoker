@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.cardsetcomponent;
 
-import ch.nolix.coreapi.programatomapi.stringcatalogueapi.StringCatalogue;
+import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
@@ -104,7 +104,7 @@ extends ComponentWithDataSupplier<CardSetController, IPlanningPokerContext, IDat
 
     final var infiniteEstimateCardButton = new Button()
       .addToken("card")
-      .setText(StringCatalogue.INFINITY)
+      .setText(StringCatalog.INFINITY)
       .setLeftMouseButtonPressAction(() -> controller.setInfiniteEstimateAndTrigger(roomVisit.getId()));
 
     if (roomVisit.hasInfiniteEstimate()) {
