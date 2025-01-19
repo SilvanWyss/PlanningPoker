@@ -1,8 +1,8 @@
-package ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi;
+package ch.nolix.planningpokerapi.backendapi.examinerapi;
 
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
 
-public interface IRoomEvaluator {
+public interface IRoomExaminer {
 
   boolean containsEstimate(IRoom room);
 }
