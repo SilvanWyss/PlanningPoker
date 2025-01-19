@@ -1,8 +1,8 @@
 package ch.nolix.planningpoker.webapplication.roomheadercomponent;
 
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
@@ -15,11 +15,11 @@ import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomHeaderComponent
-extends ComponentWithDataSupplier<RoomHeaderController, IPlanningPokerContext, IDataAdapter> {
+extends ComponentWithDataSupplier<RoomHeaderController, IPlanningPokerService, IDataAdapter> {
 
   public RoomHeaderComponent(
     final String userId,
-    final WebClientSession<IPlanningPokerContext> session,
+    final WebClientSession<IPlanningPokerService> session,
     final IDataAdapter initialDataAdapter,
     final ISelectRoomSessionFactory selectRoomSessionFactory) {
     super(new RoomHeaderController(userId, selectRoomSessionFactory), initialDataAdapter, session);

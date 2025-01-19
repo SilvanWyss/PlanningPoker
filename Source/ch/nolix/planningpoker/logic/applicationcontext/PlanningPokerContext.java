@@ -1,13 +1,13 @@
 package ch.nolix.planningpoker.logic.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IRoomChangeNotifier;
 import ch.nolix.system.graphic.image.Image;
 import ch.nolix.systemapi.graphicapi.imageapi.IImage;
 
-public final class PlanningPokerContext implements IPlanningPokerContext {
+public final class PlanningPokerContext implements IPlanningPokerService {
 
   private static final String APPLICATION_LOGO_RESOURCE_PATH = "image/poker_card.jpg";
 

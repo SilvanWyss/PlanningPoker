@@ -2,13 +2,13 @@ package ch.nolix.planningpoker.webapplication.createusercomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IUser;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.component.Controller;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
-final class CreateUserController extends Controller<IPlanningPokerContext> {
+final class CreateUserController extends Controller<IPlanningPokerService> {
 
   private final ISelectRoomSessionFactory selectRoomSessionFactory;
 
@@ -55,7 +55,7 @@ final class CreateUserController extends Controller<IPlanningPokerContext> {
     }
   }
 
-  private WebClientSession<IPlanningPokerContext> createNextSession(
+  private WebClientSession<IPlanningPokerService> createNextSession(
     final IUser user,
     final ISelectRoomSessionFactory selectRoomSessionFactory,
     final IPokerSessionFactory pokerSessionFactory) {

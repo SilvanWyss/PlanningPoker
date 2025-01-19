@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.createusercomponent;
 
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.component.Component;
@@ -15,10 +15,10 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.atomiccontrolapi.buttonapi.ButtonRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class CreateUserComponent extends Component<CreateUserController, IPlanningPokerContext> {
+public final class CreateUserComponent extends Component<CreateUserController, IPlanningPokerService> {
 
   public CreateUserComponent(
-    final WebClientSession<IPlanningPokerContext> session,
+    final WebClientSession<IPlanningPokerService> session,
     final ISelectRoomSessionFactory selectRoomSessionFactory,
     final IPokerSessionFactory pokerSessionFactory) {
     super(new CreateUserController(selectRoomSessionFactory, pokerSessionFactory), session);

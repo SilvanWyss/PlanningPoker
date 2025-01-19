@@ -1,9 +1,9 @@
 package ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi;
 
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
 public interface ICreateUserSessionFactory {
 
-  WebClientSession<IPlanningPokerContext> createCreateUserSession();
+  WebClientSession<IPlanningPokerService> createCreateUserSession();
 }

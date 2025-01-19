@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.webapplication.footercomponent;
 
 import ch.nolix.coreapi.webapi.webproperty.LinkTarget;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.system.application.component.Component;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.graphic.image.Image;
@@ -14,7 +14,7 @@ import ch.nolix.systemapi.graphicapi.imageapi.IImage;
 import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class FooterComponent extends Component<FooterController, IPlanningPokerContext> {
+public final class FooterComponent extends Component<FooterController, IPlanningPokerService> {
 
   private static final String GITHUB_LOGO_RESOURCE_PATH = "image/github_logo.jpg";
 
@@ -25,7 +25,7 @@ public final class FooterComponent extends Component<FooterController, IPlanning
 
   private static final String NOLIX_WEB_APPLICATIONS_LINK = "https://nolix.ch/nolix_web_applications.html";
 
-  public FooterComponent(final WebClientSession<IPlanningPokerContext> session) {
+  public FooterComponent(final WebClientSession<IPlanningPokerService> session) {
     super(new FooterController(), session);
   }
 

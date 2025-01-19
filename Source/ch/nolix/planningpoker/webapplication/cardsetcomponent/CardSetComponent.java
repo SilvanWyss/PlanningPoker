@@ -3,8 +3,8 @@ package ch.nolix.planningpoker.webapplication.cardsetcomponent;
 import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.button.Button;
@@ -14,14 +14,14 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CardSetComponent
-extends ComponentWithDataSupplier<CardSetController, IPlanningPokerContext, IDataAdapter> {
+extends ComponentWithDataSupplier<CardSetController, IPlanningPokerService, IDataAdapter> {
 
   private static final RoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 
   public CardSetComponent(
     final String roomVisitId,
     final String roomId,
-    final WebClientSession<IPlanningPokerContext> session,
+    final WebClientSession<IPlanningPokerService> session,
     final IDataAdapter initialDataAdapter) {
     super(new CardSetController(roomVisitId, roomId), initialDataAdapter, session);
   }

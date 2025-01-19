@@ -7,8 +7,8 @@ import ch.nolix.planningpoker.webapplication.estimateoverviewcomponent.EstimateO
 import ch.nolix.planningpoker.webapplication.roomanalysiscomponent.RoomAnalysisComponent;
 import ch.nolix.planningpoker.webapplication.roomheadercomponent.RoomHeaderComponent;
 import ch.nolix.planningpoker.webapplication.roommanagercomponent.RoomManagerComponent;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
@@ -18,7 +18,7 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class PokerComponent
-extends ComponentWithDataSupplier<PokerComponentController, IPlanningPokerContext, IDataAdapter>
+extends ComponentWithDataSupplier<PokerComponentController, IPlanningPokerService, IDataAdapter>
 implements ITriggerableSubscriber {
 
   private final ISelectRoomSessionFactory selectRoomSessionFactory;
@@ -26,7 +26,7 @@ implements ITriggerableSubscriber {
   public PokerComponent(
     final String userId,
     final IDataAdapter initialDataAdapter,
-    final WebClientSession<IPlanningPokerContext> webClientSession,
+    final WebClientSession<IPlanningPokerService> webClientSession,
     final ISelectRoomSessionFactory selectRoomSessionFactory) {
 
     super(new PokerComponentController(userId), initialDataAdapter, webClientSession);
@@ -95,7 +95,7 @@ implements ITriggerableSubscriber {
     getStoredApplicationContext().getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
   }
 
-  private WebClientSession<IPlanningPokerContext> createSelectRoomSessionWihtUserId(String userId) {
+  private WebClientSession<IPlanningPokerService> createSelectRoomSessionWihtUserId(String userId) {
     return selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId);
   }
 }

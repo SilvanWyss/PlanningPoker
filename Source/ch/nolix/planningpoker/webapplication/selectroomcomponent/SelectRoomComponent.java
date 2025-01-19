@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.webapplication.selectroomcomponent;
 
 import ch.nolix.planningpoker.webapplication.view.PokerSession;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.system.application.component.Component;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.button.Button;
@@ -12,9 +12,9 @@ import ch.nolix.system.webgui.linearcontainer.VerticalStack;
 import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public final class SelectRoomComponent extends Component<SelectRoomController, IPlanningPokerContext> {
+public final class SelectRoomComponent extends Component<SelectRoomController, IPlanningPokerService> {
 
-  public SelectRoomComponent(final String userId, final WebClientSession<IPlanningPokerContext> session) {
+  public SelectRoomComponent(final String userId, final WebClientSession<IPlanningPokerService> session) {
     super(new SelectRoomController(userId), session);
   }
 

@@ -1,8 +1,8 @@
 package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IUser;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ICreateUserSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
@@ -10,8 +10,8 @@ import ch.nolix.system.application.webapplication.WebClientSession;
 
 public final class InitializeController {
 
-  public WebClientSession<IPlanningPokerContext> createFirstPageSession(
-    final WebClientSession<IPlanningPokerContext> initialSession,
+  public WebClientSession<IPlanningPokerService> createFirstPageSession(
+    final WebClientSession<IPlanningPokerService> initialSession,
     final ICreateUserSessionFactory createUserSessionFactory,
     final ISelectRoomSessionFactory selectRoomSessionFactory,
     final IPokerSessionFactory pokerSessionFactory) {
@@ -36,10 +36,10 @@ public final class InitializeController {
     return createUserSessionFactory.createCreateUserSession();
   }
 
-  private WebClientSession<IPlanningPokerContext> createNextSession(
+  private WebClientSession<IPlanningPokerService> createNextSession(
     final IUser user,
     final IDataAdapter dataAdapter,
-    final WebClientSession<IPlanningPokerContext> initialSession,
+    final WebClientSession<IPlanningPokerService> initialSession,
     final ISelectRoomSessionFactory selectRoomSessionFactory,
     final IPokerSessionFactory pokerSessionFactory) {
 

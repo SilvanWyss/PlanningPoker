@@ -1,11 +1,11 @@
 package ch.nolix.planningpoker.webapplication.selectroomcomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.system.application.component.Controller;
 
-final class SelectRoomController extends Controller<IPlanningPokerContext> {
+final class SelectRoomController extends Controller<IPlanningPokerService> {
 
   private final String userId;
 

@@ -1,10 +1,10 @@
 package ch.nolix.planningpoker.webapplication.pokercomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.system.application.component.Controller;
 
-public final class PokerComponentController extends Controller<IPlanningPokerContext> {
+public final class PokerComponentController extends Controller<IPlanningPokerService> {
 
   private final String userId;
 

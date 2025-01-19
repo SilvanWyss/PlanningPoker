@@ -2,13 +2,13 @@ package ch.nolix.planningpoker.webapplication.roomheadercomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
 import ch.nolix.system.application.component.Controller;
 import ch.nolix.template.webgui.dialog.ShowValueDialogBuilder;
 import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
-final class RoomHeaderController extends Controller<IPlanningPokerContext> {
+final class RoomHeaderController extends Controller<IPlanningPokerService> {
 
   private static final RoomHyperlinkCreator ROOM_HYPERLINK_CREATOR = new RoomHyperlinkCreator();
 

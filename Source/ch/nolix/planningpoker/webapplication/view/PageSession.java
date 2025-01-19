@@ -1,8 +1,8 @@
 package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.planningpoker.webapplication.footercomponent.FooterComponent;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.label.Label;
 import ch.nolix.system.webgui.container.SingleContainer;
@@ -12,7 +12,7 @@ import ch.nolix.systemapi.webguiapi.atomiccontrolapi.labelapi.LabelRole;
 import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
-public abstract class PageSession extends WebClientSession<IPlanningPokerContext> {
+public abstract class PageSession extends WebClientSession<IPlanningPokerService> {
 
   protected abstract IControl<?, ?> createMainControl(IDataAdapter dataAdapter);
 

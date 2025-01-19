@@ -2,8 +2,8 @@ package ch.nolix.planningpoker.webapplication.estimateoverviewcomponent;
 
 import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.system.application.component.ComponentWithDataSupplier;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.button.Button;
@@ -12,14 +12,14 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class EstimateOverviewComponent
-extends ComponentWithDataSupplier<EstimateOverviewController, IPlanningPokerContext, IDataAdapter> {
+extends ComponentWithDataSupplier<EstimateOverviewController, IPlanningPokerService, IDataAdapter> {
 
   private static final RoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
 
   public EstimateOverviewComponent(
     final String roomVisitId,
     final String roomId,
-    final WebClientSession<IPlanningPokerContext> session,
+    final WebClientSession<IPlanningPokerService> session,
     IDataAdapter initialDataAdapter) {
     super(new EstimateOverviewController(roomVisitId, roomId), initialDataAdapter, session);
   }

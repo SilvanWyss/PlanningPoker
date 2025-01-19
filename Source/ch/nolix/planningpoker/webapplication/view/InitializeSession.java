@@ -1,9 +1,9 @@
 package ch.nolix.planningpoker.webapplication.view;
 
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
+import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.system.application.webapplication.WebClientSession;
 
-public final class InitializeSession extends WebClientSession<IPlanningPokerContext> {
+public final class InitializeSession extends WebClientSession<IPlanningPokerService> {
 
   private static final InitializeController INITIALIZE_CONTROLLER = new InitializeController();
 
