@@ -1,9 +1,9 @@
 package ch.nolix.planningpoker.datamodel.dataevaluator;
 
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
-import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomVisitEvaluator;
+import ch.nolix.planningpokerapi.backendapi.examinerapi.IRoomVisitExaminer;
 
-public final class RoomVisitEvaluator implements IRoomVisitEvaluator {
+public final class RoomVisitEvaluator implements IRoomVisitExaminer {
 
   @Override
   public boolean hasEstimate(final IRoomVisit roomVisit) {
