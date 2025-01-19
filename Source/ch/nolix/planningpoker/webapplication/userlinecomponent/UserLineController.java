@@ -1,8 +1,8 @@
 package ch.nolix.planningpoker.webapplication.userlinecomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.system.application.component.Controller;
 import ch.nolix.template.webgui.dialog.EnterValueDialogBuilder;
 

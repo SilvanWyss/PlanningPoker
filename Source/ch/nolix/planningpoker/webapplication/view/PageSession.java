@@ -1,8 +1,8 @@
 package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.planningpoker.webapplication.footercomponent.FooterComponent;
+import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.label.Label;
 import ch.nolix.system.webgui.container.SingleContainer;

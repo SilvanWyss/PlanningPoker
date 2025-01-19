@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.view;
 
 import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
 import ch.nolix.planningpoker.webapplication.createusercomponent.CreateUserComponent;
-import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
+import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.system.webgui.atomiccontrol.label.Label;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 

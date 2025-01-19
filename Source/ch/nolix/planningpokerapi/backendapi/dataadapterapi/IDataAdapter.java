@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.logicapi.applicationcontextapi;
+package ch.nolix.planningpokerapi.backendapi.dataadapterapi;
 
 import ch.nolix.coreapi.programcontrolapi.savecontrolapi.IChangeSaver;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
