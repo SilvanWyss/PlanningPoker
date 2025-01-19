@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.datamodel.dataevaluator;
 
+import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.datamodelapi.dataevaluatorapi.IRoomEvaluator;
-import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
 
 public final class RoomEvaluator implements IRoomEvaluator {
 

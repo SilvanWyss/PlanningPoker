@@ -1,4 +1,4 @@
-package ch.nolix.planningpokerapi.datamodelapi.schemaapi;
+package ch.nolix.planningpokerapi.backendapi.datamodelapi;
 
 import ch.nolix.coreapi.attributeapi.mandatoryattributeapi.IIdHolder;
 

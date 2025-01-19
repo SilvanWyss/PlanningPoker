@@ -1,9 +1,9 @@
 package ch.nolix.planningpokerapi.logicapi.applicationcontextapi;
 
 import ch.nolix.coreapi.programcontrolapi.savecontrolapi.IChangeSaver;
-import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoom;
-import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
-import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IUser;
+import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
+import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
+import ch.nolix.planningpokerapi.backendapi.datamodelapi.IUser;
 
 public interface IDataAdapter extends IChangeSaver {
 

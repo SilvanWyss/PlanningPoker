@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.webapplication.roomheadercomponent;
 
-import ch.nolix.planningpokerapi.datamodelapi.schemaapi.IRoomVisit;
+import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IDataAdapter;
 import ch.nolix.planningpokerapi.logicapi.applicationcontextapi.IPlanningPokerContext;
 import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.ISelectRoomSessionFactory;
