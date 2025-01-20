@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.selectroomcomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
-import ch.nolix.planningpokerapi.webapplicationapi.sessionfactoryapi.IPokerSessionFactory;
+import ch.nolix.planningpokerapi.frontendapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.system.application.component.Controller;
 
 final class SelectRoomController extends Controller<IPlanningPokerService> {
