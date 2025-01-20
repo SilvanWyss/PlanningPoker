@@ -1,7 +1,7 @@
-package ch.nolix.planningpoker.frontend.component.roomheadercomponent;
+package ch.nolix.planningpoker.frontend.programcontrol;
 
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
-import ch.nolix.planningpokerapi.webapplicationapi.controllerapi.IRoomTarget;
+import ch.nolix.planningpokerapi.frontendapi.programcontrolapi.IRoomTarget;
 import ch.nolix.systemapi.applicationapi.mainapi.IApplication;
 
 public final class RoomHyperlinkCreator {

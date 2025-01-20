@@ -1,6 +1,7 @@
 package ch.nolix.planningpoker.frontend.component.roomheadercomponent;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.planningpoker.frontend.programcontrol.RoomHyperlinkCreator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.frontendapi.sessionfactoryapi.ISelectRoomSessionFactory;

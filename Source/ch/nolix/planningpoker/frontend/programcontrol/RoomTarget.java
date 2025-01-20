@@ -1,9 +1,9 @@
-package ch.nolix.planningpoker.frontend.component.roomheadercomponent;
+package ch.nolix.planningpoker.frontend.programcontrol;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.core.net.target.ApplicationInstanceTarget;
 import ch.nolix.coreapi.netapi.securityproperty.SecurityMode;
-import ch.nolix.planningpokerapi.webapplicationapi.controllerapi.IRoomTarget;
+import ch.nolix.planningpokerapi.frontendapi.programcontrolapi.IRoomTarget;
 
 public final class RoomTarget extends ApplicationInstanceTarget implements IRoomTarget {
 
