@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
-import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
+import ch.nolix.planningpoker.backend.examiner.RoomVisitExaminer;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.backendapi.examinerapi.IRoomVisitExaminer;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
@@ -14,7 +14,7 @@ import ch.nolix.template.webgui.dialog.YesNoDialogBuilder;
 
 final class EstimateOverviewController extends Controller<IPlanningPokerService> {
 
-  private static final IRoomVisitExaminer ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
+  private static final IRoomVisitExaminer ROOM_VISIT_EVALUATOR = new RoomVisitExaminer();
 
   private final String roomVisitId;
 

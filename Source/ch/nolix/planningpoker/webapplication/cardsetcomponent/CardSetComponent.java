@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.webapplication.cardsetcomponent;
 
 import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
-import ch.nolix.planningpoker.datamodel.dataevaluator.RoomVisitEvaluator;
+import ch.nolix.planningpoker.backend.examiner.RoomVisitExaminer;
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
@@ -16,7 +16,7 @@ import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 public final class CardSetComponent
 extends ComponentWithDataSupplier<CardSetController, IPlanningPokerService, IDataAdapter> {
 
-  private static final RoomVisitEvaluator ROOM_VISIT_EVALUATOR = new RoomVisitEvaluator();
+  private static final RoomVisitExaminer ROOM_VISIT_EVALUATOR = new RoomVisitExaminer();
 
   public CardSetComponent(
     final String roomVisitId,

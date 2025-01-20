@@ -1,12 +1,12 @@
-package ch.nolix.planningpoker.logic.applicationcontext;
+package ch.nolix.planningpoker.backend.dataadapter;
 
 import ch.nolix.core.commontypetool.stringtool.StringTool;
 import ch.nolix.core.errorcontrol.exception.GeneralException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
 import ch.nolix.coreapi.commontypetoolapi.stringtoolapi.IStringTool;
-import ch.nolix.planningpoker.datamodel.schema.Room;
-import ch.nolix.planningpoker.datamodel.schema.RoomVisit;
-import ch.nolix.planningpoker.datamodel.schema.User;
+import ch.nolix.planningpoker.backend.datamodel.Room;
+import ch.nolix.planningpoker.backend.datamodel.RoomVisit;
+import ch.nolix.planningpoker.backend.datamodel.User;
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;

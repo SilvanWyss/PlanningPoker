@@ -1,4 +1,4 @@
-package ch.nolix.planningpoker.datamodel.schema;
+package ch.nolix.planningpoker.backend.datamodel;
 
 import ch.nolix.core.errorcontrol.invalidargumentexception.InvalidArgumentException;
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;

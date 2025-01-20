@@ -1,6 +1,7 @@
 package ch.nolix.planningpoker.logic.applicationcontext;
 
 import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.planningpoker.backend.dataadapter.DataAdapter;
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IRoomChangeNotifier;

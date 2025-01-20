@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.webapplication.main;
 
 import ch.nolix.core.document.node.FileNode;
 import ch.nolix.core.document.node.MutableNode;
-import ch.nolix.planningpoker.datamodel.schema.SchemaCatalogue;
+import ch.nolix.planningpoker.backend.datamodel.SchemaCatalogue;
 import ch.nolix.planningpoker.logic.applicationcontext.PlanningPokerContext;
 import ch.nolix.planningpoker.webapplication.view.InitializeSession;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
