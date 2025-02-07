@@ -18,7 +18,7 @@ public final class InitializeController {
 
     final var applicationContext = initialSession.getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
+    try (final var databaseAdapter = applicationContext.createAdapter()) {
 
       final var userId = initialSession.getStoredParentClient().getOptionalCookieValueByCookieName("user_id");
 

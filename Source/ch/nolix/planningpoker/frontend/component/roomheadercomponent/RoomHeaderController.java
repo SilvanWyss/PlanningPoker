@@ -59,7 +59,7 @@ final class RoomHeaderController extends Controller<IPlanningPokerService> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
+    try (final var databaseAdapter = applicationContext.createAdapter()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       final var room = user.getStoredCurrentRoomVisit().getStoredParentRoom();

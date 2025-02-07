@@ -32,7 +32,7 @@ final class CreateUserController extends Controller<IPlanningPokerService> {
 
     final var roomNumber = session.getStoredParentClient().getOptionalUrlParameterValueByUrlParameterName("room");
 
-    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
+    try (final var databaseAdapter = applicationContext.createAdapter()) {
 
       final var user = databaseAdapter.createUserWithName(userName);
 

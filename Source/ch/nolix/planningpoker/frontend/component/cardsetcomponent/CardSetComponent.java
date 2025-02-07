@@ -5,7 +5,7 @@ import ch.nolix.planningpoker.backend.examiner.RoomVisitExaminer;
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
-import ch.nolix.system.application.component.ComponentWithDataSupplier;
+import ch.nolix.system.application.component.ComponentWithAdapterFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.button.Button;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
@@ -14,7 +14,7 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class CardSetComponent
-extends ComponentWithDataSupplier<CardSetController, IPlanningPokerService, IDataAdapter> {
+extends ComponentWithAdapterFactory<CardSetController, IPlanningPokerService, IDataAdapter> {
 
   private static final RoomVisitExaminer ROOM_VISIT_EVALUATOR = new RoomVisitExaminer();
 

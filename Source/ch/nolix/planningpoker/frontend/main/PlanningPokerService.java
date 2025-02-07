@@ -33,13 +33,13 @@ public final class PlanningPokerService implements IPlanningPokerService {
   }
 
   @Override
-  public IImage getApplicationLogo() {
-    return APPLICATION_LOGO;
+  public IDataAdapter createAdapter() {
+    return DataAdapter.usingDatabaseAdapter(internalDatabaseAdapter.createEmptyCopy());
   }
 
   @Override
-  public IDataAdapter createDataSupplier() {
-    return DataAdapter.usingDatabaseAdapter(internalDatabaseAdapter.createEmptyCopy());
+  public IImage getApplicationLogo() {
+    return APPLICATION_LOGO;
   }
 
   @Override

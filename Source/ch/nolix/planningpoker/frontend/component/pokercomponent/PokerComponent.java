@@ -10,7 +10,7 @@ import ch.nolix.planningpoker.frontend.component.roommanagercomponent.RoomManage
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.frontendapi.sessionfactoryapi.ISelectRoomSessionFactory;
-import ch.nolix.system.application.component.ComponentWithDataSupplier;
+import ch.nolix.system.application.component.ComponentWithAdapterFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.linearcontainer.HorizontalStack;
 import ch.nolix.system.webgui.linearcontainer.VerticalStack;
@@ -18,7 +18,7 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class PokerComponent
-extends ComponentWithDataSupplier<PokerComponentController, IPlanningPokerService, IDataAdapter>
+extends ComponentWithAdapterFactory<PokerComponentController, IPlanningPokerService, IDataAdapter>
 implements ITriggerableSubscriber {
 
   private final ISelectRoomSessionFactory selectRoomSessionFactory;
@@ -48,7 +48,7 @@ implements ITriggerableSubscriber {
 
     final var userId = getStoredController().getUserId();
 
-    try (final var dataSpplier = getStoredApplicationContext().createDataSupplier()) {
+    try (final var dataSpplier = getStoredApplicationContext().createAdapter()) {
 
       final var user = dataSpplier.getStoredUserById(userId);
 

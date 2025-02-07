@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.frontend.component.userlinecomponent;
 
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
-import ch.nolix.system.application.component.ComponentWithDataSupplier;
+import ch.nolix.system.application.component.ComponentWithAdapterFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.button.Button;
 import ch.nolix.system.webgui.atomiccontrol.label.Label;
@@ -11,7 +11,7 @@ import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class UserLineComponent
-extends ComponentWithDataSupplier<UserLineController, IPlanningPokerService, IDataAdapter> {
+extends ComponentWithAdapterFactory<UserLineController, IPlanningPokerService, IDataAdapter> {
 
   public UserLineComponent(
     final String userId,

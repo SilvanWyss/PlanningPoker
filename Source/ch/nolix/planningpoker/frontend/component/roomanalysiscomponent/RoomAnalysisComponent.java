@@ -8,14 +8,14 @@ import ch.nolix.planningpokerapi.backendapi.analysisapi.IRoomAnalysis;
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
-import ch.nolix.system.application.component.ComponentWithDataSupplier;
+import ch.nolix.system.application.component.ComponentWithAdapterFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.container.Grid;
 import ch.nolix.systemapi.applicationapi.componentapi.RefreshBehavior;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomAnalysisComponent
-extends ComponentWithDataSupplier<RoomAnalysisController, IPlanningPokerService, IDataAdapter> {
+extends ComponentWithAdapterFactory<RoomAnalysisController, IPlanningPokerService, IDataAdapter> {
 
   public RoomAnalysisComponent(
     final String roomId,

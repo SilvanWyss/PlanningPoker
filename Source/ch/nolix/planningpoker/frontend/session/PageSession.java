@@ -27,7 +27,7 @@ public abstract class PageSession extends WebClientSession<IPlanningPokerService
   }
 
   private IControl<?, ?> createRootControl() {
-    try (final var databaseAdapter = getStoredApplicationContext().createDataSupplier()) {
+    try (final var databaseAdapter = getStoredApplicationContext().createAdapter()) {
       return new VerticalStack()
         .setRole(ContainerRole.OVERALL_CONTAINER)
         .addControl(

@@ -26,7 +26,7 @@ final class CardSetController extends Controller<IPlanningPokerService> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
+    try (final var databaseAdapter = applicationContext.createAdapter()) {
 
       final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
       roomVisit.deleteEstimate();
@@ -62,7 +62,7 @@ final class CardSetController extends Controller<IPlanningPokerService> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
+    try (final var databaseAdapter = applicationContext.createAdapter()) {
 
       final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
       roomVisit.setEstimateInStoryPoints(estimateInStoryPoints);
@@ -77,7 +77,7 @@ final class CardSetController extends Controller<IPlanningPokerService> {
 
     final var applicationContext = getStoredApplicationContext();
 
-    try (final var databaseAdapter = applicationContext.createDataSupplier()) {
+    try (final var databaseAdapter = applicationContext.createAdapter()) {
 
       final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
       roomVisit.setInfiniteEstimate();

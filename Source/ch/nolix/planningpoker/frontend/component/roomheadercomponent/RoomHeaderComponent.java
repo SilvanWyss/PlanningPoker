@@ -4,7 +4,7 @@ import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.frontendapi.sessionfactoryapi.ISelectRoomSessionFactory;
-import ch.nolix.system.application.component.ComponentWithDataSupplier;
+import ch.nolix.system.application.component.ComponentWithAdapterFactory;
 import ch.nolix.system.application.webapplication.WebClientSession;
 import ch.nolix.system.webgui.atomiccontrol.button.Button;
 import ch.nolix.system.webgui.atomiccontrol.label.Label;
@@ -15,7 +15,7 @@ import ch.nolix.systemapi.webguiapi.basecontainerapi.ContainerRole;
 import ch.nolix.systemapi.webguiapi.mainapi.IControl;
 
 public final class RoomHeaderComponent
-extends ComponentWithDataSupplier<RoomHeaderController, IPlanningPokerService, IDataAdapter> {
+extends ComponentWithAdapterFactory<RoomHeaderController, IPlanningPokerService, IDataAdapter> {
 
   public RoomHeaderComponent(
     final String userId,
