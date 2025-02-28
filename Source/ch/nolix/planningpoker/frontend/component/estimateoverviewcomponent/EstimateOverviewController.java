@@ -47,14 +47,14 @@ final class EstimateOverviewController extends Controller<IPlanningPokerService>
   }
 
   public IRoomChangeNotifier getStoredRoomChangeNotifier() {
-    return getStoredApplicationContext().getStoredRoomChangeNotifier();
+    return getStoredApplicationService().getStoredRoomChangeNotifier();
   }
 
   public void openKickUserDialog(final String userId) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var dataAdapter = applicationContext.createAdapter()) {
+    try (final var dataAdapter = applicationService.createAdapter()) {
 
       final var user = dataAdapter.getStoredUserById(userId);
 
@@ -102,15 +102,15 @@ final class EstimateOverviewController extends Controller<IPlanningPokerService>
 
   private void kickUserAndTrigger(final String userId) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var dataAdapter = applicationContext.createAdapter()) {
+    try (final var dataAdapter = applicationService.createAdapter()) {
 
       final var user = dataAdapter.getStoredUserById(userId);
       dataAdapter.leaveRoom(user);
       dataAdapter.saveChanges();
 
-      getStoredApplicationContext().getStoredRoomChangeNotifier().noteRoomChange(roomId);
+      getStoredApplicationService().getStoredRoomChangeNotifier().noteRoomChange(roomId);
     }
   }
 }

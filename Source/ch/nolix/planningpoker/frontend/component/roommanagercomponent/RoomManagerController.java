@@ -55,9 +55,9 @@ final class RoomManagerController extends Controller<IPlanningPokerService> {
 
   public void toggleEstimateVisibilityAndTrigger(final String roomId) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var room = databaseAdapter.getStoredRoomById(roomId);
 
@@ -69,22 +69,22 @@ final class RoomManagerController extends Controller<IPlanningPokerService> {
 
       databaseAdapter.saveChanges();
 
-      applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+      applicationService.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
     }
   }
 
   private void deleteEstimatesAndTrigger(final String roomId) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var room = databaseAdapter.getStoredRoomById(roomId);
       room.getStoredRoomVisits().forEach(IRoomVisit::deleteEstimate);
       room.setEstimatesInvisible();
       databaseAdapter.saveChanges();
 
-      applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+      applicationService.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
     }
   }
 }

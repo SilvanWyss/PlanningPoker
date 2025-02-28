@@ -24,16 +24,16 @@ final class CardSetController extends Controller<IPlanningPokerService> {
 
   public void deleteEstimateAndTrigger(final String roomVisitId) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
       roomVisit.deleteEstimate();
       databaseAdapter.saveChanges();
 
       final var room = roomVisit.getStoredParentRoom();
-      applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+      applicationService.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
     }
   }
 
@@ -55,36 +55,36 @@ final class CardSetController extends Controller<IPlanningPokerService> {
   }
 
   public IRoomChangeNotifier getStoredRoomChangeNotifier() {
-    return getStoredApplicationContext().getStoredRoomChangeNotifier();
+    return getStoredApplicationService().getStoredRoomChangeNotifier();
   }
 
   public void setEstimateInStoryPointsAndTrigger(final String roomVisitId, final double estimateInStoryPoints) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
       roomVisit.setEstimateInStoryPoints(estimateInStoryPoints);
       databaseAdapter.saveChanges();
 
       final var room = roomVisit.getStoredParentRoom();
-      applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+      applicationService.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
     }
   }
 
   public void setInfiniteEstimateAndTrigger(final String roomVisitId) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var roomVisit = databaseAdapter.getStoredRoomVisitById(roomVisitId);
       roomVisit.setInfiniteEstimate();
       databaseAdapter.saveChanges();
 
       final var room = roomVisit.getStoredParentRoom();
-      applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+      applicationService.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
     }
   }
 }

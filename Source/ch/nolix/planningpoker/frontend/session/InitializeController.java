@@ -16,9 +16,9 @@ public final class InitializeController {
     final ISelectRoomSessionFactory selectRoomSessionFactory,
     final IPokerSessionFactory pokerSessionFactory) {
 
-    final var applicationContext = initialSession.getStoredApplicationContext();
+    final var applicationService = initialSession.getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var userId = initialSession.getStoredParentClient().getOptionalCookieValueByCookieName("user_id");
 

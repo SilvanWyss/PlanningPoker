@@ -21,6 +21,6 @@ final class RoomAnalysisController extends Controller<IPlanningPokerService> {
   }
 
   public IRoomChangeNotifier getStoredRoomChangeNotifier() {
-    return getStoredApplicationContext().getStoredRoomChangeNotifier();
+    return getStoredApplicationService().getStoredRoomChangeNotifier();
   }
 }

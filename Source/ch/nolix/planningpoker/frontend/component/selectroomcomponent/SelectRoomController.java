@@ -18,9 +18,9 @@ final class SelectRoomController extends Controller<IPlanningPokerService> {
 
   public void createAndEnterRoomAndRedirect(final IPokerSessionFactory pokerSessionFactory) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       databaseAdapter.createNewRoomAndEnterRoom(user);
@@ -33,16 +33,16 @@ final class SelectRoomController extends Controller<IPlanningPokerService> {
 
   public void enterRoomAndRedirect(final String roomNumber, final IPokerSessionFactory pokerSessionFactory) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       final var room = databaseAdapter.getStoredRoomByNumber(roomNumber);
       databaseAdapter.enterRoom(user, room);
       databaseAdapter.saveChanges();
 
-      applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+      applicationService.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
 
       final var pokerSession = pokerSessionFactory.createPokerSessionWihtUserId(userId);
       getStoredWebClientSession().setNext(pokerSession);

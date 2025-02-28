@@ -57,9 +57,9 @@ final class RoomHeaderController extends Controller<IPlanningPokerService> {
 
   private void goToOtherRoomAndTrigger() {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       final var room = user.getStoredCurrentRoomVisit().getStoredParentRoom();
@@ -69,7 +69,7 @@ final class RoomHeaderController extends Controller<IPlanningPokerService> {
 
       getStoredWebClientSession().setNext(selectRoomSessionFactory.createSelectRoomSessionWihtUserId(userId));
 
-      applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+      applicationService.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
     }
   }
 }

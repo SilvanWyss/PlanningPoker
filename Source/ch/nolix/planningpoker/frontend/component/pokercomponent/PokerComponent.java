@@ -48,9 +48,9 @@ implements ITriggerableSubscriber {
 
     final var userId = getStoredController().getUserId();
 
-    try (final var dataSpplier = getStoredApplicationContext().createAdapter()) {
+    try (final var adapter = getStoredApplicationService().createAdapter()) {
 
-      final var user = dataSpplier.getStoredUserById(userId);
+      final var user = adapter.getStoredUserById(userId);
 
       if (user.isInARoom()) {
         refresh();
@@ -92,7 +92,7 @@ implements ITriggerableSubscriber {
     final var room = roomVisit.getStoredParentRoom();
     final var roomId = room.getId();
 
-    getStoredApplicationContext().getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
+    getStoredApplicationService().getStoredRoomChangeNotifier().registerRoomSubscriberIfNotRegistered(roomId, this);
   }
 
   private WebClientSession<IPlanningPokerService> createSelectRoomSessionWihtUserId(String userId) {

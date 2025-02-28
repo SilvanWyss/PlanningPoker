@@ -27,12 +27,12 @@ final class CreateUserController extends Controller<IPlanningPokerService> {
 
   public void createUserAndSetCookieAndRedirect(final String userName) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationServuce = getStoredApplicationService();
     final var session = getStoredWebClientSession();
 
     final var roomNumber = session.getStoredParentClient().getOptionalUrlParameterValueByUrlParameterName("room");
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationServuce.createAdapter()) {
 
       final var user = databaseAdapter.createUserWithName(userName);
 
@@ -43,7 +43,7 @@ final class CreateUserController extends Controller<IPlanningPokerService> {
         if (room != null) {
           databaseAdapter.enterRoom(user, room);
           databaseAdapter.saveChanges();
-          applicationContext.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
+          applicationServuce.getStoredRoomChangeNotifier().noteRoomChange(room.getId());
         }
       } else {
         databaseAdapter.saveChanges();

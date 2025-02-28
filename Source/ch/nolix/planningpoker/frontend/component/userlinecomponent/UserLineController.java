@@ -26,9 +26,9 @@ final class UserLineController extends Controller<IPlanningPokerService> {
 
   public void openEditUserNameDialog() {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       final var originUserName = user.getName();
@@ -46,16 +46,16 @@ final class UserLineController extends Controller<IPlanningPokerService> {
 
   private void setUserName(final String newUserName) {
 
-    final var applicationContext = getStoredApplicationContext();
+    final var applicationService = getStoredApplicationService();
 
-    try (final var databaseAdapter = applicationContext.createAdapter()) {
+    try (final var databaseAdapter = applicationService.createAdapter()) {
 
       final var user = databaseAdapter.getStoredUserById(userId);
       user.setName(newUserName);
       databaseAdapter.saveChanges();
 
       if (user.isInARoom()) {
-        applicationContext
+        applicationService
           .getStoredRoomChangeNotifier()
           .noteRoomChange(user.getStoredCurrentRoomVisit().getStoredParentRoom().getId());
       }
