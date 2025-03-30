@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.frontend.component.estimateoverviewcomponent;
 
 import java.util.Locale;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.coreapi.programatomapi.stringcatalogapi.StringCatalog;
 import ch.nolix.planningpoker.backend.examiner.RoomVisitExaminer;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
@@ -22,8 +22,8 @@ final class EstimateOverviewController extends Controller<IPlanningPokerService>
 
   public EstimateOverviewController(final String roomVisitId, final String roomId) {
 
-    GlobalValidator.assertThat(roomId).thatIsNamed("room visit id").isNotBlank();
-    GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
+    Validator.assertThat(roomId).thatIsNamed("room visit id").isNotBlank();
+    Validator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
 
     this.roomVisitId = roomVisitId;
     this.roomId = roomId;

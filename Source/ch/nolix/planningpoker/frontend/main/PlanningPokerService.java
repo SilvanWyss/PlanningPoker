@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.main;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpoker.backend.dataadapter.DataAdapter;
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
@@ -22,7 +22,7 @@ public final class PlanningPokerService implements IPlanningPokerService {
 
   private PlanningPokerService(final ch.nolix.systemapi.objectdataapi.adapterapi.IDataAdapter databaseAdapter) {
 
-    GlobalValidator.assertThat(databaseAdapter).thatIsNamed(DataAdapter.class).isNotNull();
+    Validator.assertThat(databaseAdapter).thatIsNamed(DataAdapter.class).isNotNull();
 
     this.internalDatabaseAdapter = databaseAdapter;
   }

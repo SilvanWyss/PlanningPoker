@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.component.pokercomponent;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.system.application.component.Controller;
 
@@ -10,7 +10,7 @@ public final class PokerComponentController extends Controller<IPlanningPokerSer
 
   public PokerComponentController(final String userId) {
 
-    GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
+    Validator.assertThat(userId).thatIsNamed("user id").isNotBlank();
 
     this.userId = userId;
   }

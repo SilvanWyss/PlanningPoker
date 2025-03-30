@@ -2,8 +2,7 @@ package ch.nolix.planningpoker.backend.dataadapter;
 
 import ch.nolix.core.commontypetool.stringtool.StringTool;
 import ch.nolix.core.errorcontrol.exception.GeneralException;
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.coreapi.commontypetoolapi.stringtoolapi.IStringTool;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpoker.backend.datamodel.Room;
 import ch.nolix.planningpoker.backend.datamodel.RoomVisit;
 import ch.nolix.planningpoker.backend.datamodel.User;
@@ -13,8 +12,6 @@ import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IUser;
 
 public final class DataAdapter implements IDataAdapter {
-
-  private static final IStringTool STRING_TOOL = new StringTool();
 
   private final ch.nolix.systemapi.objectdataapi.adapterapi.IDataAdapter internalDatabaseAdapter;
 
@@ -81,7 +78,7 @@ public final class DataAdapter implements IDataAdapter {
   @Override
   public IRoom getStoredRoomByNumber(final String number) {
 
-    GlobalValidator.assertThat(number).thatIsNamed("room number").isNotBlank();
+    Validator.assertThat(number).thatIsNamed("room number").isNotBlank();
 
     final var room = internalDatabaseAdapter
       .getStoredTableByEntityType(Room.class)
@@ -90,7 +87,7 @@ public final class DataAdapter implements IDataAdapter {
 
     if (room.isEmpty()) {
       throw GeneralException.withErrorMessage(
-        "The room " + STRING_TOOL.getInSingleQuotes(number) + " does not exist.");
+        "The room " + StringTool.getInSingleQuotes(number) + " does not exist.");
     }
 
     return room.get();

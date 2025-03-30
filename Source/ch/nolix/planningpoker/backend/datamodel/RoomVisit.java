@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.backend.datamodel;
 
 import ch.nolix.core.errorcontrol.invalidargumentexception.InvalidArgumentException;
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IUser;
@@ -72,7 +72,7 @@ public final class RoomVisit extends Entity implements IRoomVisit {
   @Override
   public void setEstimateInStoryPoints(final double estimateInStoryPoints) {
 
-    GlobalValidator.assertThat(estimateInStoryPoints).thatIsNamed("estimate in story points").isNotNegative();
+    Validator.assertThat(estimateInStoryPoints).thatIsNamed("estimate in story points").isNotNegative();
 
     deleteEstimate();
 

@@ -1,8 +1,8 @@
 package ch.nolix.planningpoker.backend.analysis;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
-import ch.nolix.core.math.main.GlobalCalculator;
-import ch.nolix.core.programatom.function.GlobalFunctionService;
+import ch.nolix.core.errorcontrol.validator.Validator;
+import ch.nolix.core.math.main.Calculator;
+import ch.nolix.core.programatom.function.FunctionService;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.planningpokerapi.backendapi.analysisapi.IRoomAnalysis;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
@@ -14,7 +14,7 @@ public final class RoomAnalysis implements IRoomAnalysis {
 
   private RoomAnalysis(final IContainer<Double> estimatesInStoryPoints) {
 
-    GlobalValidator.assertThat(estimatesInStoryPoints).thatIsNamed("estimates in story points").isNotNull();
+    Validator.assertThat(estimatesInStoryPoints).thatIsNamed("estimates in story points").isNotNull();
 
     this.estimatesInStoryPoints = estimatesInStoryPoints;
   }
@@ -35,26 +35,26 @@ public final class RoomAnalysis implements IRoomAnalysis {
     final var averageEstimateInStoryPoints = getAverageEstimateInStoryPointsOrZero();
 
     return estimatesInStoryPoints.getAverageOrZero(
-      e -> GlobalCalculator.getAbsoluteDifference(averageEstimateInStoryPoints, e));
+      e -> Calculator.getAbsoluteDifference(averageEstimateInStoryPoints, e));
   }
 
   @Override
   public double getAverageEstimateInStoryPointsOrZero() {
-    return estimatesInStoryPoints.getAverageOrZero(GlobalFunctionService::getSelf);
+    return estimatesInStoryPoints.getAverageOrZero(FunctionService::getSelf);
   }
 
   @Override
   public double getMaxEstimateInStoryPointsOrZero() {
-    return estimatesInStoryPoints.getMaxOrZero(GlobalFunctionService::getSelf);
+    return estimatesInStoryPoints.getMaxOrZero(FunctionService::getSelf);
   }
 
   @Override
   public double getMedianEstimateInStoryPointsOrZero() {
-    return estimatesInStoryPoints.getMedianOrZero(GlobalFunctionService::getSelf);
+    return estimatesInStoryPoints.getMedianOrZero(FunctionService::getSelf);
   }
 
   @Override
   public double getMinEstimateInStoryPointsOrZero() {
-    return estimatesInStoryPoints.getMinOrZero(GlobalFunctionService::getSelf);
+    return estimatesInStoryPoints.getMinOrZero(FunctionService::getSelf);
   }
 }

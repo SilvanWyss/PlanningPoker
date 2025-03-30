@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.component.createusercomponent;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IUser;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.frontendapi.sessionfactoryapi.IPokerSessionFactory;
@@ -18,8 +18,8 @@ final class CreateUserController extends Controller<IPlanningPokerService> {
     final ISelectRoomSessionFactory selectRoomSessionFactory,
     final IPokerSessionFactory pokerSessionFactory) {
 
-    GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
-    GlobalValidator.assertThat(pokerSessionFactory).thatIsNamed(IPokerSessionFactory.class).isNotNull();
+    Validator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
+    Validator.assertThat(pokerSessionFactory).thatIsNamed(IPokerSessionFactory.class).isNotNull();
 
     this.selectRoomSessionFactory = selectRoomSessionFactory;
     this.pokerSessionFactory = pokerSessionFactory;

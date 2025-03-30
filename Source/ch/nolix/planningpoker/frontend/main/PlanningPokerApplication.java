@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.frontend.main;
 
 import ch.nolix.core.document.node.FileNode;
 import ch.nolix.core.document.node.MutableNode;
-import ch.nolix.planningpoker.backend.datamodel.SchemaCatalogue;
+import ch.nolix.planningpoker.backend.datamodel.EntityTypeSetCatalog;
 import ch.nolix.planningpoker.frontend.session.InitializeSession;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.system.application.main.Application;
@@ -26,7 +26,7 @@ extends Application<WebClient<IPlanningPokerService>, IPlanningPokerService> {
     final var databaseAdapter = NodeDataAdapter
       .forNodeDatabase(fileNodeDatabase)
       .withName("PlanningPokerDatabase")
-      .andSchema(SchemaCatalogue.SCHEMA);
+      .andSchema(EntityTypeSetCatalog.ENTITY_TYPE_SET);
 
     return new PlanningPokerApplication(databaseAdapter);
   }
@@ -38,7 +38,7 @@ extends Application<WebClient<IPlanningPokerService>, IPlanningPokerService> {
     final var databaseAdapter = NodeDataAdapter
       .forNodeDatabase(nodeDatabase)
       .withName("PlanningPokerDatabase")
-      .andSchema(SchemaCatalogue.SCHEMA);
+      .andSchema(EntityTypeSetCatalog.ENTITY_TYPE_SET);
 
     return new PlanningPokerApplication(databaseAdapter);
   }

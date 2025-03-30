@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.component.userlinecomponent;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.system.application.component.Controller;
@@ -12,7 +12,7 @@ final class UserLineController extends Controller<IPlanningPokerService> {
 
   public UserLineController(final String userId) {
 
-    GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
+    Validator.assertThat(userId).thatIsNamed("user id").isNotBlank();
 
     this.userId = userId;
   }

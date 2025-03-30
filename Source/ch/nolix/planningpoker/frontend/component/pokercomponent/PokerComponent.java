@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.component.pokercomponent;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 import ch.nolix.planningpoker.frontend.component.cardsetcomponent.CardSetComponent;
 import ch.nolix.planningpoker.frontend.component.estimateoverviewcomponent.EstimateOverviewComponent;
@@ -31,7 +31,7 @@ implements ITriggerableSubscriber {
 
     super(new PokerComponentController(userId), initialDataAdapter, webClientSession);
 
-    GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
+    Validator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
 
     this.selectRoomSessionFactory = selectRoomSessionFactory;
 

@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.component.roomheadercomponent;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpoker.frontend.programcontrol.RoomHyperlinkCreator;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
@@ -19,8 +19,8 @@ final class RoomHeaderController extends Controller<IPlanningPokerService> {
 
   public RoomHeaderController(final String userId, final ISelectRoomSessionFactory selectRoomSessionFactory) {
 
-    GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
-    GlobalValidator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
+    Validator.assertThat(userId).thatIsNamed("user id").isNotBlank();
+    Validator.assertThat(selectRoomSessionFactory).thatIsNamed(ISelectRoomSessionFactory.class).isNotNull();
 
     this.userId = userId;
     this.selectRoomSessionFactory = selectRoomSessionFactory;

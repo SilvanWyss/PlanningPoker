@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.backend.datamodel;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.coreapi.programatomapi.variableapi.LowerCaseVariableCatalog;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IUser;
@@ -47,9 +47,9 @@ public final class User extends Entity implements IUser {
   @Override
   public void setName(final String name) {
 
-    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseVariableCatalog.NAME).isNotBlank();
-    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseVariableCatalog.NAME).isNotLongerThan(MAX_NAME_LENGTH);
-    GlobalValidator.assertThat(name).thatIsNamed(LowerCaseVariableCatalog.NAME).matches("[a-zA-Z0-9[.]\s]*");
+    Validator.assertThat(name).thatIsNamed(LowerCaseVariableCatalog.NAME).isNotBlank();
+    Validator.assertThat(name).thatIsNamed(LowerCaseVariableCatalog.NAME).isNotLongerThan(MAX_NAME_LENGTH);
+    Validator.assertThat(name).thatIsNamed(LowerCaseVariableCatalog.NAME).matches("[a-zA-Z0-9[.]\s]*");
 
     this.name.setValue(name);
   }

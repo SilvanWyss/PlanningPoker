@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.main;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.coreapi.programcontrolapi.triggerapi.ITriggerableSubscriber;
 
 public final class RoomSubscriberWrapper implements ITriggerableSubscriber {
@@ -11,8 +11,8 @@ public final class RoomSubscriberWrapper implements ITriggerableSubscriber {
 
   private RoomSubscriberWrapper(final String roomId, final ITriggerableSubscriber roomSubscriber) {
 
-    GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
-    GlobalValidator.assertThat(roomSubscriber).thatIsNamed("roomSubscriber").isNotNull();
+    Validator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
+    Validator.assertThat(roomSubscriber).thatIsNamed("roomSubscriber").isNotNull();
 
     this.roomId = roomId;
     this.roomSubscriber = roomSubscriber;

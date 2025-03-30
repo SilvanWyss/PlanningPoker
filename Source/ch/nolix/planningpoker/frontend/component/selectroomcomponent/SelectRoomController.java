@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.component.selectroomcomponent;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.frontendapi.sessionfactoryapi.IPokerSessionFactory;
 import ch.nolix.system.application.component.Controller;
@@ -11,7 +11,7 @@ final class SelectRoomController extends Controller<IPlanningPokerService> {
 
   public SelectRoomController(final String userId) {
 
-    GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
+    Validator.assertThat(userId).thatIsNamed("user id").isNotBlank();
 
     this.userId = userId;
   }

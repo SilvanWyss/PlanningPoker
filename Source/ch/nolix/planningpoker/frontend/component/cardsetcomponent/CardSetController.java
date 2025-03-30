@@ -2,7 +2,7 @@ package ch.nolix.planningpoker.frontend.component.cardsetcomponent;
 
 import java.util.Locale;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IPlanningPokerService;
 import ch.nolix.planningpokerapi.frontendapi.mainapi.IRoomChangeNotifier;
 import ch.nolix.system.application.component.Controller;
@@ -15,8 +15,8 @@ final class CardSetController extends Controller<IPlanningPokerService> {
 
   public CardSetController(final String roomVisitId, final String roomId) {
 
-    GlobalValidator.assertThat(roomVisitId).thatIsNamed("room visit id").isNotBlank();
-    GlobalValidator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
+    Validator.assertThat(roomVisitId).thatIsNamed("room visit id").isNotBlank();
+    Validator.assertThat(roomId).thatIsNamed("room id").isNotBlank();
 
     this.roomVisitId = roomVisitId;
     this.roomId = roomId;

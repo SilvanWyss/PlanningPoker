@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.frontend.session;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpoker.frontend.component.pokercomponent.PokerComponent;
 import ch.nolix.planningpoker.frontend.component.userlinecomponent.UserLineComponent;
 import ch.nolix.planningpokerapi.backendapi.dataadapterapi.IDataAdapter;
@@ -12,7 +12,7 @@ public final class PokerSession extends PageSession {
 
   private PokerSession(final String userId) {
 
-    GlobalValidator.assertThat(userId).thatIsNamed("user id").isNotBlank();
+    Validator.assertThat(userId).thatIsNamed("user id").isNotBlank();
 
     this.userId = userId;
   }

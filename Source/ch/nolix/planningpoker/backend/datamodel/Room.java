@@ -1,6 +1,6 @@
 package ch.nolix.planningpoker.backend.datamodel;
 
-import ch.nolix.core.errorcontrol.validator.GlobalValidator;
+import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
 import ch.nolix.coreapi.programatomapi.variableapi.LowerCaseVariableCatalog;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
@@ -97,7 +97,7 @@ public final class Room extends Entity implements IRoom {
 
   private void setNumber(final String number) {
 
-    GlobalValidator.assertThat(number).thatIsNamed(LowerCaseVariableCatalog.NUMBER).isNotNull();
+    Validator.assertThat(number).thatIsNamed(LowerCaseVariableCatalog.NUMBER).isNotNull();
 
     this.number.setValue(number);
   }
