@@ -1,7 +1,7 @@
 package ch.nolix.planningpoker.backend.dataadapter;
 
 import ch.nolix.core.commontypetool.stringtool.StringTool;
-import ch.nolix.core.errorcontrol.exception.GeneralException;
+import ch.nolix.core.errorcontrol.generalexception.GeneralException;
 import ch.nolix.core.errorcontrol.validator.Validator;
 import ch.nolix.planningpoker.backend.datamodel.Room;
 import ch.nolix.planningpoker.backend.datamodel.RoomVisit;

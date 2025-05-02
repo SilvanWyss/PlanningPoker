@@ -89,9 +89,9 @@ public final class RoomVisit extends Entity implements IRoomVisit {
 
   private void assertVisitorIsNotInARoom(final User visitor) {
     if (visitor.isInARoom()) {
-      throw InvalidArgumentException.forArgumentNameAndArgumentAndErrorPredicate(
-        "visitor",
+      throw InvalidArgumentException.forArgumentAndArgumentNameAndErrorPredicate(
         visitor,
+        "visitor",
         "is in a room");
     }
   }
