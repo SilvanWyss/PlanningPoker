@@ -1,6 +1,6 @@
 package ch.nolix.planningpokerapi.backendapi.dataadapterapi;
 
-import ch.nolix.coreapi.programcontrolapi.savecontrolapi.IChangeSaver;
+import ch.nolix.coreapi.resourcecontrolapi.savecontrolapi.IChangeSaver;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoom;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IRoomVisit;
 import ch.nolix.planningpokerapi.backendapi.datamodelapi.IUser;
